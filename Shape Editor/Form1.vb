@@ -132,8 +132,12 @@
         Dim sb As New System.Text.StringBuilder()
         sb.AppendLine("Body = {")
         Dim orderedPoints = GetOrderedPoints()
-        For Each point As Point In orderedPoints
-            sb.AppendLine($"    New Point(CInt({point.X} * ScaleFactor), CInt({point.Y} * ScaleFactor)),")
+        For i As Integer = 0 To orderedPoints.Count - 1
+            If i < orderedPoints.Count - 1 Then
+                sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor)),")
+            Else
+                sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor))")
+            End If
         Next
         sb.AppendLine("}")
         Dim result As String = sb.ToString()
@@ -151,8 +155,10 @@
         For i As Integer = points.Count - 1 To 1 Step -2
             orderedPoints.Add(points(i))
         Next
-        orderedPoints.Add(points(0)) ' Close the shape
-        orderedPoints.Add(points(1)) ' Close the mirror shape
+        If points.Count > 0 Then
+            orderedPoints.Add(points(0)) ' Close the shape
+            orderedPoints.Add(points(1)) ' Close the mirror shape
+        End If
         Return orderedPoints
     End Function
 
