@@ -157,7 +157,6 @@
         Next
         If points.Count > 0 Then
             orderedPoints.Add(points(0)) ' Close the shape
-            orderedPoints.Add(points(1)) ' Close the mirror shape
         End If
         Return orderedPoints
     End Function
