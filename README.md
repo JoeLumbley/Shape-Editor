@@ -1,7 +1,8 @@
 # Shape Editor
 
- Shape Editor allows you to draw shapes interactively in the draw area. 
- While an array of points is visualized and displayed in the code view. This allows users to see the coordinates of the points that define the shape they are creating. 
+ Shape Editor allows you to draw shapes interactively in the drawing view while the array of points representing the shape is generated and displayed in the code view.
+ 
+ This allows you to see the coordinates of the points that define the shape you are creating. 
 
 
 ![002](https://github.com/user-attachments/assets/6fea6f7e-443f-4274-9dfd-895928e51abe)
@@ -17,5 +18,5 @@ Key functionalities include point selection, shape scaling, and shape mirroring.
 
 **Debugging and Adjustment**: If you want to adjust points, you can easily identify their coordinates and modify them as needed.
 
-The visualization of the array of points as VB.NET code in the TextBox enhances user interaction with the Shape Editor application, providing clarity and control over the shapes being created.
+The visualization of the array of points as VB.NET code in the TextBox enhances user interaction, providing clarity and control over the shapes being created.
 
