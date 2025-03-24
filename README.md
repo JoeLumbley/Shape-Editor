@@ -1,6 +1,6 @@
 # Shape Editor
 
- Shape Editor allows you to draw shapes interactively in the drawing view while the array of points representing the shape is generated and displayed in the code view.
+ Shape Editor allows you to draw shapes interactively in the drawing view then it generates an array of points representing the shape in the code view.
  
  This allows you to see the coordinates of the points that define the shape you are creating. 
 
