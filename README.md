@@ -8,9 +8,9 @@
   
 - **Copy and Paste**: You can easily copy the generated code from the Shape Editor and paste it into your code editor for further development or modification.
   
-- **Immediate Feedback**: This functionality allows for quick testing and adjustments, enhancing the your experience.
+- **Immediate Feedback**: This functionality allows for quick testing and adjustments, enhancing your experience.
   
-- **Ease of Use**: Simplifies the process of integrating shape data into projects.
+- **Ease of Use**: Simplifies the process of integrating shape data into your projects.
   
 - **Interactive Development**: Facilitates a hands-on approach to shape creation and coding.
 
