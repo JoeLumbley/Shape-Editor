@@ -38,16 +38,16 @@
             End If
         Next
 
-        ' Draw mirror point handles
-        For i As Integer = 1 To points.Count - 1 Step 2
-            Dim point = points(i)
-            Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
-            If i = selectedPointIndex Then
-                e.Graphics.FillRectangle(Brushes.Purple, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-            Else
-                e.Graphics.FillRectangle(Brushes.Blue, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-            End If
-        Next
+        '' Draw mirror point handles
+        'For i As Integer = 1 To points.Count - 1 Step 2
+        '    Dim point = points(i)
+        '    Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
+        '    If i = selectedPointIndex Then
+        '        e.Graphics.FillRectangle(Brushes.Purple, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+        '    Else
+        '        e.Graphics.FillRectangle(Brushes.Blue, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+        '    End If
+        'Next
     End Sub
 
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
