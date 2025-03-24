@@ -1,4 +1,22 @@
 # Shape Editor
 
+ Shape Editor is a tool designed for creating shapes interactively while simultaneously generating an array of points in code that represent the shape. 
 
-![001](https://github.com/user-attachments/assets/889bd04d-b2b4-4692-8149-442131ca9f9d)
+
+
+![003](https://github.com/user-attachments/assets/de00cbef-3bf3-4f49-9b3e-7c43e164303f)
+
+
+
+- **Code Generation**: The Shape Editor generates an array of points that represent the drawn shape in VB.NET code format.
+  
+- **Copy and Paste**: You can easily copy the generated code from the Shape Editor and paste it into your code editor for further development or modification.
+  
+- **Immediate Feedback**: This functionality allows for quick testing and adjustments, enhancing your experience.
+  
+- **Ease of Use**: Simplifies the process of integrating shape data into your projects.
+  
+- **Interactive Development**: Facilitates a hands-on approach to shape creation and coding.
+
+
+
