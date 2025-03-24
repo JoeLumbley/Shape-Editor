@@ -27,19 +27,20 @@ Partial Class Form1
         ' 
         ' TextBox1
         ' 
-        TextBox1.Location = New Point(426, 126)
+        TextBox1.Location = New Point(473, 137)
         TextBox1.Multiline = True
         TextBox1.Name = "TextBox1"
+        TextBox1.PlaceholderText = "Draw shape in the drawing area to the left."
         TextBox1.ReadOnly = True
-        TextBox1.Size = New Size(140, 42)
+        TextBox1.Size = New Size(155, 45)
         TextBox1.TabIndex = 0
         TextBox1.TabStop = False
         ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(9F, 23F)
+        AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 450)
+        ClientSize = New Size(889, 489)
         Controls.Add(TextBox1)
         Name = "Form1"
         Text = "Form1"
