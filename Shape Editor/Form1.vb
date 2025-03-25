@@ -2,41 +2,30 @@
     Private points As New List(Of Point)()
     Private isDrawing As Boolean = False
     Private selectedPointIndex As Integer = -1
+    Private hoveredPointIndex As Integer = -1
     Private Const handleSize As Integer = 15
     Private ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed
 
     Private ShapePen As New Pen(Color.Black, 2)
-
-
-
     Private DrawingCenter As Point
+    Private AdjustedMouseLocation As Point
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
         Me.KeyPreview = True ' Enable KeyPreview to capture key events at the form level
 
-
-
         ' Set focus to the form itself
         Me.Focus()
         Me.ActiveControl = Nothing
 
-
-
         ScaleFactor = TrackBar1.Value / 100.0
-
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
         MyBase.OnPaint(e)
 
-
-
-        'Dim centerX As Integer = Me.ClientSize.Width \ 4
-        'Dim centerY As Integer = Me.ClientSize.Height \ 2
-
+        e.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
         e.Graphics.Clear(SystemColors.Control)
-
         e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
         e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
@@ -54,48 +43,35 @@
             e.Graphics.DrawPolygon(ShapePen, scaledPoints)
         End If
 
-        e.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
 
         ' Draw point handles
         For i As Integer = 0 To points.Count - 1 Step 2
             Dim point = points(i)
             Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
-            If i = selectedPointIndex Then
+            If i = selectedPointIndex OrElse i = hoveredPointIndex Then
                 e.Graphics.FillRectangle(Brushes.Purple, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
             Else
                 e.Graphics.FillRectangle(Brushes.Red, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
             End If
         Next
 
-        '' Draw mirror point handles
-        'For i As Integer = 1 To points.Count - 1 Step 2
-        '    Dim point = points(i)
-        '    Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
-        '    If i = selectedPointIndex Then
-        '        e.Graphics.FillRectangle(Brushes.Purple, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-        '    Else
-        '        e.Graphics.FillRectangle(Brushes.Blue, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-        '    End If
-        'Next
+        ' Draw the mouse location
+        'e.Graphics.FillEllipse(Brushes.Green, AdjustedMouseLocation.X - 2, AdjustedMouseLocation.Y - 2, 4, 4)
     End Sub
 
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
-        'Dim centerX As Integer = Me.ClientSize.Width \ 4
-        'Dim centerY As Integer = Me.ClientSize.Height \ 2
-
-        Dim adjustedLocation As New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
-
         If e.Button = MouseButtons.Left Then
-            selectedPointIndex = GetPointIndexAtLocation(adjustedLocation)
+            AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
+            selectedPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
 
             ' If no point was selected, add a new point
             If selectedPointIndex = -1 Then
                 ' Add the point
-                points.Add(adjustedLocation)
+                points.Add(AdjustedMouseLocation)
 
                 ' Add the mirror point
-                points.Add(New Point(adjustedLocation.X, -adjustedLocation.Y))
+                points.Add(New Point(AdjustedMouseLocation.X, -AdjustedMouseLocation.Y))
 
                 selectedPointIndex = points.Count - 2
             End If
@@ -109,17 +85,24 @@
     End Sub
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
-        'Dim centerX As Integer = Me.ClientSize.Width \ 4
-        'Dim centerY As Integer = Me.ClientSize.Height \ 2
-        Dim adjustedLocation As New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
+
+        AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
         If isDrawing AndAlso selectedPointIndex <> -1 Then
-            points(selectedPointIndex) = adjustedLocation
-            points(selectedPointIndex + 1) = New Point(adjustedLocation.X, -adjustedLocation.Y)
+            points(selectedPointIndex) = AdjustedMouseLocation
+            points(selectedPointIndex + 1) = New Point(AdjustedMouseLocation.X, -AdjustedMouseLocation.Y)
             GeneratePointArrayText()
 
             Invalidate()
         End If
+
+        ' Update hovered point index
+        Dim newHoveredPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
+        If newHoveredPointIndex <> hoveredPointIndex Then
+            hoveredPointIndex = newHoveredPointIndex
+            Invalidate()
+        End If
+
     End Sub
 
     Private Sub Form1_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
@@ -136,21 +119,6 @@
             points.Add(New Point(points(1).X, -points(1).Y)) ' Close the mirror shape
             Invalidate()
             GeneratePointArrayText()
-        ElseIf e.KeyCode = Keys.Up Then
-            'ScaleFactor += 0.01
-            'GeneratePointArrayText()
-            'Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
-            'TrackBar1.Value = CInt(ScaleFactor * 100)
-
-            'Invalidate()
-        ElseIf e.KeyCode = Keys.Down Then
-            'ScaleFactor -= 0.01
-            'If ScaleFactor < 1 Then ScaleFactor = 1 ' Prevent scale factor from going below 1
-            'GeneratePointArrayText()
-            'Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
-
-            'TrackBar1.Value = CInt(ScaleFactor * 100)
-            'Invalidate()
         ElseIf e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
             points.RemoveAt(selectedPointIndex)
             points.RemoveAt(selectedPointIndex)
@@ -165,9 +133,6 @@
             GeneratePointArrayText()
             Invalidate()
         End If
-        'e.SuppressKeyPress = True
-
-        'e.Handled = True
     End Sub
 
     Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
@@ -179,8 +144,9 @@
     Private Function GetPointIndexAtLocation(location As Point) As Integer
         For i As Integer = 0 To points.Count - 1 Step 2
             Dim point As Point = points(i)
-            Dim rect As New Rectangle(point.X - handleSize / 2, point.Y - handleSize / 2, handleSize, handleSize)
-            If rect.Contains(location) Then
+            Dim scaledPoint As New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
+            Dim rect As New Rectangle(scaledPoint.X - handleSize / 2, scaledPoint.Y - handleSize / 2, handleSize, handleSize)
+            If rect.Contains(New Point(CInt(location.X * ScaleFactor), CInt(location.Y * ScaleFactor))) Then
                 Return i
             End If
         Next
@@ -201,11 +167,6 @@
         sb.AppendLine("}")
         Dim result As String = sb.ToString()
         TextBox1.Text = result
-
-        '' Set focus to the form itself
-        'Me.Focus()
-        'Me.ActiveControl = Nothing
-
     End Sub
 
     Private Function GetOrderedPoints() As List(Of Point)
@@ -223,16 +184,12 @@
     End Function
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-
-
         DrawingCenter = New Point(ClientSize.Width \ 4, ClientSize.Height \ 2)
 
         TextBox1.Top = ClientRectangle.Top
         TextBox1.Left = ClientSize.Width / 2
         TextBox1.Width = ClientSize.Width / 2
         TextBox1.Height = ClientSize.Height
-
-
 
         TrackBar1.Top = ClientRectangle.Bottom - TrackBar1.Height
         TrackBar1.Left = ClientRectangle.Left
@@ -243,28 +200,19 @@
         Label1.Width = 200
         Label1.Height = 20
 
-
         HScrollBar1.Top = ClientRectangle.Bottom - TrackBar1.Height - HScrollBar1.Height
         HScrollBar1.Left = ClientRectangle.Left
         HScrollBar1.Width = ClientSize.Width / 2 - VScrollBar1.Width
         HScrollBar1.Minimum = (-ClientSize.Width \ 4) * 3
         HScrollBar1.Maximum = (ClientSize.Width \ 4) * 3
-
         HScrollBar1.Value = 0
-
 
         VScrollBar1.Top = ClientRectangle.Top
         VScrollBar1.Left = TextBox1.Left - VScrollBar1.Width
         VScrollBar1.Height = ClientSize.Height - TrackBar1.Height - HScrollBar1.Height
-
         VScrollBar1.Minimum = (-ClientSize.Height \ 4) * 3
         VScrollBar1.Maximum = (ClientSize.Height \ 4) * 3
-
-
         VScrollBar1.Value = 0
-
-
-
 
         Button1.Top = HScrollBar1.Top
         Button1.Left = VScrollBar1.Left
@@ -275,48 +223,23 @@
     End Sub
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
-
-
-
-
-
-
-
         ScaleFactor = TrackBar1.Value / 100.0
-
-
         Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
-
         GeneratePointArrayText()
-
         Invalidate()
-
     End Sub
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
-        'HScrollBar1.Minimum = (-ClientSize.Width \ 4) * 2
-        'HScrollBar1.Maximum = (ClientSize.Width \ 4) * 2
-
-
-        'ClientSize.Width \ 4
         DrawingCenter.X = ClientSize.Width \ 4 - HScrollBar1.Value
-
-
         Invalidate()
-
     End Sub
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
-
         DrawingCenter.Y = ClientSize.Height \ 2 - VScrollBar1.Value
-
         Invalidate()
-
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-
         VScrollBar1.Value = 0
         DrawingCenter.Y = ClientSize.Height \ 2 - VScrollBar1.Value
 
@@ -324,7 +247,5 @@
         DrawingCenter.X = ClientSize.Width \ 4 - HScrollBar1.Value
 
         Invalidate()
-
-
     End Sub
 End Class
