@@ -227,8 +227,6 @@
 
         DrawingCenter = New Point(ClientSize.Width \ 4, ClientSize.Height \ 2)
 
-
-
         TextBox1.Top = ClientRectangle.Top
         TextBox1.Left = ClientSize.Width / 2
         TextBox1.Width = ClientSize.Width / 2
