@@ -244,6 +244,10 @@
         HScrollBar1.Top = ClientRectangle.Bottom - TrackBar1.Height - HScrollBar1.Height
         HScrollBar1.Left = ClientRectangle.Left
         HScrollBar1.Width = ClientSize.Width / 2
+        HScrollBar1.Minimum = (-ClientSize.Width \ 4) * 2
+        HScrollBar1.Maximum = (ClientSize.Width \ 4) * 2
+
+        HScrollBar1.Value = 0
 
         Invalidate()
     End Sub
@@ -258,19 +262,23 @@
 
         ScaleFactor = TrackBar1.Value / 100.0
 
+
         Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
 
         GeneratePointArrayText()
+
         Invalidate()
+
     End Sub
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
-        HScrollBar1.Minimum = (-ClientSize.Width \ 4) * 2
-        HScrollBar1.Maximum = (ClientSize.Width \ 4) * 2
+        'HScrollBar1.Minimum = (-ClientSize.Width \ 4) * 2
+        'HScrollBar1.Maximum = (ClientSize.Width \ 4) * 2
 
 
         'ClientSize.Width \ 4
         DrawingCenter = New Point(ClientSize.Width \ 4 - HScrollBar1.Value, ClientSize.Height \ 2)
+
 
         Invalidate()
 
