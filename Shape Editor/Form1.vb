@@ -185,8 +185,6 @@
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
 
-
-
         DrawingCenter = New Point(ClientSize.Width \ 4 - VScrollBar1.Width \ 2, (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height) \ 2)
 
         TextBox1.Top = ClientRectangle.Top
