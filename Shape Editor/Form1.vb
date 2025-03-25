@@ -184,7 +184,10 @@
     End Function
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-        DrawingCenter = New Point(ClientSize.Width \ 4, ClientSize.Height \ 2)
+
+
+
+        DrawingCenter = New Point(ClientSize.Width \ 4 - VScrollBar1.Width \ 2, (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height) \ 2)
 
         TextBox1.Top = ClientRectangle.Top
         TextBox1.Left = ClientSize.Width / 2
@@ -240,12 +243,16 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        ' Center the drawing area
         VScrollBar1.Value = 0
-        DrawingCenter.Y = ClientSize.Height \ 2 - VScrollBar1.Value
+        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height) \ 2
 
         HScrollBar1.Value = 0
-        DrawingCenter.X = ClientSize.Width \ 4 - HScrollBar1.Value
+        DrawingCenter.X = ClientSize.Width \ 4 - VScrollBar1.Width \ 2
 
         Invalidate()
+
     End Sub
+
 End Class
