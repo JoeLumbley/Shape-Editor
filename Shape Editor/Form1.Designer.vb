@@ -45,12 +45,12 @@ Partial Class Form1
         ' TrackBar1
         ' 
         TrackBar1.Location = New Point(12, 388)
-        TrackBar1.Maximum = 1000
+        TrackBar1.Maximum = 1600
         TrackBar1.Minimum = 100
         TrackBar1.Name = "TrackBar1"
         TrackBar1.Size = New Size(156, 69)
         TrackBar1.TabIndex = 1
-        TrackBar1.Value = 100
+        TrackBar1.Value = 800
         ' 
         ' Label1
         ' 

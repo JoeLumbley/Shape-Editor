@@ -20,6 +20,11 @@
         ' Set focus to the form itself
         Me.Focus()
         Me.ActiveControl = Nothing
+
+
+
+        ScaleFactor = TrackBar1.Value / 100.0
+
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
@@ -243,7 +248,7 @@
 
         HScrollBar1.Top = ClientRectangle.Bottom - TrackBar1.Height - HScrollBar1.Height
         HScrollBar1.Left = ClientRectangle.Left
-        HScrollBar1.Width = ClientSize.Width / 2
+        HScrollBar1.Width = ClientSize.Width / 2 - VScrollBar1.Width
         HScrollBar1.Minimum = (-ClientSize.Width \ 4) * 3
         HScrollBar1.Maximum = (ClientSize.Width \ 4) * 3
 
