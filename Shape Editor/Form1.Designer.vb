@@ -24,6 +24,7 @@ Partial Class Form1
     Private Sub InitializeComponent()
         TextBox1 = New TextBox()
         TrackBar1 = New TrackBar()
+        Label1 = New Label()
         CType(TrackBar1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -41,18 +42,28 @@ Partial Class Form1
         ' TrackBar1
         ' 
         TrackBar1.Location = New Point(12, 388)
-        TrackBar1.Maximum = 500
+        TrackBar1.Maximum = 1000
         TrackBar1.Minimum = 100
         TrackBar1.Name = "TrackBar1"
         TrackBar1.Size = New Size(156, 69)
         TrackBar1.TabIndex = 1
         TrackBar1.Value = 100
         ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Location = New Point(56, 426)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(63, 25)
+        Label1.TabIndex = 2
+        Label1.Text = "Label1"
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(889, 489)
+        Controls.Add(Label1)
         Controls.Add(TrackBar1)
         Controls.Add(TextBox1)
         KeyPreview = True
@@ -65,5 +76,6 @@ Partial Class Form1
 
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents TrackBar1 As TrackBar
+    Friend WithEvents Label1 As Label
 
 End Class

@@ -124,14 +124,20 @@
             Invalidate()
             GeneratePointArrayText()
         ElseIf e.KeyCode = Keys.Up Then
-            ScaleFactor += 0.1
-            GeneratePointArrayText()
-            Invalidate()
+            'ScaleFactor += 0.01
+            'GeneratePointArrayText()
+            'Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
+            'TrackBar1.Value = CInt(ScaleFactor * 100)
+
+            'Invalidate()
         ElseIf e.KeyCode = Keys.Down Then
-            ScaleFactor -= 0.1
-            If ScaleFactor < 1 Then ScaleFactor = 1 ' Prevent scale factor from going below 1
-            GeneratePointArrayText()
-            Invalidate()
+            'ScaleFactor -= 0.01
+            'If ScaleFactor < 1 Then ScaleFactor = 1 ' Prevent scale factor from going below 1
+            'GeneratePointArrayText()
+            'Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
+
+            'TrackBar1.Value = CInt(ScaleFactor * 100)
+            'Invalidate()
         ElseIf e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
             points.RemoveAt(selectedPointIndex)
             points.RemoveAt(selectedPointIndex)
@@ -146,9 +152,9 @@
             GeneratePointArrayText()
             Invalidate()
         End If
-        e.SuppressKeyPress = True
+        'e.SuppressKeyPress = True
 
-        e.Handled = True
+        'e.Handled = True
     End Sub
 
     Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
@@ -215,6 +221,10 @@
         TrackBar1.Left = ClientRectangle.Left
         TrackBar1.Width = ClientSize.Width / 2
 
+        Label1.Top = TrackBar1.Bottom - Label1.Height - 5
+        Label1.Left = ClientRectangle.Left + 5
+        Label1.Width = 200
+        Label1.Height = 20
 
 
         Invalidate()
@@ -229,6 +239,9 @@
 
 
         ScaleFactor = TrackBar1.Value / 100.0
+
+        Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
+
         GeneratePointArrayText()
         Invalidate()
     End Sub
