@@ -221,13 +221,16 @@
         Button1.Height = HScrollBar1.Height
 
         Invalidate()
+
     End Sub
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
+
         ScaleFactor = TrackBar1.Value / 100.0
         Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
         GeneratePointArrayText()
         Invalidate()
+
     End Sub
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
