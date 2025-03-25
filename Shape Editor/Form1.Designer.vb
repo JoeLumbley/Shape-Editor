@@ -26,6 +26,8 @@ Partial Class Form1
         TrackBar1 = New TrackBar()
         Label1 = New Label()
         HScrollBar1 = New HScrollBar()
+        VScrollBar1 = New VScrollBar()
+        Button1 = New Button()
         CType(TrackBar1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -67,11 +69,29 @@ Partial Class Form1
         HScrollBar1.Size = New Size(120, 39)
         HScrollBar1.TabIndex = 3
         ' 
+        ' VScrollBar1
+        ' 
+        VScrollBar1.Location = New Point(591, 307)
+        VScrollBar1.Name = "VScrollBar1"
+        VScrollBar1.Size = New Size(39, 180)
+        VScrollBar1.TabIndex = 4
+        ' 
+        ' Button1
+        ' 
+        Button1.Location = New Point(513, 243)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(112, 34)
+        Button1.TabIndex = 5
+        Button1.Text = "C"
+        Button1.UseVisualStyleBackColor = True
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(889, 489)
+        Controls.Add(Button1)
+        Controls.Add(VScrollBar1)
         Controls.Add(HScrollBar1)
         Controls.Add(Label1)
         Controls.Add(TrackBar1)
@@ -88,5 +108,7 @@ Partial Class Form1
     Friend WithEvents TrackBar1 As TrackBar
     Friend WithEvents Label1 As Label
     Friend WithEvents HScrollBar1 As HScrollBar
+    Friend WithEvents VScrollBar1 As VScrollBar
+    Friend WithEvents Button1 As Button
 
 End Class

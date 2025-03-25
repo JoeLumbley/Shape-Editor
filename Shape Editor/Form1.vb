@@ -244,10 +244,29 @@
         HScrollBar1.Top = ClientRectangle.Bottom - TrackBar1.Height - HScrollBar1.Height
         HScrollBar1.Left = ClientRectangle.Left
         HScrollBar1.Width = ClientSize.Width / 2
-        HScrollBar1.Minimum = (-ClientSize.Width \ 4) * 2
-        HScrollBar1.Maximum = (ClientSize.Width \ 4) * 2
+        HScrollBar1.Minimum = (-ClientSize.Width \ 4) * 3
+        HScrollBar1.Maximum = (ClientSize.Width \ 4) * 3
 
         HScrollBar1.Value = 0
+
+
+        VScrollBar1.Top = ClientRectangle.Top
+        VScrollBar1.Left = TextBox1.Left - VScrollBar1.Width
+        VScrollBar1.Height = ClientSize.Height - TrackBar1.Height - HScrollBar1.Height
+
+        VScrollBar1.Minimum = (-ClientSize.Height \ 4) * 3
+        VScrollBar1.Maximum = (ClientSize.Height \ 4) * 3
+
+
+        VScrollBar1.Value = 0
+
+
+
+
+        Button1.Top = HScrollBar1.Top
+        Button1.Left = VScrollBar1.Left
+        Button1.Width = VScrollBar1.Width
+        Button1.Height = HScrollBar1.Height
 
         Invalidate()
     End Sub
@@ -277,11 +296,32 @@
 
 
         'ClientSize.Width \ 4
-        DrawingCenter = New Point(ClientSize.Width \ 4 - HScrollBar1.Value, ClientSize.Height \ 2)
+        DrawingCenter.X = ClientSize.Width \ 4 - HScrollBar1.Value
 
 
         Invalidate()
 
     End Sub
 
+    Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
+
+        DrawingCenter.Y = ClientSize.Height \ 2 - VScrollBar1.Value
+
+        Invalidate()
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+        VScrollBar1.Value = 0
+        DrawingCenter.Y = ClientSize.Height \ 2 - VScrollBar1.Value
+
+        HScrollBar1.Value = 0
+        DrawingCenter.X = ClientSize.Width \ 4 - HScrollBar1.Value
+
+        Invalidate()
+
+
+    End Sub
 End Class
