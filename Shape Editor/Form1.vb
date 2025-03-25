@@ -7,6 +7,10 @@
 
     Private ShapePen As New Pen(Color.Black, 2)
 
+
+
+    Private DrawingCenter As Point
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
         Me.KeyPreview = True ' Enable KeyPreview to capture key events at the form level
@@ -20,8 +24,11 @@
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
         MyBase.OnPaint(e)
-        Dim centerX As Integer = Me.ClientSize.Width \ 4
-        Dim centerY As Integer = Me.ClientSize.Height \ 2
+
+
+
+        'Dim centerX As Integer = Me.ClientSize.Width \ 4
+        'Dim centerY As Integer = Me.ClientSize.Height \ 2
 
         e.Graphics.Clear(SystemColors.Control)
 
@@ -30,7 +37,7 @@
         e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
 
         ' Translate the origin to the center of the drawing area
-        e.Graphics.TranslateTransform(centerX, centerY)
+        e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
 
         ' Draw intersecting lines at the origin
         e.Graphics.DrawLine(Pens.Black, -5, 0, 5, 0) ' Horizontal line
@@ -69,9 +76,10 @@
     End Sub
 
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
-        Dim centerX As Integer = Me.ClientSize.Width \ 4
-        Dim centerY As Integer = Me.ClientSize.Height \ 2
-        Dim adjustedLocation As New Point(CInt((e.Location.X - centerX) / ScaleFactor), CInt((e.Location.Y - centerY) / ScaleFactor))
+        'Dim centerX As Integer = Me.ClientSize.Width \ 4
+        'Dim centerY As Integer = Me.ClientSize.Height \ 2
+
+        Dim adjustedLocation As New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
         If e.Button = MouseButtons.Left Then
             selectedPointIndex = GetPointIndexAtLocation(adjustedLocation)
@@ -96,9 +104,9 @@
     End Sub
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
-        Dim centerX As Integer = Me.ClientSize.Width \ 4
-        Dim centerY As Integer = Me.ClientSize.Height \ 2
-        Dim adjustedLocation As New Point(CInt((e.Location.X - centerX) / ScaleFactor), CInt((e.Location.Y - centerY) / ScaleFactor))
+        'Dim centerX As Integer = Me.ClientSize.Width \ 4
+        'Dim centerY As Integer = Me.ClientSize.Height \ 2
+        Dim adjustedLocation As New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
         If isDrawing AndAlso selectedPointIndex <> -1 Then
             points(selectedPointIndex) = adjustedLocation
@@ -210,6 +218,12 @@
     End Function
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+
+
+        DrawingCenter = New Point(ClientSize.Width \ 4, ClientSize.Height \ 2)
+
+
+
         TextBox1.Top = ClientRectangle.Top
         TextBox1.Left = ClientSize.Width / 2
         TextBox1.Width = ClientSize.Width / 2
@@ -226,6 +240,10 @@
         Label1.Width = 200
         Label1.Height = 20
 
+
+        HScrollBar1.Top = ClientRectangle.Bottom - TrackBar1.Height - HScrollBar1.Height
+        HScrollBar1.Left = ClientRectangle.Left
+        HScrollBar1.Width = ClientSize.Width / 2
 
         Invalidate()
     End Sub
@@ -246,11 +264,16 @@
         Invalidate()
     End Sub
 
+    Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
+        HScrollBar1.Minimum = (-ClientSize.Width \ 4) * 2
+        HScrollBar1.Maximum = (ClientSize.Width \ 4) * 2
 
 
+        'ClientSize.Width \ 4
+        DrawingCenter = New Point(ClientSize.Width \ 4 - HScrollBar1.Value, ClientSize.Height \ 2)
 
+        Invalidate()
 
-
-
+    End Sub
 
 End Class
