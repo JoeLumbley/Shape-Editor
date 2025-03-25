@@ -23,6 +23,8 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         TextBox1 = New TextBox()
+        TrackBar1 = New TrackBar()
+        CType(TrackBar1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' TextBox1
@@ -36,18 +38,32 @@ Partial Class Form1
         TextBox1.TabIndex = 0
         TextBox1.TabStop = False
         ' 
+        ' TrackBar1
+        ' 
+        TrackBar1.Location = New Point(12, 388)
+        TrackBar1.Maximum = 500
+        TrackBar1.Minimum = 100
+        TrackBar1.Name = "TrackBar1"
+        TrackBar1.Size = New Size(156, 69)
+        TrackBar1.TabIndex = 1
+        TrackBar1.Value = 100
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(889, 489)
+        Controls.Add(TrackBar1)
         Controls.Add(TextBox1)
+        KeyPreview = True
         Name = "Form1"
         Text = "Form1"
+        CType(TrackBar1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
 
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TrackBar1 As TrackBar
 
 End Class

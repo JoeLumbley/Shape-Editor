@@ -5,15 +5,17 @@
     Private Const handleSize As Integer = 15
     Private ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed
 
-
     Private ShapePen As New Pen(Color.Black, 2)
-
-
-
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
         Me.KeyPreview = True ' Enable KeyPreview to capture key events at the form level
+
+
+
+        ' Set focus to the form itself
+        Me.Focus()
+        Me.ActiveControl = Nothing
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
@@ -21,9 +23,7 @@
         Dim centerX As Integer = Me.ClientSize.Width \ 4
         Dim centerY As Integer = Me.ClientSize.Height \ 2
 
-
         e.Graphics.Clear(SystemColors.Control)
-
 
         e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
@@ -69,20 +69,15 @@
     End Sub
 
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
-
         Dim centerX As Integer = Me.ClientSize.Width \ 4
-
         Dim centerY As Integer = Me.ClientSize.Height \ 2
-
         Dim adjustedLocation As New Point(CInt((e.Location.X - centerX) / ScaleFactor), CInt((e.Location.Y - centerY) / ScaleFactor))
 
         If e.Button = MouseButtons.Left Then
-
             selectedPointIndex = GetPointIndexAtLocation(adjustedLocation)
 
             ' If no point was selected, add a new point
             If selectedPointIndex = -1 Then
-
                 ' Add the point
                 points.Add(adjustedLocation)
 
@@ -90,7 +85,6 @@
                 points.Add(New Point(adjustedLocation.X, -adjustedLocation.Y))
 
                 selectedPointIndex = points.Count - 2
-
             End If
 
             isDrawing = True
@@ -98,9 +92,7 @@
             GeneratePointArrayText()
 
             Invalidate()
-
         End If
-
     End Sub
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
@@ -122,7 +114,6 @@
             isDrawing = False
             selectedPointIndex = -1
             GeneratePointArrayText()
-
         End If
     End Sub
 
@@ -139,9 +130,12 @@
         ElseIf e.KeyCode = Keys.Down Then
             ScaleFactor -= 0.1
             If ScaleFactor < 1 Then ScaleFactor = 1 ' Prevent scale factor from going below 1
-            'If ScaleFactor < 0.1 Then ScaleFactor = 0.1 ' Prevent scale factor from going below 0.1
-
-
+            GeneratePointArrayText()
+            Invalidate()
+        ElseIf e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
+            points.RemoveAt(selectedPointIndex)
+            points.RemoveAt(selectedPointIndex)
+            selectedPointIndex = -1
             GeneratePointArrayText()
             Invalidate()
         ElseIf e.KeyCode = Keys.N AndAlso selectedPointIndex <> -1 Then
@@ -151,6 +145,15 @@
             selectedPointIndex += 2
             GeneratePointArrayText()
             Invalidate()
+        End If
+        e.SuppressKeyPress = True
+
+        e.Handled = True
+    End Sub
+
+    Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
+        If e.KeyCode = Keys.Up OrElse e.KeyCode = Keys.Down Then
+            e.SuppressKeyPress = True
         End If
     End Sub
 
@@ -166,11 +169,8 @@
     End Function
 
     Private Sub GeneratePointArrayText()
-
         Dim sb As New System.Text.StringBuilder()
-
         sb.AppendLine("Dim Shape As Point() = {")
-        'sb.AppendLine("Body = {")
         Dim orderedPoints = GetOrderedPoints()
         For i As Integer = 0 To orderedPoints.Count - 1
             If i < orderedPoints.Count - 1 Then
@@ -181,45 +181,63 @@
         Next
         sb.AppendLine("}")
         Dim result As String = sb.ToString()
-        ' Display or use the result as needed
-        'MessageBox.Show(result)
-
         TextBox1.Text = result
+
+        '' Set focus to the form itself
+        'Me.Focus()
+        'Me.ActiveControl = Nothing
 
     End Sub
 
     Private Function GetOrderedPoints() As List(Of Point)
-
         Dim orderedPoints As New List(Of Point)()
-
         For i As Integer = 0 To points.Count - 1 Step 2
             orderedPoints.Add(points(i))
         Next
-
         For i As Integer = points.Count - 1 To 1 Step -2
             orderedPoints.Add(points(i))
         Next
-
         If points.Count > 0 Then
             orderedPoints.Add(points(0)) ' Close the shape
         End If
-
         Return orderedPoints
     End Function
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-
         TextBox1.Top = ClientRectangle.Top
         TextBox1.Left = ClientSize.Width / 2
         TextBox1.Width = ClientSize.Width / 2
         TextBox1.Height = ClientSize.Height
 
-        Invalidate()
 
+
+        TrackBar1.Top = ClientRectangle.Bottom - TrackBar1.Height
+        TrackBar1.Left = ClientRectangle.Left
+        TrackBar1.Width = ClientSize.Width / 2
+
+
+
+        Invalidate()
     End Sub
 
+    Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
+
+
+
+
+
+
+
+        ScaleFactor = TrackBar1.Value / 100.0
+        GeneratePointArrayText()
+        Invalidate()
+    End Sub
+
+
+
+
+
+
+
+
 End Class
-
-
-
-
