@@ -8,9 +8,9 @@
 
 
 
-- **Code Generation**: The Shape Editor generates an array of points that represent the drawn shape in VB.NET code format.
+- **Code Generation**: Shape Editor generates an array of points that represent the drawn shape in code.
   
-- **Copy and Paste**: You can easily copy the generated code from the Shape Editor and paste it into your code editor for further development or modification.
+- **Copy and Paste**: You can easily copy the generated code from the code view and paste it into your code editor for further development or modification.
   
 - **Immediate Feedback**: This functionality allows for quick testing and adjustments, enhancing your experience.
   
