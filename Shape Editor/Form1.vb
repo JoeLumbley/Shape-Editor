@@ -7,6 +7,7 @@
     Private ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed
 
     Private ShapePen As New Pen(Color.Black, 2)
+    Private ShapeBrush As New SolidBrush(Color.FromArgb(128, Color.Blue)) ' Semi-transparent blue brush for filling the shape
     Private DrawingCenter As Point
     Private AdjustedMouseLocation As Point
 
@@ -23,14 +24,14 @@
         ScaleFactor = TrackBar1.Value / 100.0
         Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
 
-        ' Add event handler for HideControlHandlesCheckBox
+        ' Add event handlers for checkboxes
         AddHandler HideControlHandlesCheckBox.CheckedChanged, AddressOf HideControlHandlesCheckBox_CheckedChanged
+        AddHandler FillShapeCheckBox.CheckedChanged, AddressOf FillShapeCheckBox_CheckedChanged
 
         CenterToScreen()
 
-        'maximize the form
+        ' Maximize the form
         WindowState = FormWindowState.Maximized
-
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
@@ -61,6 +62,12 @@
         If points.Count > 1 Then
             Dim orderedPoints = GetOrderedPoints()
             Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
+
+            ' Fill the shape if the checkbox is checked
+            If FillShapeCheckBox.Checked Then
+                e.Graphics.FillPolygon(ShapeBrush, scaledPoints)
+            End If
+
             e.Graphics.DrawPolygon(ShapePen, scaledPoints)
         End If
 
@@ -271,7 +278,8 @@
         HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
         HideControlHandlesCheckBox.Left = Label1.Right + 25
 
-
+        FillShapeCheckBox.Top = HideControlHandlesCheckBox.Top
+        FillShapeCheckBox.Left = HideControlHandlesCheckBox.Right + 25
 
         Invalidate()
     End Sub
@@ -305,6 +313,10 @@
     End Sub
 
     Private Sub HideControlHandlesCheckBox_CheckedChanged(sender As Object, e As EventArgs)
+        Invalidate()
+    End Sub
+
+    Private Sub FillShapeCheckBox_CheckedChanged(sender As Object, e As EventArgs)
         Invalidate()
     End Sub
 End Class
