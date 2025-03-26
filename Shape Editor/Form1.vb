@@ -11,6 +11,8 @@
     Private DrawingCenter As Point
     Private AdjustedMouseLocation As Point
     Private HandleBrush As New SolidBrush(Color.FromArgb(128, Color.Blue)) ' Semi-transparent blue brush for the control handles
+    Private HoverBrush As New SolidBrush(Color.FromArgb(128, Color.Blue)) ' Semi-transparent blue brush for the control handles
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
@@ -86,7 +88,7 @@
                 Dim point = points(i)
                 Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
                 If i = selectedPointIndex OrElse i = hoveredPointIndex Then
-                    e.Graphics.FillRectangle(Brushes.Purple, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+                    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
                 Else
                     e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
                 End If
@@ -333,9 +335,15 @@
     Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
 
         ' Update brushes and pens based on dark mode state
-        ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.Silver, Color.Blue)))
+        ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.Silver, Color.DodgerBlue)))
         ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
-        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DodgerBlue, Color.Red)))
+
+
+        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DodgerBlue, Color.DarkGray)))
+
+        HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.Orchid, Color.Gray)))
+
+
 
         TrackBar1.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
 
