@@ -28,6 +28,7 @@ Partial Class Form1
         HScrollBar1 = New HScrollBar()
         VScrollBar1 = New VScrollBar()
         Button1 = New Button()
+        HideControlHandlesCheckBox = New CheckBox()
         CType(TrackBar1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -85,11 +86,22 @@ Partial Class Form1
         Button1.Text = "C"
         Button1.UseVisualStyleBackColor = True
         ' 
+        ' HideControlHandlesCheckBox
+        ' 
+        HideControlHandlesCheckBox.AutoSize = True
+        HideControlHandlesCheckBox.Location = New Point(116, 405)
+        HideControlHandlesCheckBox.Name = "HideControlHandlesCheckBox"
+        HideControlHandlesCheckBox.Size = New Size(208, 29)
+        HideControlHandlesCheckBox.TabIndex = 6
+        HideControlHandlesCheckBox.Text = "Hide Control Handles"
+        HideControlHandlesCheckBox.UseVisualStyleBackColor = True
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(889, 489)
+        ClientSize = New Size(1258, 664)
+        Controls.Add(HideControlHandlesCheckBox)
         Controls.Add(Button1)
         Controls.Add(VScrollBar1)
         Controls.Add(HScrollBar1)
@@ -110,5 +122,6 @@ Partial Class Form1
     Friend WithEvents HScrollBar1 As HScrollBar
     Friend WithEvents VScrollBar1 As VScrollBar
     Friend WithEvents Button1 As Button
+    Friend WithEvents HideControlHandlesCheckBox As CheckBox
 
 End Class
