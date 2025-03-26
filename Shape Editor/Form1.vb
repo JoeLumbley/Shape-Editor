@@ -26,16 +26,25 @@
 
         e.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
         e.Graphics.Clear(SystemColors.Control)
-        e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
-        e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
 
         ' Translate the origin to the center of the drawing area
         e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
 
+        ' Draw the coordinate system
+        e.Graphics.DrawLine(Pens.Gray, -ClientSize.Width * 3, 0, ClientSize.Width * 3, 0) ' X-axis
+        e.Graphics.DrawLine(Pens.Gray, 0, -ClientSize.Height * 3, 0, ClientSize.Height * 3) ' Y-axis
+
+
         ' Draw intersecting lines at the origin
         e.Graphics.DrawLine(Pens.Black, -5, 0, 5, 0) ' Horizontal line
         e.Graphics.DrawLine(Pens.Black, 0, -5, 0, 5) ' Vertical line
+
+
+        e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+        e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+        e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
 
         If points.Count > 1 Then
             Dim orderedPoints = GetOrderedPoints()
@@ -56,8 +65,6 @@
             End If
         Next
 
-        ' Draw the mouse location
-        'e.Graphics.FillEllipse(Brushes.Green, AdjustedMouseLocation.X - 2, AdjustedMouseLocation.Y - 2, 4, 4)
     End Sub
 
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
