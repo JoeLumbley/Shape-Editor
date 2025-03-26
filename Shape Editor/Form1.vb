@@ -35,6 +35,8 @@
         ' Translate the origin to the center of the drawing area
         e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
 
+        DrawGrid(e.Graphics)
+
         ' Draw the coordinate system
         e.Graphics.DrawLine(Pens.Gray, -ClientSize.Width * 3, 0, ClientSize.Width * 3, 0) ' X-axis
         e.Graphics.DrawLine(Pens.Gray, 0, -ClientSize.Height * 3, 0, ClientSize.Height * 3) ' Y-axis
@@ -65,6 +67,25 @@
             Else
                 e.Graphics.FillRectangle(Brushes.Red, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
             End If
+        Next
+
+    End Sub
+
+    Private Sub DrawGrid(g As Graphics)
+
+        ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
+        Dim stepSize As Integer = CInt(20 * ScaleFactor)
+
+        ' Draw vertical grid lines
+        For i As Integer = -((ClientSize.Width * 3) \ stepSize) To (ClientSize.Width * 3) \ stepSize
+            Dim x As Integer = i * stepSize
+            g.DrawLine(Pens.LightGray, x, -ClientSize.Height * 3, x, ClientSize.Height * 3)
+        Next
+
+        ' Draw horizontal grid lines
+        For i As Integer = -((ClientSize.Height * 3) \ stepSize) To (ClientSize.Height * 3) \ stepSize
+            Dim y As Integer = i * stepSize
+            g.DrawLine(Pens.LightGray, -ClientSize.Width * 3, y, ClientSize.Width * 3, y)
         Next
 
     End Sub
