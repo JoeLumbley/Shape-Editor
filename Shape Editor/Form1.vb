@@ -18,7 +18,11 @@
         Me.Focus()
         Me.ActiveControl = Nothing
 
+        Text = "Shape Editor - Code with Joe"
+
         ScaleFactor = TrackBar1.Value / 100.0
+        Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
+
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
