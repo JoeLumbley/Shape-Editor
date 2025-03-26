@@ -61,10 +61,10 @@
         e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
         e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
 
-        ' Update brushes and pens based on dark mode state
-        ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.DarkSlateGray, Color.Blue)))
-        ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
-        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DeepSkyBlue, Color.Red)))
+        '' Update brushes and pens based on dark mode state
+        'ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.DarkSlateGray, Color.Blue)))
+        'ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
+        'HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DeepSkyBlue, Color.Red)))
 
         If points.Count > 1 Then
             Dim orderedPoints = GetOrderedPoints()
@@ -333,9 +333,9 @@
     Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
 
         ' Update brushes and pens based on dark mode state
-        ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.DarkSlateGray, Color.Blue)))
+        ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.Silver, Color.Blue)))
         ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
-        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DeepSkyBlue, Color.Red)))
+        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DodgerBlue, Color.Red)))
 
         TrackBar1.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
 
