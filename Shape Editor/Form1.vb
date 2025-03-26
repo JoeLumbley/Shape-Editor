@@ -70,12 +70,17 @@
     End Sub
 
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
+
         If e.Button = MouseButtons.Left Then
-            AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
+
+            AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor),
+                                              CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
+
             selectedPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
 
             ' If no point was selected, add a new point
             If selectedPointIndex = -1 Then
+
                 ' Add the point
                 points.Add(AdjustedMouseLocation)
 
@@ -83,6 +88,7 @@
                 points.Add(New Point(AdjustedMouseLocation.X, -AdjustedMouseLocation.Y))
 
                 selectedPointIndex = points.Count - 2
+
             End If
 
             isDrawing = True
@@ -90,7 +96,9 @@
             GeneratePointArrayText()
 
             Invalidate()
+
         End If
+
     End Sub
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
@@ -98,98 +106,158 @@
         AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
         If isDrawing AndAlso selectedPointIndex <> -1 Then
+
             points(selectedPointIndex) = AdjustedMouseLocation
+
             points(selectedPointIndex + 1) = New Point(AdjustedMouseLocation.X, -AdjustedMouseLocation.Y)
+
             GeneratePointArrayText()
 
             Invalidate()
+
         End If
 
         ' Update hovered point index
         Dim newHoveredPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
+
         If newHoveredPointIndex <> hoveredPointIndex Then
+
             hoveredPointIndex = newHoveredPointIndex
+
             Invalidate()
+
         End If
 
     End Sub
 
     Private Sub Form1_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
+
         If e.Button = MouseButtons.Left Then
+
             isDrawing = False
+
             selectedPointIndex = -1
+
             GeneratePointArrayText()
+
         End If
+
     End Sub
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-        If e.KeyCode = Keys.Enter AndAlso points.Count > 2 Then
-            points.Add(points(0)) ' Close the shape
-            points.Add(New Point(points(1).X, -points(1).Y)) ' Close the mirror shape
-            Invalidate()
-            GeneratePointArrayText()
-        ElseIf e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
-            points.RemoveAt(selectedPointIndex)
-            points.RemoveAt(selectedPointIndex)
-            selectedPointIndex = -1
-            GeneratePointArrayText()
-            Invalidate()
-        ElseIf e.KeyCode = Keys.N AndAlso selectedPointIndex <> -1 Then
-            Dim newPoint As New Point(points(selectedPointIndex).X + 10, points(selectedPointIndex).Y + 10)
-            points.Insert(selectedPointIndex + 2, newPoint)
-            points.Insert(selectedPointIndex + 3, New Point(newPoint.X, -newPoint.Y))
-            selectedPointIndex += 2
-            GeneratePointArrayText()
-            Invalidate()
-        End If
-    End Sub
 
-    Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
-        If e.KeyCode = Keys.Up OrElse e.KeyCode = Keys.Down Then
-            e.SuppressKeyPress = True
+        If e.KeyCode = Keys.Enter AndAlso points.Count > 2 Then
+
+            points.Add(points(0)) ' Close the shape
+
+            points.Add(New Point(points(1).X, -points(1).Y)) ' Close the mirror shape
+
+            Invalidate()
+
+            GeneratePointArrayText()
+
+        ElseIf e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
+
+            points.RemoveAt(selectedPointIndex)
+
+            points.RemoveAt(selectedPointIndex)
+
+            selectedPointIndex = -1
+
+            GeneratePointArrayText()
+
+            Invalidate()
+
+        ElseIf e.KeyCode = Keys.N AndAlso selectedPointIndex <> -1 Then
+
+            Dim newPoint As New Point(points(selectedPointIndex).X + 10, points(selectedPointIndex).Y + 10)
+
+            points.Insert(selectedPointIndex + 2, newPoint)
+
+            points.Insert(selectedPointIndex + 3, New Point(newPoint.X, -newPoint.Y))
+
+            selectedPointIndex += 2
+
+            GeneratePointArrayText()
+
+            Invalidate()
+
         End If
+
     End Sub
 
     Private Function GetPointIndexAtLocation(location As Point) As Integer
+
         For i As Integer = 0 To points.Count - 1 Step 2
+
             Dim point As Point = points(i)
             Dim scaledPoint As New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
             Dim rect As New Rectangle(scaledPoint.X - handleSize / 2, scaledPoint.Y - handleSize / 2, handleSize, handleSize)
+
             If rect.Contains(New Point(CInt(location.X * ScaleFactor), CInt(location.Y * ScaleFactor))) Then
+
                 Return i
+
             End If
+
         Next
+
         Return -1
+
     End Function
 
     Private Sub GeneratePointArrayText()
+
         Dim sb As New System.Text.StringBuilder()
+
         sb.AppendLine("Dim Shape As Point() = {")
+
         Dim orderedPoints = GetOrderedPoints()
+
         For i As Integer = 0 To orderedPoints.Count - 1
+
             If i < orderedPoints.Count - 1 Then
+
                 sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor)),")
+
             Else
+
                 sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor))")
+
             End If
+
         Next
+
         sb.AppendLine("}")
-        Dim result As String = sb.ToString()
-        TextBox1.Text = result
+
+        TextBox1.Text = sb.ToString()
+
     End Sub
 
     Private Function GetOrderedPoints() As List(Of Point)
+
         Dim orderedPoints As New List(Of Point)()
+
         For i As Integer = 0 To points.Count - 1 Step 2
+
             orderedPoints.Add(points(i))
+
         Next
+
         For i As Integer = points.Count - 1 To 1 Step -2
+
             orderedPoints.Add(points(i))
+
         Next
+
         If points.Count > 0 Then
+
             orderedPoints.Add(points(0)) ' Close the shape
+
         End If
+
         Return orderedPoints
+
     End Function
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
@@ -236,20 +304,29 @@
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
 
         ScaleFactor = TrackBar1.Value / 100.0
+
         Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
+
         GeneratePointArrayText()
+
         Invalidate()
 
     End Sub
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
+
         DrawingCenter.X = ClientSize.Width \ 4 - HScrollBar1.Value
+
         Invalidate()
+
     End Sub
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
+
         DrawingCenter.Y = ClientSize.Height \ 2 - VScrollBar1.Value
+
         Invalidate()
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
