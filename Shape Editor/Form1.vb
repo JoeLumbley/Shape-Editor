@@ -10,6 +10,7 @@
     Private ShapeBrush As New SolidBrush(Color.FromArgb(128, Color.Blue)) ' Semi-transparent blue brush for filling the shape
     Private DrawingCenter As Point
     Private AdjustedMouseLocation As Point
+    Private HandleBrush As New SolidBrush(Color.FromArgb(128, Color.Blue)) ' Semi-transparent blue brush for the control handles
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
@@ -27,6 +28,7 @@
         ' Add event handlers for checkboxes
         AddHandler HideControlHandlesCheckBox.CheckedChanged, AddressOf HideControlHandlesCheckBox_CheckedChanged
         AddHandler FillShapeCheckBox.CheckedChanged, AddressOf FillShapeCheckBox_CheckedChanged
+        AddHandler DarkModeCheckBox.CheckedChanged, AddressOf DarkModeCheckBox_CheckedChanged
 
         CenterToScreen()
 
@@ -38,7 +40,7 @@
         MyBase.OnPaint(e)
 
         e.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
-        e.Graphics.Clear(SystemColors.Control)
+        e.Graphics.Clear(If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control))
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
 
         ' Translate the origin to the center of the drawing area
@@ -47,17 +49,22 @@
         DrawGrid(e.Graphics)
 
         ' Draw the coordinate system
-        e.Graphics.DrawLine(Pens.Gray, -ClientSize.Width * 3, 0, ClientSize.Width * 3, 0) ' X-axis
-        e.Graphics.DrawLine(Pens.Gray, 0, -ClientSize.Height * 3, 0, ClientSize.Height * 3) ' Y-axis
+        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Gray), -ClientSize.Width * 3, 0, ClientSize.Width * 3, 0) ' X-axis
+        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Gray), 0, -ClientSize.Height * 3, 0, ClientSize.Height * 3) ' Y-axis
 
         ' Draw intersecting lines at the origin
-        e.Graphics.DrawLine(Pens.Black, -5, 0, 5, 0) ' Horizontal line
-        e.Graphics.DrawLine(Pens.Black, 0, -5, 0, 5) ' Vertical line
+        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.White, Pens.Black), -5, 0, 5, 0) ' Horizontal line
+        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.White, Pens.Black), 0, -5, 0, 5) ' Vertical line
 
         e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
         e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
         e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+
+        ' Update brushes and pens based on dark mode state
+        ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.DarkSlateGray, Color.Blue)))
+        ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
+        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DeepSkyBlue, Color.Red)))
 
         If points.Count > 1 Then
             Dim orderedPoints = GetOrderedPoints()
@@ -81,7 +88,7 @@
                 If i = selectedPointIndex OrElse i = hoveredPointIndex Then
                     e.Graphics.FillRectangle(Brushes.Purple, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
                 Else
-                    e.Graphics.FillRectangle(Brushes.Red, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+                    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
                 End If
             Next
         End If
@@ -90,17 +97,18 @@
     Private Sub DrawGrid(g As Graphics)
         ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
         Dim stepSize As Integer = CInt(20 * ScaleFactor)
+        Dim gridPen As Pen = If(DarkModeCheckBox.Checked, Pens.DarkSlateGray, Pens.LightGray)
 
         ' Draw vertical grid lines
         For i As Integer = -((ClientSize.Width * 3) \ stepSize) To (ClientSize.Width * 3) \ stepSize
             Dim x As Integer = i * stepSize
-            g.DrawLine(Pens.LightGray, x, -ClientSize.Height * 3, x, ClientSize.Height * 3)
+            g.DrawLine(gridPen, x, -ClientSize.Height * 3, x, ClientSize.Height * 3)
         Next
 
         ' Draw horizontal grid lines
         For i As Integer = -((ClientSize.Height * 3) \ stepSize) To (ClientSize.Height * 3) \ stepSize
             Dim y As Integer = i * stepSize
-            g.DrawLine(Pens.LightGray, -ClientSize.Width * 3, y, ClientSize.Width * 3, y)
+            g.DrawLine(gridPen, -ClientSize.Width * 3, y, ClientSize.Width * 3, y)
         Next
     End Sub
 
@@ -239,7 +247,6 @@
     End Function
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-
         DrawingCenter = New Point(ClientSize.Width \ 4 - VScrollBar1.Width \ 2, (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height) \ 2)
 
         TextBox1.Top = ClientRectangle.Top
@@ -281,6 +288,9 @@
         FillShapeCheckBox.Top = HideControlHandlesCheckBox.Top
         FillShapeCheckBox.Left = HideControlHandlesCheckBox.Right + 25
 
+        DarkModeCheckBox.Top = HideControlHandlesCheckBox.Top
+        DarkModeCheckBox.Left = FillShapeCheckBox.Right + 25
+
         Invalidate()
     End Sub
 
@@ -317,6 +327,10 @@
     End Sub
 
     Private Sub FillShapeCheckBox_CheckedChanged(sender As Object, e As EventArgs)
+        Invalidate()
+    End Sub
+
+    Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
         Invalidate()
     End Sub
 End Class

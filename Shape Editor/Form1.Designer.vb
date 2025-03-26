@@ -30,6 +30,7 @@ Partial Class Form1
         Button1 = New Button()
         HideControlHandlesCheckBox = New CheckBox()
         FillShapeCheckBox = New CheckBox()
+        DarkModeCheckBox = New CheckBox()
         CType(TrackBar1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -90,11 +91,11 @@ Partial Class Form1
         ' HideControlHandlesCheckBox
         ' 
         HideControlHandlesCheckBox.AutoSize = True
-        HideControlHandlesCheckBox.Location = New Point(116, 405)
+        HideControlHandlesCheckBox.Location = New Point(174, 413)
         HideControlHandlesCheckBox.Name = "HideControlHandlesCheckBox"
-        HideControlHandlesCheckBox.Size = New Size(208, 29)
+        HideControlHandlesCheckBox.Size = New Size(144, 29)
         HideControlHandlesCheckBox.TabIndex = 6
-        HideControlHandlesCheckBox.Text = "Hide Control Handles"
+        HideControlHandlesCheckBox.Text = "Hide Handles"
         HideControlHandlesCheckBox.UseVisualStyleBackColor = True
         ' 
         ' FillShapeCheckBox
@@ -107,11 +108,22 @@ Partial Class Form1
         FillShapeCheckBox.Text = "Fill Shape"
         FillShapeCheckBox.UseVisualStyleBackColor = True
         ' 
+        ' DarkModeCheckBox
+        ' 
+        DarkModeCheckBox.AutoSize = True
+        DarkModeCheckBox.Location = New Point(76, 388)
+        DarkModeCheckBox.Name = "DarkModeCheckBox"
+        DarkModeCheckBox.Size = New Size(127, 29)
+        DarkModeCheckBox.TabIndex = 8
+        DarkModeCheckBox.Text = "Dark Mode"
+        DarkModeCheckBox.UseVisualStyleBackColor = True
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1258, 664)
+        Controls.Add(DarkModeCheckBox)
         Controls.Add(FillShapeCheckBox)
         Controls.Add(HideControlHandlesCheckBox)
         Controls.Add(Button1)
@@ -136,5 +148,6 @@ Partial Class Form1
     Friend WithEvents Button1 As Button
     Friend WithEvents HideControlHandlesCheckBox As CheckBox
     Friend WithEvents FillShapeCheckBox As CheckBox
+    Friend WithEvents DarkModeCheckBox As CheckBox
 
 End Class
