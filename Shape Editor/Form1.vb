@@ -331,6 +331,50 @@
     End Sub
 
     Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
+
+        ' Update brushes and pens based on dark mode state
+        ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.DarkSlateGray, Color.Blue)))
+        ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
+        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DeepSkyBlue, Color.Red)))
+
+        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+
+
+        Label1.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+        Label1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        TextBox1.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+        TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+
+        HideControlHandlesCheckBox.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+        HideControlHandlesCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        FillShapeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+
+
+        DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+
+
+
+        'Button1.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+
+        'Button1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        'BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+
+        'ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+
+
+
+        'Control.DefaultBackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+
+
+
         Invalidate()
+
     End Sub
+
 End Class
