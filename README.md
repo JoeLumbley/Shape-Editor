@@ -18,5 +18,5 @@
   
 - **Interactive Development**: Facilitates a hands-on approach to shape creation and coding.
 
-
+- **Point Mirroring**: Simplifies the creation of symmetrical shapes.
 
