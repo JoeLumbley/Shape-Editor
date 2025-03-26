@@ -10,8 +10,8 @@
     Private ShapeBrush As New SolidBrush(Color.FromArgb(128, Color.Blue)) ' Semi-transparent blue brush for filling the shape
     Private DrawingCenter As Point
     Private AdjustedMouseLocation As Point
-    Private HandleBrush As New SolidBrush(Color.FromArgb(128, Color.Blue)) ' Semi-transparent blue brush for the control handles
-    Private HoverBrush As New SolidBrush(Color.FromArgb(128, Color.Blue)) ' Semi-transparent blue brush for the control handles
+    Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray)) ' Semi-transparent blue brush for the control handles
+    Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray)) ' Semi-transparent blue brush for the control handles
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
