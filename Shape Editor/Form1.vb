@@ -13,16 +13,11 @@
     Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray)) ' Semi-transparent blue brush for the control handles
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray)) ' Semi-transparent blue brush for the control handles
 
-
-
-
     Private GridColorDark As Color = Color.FromArgb(255, 64, 64, 64)
 
     Private ReadOnlyColorDark As Color = Color.FromArgb(255, 32, 32, 32)
 
-
     Private GridPenDark As New Pen(GridColorDark, 1)
-
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
