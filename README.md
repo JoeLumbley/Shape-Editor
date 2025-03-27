@@ -36,10 +36,13 @@ Easily create symmetrical shapes with the point mirroring feature, streamlining 
 - **Interactive Feedback**: As you adjust points or modify the shape on one side, the mirrored shape updates in real-time, providing immediate visual feedback.
 
 #### Benefits of Point Mirroring
-1. **Efficiency**: Reduces the time needed to design symmetrical shapes, making the workflow faster and more efficient.
-2. **Creativity**: Encourages experimentation with shapes, as you can easily visualize and create complex designs without the hassle of manual adjustments.
-3. **Precision**: Ensures that both sides of the shape are perfectly aligned and proportional, enhancing the overall quality of the design.
-4. **User-Friendly**: Simplifies the design process for users of all skill levels, making it accessible to beginners while still being useful for experienced developers.
+- **Efficiency**: Reduces the time needed to design symmetrical shapes, making the workflow faster and more efficient.
+ 
+- **Creativity**: Encourages experimentation with shapes, as you can easily visualize and create complex designs without the hassle of manual adjustments.
+ 
+- **Precision**: Ensures that both sides of the shape are perfectly aligned and proportional, enhancing the overall quality of the design.
+ 
+- **User-Friendly**: Simplifies the design process for users of all skill levels, making it accessible to beginners while still being useful for experienced developers.
 
 Point mirroring in the Shape Editor is a powerful feature that streamlines the process of creating symmetrical shapes, allowing you to focus on creativity and design rather than tedious adjustments. This functionality not only enhances your experience but also improves the overall efficiency of shape creation.
 
