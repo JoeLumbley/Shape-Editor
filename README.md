@@ -20,12 +20,15 @@ The Shape Editor is an innovative tool designed to facilitate the interactive cr
 
 - **Point Mirroring**: Easily create symmetrical shapes with the point mirroring feature, streamlining the design process.
 
-To begin using the Shape Editor, simply launch the application and start creating shapes. The generated code will be available for you to copy and use in your projects.
+- **Dark Mode**: 
+  
+
 
 
 ![022](https://github.com/user-attachments/assets/30dfd866-5653-4cfa-9765-4d6d3ef6231b)
 
 
+To begin using the Shape Editor, simply launch the application and start creating shapes. The generated code will be available for you to copy and use in your projects.
 
 
 
