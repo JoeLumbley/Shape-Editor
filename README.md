@@ -32,7 +32,7 @@ Easily create symmetrical shapes with the point mirroring feature, streamlining 
 
 
 ### How Point Mirroring Works
-- **Symmetrical Design**: Users can draw a shape on one side of a designated axis (e.g., vertical or horizontal), and the Shape Editor automatically generates the mirrored counterpart on the opposite side. This saves time and effort in manually creating symmetrical shapes.
+- **Symmetrical Design**: Users can draw a shape on one side of the horizontal axis, and the Shape Editor automatically generates the mirrored counterpart on the opposite side. This saves time and effort in manually creating symmetrical shapes.
 - **Interactive Feedback**: As users adjust points or modify the shape on one side, the mirrored shape updates in real-time, providing immediate visual feedback.
 
 #### Benefits of Point Mirroring
