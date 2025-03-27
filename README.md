@@ -20,13 +20,28 @@ The Shape Editor is an innovative tool designed to facilitate the interactive cr
 
 - **Point Mirroring**: Easily create symmetrical shapes with the point mirroring feature, streamlining the design process.
 
-- **Dark Mode**: 
+- **Dark Mode**: enhances user experience, particularly in low-light environments. 
   
 
+## Dark Mode
 
-
+Enhances user experience, particularly in low-light environments. 
+  
 ![022](https://github.com/user-attachments/assets/30dfd866-5653-4cfa-9765-4d6d3ef6231b)
 
+
+
+- **Visual Comfort**: Dark Mode reduces eye strain by using darker colors for the interface, making it easier to work for extended periods without discomfort.
+
+- **Aesthetic Appeal**: The sleek, modern design of Dark Mode provides a visually appealing alternative that many users prefer for its contemporary look.
+
+- **Energy Efficiency**: For devices with OLED screens, Dark Mode can help save battery life by using less power when displaying darker pixels.
+
+- **User Preference**: Users can easily toggle between Light and Dark Modes, allowing them to choose their preferred interface based on their environment or personal taste.
+
+- **Consistent Experience**: The transition to Dark Mode maintains consistency across all elements of the Shape Editor, ensuring that all features and functionalities remain easily accessible and visually coherent.
+
+To enable Dark Mode, users simply need to check the box for the Dark Mode option, instantly transforming the interface to suit their preferences. This feature not only enhances usability but also aligns with modern design trends, making the Shape Editor more appealing to a wider audience.
 
 To begin using the Shape Editor, simply launch the application and start creating shapes. The generated code will be available for you to copy and use in your projects.
 
