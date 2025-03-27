@@ -41,6 +41,7 @@ Partial Class Form1
         TextBox1.Name = "TextBox1"
         TextBox1.PlaceholderText = "Draw shape in the drawing area to the left."
         TextBox1.ReadOnly = True
+        TextBox1.ScrollBars = ScrollBars.Vertical
         TextBox1.Size = New Size(155, 45)
         TextBox1.TabIndex = 0
         TextBox1.TabStop = False
