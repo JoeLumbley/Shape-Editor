@@ -49,7 +49,7 @@ Partial Class Form1
         ' TrackBar1
         ' 
         TrackBar1.Location = New Point(12, 388)
-        TrackBar1.Maximum = 1600
+        TrackBar1.Maximum = 6400
         TrackBar1.Minimum = 100
         TrackBar1.Name = "TrackBar1"
         TrackBar1.Size = New Size(156, 69)
@@ -92,7 +92,7 @@ Partial Class Form1
         ' HideControlHandlesCheckBox
         ' 
         HideControlHandlesCheckBox.AutoSize = True
-        HideControlHandlesCheckBox.Location = New Point(174, 413)
+        HideControlHandlesCheckBox.Location = New Point(350, 477)
         HideControlHandlesCheckBox.Name = "HideControlHandlesCheckBox"
         HideControlHandlesCheckBox.Size = New Size(144, 29)
         HideControlHandlesCheckBox.TabIndex = 6
@@ -102,7 +102,7 @@ Partial Class Form1
         ' FillShapeCheckBox
         ' 
         FillShapeCheckBox.AutoSize = True
-        FillShapeCheckBox.Location = New Point(36, 413)
+        FillShapeCheckBox.Location = New Point(30, 512)
         FillShapeCheckBox.Name = "FillShapeCheckBox"
         FillShapeCheckBox.Size = New Size(113, 29)
         FillShapeCheckBox.TabIndex = 7
@@ -112,7 +112,7 @@ Partial Class Form1
         ' DarkModeCheckBox
         ' 
         DarkModeCheckBox.AutoSize = True
-        DarkModeCheckBox.Location = New Point(76, 388)
+        DarkModeCheckBox.Location = New Point(173, 532)
         DarkModeCheckBox.Name = "DarkModeCheckBox"
         DarkModeCheckBox.Size = New Size(127, 29)
         DarkModeCheckBox.TabIndex = 8

@@ -14,13 +14,23 @@
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray)) ' Semi-transparent blue brush for the control handles
 
 
+
+
+    Private GridColorDark As Color = Color.FromArgb(255, 64, 64, 64)
+
+    Private ReadOnlyColorDark As Color = Color.FromArgb(255, 32, 32, 32)
+
+
+    Private GridPenDark As New Pen(GridColorDark, 1)
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
         Me.KeyPreview = True ' Enable KeyPreview to capture key events at the form level
 
         ' Set focus to the form itself
-        Me.Focus()
-        Me.ActiveControl = Nothing
+        'Me.Focus()
+        'Me.ActiveControl = Nothing
 
         Text = "Shape Editor - Code with Joe"
 
@@ -51,8 +61,8 @@
         DrawGrid(e.Graphics)
 
         ' Draw the coordinate system
-        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Gray), -ClientSize.Width * 3, 0, ClientSize.Width * 3, 0) ' X-axis
-        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Gray), 0, -ClientSize.Height * 3, 0, ClientSize.Height * 3) ' Y-axis
+        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Silver), -ClientSize.Width * 3, 0, ClientSize.Width * 3, 0) ' X-axis
+        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Silver), 0, -ClientSize.Height * 3, 0, ClientSize.Height * 3) ' Y-axis
 
         ' Draw intersecting lines at the origin
         e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.White, Pens.Black), -5, 0, 5, 0) ' Horizontal line
@@ -99,7 +109,8 @@
     Private Sub DrawGrid(g As Graphics)
         ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
         Dim stepSize As Integer = CInt(20 * ScaleFactor)
-        Dim gridPen As Pen = If(DarkModeCheckBox.Checked, Pens.DarkSlateGray, Pens.LightGray)
+
+        Dim gridPen As Pen = If(DarkModeCheckBox.Checked, GridPenDark, Pens.Gainsboro)
 
         ' Draw vertical grid lines
         For i As Integer = -((ClientSize.Width * 3) \ stepSize) To (ClientSize.Width * 3) \ stepSize
@@ -360,7 +371,10 @@
 
         Label1.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
         Label1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        TextBox1.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+
+
+
+        TextBox1.BackColor = If(DarkModeCheckBox.Checked, ReadOnlyColorDark, SystemColors.Control)
         TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
 
