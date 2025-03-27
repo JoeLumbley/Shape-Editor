@@ -276,7 +276,10 @@
         VScrollBar1.Left = TextBox1.Left - VScrollBar1.Width
         VScrollBar1.Height = ClientSize.Height - TrackBar1.Height - HScrollBar1.Height
         VScrollBar1.Minimum = (-ClientSize.Height \ 4) * 3
+        'VScrollBar1.Maximum = (ClientSize.Height \ 4) * 3
         VScrollBar1.Maximum = (ClientSize.Height \ 4) * 3
+
+
         VScrollBar1.Value = 0
 
         Button1.Top = HScrollBar1.Top
@@ -304,12 +307,26 @@
     End Sub
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
-        DrawingCenter.X = ClientSize.Width \ 4 - HScrollBar1.Value
+
+        ' Update the drawing center based on the scroll value
+
+
+        DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
+
+
+
         Invalidate()
     End Sub
 
+
+
+
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
-        DrawingCenter.Y = ClientSize.Height \ 2 - VScrollBar1.Value
+
+        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height) \ 2 - VScrollBar1.Value
+
+
+
         Invalidate()
     End Sub
 
