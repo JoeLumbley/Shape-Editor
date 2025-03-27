@@ -3,7 +3,7 @@
 The Shape Editor is an innovative tool designed to facilitate the interactive creation of shapes while simultaneously generating a corresponding array of points in code that represent the shape. This tool is perfect for developers looking to integrate shape data into their projects seamlessly.
 
 
-![018](https://github.com/user-attachments/assets/c12bdd84-5a2e-405e-9c5e-f6c23daa9ae8)
+![023](https://github.com/user-attachments/assets/a3785b9f-f380-455d-a561-4f6b1b93695e)
 
 
 ## Features
@@ -21,3 +21,11 @@ The Shape Editor is an innovative tool designed to facilitate the interactive cr
 - **Point Mirroring**: Easily create symmetrical shapes with the point mirroring feature, streamlining the design process.
 
 To begin using the Shape Editor, simply launch the application and start creating shapes. The generated code will be available for you to copy and use in your projects.
+
+
+![022](https://github.com/user-attachments/assets/30dfd866-5653-4cfa-9765-4d6d3ef6231b)
+
+
+
+
+
