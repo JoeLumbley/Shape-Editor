@@ -18,12 +18,38 @@ The Shape Editor is an innovative tool designed to facilitate the interactive cr
 
 - **Interactive Development**: Encourages a hands-on approach to shape creation and coding, allowing for greater creativity and experimentation.
 
-- **Point Mirroring**: Easily create symmetrical shapes with the point mirroring feature, streamlining the design process.
 
 
+
+## Point Mirroring
+
+Easily create symmetrical shapes with the point mirroring feature, streamlining the design process.
 
 
 ![024](https://github.com/user-attachments/assets/6f39c640-d8ab-4d82-b694-58fd03f2e80d)
+
+
+
+
+### How Point Mirroring Works
+- **Symmetrical Design**: Users can draw a shape on one side of a designated axis (e.g., vertical or horizontal), and the Shape Editor automatically generates the mirrored counterpart on the opposite side. This saves time and effort in manually creating symmetrical shapes.
+- **Interactive Feedback**: As users adjust points or modify the shape on one side, the mirrored shape updates in real-time, providing immediate visual feedback.
+
+#### Benefits of Point Mirroring
+1. **Efficiency**: Reduces the time needed to design symmetrical shapes, making the workflow faster and more efficient.
+2. **Creativity**: Encourages experimentation with shapes, as users can easily visualize and create complex designs without the hassle of manual adjustments.
+3. **Precision**: Ensures that both sides of the shape are perfectly aligned and proportional, enhancing the overall quality of the design.
+4. **User-Friendly**: Simplifies the design process for users of all skill levels, making it accessible to beginners while still being useful for experienced developers.
+
+Point mirroring in the Shape Editor is a powerful feature that streamlines the process of creating symmetrical shapes, allowing you to focus on creativity and design rather than tedious adjustments. This functionality not only enhances your experience but also improves the overall efficiency of shape creation.
+
+
+
+
+
+
+
+
 
 
   
