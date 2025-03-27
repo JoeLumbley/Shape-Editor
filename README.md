@@ -20,7 +20,6 @@ The Shape Editor is an innovative tool designed to facilitate the interactive cr
 
 - **Point Mirroring**: Easily create symmetrical shapes with the point mirroring feature, streamlining the design process.
 
-- **Dark Mode**: enhances user experience, particularly in low-light environments. 
   
 
 ## Dark Mode
