@@ -40,7 +40,7 @@ Enhances your experience, particularly in low-light environments.
 
 - **Consistent Experience**: The transition to Dark Mode maintains consistency across all elements of the Shape Editor, ensuring that all features and functionalities remain easily accessible and visually coherent.
 
-To enable Dark Mode, you simply need to check the box for the Dark Mode option, instantly transforming the interface to suit your preferences. This feature not only enhances usability but also aligns with modern design trends, making the Shape Editor more appealing to a wider audience.
+To enable Dark Mode, you simply need to check the box for the Dark Mode option, instantly transforming the interface to suit your preferences. This feature not only enhances usability but also aligns with modern design trends.
 
 To begin using the Shape Editor, simply launch the application and start creating shapes. The generated code will be available for you to copy and use in your projects.
 
