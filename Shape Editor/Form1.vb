@@ -15,7 +15,7 @@
 
     Private GridColorDark As Color = Color.FromArgb(255, 64, 64, 64)
 
-    Private ReadOnlyColorDark As Color = Color.FromArgb(255, 32, 32, 32)
+    Private DarkModeControlColor As Color = Color.FromArgb(255, 32, 32, 32)
 
     Private GridPenDark As New Pen(GridColorDark, 1)
 
@@ -47,7 +47,7 @@
         MyBase.OnPaint(e)
 
         e.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
-        e.Graphics.Clear(If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control))
+        e.Graphics.Clear(If(DarkModeCheckBox.Checked, Color.Black, Color.White))
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
 
         ' Translate the origin to the center of the drawing area
@@ -108,15 +108,15 @@
         Dim gridPen As Pen = If(DarkModeCheckBox.Checked, GridPenDark, Pens.Gainsboro)
 
         ' Draw vertical grid lines
-        For i As Integer = -((ClientSize.Width * 3) \ stepSize) To (ClientSize.Width * 3) \ stepSize
+        For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
             Dim x As Integer = i * stepSize
-            g.DrawLine(gridPen, x, -ClientSize.Height * 3, x, ClientSize.Height * 3)
+            g.DrawLine(gridPen, x, -ClientSize.Height * 8, x, ClientSize.Height * 8)
         Next
 
         ' Draw horizontal grid lines
-        For i As Integer = -((ClientSize.Height * 3) \ stepSize) To (ClientSize.Height * 3) \ stepSize
+        For i As Integer = -((ClientSize.Height * 8) \ stepSize) To (ClientSize.Height * 8) \ stepSize
             Dim y As Integer = i * stepSize
-            g.DrawLine(gridPen, -ClientSize.Width * 3, y, ClientSize.Width * 3, y)
+            g.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
         Next
     End Sub
 
@@ -274,16 +274,15 @@
         HScrollBar1.Top = ClientRectangle.Bottom - TrackBar1.Height - HScrollBar1.Height
         HScrollBar1.Left = ClientRectangle.Left
         HScrollBar1.Width = ClientSize.Width / 2 - VScrollBar1.Width
-        HScrollBar1.Minimum = (-ClientSize.Width \ 4) * 3
-        HScrollBar1.Maximum = (ClientSize.Width \ 4) * 3
+        HScrollBar1.Minimum = -ClientSize.Width * 2
+        HScrollBar1.Maximum = ClientSize.Width * 2
         HScrollBar1.Value = 0
 
         VScrollBar1.Top = ClientRectangle.Top
         VScrollBar1.Left = TextBox1.Left - VScrollBar1.Width
         VScrollBar1.Height = ClientSize.Height - TrackBar1.Height - HScrollBar1.Height
-        VScrollBar1.Minimum = (-ClientSize.Height \ 4) * 3
-        'VScrollBar1.Maximum = (ClientSize.Height \ 4) * 3
-        VScrollBar1.Maximum = (ClientSize.Height \ 4) * 3
+        VScrollBar1.Minimum = -ClientSize.Height * 4
+        VScrollBar1.Maximum = ClientSize.Height * 4
 
 
         VScrollBar1.Value = 0
@@ -306,10 +305,40 @@
     End Sub
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
+
+        CenterDrawingArea()
+
+
         ScaleFactor = TrackBar1.Value / 100.0
+
         Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
+
+        If ScaleFactor >= 3 Then
+
+            HScrollBar1.Minimum = -ClientSize.Width * (ScaleFactor / 16)
+
+            HScrollBar1.Maximum = ClientSize.Width * (ScaleFactor / 16)
+
+            VScrollBar1.Minimum = -ClientSize.Height * (ScaleFactor / 16)
+
+            VScrollBar1.Maximum = ClientSize.Height * (ScaleFactor / 16)
+
+            If Not HScrollBar1.Enabled Then HScrollBar1.Enabled = True
+
+            If Not VScrollBar1.Enabled Then VScrollBar1.Enabled = True
+
+        Else
+
+            If HScrollBar1.Enabled Then HScrollBar1.Enabled = False
+
+            If VScrollBar1.Enabled Then VScrollBar1.Enabled = False
+
+        End If
+
         GeneratePointArrayText()
+
         Invalidate()
+
     End Sub
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
@@ -330,6 +359,15 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+        CenterDrawingArea()
+
+        Invalidate()
+    End Sub
+
+    Private Sub CenterDrawingArea()
+
         ' Center the drawing area
         VScrollBar1.Value = 0
         DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height) \ 2
@@ -337,7 +375,6 @@
         HScrollBar1.Value = 0
         DrawingCenter.X = ClientSize.Width \ 4 - VScrollBar1.Width \ 2
 
-        Invalidate()
     End Sub
 
     Private Sub HideControlHandlesCheckBox_CheckedChanged(sender As Object, e As EventArgs)
@@ -359,29 +396,27 @@
 
         HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.Orchid, Color.Gray)))
 
+        TextBox1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
-
-        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
-
-
-        Label1.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
-        Label1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-
-
-
-        TextBox1.BackColor = If(DarkModeCheckBox.Checked, ReadOnlyColorDark, SystemColors.Control)
         TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
 
-        HideControlHandlesCheckBox.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+
+
+
+        Label1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        Label1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        HideControlHandlesCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
         HideControlHandlesCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
         FillShapeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+        FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
 
         DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
+        DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
 
 
