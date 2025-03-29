@@ -556,4 +556,29 @@ Public Class Form1
         End Using
     End Sub
 
+
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Close()
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        MessageBox.Show("Shape Editor" & vbCrLf & "A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET." & vbCrLf & vbCrLf & "MIT License" & vbCrLf & "Copyright(c) 2025 Joseph W. Lumbley", "About Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If MessageBox.Show("Are you sure you want to exit?", "Exit Shape Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+            e.Cancel = True
+        End If
+    End Sub
+
+    Private Sub Form1_MouseWheel(sender As Object, e As MouseEventArgs) Handles MyBase.MouseWheel
+        If e.Delta > 0 Then
+            TrackBar1.Value += 10
+        Else
+            TrackBar1.Value -= 10
+        End If
+    End Sub
+
+
+
 End Class
