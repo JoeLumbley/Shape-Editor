@@ -84,8 +84,8 @@ Public Class Form1
         DrawGrid(e.Graphics)
 
         ' Draw the coordinate system
-        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Silver), -ClientSize.Width * 3, 0, ClientSize.Width * 3, 0) ' X-axis
-        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Silver), 0, -ClientSize.Height * 3, 0, ClientSize.Height * 3) ' Y-axis
+        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Silver), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0) ' X-axis
+        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Silver), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8) ' Y-axis
 
         ' Draw intersecting lines at the origin
         e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.White, Pens.Black), -5, 0, 5, 0) ' Horizontal line
@@ -296,43 +296,62 @@ Public Class Form1
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
 
-        DrawingCenter = New Point(ClientSize.Width \ 4 - VScrollBar1.Width \ 2, (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height) \ 2)
+        ' Calculate common values
+        Dim clientWidth As Integer = ClientSize.Width
+        Dim clientHeight As Integer = ClientSize.Height
+        Dim halfClientWidth As Integer = clientWidth \ 2
+        Dim quarterClientWidth As Integer = clientWidth \ 4
+        Dim menuStripHeight As Integer = MenuStrip1.Height
+        Dim trackBarHeight As Integer = TrackBar1.Height
+        Dim hScrollBarHeight As Integer = HScrollBar1.Height
+        Dim vScrollBarWidth As Integer = VScrollBar1.Width
 
-        TextBox1.Top = ClientRectangle.Top
-        TextBox1.Left = ClientSize.Width / 2
-        TextBox1.Width = ClientSize.Width / 2
-        TextBox1.Height = ClientSize.Height
+        ' Update DrawingCenter
+        DrawingCenter = New Point(quarterClientWidth - vScrollBarWidth \ 2, (clientHeight - trackBarHeight - hScrollBarHeight) \ 2)
 
-        TrackBar1.Top = ClientRectangle.Bottom - TrackBar1.Height
+
+        'TextBox1.SuspendLayout()
+
+        ' Update TextBox1
+        TextBox1.Top = ClientRectangle.Top + menuStripHeight
+        TextBox1.Left = halfClientWidth
+        TextBox1.Width = halfClientWidth
+        TextBox1.Height = clientHeight - menuStripHeight
+
+        ' Update TrackBar1
+        TrackBar1.Top = ClientRectangle.Bottom - trackBarHeight
         TrackBar1.Left = ClientRectangle.Left
-        TrackBar1.Width = ClientSize.Width / 2
+        TrackBar1.Width = halfClientWidth
 
+        ' Update Label1
         Label1.Top = TrackBar1.Bottom - Label1.Height - 5
         Label1.Left = ClientRectangle.Left + 5
         Label1.Width = 200
         Label1.Height = 20
 
-        HScrollBar1.Top = ClientRectangle.Bottom - TrackBar1.Height - HScrollBar1.Height
+        ' Update HScrollBar1
+        HScrollBar1.Top = ClientRectangle.Bottom - trackBarHeight - hScrollBarHeight
         HScrollBar1.Left = ClientRectangle.Left
-        HScrollBar1.Width = ClientSize.Width / 2 - VScrollBar1.Width
-        HScrollBar1.Minimum = -ClientSize.Width * 2
-        HScrollBar1.Maximum = ClientSize.Width * 2
+        HScrollBar1.Width = halfClientWidth - vScrollBarWidth
+        HScrollBar1.Minimum = -clientWidth * 2
+        HScrollBar1.Maximum = clientWidth * 2
         HScrollBar1.Value = 0
 
-        VScrollBar1.Top = ClientRectangle.Top
-        VScrollBar1.Left = TextBox1.Left - VScrollBar1.Width
-        VScrollBar1.Height = ClientSize.Height - TrackBar1.Height - HScrollBar1.Height
-        VScrollBar1.Minimum = -ClientSize.Height * 4
-        VScrollBar1.Maximum = ClientSize.Height * 4
-
-
+        ' Update VScrollBar1
+        VScrollBar1.Top = ClientRectangle.Top + menuStripHeight
+        VScrollBar1.Left = TextBox1.Left - vScrollBarWidth
+        VScrollBar1.Height = clientHeight - trackBarHeight - hScrollBarHeight - menuStripHeight
+        VScrollBar1.Minimum = -clientHeight * 4
+        VScrollBar1.Maximum = clientHeight * 4
         VScrollBar1.Value = 0
 
-        Button1.Top = HScrollBar1.Top
-        Button1.Left = VScrollBar1.Left
-        Button1.Width = VScrollBar1.Width
-        Button1.Height = HScrollBar1.Height
+        ' Update Button1
+        Button1.Top = HScrollBar1.Top - 1
+        Button1.Left = VScrollBar1.Left - 1
+        Button1.Width = vScrollBarWidth + 1
+        Button1.Height = hScrollBarHeight + 2
 
+        ' Update CheckBoxes
         HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
         HideControlHandlesCheckBox.Left = Label1.Right + 25
 
@@ -455,6 +474,34 @@ Public Class Form1
         DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
         DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
+
+        MenuStrip1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        MenuStrip1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        FileToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+
+        FileToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+
+
+
+        OpenToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        OpenToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        SaveToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        SaveToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        NewToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        NewToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        ExitToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        ExitToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        AboutToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        AboutToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+
+        'Me.BackColor = If(DarkModeCheckBox.Checked, Color.Black, Color.White)
+        'Me.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+
+
         Invalidate()
 
     End Sub
@@ -466,45 +513,6 @@ Public Class Form1
 
 
 
-    'Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
-    '    Using saveFileDialog As New SaveFileDialog()
-    '        saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
-    '        saveFileDialog.Title = "Save Points"
-
-    '        If saveFileDialog.ShowDialog() = DialogResult.OK Then
-    '            Using writer As New StreamWriter(saveFileDialog.FileName)
-    '                For Each point As Point In points
-    '                    writer.WriteLine($"{point.X},{point.Y}")
-    '                Next
-    '            End Using
-    '        End If
-    '    End Using
-    'End Sub
-
-    'Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
-    '    Using openFileDialog As New OpenFileDialog()
-    '        openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
-    '        openFileDialog.Title = "Open Points"
-
-    '        If openFileDialog.ShowDialog() = DialogResult.OK Then
-    '            points.Clear()
-    '            Using reader As New StreamReader(openFileDialog.FileName)
-    '                While Not reader.EndOfStream
-    '                    Dim line As String = reader.ReadLine()
-    '                    Dim parts As String() = line.Split(","c)
-    '                    If parts.Length = 2 Then
-    '                        Dim x As Integer
-    '                        Dim y As Integer
-    '                        If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
-    '                            points.Add(New Point(x, y))
-    '                        End If
-    '                    End If
-    '                End While
-    '            End Using
-    '            Invalidate()
-    '        End If
-    '    End Using
-    'End Sub
 
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click

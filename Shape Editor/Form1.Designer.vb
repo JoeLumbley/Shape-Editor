@@ -44,65 +44,65 @@ Partial Class Form1
         ' 
         ' TextBox1
         ' 
-        TextBox1.Location = New Point(426, 126)
+        TextBox1.Location = New Point(473, 137)
         TextBox1.Multiline = True
         TextBox1.Name = "TextBox1"
         TextBox1.PlaceholderText = "Draw shape in the drawing area to the left."
         TextBox1.ReadOnly = True
         TextBox1.ScrollBars = ScrollBars.Vertical
-        TextBox1.Size = New Size(140, 42)
+        TextBox1.Size = New Size(155, 45)
         TextBox1.TabIndex = 0
         TextBox1.TabStop = False
         ' 
         ' TrackBar1
         ' 
-        TrackBar1.Location = New Point(11, 357)
+        TrackBar1.Location = New Point(12, 388)
         TrackBar1.Maximum = 6400
         TrackBar1.Minimum = 100
         TrackBar1.Name = "TrackBar1"
-        TrackBar1.Size = New Size(140, 64)
+        TrackBar1.Size = New Size(156, 69)
         TrackBar1.TabIndex = 1
         TrackBar1.Value = 800
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(50, 392)
+        Label1.Location = New Point(56, 426)
         Label1.Name = "Label1"
-        Label1.Size = New Size(59, 23)
+        Label1.Size = New Size(63, 25)
         Label1.TabIndex = 2
         Label1.Text = "Label1"
         ' 
         ' HScrollBar1
         ' 
-        HScrollBar1.Location = New Point(224, 313)
+        HScrollBar1.Location = New Point(249, 340)
         HScrollBar1.Minimum = -100
         HScrollBar1.Name = "HScrollBar1"
-        HScrollBar1.Size = New Size(108, 39)
+        HScrollBar1.Size = New Size(120, 39)
         HScrollBar1.TabIndex = 3
         ' 
         ' VScrollBar1
         ' 
-        VScrollBar1.Location = New Point(532, 282)
+        VScrollBar1.Location = New Point(350, 174)
         VScrollBar1.Name = "VScrollBar1"
-        VScrollBar1.Size = New Size(39, 166)
+        VScrollBar1.Size = New Size(39, 180)
         VScrollBar1.TabIndex = 4
         ' 
         ' Button1
         ' 
-        Button1.Location = New Point(462, 224)
+        Button1.Location = New Point(340, 340)
         Button1.Name = "Button1"
-        Button1.Size = New Size(101, 31)
+        Button1.Size = New Size(112, 34)
         Button1.TabIndex = 5
         Button1.Text = "C"
-        Button1.UseVisualStyleBackColor = True
+        'Button1.UseVisualStyleBackColor = True
         ' 
         ' HideControlHandlesCheckBox
         ' 
         HideControlHandlesCheckBox.AutoSize = True
-        HideControlHandlesCheckBox.Location = New Point(315, 439)
+        HideControlHandlesCheckBox.Location = New Point(350, 477)
         HideControlHandlesCheckBox.Name = "HideControlHandlesCheckBox"
-        HideControlHandlesCheckBox.Size = New Size(133, 27)
+        HideControlHandlesCheckBox.Size = New Size(144, 29)
         HideControlHandlesCheckBox.TabIndex = 6
         HideControlHandlesCheckBox.Text = "Hide Handles"
         HideControlHandlesCheckBox.UseVisualStyleBackColor = True
@@ -110,9 +110,9 @@ Partial Class Form1
         ' FillShapeCheckBox
         ' 
         FillShapeCheckBox.AutoSize = True
-        FillShapeCheckBox.Location = New Point(27, 471)
+        FillShapeCheckBox.Location = New Point(30, 512)
         FillShapeCheckBox.Name = "FillShapeCheckBox"
-        FillShapeCheckBox.Size = New Size(104, 27)
+        FillShapeCheckBox.Size = New Size(113, 29)
         FillShapeCheckBox.TabIndex = 7
         FillShapeCheckBox.Text = "Fill Shape"
         FillShapeCheckBox.UseVisualStyleBackColor = True
@@ -120,9 +120,9 @@ Partial Class Form1
         ' DarkModeCheckBox
         ' 
         DarkModeCheckBox.AutoSize = True
-        DarkModeCheckBox.Location = New Point(156, 489)
+        DarkModeCheckBox.Location = New Point(173, 532)
         DarkModeCheckBox.Name = "DarkModeCheckBox"
-        DarkModeCheckBox.Size = New Size(116, 27)
+        DarkModeCheckBox.Size = New Size(127, 29)
         DarkModeCheckBox.TabIndex = 8
         DarkModeCheckBox.Text = "Dark Mode"
         DarkModeCheckBox.UseVisualStyleBackColor = True
@@ -133,8 +133,7 @@ Partial Class Form1
         MenuStrip1.Items.AddRange(New ToolStripItem() {FileToolStripMenuItem})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
-        MenuStrip1.Padding = New Padding(5, 2, 0, 2)
-        MenuStrip1.Size = New Size(1132, 31)
+        MenuStrip1.Size = New Size(1258, 33)
         MenuStrip1.TabIndex = 9
         MenuStrip1.Text = "MenuStrip1"
         ' 
@@ -142,53 +141,53 @@ Partial Class Form1
         ' 
         FileToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {OpenToolStripMenuItem, NewToolStripMenuItem, SaveToolStripMenuItem, AboutToolStripMenuItem, ExitToolStripMenuItem})
         FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        FileToolStripMenuItem.Size = New Size(51, 27)
+        FileToolStripMenuItem.Size = New Size(54, 29)
         FileToolStripMenuItem.Text = "File"
         ' 
         ' OpenToolStripMenuItem
         ' 
         OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         OpenToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.O
-        OpenToolStripMenuItem.Size = New Size(252, 30)
+        OpenToolStripMenuItem.Size = New Size(223, 34)
         OpenToolStripMenuItem.Text = "Open"
         ' 
         ' NewToolStripMenuItem
         ' 
         NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         NewToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.N
-        NewToolStripMenuItem.Size = New Size(252, 30)
+        NewToolStripMenuItem.Size = New Size(223, 34)
         NewToolStripMenuItem.Text = "New"
         ' 
         ' SaveToolStripMenuItem
         ' 
         SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         SaveToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.S
-        SaveToolStripMenuItem.Size = New Size(252, 30)
+        SaveToolStripMenuItem.Size = New Size(223, 34)
         SaveToolStripMenuItem.Text = "Save"
         ' 
         ' AboutToolStripMenuItem
         ' 
         AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        AboutToolStripMenuItem.Size = New Size(252, 30)
+        AboutToolStripMenuItem.Size = New Size(223, 34)
         AboutToolStripMenuItem.Text = "About"
         ' 
         ' ExitToolStripMenuItem
         ' 
         ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        ExitToolStripMenuItem.Size = New Size(252, 30)
+        ExitToolStripMenuItem.Size = New Size(223, 34)
         ExitToolStripMenuItem.Text = "Exit"
         ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(9F, 23F)
+        AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1132, 611)
+        ClientSize = New Size(1258, 664)
+        Controls.Add(HScrollBar1)
+        Controls.Add(VScrollBar1)
         Controls.Add(DarkModeCheckBox)
         Controls.Add(FillShapeCheckBox)
         Controls.Add(HideControlHandlesCheckBox)
         Controls.Add(Button1)
-        Controls.Add(VScrollBar1)
-        Controls.Add(HScrollBar1)
         Controls.Add(Label1)
         Controls.Add(TrackBar1)
         Controls.Add(TextBox1)
