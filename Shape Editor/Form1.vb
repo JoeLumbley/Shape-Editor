@@ -562,7 +562,20 @@ Public Class Form1
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
-        MessageBox.Show("Shape Editor" & vbCrLf & "A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET." & vbCrLf & vbCrLf & "MIT License" & vbCrLf & "Copyright(c) 2025 Joseph W. Lumbley", "About Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        MessageBox.Show("Shape Editor" _
+                      & vbCrLf _
+                      & "A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET." _
+                      & vbCrLf _
+                      & vbCrLf _
+                      & "MIT License" _
+                      & vbCrLf _
+                      & "Copyright(c) 2025 Joseph W. Lumbley" _
+                      & vbCrLf _
+                      & vbCrLf _
+                      & "https://github.com/JoeLumbley/Shape-Editor",
+                        "About Shape Editor",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information)
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
