@@ -31,7 +31,14 @@ Partial Class Form1
         HideControlHandlesCheckBox = New CheckBox()
         FillShapeCheckBox = New CheckBox()
         DarkModeCheckBox = New CheckBox()
+        MenuStrip1 = New MenuStrip()
+        FileToolStripMenuItem = New ToolStripMenuItem()
+        OpenToolStripMenuItem = New ToolStripMenuItem()
+        NewToolStripMenuItem = New ToolStripMenuItem()
+        SaveToolStripMenuItem = New ToolStripMenuItem()
+        ExitToolStripMenuItem = New ToolStripMenuItem()
         CType(TrackBar1, ComponentModel.ISupportInitialize).BeginInit()
+        MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
         ' TextBox1
@@ -119,6 +126,47 @@ Partial Class Form1
         DarkModeCheckBox.Text = "Dark Mode"
         DarkModeCheckBox.UseVisualStyleBackColor = True
         ' 
+        ' MenuStrip1
+        ' 
+        MenuStrip1.ImageScalingSize = New Size(24, 24)
+        MenuStrip1.Items.AddRange(New ToolStripItem() {FileToolStripMenuItem})
+        MenuStrip1.Location = New Point(0, 0)
+        MenuStrip1.Name = "MenuStrip1"
+        MenuStrip1.Size = New Size(1258, 33)
+        MenuStrip1.TabIndex = 9
+        MenuStrip1.Text = "MenuStrip1"
+        ' 
+        ' FileToolStripMenuItem
+        ' 
+        FileToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {OpenToolStripMenuItem, NewToolStripMenuItem, SaveToolStripMenuItem, ExitToolStripMenuItem})
+        FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        FileToolStripMenuItem.Size = New Size(54, 29)
+        FileToolStripMenuItem.Text = "File"
+        ' 
+        ' OpenToolStripMenuItem
+        ' 
+        OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+        OpenToolStripMenuItem.Size = New Size(270, 34)
+        OpenToolStripMenuItem.Text = "Open"
+        ' 
+        ' NewToolStripMenuItem
+        ' 
+        NewToolStripMenuItem.Name = "NewToolStripMenuItem"
+        NewToolStripMenuItem.Size = New Size(270, 34)
+        NewToolStripMenuItem.Text = "New"
+        ' 
+        ' SaveToolStripMenuItem
+        ' 
+        SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
+        SaveToolStripMenuItem.Size = New Size(270, 34)
+        SaveToolStripMenuItem.Text = "Save"
+        ' 
+        ' ExitToolStripMenuItem
+        ' 
+        ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        ExitToolStripMenuItem.Size = New Size(270, 34)
+        ExitToolStripMenuItem.Text = "Exit"
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
@@ -133,10 +181,14 @@ Partial Class Form1
         Controls.Add(Label1)
         Controls.Add(TrackBar1)
         Controls.Add(TextBox1)
+        Controls.Add(MenuStrip1)
         KeyPreview = True
+        MainMenuStrip = MenuStrip1
         Name = "Form1"
         Text = "Form1"
         CType(TrackBar1, ComponentModel.ISupportInitialize).EndInit()
+        MenuStrip1.ResumeLayout(False)
+        MenuStrip1.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -150,5 +202,11 @@ Partial Class Form1
     Friend WithEvents HideControlHandlesCheckBox As CheckBox
     Friend WithEvents FillShapeCheckBox As CheckBox
     Friend WithEvents DarkModeCheckBox As CheckBox
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NewToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
 
 End Class

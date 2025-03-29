@@ -23,6 +23,8 @@
 ' OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ' SOFTWARE.
 
+Imports System.IO
+
 Public Class Form1
     Private points As New List(Of Point)()
     Private isDrawing As Boolean = False
@@ -66,6 +68,7 @@ Public Class Form1
 
         ' Maximize the form
         WindowState = FormWindowState.Maximized
+
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
@@ -454,6 +457,103 @@ Public Class Form1
 
         Invalidate()
 
+    End Sub
+
+
+
+
+
+
+
+
+    'Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+    '    Using saveFileDialog As New SaveFileDialog()
+    '        saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+    '        saveFileDialog.Title = "Save Points"
+
+    '        If saveFileDialog.ShowDialog() = DialogResult.OK Then
+    '            Using writer As New StreamWriter(saveFileDialog.FileName)
+    '                For Each point As Point In points
+    '                    writer.WriteLine($"{point.X},{point.Y}")
+    '                Next
+    '            End Using
+    '        End If
+    '    End Using
+    'End Sub
+
+    'Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
+    '    Using openFileDialog As New OpenFileDialog()
+    '        openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+    '        openFileDialog.Title = "Open Points"
+
+    '        If openFileDialog.ShowDialog() = DialogResult.OK Then
+    '            points.Clear()
+    '            Using reader As New StreamReader(openFileDialog.FileName)
+    '                While Not reader.EndOfStream
+    '                    Dim line As String = reader.ReadLine()
+    '                    Dim parts As String() = line.Split(","c)
+    '                    If parts.Length = 2 Then
+    '                        Dim x As Integer
+    '                        Dim y As Integer
+    '                        If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
+    '                            points.Add(New Point(x, y))
+    '                        End If
+    '                    End If
+    '                End While
+    '            End Using
+    '            Invalidate()
+    '        End If
+    '    End Using
+    'End Sub
+
+
+    Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
+        points.Clear()
+        TextBox1.Clear()
+        Invalidate()
+    End Sub
+
+    Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+        Using saveFileDialog As New SaveFileDialog()
+            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+            saveFileDialog.Title = "Save Points"
+
+            If saveFileDialog.ShowDialog() = DialogResult.OK Then
+                Using writer As New StreamWriter(saveFileDialog.FileName)
+                    For Each point As Point In points
+                        writer.WriteLine($"{point.X},{point.Y}")
+                    Next
+                End Using
+            End If
+        End Using
+    End Sub
+
+    Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
+        Using openFileDialog As New OpenFileDialog()
+            openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+            openFileDialog.Title = "Open Points"
+
+            If openFileDialog.ShowDialog() = DialogResult.OK Then
+                points.Clear()
+                Using reader As New StreamReader(openFileDialog.FileName)
+                    While Not reader.EndOfStream
+                        Dim line As String = reader.ReadLine()
+                        Dim parts As String() = line.Split(","c)
+                        If parts.Length = 2 Then
+                            Dim x As Integer
+                            Dim y As Integer
+                            If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
+                                points.Add(New Point(x, y))
+                            End If
+                        End If
+                    End While
+                End Using
+
+                GeneratePointArrayText()
+
+                Invalidate()
+            End If
+        End Using
     End Sub
 
 End Class
