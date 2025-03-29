@@ -68,11 +68,6 @@
         e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
         e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
 
-        '' Update brushes and pens based on dark mode state
-        'ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.DarkSlateGray, Color.Blue)))
-        'ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
-        'HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DeepSkyBlue, Color.Red)))
-
         If points.Count > 1 Then
             Dim orderedPoints = GetOrderedPoints()
             Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
@@ -99,9 +94,11 @@
                 End If
             Next
         End If
+
     End Sub
 
     Private Sub DrawGrid(g As Graphics)
+
         ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
         Dim stepSize As Integer = CInt(20 * ScaleFactor)
 
@@ -118,9 +115,11 @@
             Dim y As Integer = i * stepSize
             g.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
         Next
+
     End Sub
 
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
+
         If e.Button = MouseButtons.Left Then
             AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor),
                                               CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
@@ -144,9 +143,11 @@
 
             Invalidate()
         End If
+
     End Sub
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
+
         AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
         If isDrawing AndAlso selectedPointIndex <> -1 Then
@@ -165,17 +166,21 @@
             hoveredPointIndex = newHoveredPointIndex
             Invalidate()
         End If
+
     End Sub
 
     Private Sub Form1_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
+
         If e.Button = MouseButtons.Left Then
             isDrawing = False
             selectedPointIndex = -1
             GeneratePointArrayText()
         End If
+
     End Sub
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+
         If e.KeyCode = Keys.Enter AndAlso points.Count > 2 Then
             points.Add(points(0)) ' Close the shape
             points.Add(New Point(points(1).X, -points(1).Y)) ' Close the mirror shape
@@ -198,9 +203,11 @@
             GeneratePointArrayText()
             Invalidate()
         End If
+
     End Sub
 
     Private Function GetPointIndexAtLocation(location As Point) As Integer
+
         For i As Integer = 0 To points.Count - 1 Step 2
             Dim point As Point = points(i)
             Dim scaledPoint As New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
@@ -212,9 +219,11 @@
         Next
 
         Return -1
+
     End Function
 
     Private Sub GeneratePointArrayText()
+
         Dim sb As New System.Text.StringBuilder()
 
         sb.AppendLine("Dim ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed")
@@ -234,9 +243,11 @@
         sb.AppendLine("}")
 
         TextBox1.Text = sb.ToString()
+
     End Sub
 
     Private Function GetOrderedPoints() As List(Of Point)
+
         Dim orderedPoints As New List(Of Point)()
 
         For i As Integer = 0 To points.Count - 1 Step 2
@@ -252,9 +263,11 @@
         End If
 
         Return orderedPoints
+
     End Function
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+
         DrawingCenter = New Point(ClientSize.Width \ 4 - VScrollBar1.Width \ 2, (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height) \ 2)
 
         TextBox1.Top = ClientRectangle.Top
@@ -302,12 +315,12 @@
         DarkModeCheckBox.Left = FillShapeCheckBox.Right + 25
 
         Invalidate()
+
     End Sub
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
 
         CenterDrawingArea()
-
 
         ScaleFactor = TrackBar1.Value / 100.0
 
@@ -360,10 +373,10 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-
         CenterDrawingArea()
 
         Invalidate()
+
     End Sub
 
     Private Sub CenterDrawingArea()
@@ -387,10 +400,9 @@
 
     Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
 
-        ' Update brushes and pens based on dark mode state
         ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.Silver, Color.DodgerBlue)))
-        ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
 
+        ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
 
         HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DodgerBlue, Color.DarkGray)))
 
@@ -400,10 +412,7 @@
 
         TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
-
         TrackBar1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-
-
 
         Label1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
         Label1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
@@ -417,23 +426,6 @@
 
         DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
         DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-
-
-
-        'Button1.BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
-
-        'Button1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-
-        'BackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
-
-        'ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-
-
-
-
-        'Control.DefaultBackColor = If(DarkModeCheckBox.Checked, Color.Black, SystemColors.Control)
-
-
 
         Invalidate()
 
