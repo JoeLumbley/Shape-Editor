@@ -38,6 +38,7 @@ Partial Class Form1
         SaveToolStripMenuItem = New ToolStripMenuItem()
         AboutToolStripMenuItem = New ToolStripMenuItem()
         ExitToolStripMenuItem = New ToolStripMenuItem()
+        Panel1 = New Panel()
         CType(TrackBar1, ComponentModel.ISupportInitialize).BeginInit()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
@@ -94,8 +95,9 @@ Partial Class Form1
         Button1.Name = "Button1"
         Button1.Size = New Size(112, 34)
         Button1.TabIndex = 5
+        Button1.TabStop = False
         Button1.Text = "C"
-        'Button1.UseVisualStyleBackColor = True
+        Button1.UseVisualStyleBackColor = True
         ' 
         ' HideControlHandlesCheckBox
         ' 
@@ -177,6 +179,13 @@ Partial Class Form1
         ExitToolStripMenuItem.Size = New Size(223, 34)
         ExitToolStripMenuItem.Text = "Exit"
         ' 
+        ' Panel1
+        ' 
+        Panel1.Location = New Point(409, 288)
+        Panel1.Name = "Panel1"
+        Panel1.Size = New Size(300, 150)
+        Panel1.TabIndex = 10
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
@@ -184,10 +193,11 @@ Partial Class Form1
         ClientSize = New Size(1258, 664)
         Controls.Add(HScrollBar1)
         Controls.Add(VScrollBar1)
+        Controls.Add(Button1)
+        Controls.Add(Panel1)
         Controls.Add(DarkModeCheckBox)
         Controls.Add(FillShapeCheckBox)
         Controls.Add(HideControlHandlesCheckBox)
-        Controls.Add(Button1)
         Controls.Add(Label1)
         Controls.Add(TrackBar1)
         Controls.Add(TextBox1)
@@ -219,5 +229,6 @@ Partial Class Form1
     Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Panel1 As Panel
 
 End Class
