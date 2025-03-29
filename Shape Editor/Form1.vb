@@ -536,25 +536,34 @@ Public Class Form1
     End Sub
 
     Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
+
         Using openFileDialog As New OpenFileDialog()
+
             openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
             openFileDialog.Title = "Open Points"
 
             If openFileDialog.ShowDialog() = DialogResult.OK Then
+
                 points.Clear()
+
                 Using reader As New StreamReader(openFileDialog.FileName)
 
-
                     While Not reader.EndOfStream
+
                         Dim line As String = reader.ReadLine()
                         Dim parts As String() = line.Split(","c)
+
                         If parts.Length = 2 Then
+
                             Dim x As Integer
                             Dim y As Integer
+
                             If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
                                 points.Add(New Point(x, y))
                             End If
+
                         End If
+
                     End While
 
                     ' Add file name to "Shape Editor - Code with Joe" and display in titlebar.
@@ -565,8 +574,11 @@ Public Class Form1
                 GeneratePointArrayText()
 
                 Invalidate()
+
             End If
+
         End Using
+
     End Sub
 
 
