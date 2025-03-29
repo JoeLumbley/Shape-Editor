@@ -1,17 +1,42 @@
-﻿Public Class Form1
+﻿' Shape Editor
+
+' A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET.
+
+' MIT License
+' Copyright(c) 2025 Joseph W. Lumbley
+
+' Permission is hereby granted, free of charge, to any person obtaining a copy
+' of this software and associated documentation files (the "Software"), to deal
+' in the Software without restriction, including without limitation the rights
+' to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+' copies of the Software, and to permit persons to whom the Software is
+' furnished to do so, subject to the following conditions:
+
+' The above copyright notice and this permission notice shall be included in all
+' copies or substantial portions of the Software.
+
+' THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+' IMPLIED, INCLUDING BUT NOT LIMITED TO AND THE WARRANTIES OF MERCHANTABILITY,
+' FITNESS FOR A PARTICULAR PURPOSE A NONINFRINGEMENT. IN NO EVENT SHALL THE
+' AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+' LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+' OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+' SOFTWARE.
+
+Public Class Form1
     Private points As New List(Of Point)()
     Private isDrawing As Boolean = False
     Private selectedPointIndex As Integer = -1
     Private hoveredPointIndex As Integer = -1
     Private Const handleSize As Integer = 15
-    Private ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed
+    Private ScaleFactor As Double = 1.0
 
     Private ShapePen As New Pen(Color.Black, 2)
-    Private ShapeBrush As New SolidBrush(Color.FromArgb(128, Color.Blue)) ' Semi-transparent blue brush for filling the shape
+    Private ShapeBrush As New SolidBrush(Color.FromArgb(128, Color.Blue))
     Private DrawingCenter As Point
     Private AdjustedMouseLocation As Point
-    Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray)) ' Semi-transparent blue brush for the control handles
-    Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray)) ' Semi-transparent blue brush for the control handles
+    Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
+    Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
 
     Private GridColorDark As Color = Color.FromArgb(255, 64, 64, 64)
 
@@ -21,7 +46,7 @@
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
-        Me.KeyPreview = True ' Enable KeyPreview to capture key events at the form level
+        Me.KeyPreview = True
 
         ' Set focus to the form itself
         'Me.Focus()
