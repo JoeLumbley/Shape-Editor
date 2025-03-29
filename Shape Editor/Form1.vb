@@ -514,18 +514,25 @@ Public Class Form1
     End Sub
 
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+
         Using saveFileDialog As New SaveFileDialog()
+
             saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
             saveFileDialog.Title = "Save Points"
+            saveFileDialog.InitialDirectory = Application.StartupPath
 
-            If saveFileDialog.ShowDialog() = DialogResult.OK Then
+            If saveFileDialog.ShowDialog(Me) = DialogResult.OK Then
+
                 Using writer As New StreamWriter(saveFileDialog.FileName)
                     For Each point As Point In points
                         writer.WriteLine($"{point.X},{point.Y}")
                     Next
                 End Using
+
             End If
+
         End Using
+
     End Sub
 
     Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
@@ -536,6 +543,8 @@ Public Class Form1
             If openFileDialog.ShowDialog() = DialogResult.OK Then
                 points.Clear()
                 Using reader As New StreamReader(openFileDialog.FileName)
+
+
                     While Not reader.EndOfStream
                         Dim line As String = reader.ReadLine()
                         Dim parts As String() = line.Split(","c)
@@ -547,6 +556,10 @@ Public Class Form1
                             End If
                         End If
                     End While
+
+                    ' Add file name to "Shape Editor - Code with Joe" and display in titlebar.
+                    Text = $"{Path.GetFileName(openFileDialog.FileName)} - Shape Editor - Code with Joe"
+
                 End Using
 
                 GeneratePointArrayText()
