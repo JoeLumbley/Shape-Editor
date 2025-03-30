@@ -27,7 +27,7 @@ Easily create symmetrical shapes with the point mirroring feature, streamlining 
 
 
 
-![003](https://github.com/user-attachments/assets/209a8083-7f29-45a6-8899-19f4e058721f)
+![004](https://github.com/user-attachments/assets/e328602a-22af-4f5b-aace-ca03877acdd6)
 
 
 
