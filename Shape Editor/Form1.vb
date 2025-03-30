@@ -307,7 +307,7 @@ Public Class Form1
         Dim vScrollBarWidth As Integer = VScrollBar1.Width
 
         ' Update DrawingCenter
-        DrawingCenter = New Point(quarterClientWidth - vScrollBarWidth \ 2, (clientHeight - trackBarHeight - hScrollBarHeight) \ 2)
+        DrawingCenter = New Point(quarterClientWidth - vScrollBarWidth \ 2, (clientHeight - trackBarHeight - hScrollBarHeight + MenuStrip1.Height) \ 2)
 
         ' Update TextBox1
         TextBox1.Top = ClientRectangle.Top + menuStripHeight
