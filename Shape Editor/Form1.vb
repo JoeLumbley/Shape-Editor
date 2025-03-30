@@ -346,7 +346,7 @@ Public Class Form1
         'Button1.Top = HScrollBar1.Top
         'Button1.Left = VScrollBar1.Left
         Button1.Width = vScrollBarWidth + 2
-        'Button1.Height = hScrollBarHeight
+        Button1.Height = hScrollBarHeight + 2
         'Button1.Visible = False
 
         GroupBox1.Top = HScrollBar1.Top
@@ -452,6 +452,21 @@ Public Class Form1
 
     Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
 
+        '' Set the form background color
+        'Me.BackColor = If(DarkModeCheckBox.Checked, Color.Black, Color.White)
+
+        '' Set the form foreground color
+        'Me.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        ''' Set the form border style
+        ''Me.FormBorderStyle = If(DarkModeCheckBox.Checked, FormBorderStyle.Sizable, FormBorderStyle.Fixed3D)
+
+        '' Set the form border width
+        'Me.Width = If(DarkModeCheckBox.Checked, 1, 2)
+
+
+
+
         ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.Silver, Color.DodgerBlue)))
 
         ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
@@ -538,6 +553,7 @@ Public Class Form1
 
             openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
             openFileDialog.Title = "Open Points"
+            openFileDialog.InitialDirectory = Application.StartupPath
 
             If openFileDialog.ShowDialog() = DialogResult.OK Then
 
