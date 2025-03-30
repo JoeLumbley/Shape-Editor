@@ -96,7 +96,7 @@ To begin using the Shape Editor, simply launch the application and start creatin
 
 
 
-### Comma-Separated Values (CSV) Files in Shape Editor
+## Comma-Separated Values (CSV) Files
 
  **File Format**:
    - CSV files are plain text files where data is organized in a tabular format, with each value separated by a comma.
