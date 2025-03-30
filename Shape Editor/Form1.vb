@@ -306,8 +306,9 @@ Public Class Form1
         Dim hScrollBarHeight As Integer = HScrollBar1.Height
         Dim vScrollBarWidth As Integer = VScrollBar1.Width
 
-        ' Update DrawingCenter
-        DrawingCenter = New Point(quarterClientWidth - vScrollBarWidth \ 2, (clientHeight - trackBarHeight - hScrollBarHeight + MenuStrip1.Height) \ 2)
+        UpdateDrawingCenter()
+
+
 
         ' Update TextBox1
         TextBox1.Top = ClientRectangle.Top + menuStripHeight
@@ -347,14 +348,12 @@ Public Class Form1
         'Button1.Left = VScrollBar1.Left
         Button1.Width = vScrollBarWidth + 2
         Button1.Height = hScrollBarHeight + 2
-        'Button1.Visible = False
 
         GroupBox1.Top = HScrollBar1.Top
         GroupBox1.Left = VScrollBar1.Left
 
         GroupBox1.Width = vScrollBarWidth
         GroupBox1.Height = hScrollBarHeight
-        'GroupBox1.Visible = False
 
         ' Update CheckBoxes
         HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
@@ -370,7 +369,26 @@ Public Class Form1
 
     End Sub
 
+    Private Sub UpdateDrawingCenter()
+
+        ' Calculate common values
+        Dim clientWidth As Integer = ClientSize.Width
+        Dim clientHeight As Integer = ClientSize.Height
+        Dim halfClientWidth As Integer = clientWidth \ 2
+        Dim quarterClientWidth As Integer = clientWidth \ 4
+        Dim menuStripHeight As Integer = MenuStrip1.Height
+        Dim trackBarHeight As Integer = TrackBar1.Height
+        Dim hScrollBarHeight As Integer = HScrollBar1.Height
+        Dim vScrollBarWidth As Integer = VScrollBar1.Width
+
+        ' Update drawing center
+        DrawingCenter = New Point(quarterClientWidth - vScrollBarWidth \ 2, (clientHeight - trackBarHeight - hScrollBarHeight + menuStripHeight) \ 2)
+
+    End Sub
+
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
+
+        ResetScrollBars()
 
         CenterDrawingArea()
 
@@ -417,15 +435,7 @@ Public Class Form1
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
 
-        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height) \ 2 - VScrollBar1.Value
-
-        Invalidate()
-
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-        CenterDrawingArea()
+        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
 
         Invalidate()
 
@@ -433,12 +443,27 @@ Public Class Form1
 
     Private Sub CenterDrawingArea()
 
-        ' Center the drawing area
-        VScrollBar1.Value = 0
-        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height) \ 2
+        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2
+
+        DrawingCenter.X = ClientSize.Width \ 4 - VScrollBar1.Width \ 2
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        ResetScrollBars()
+
+        CenterDrawingArea()
+
+        Invalidate()
+
+    End Sub
+
+
+    Private Sub ResetScrollBars()
 
         HScrollBar1.Value = 0
-        DrawingCenter.X = ClientSize.Width \ 4 - VScrollBar1.Width \ 2
+        VScrollBar1.Value = 0
 
     End Sub
 
@@ -451,21 +476,6 @@ Public Class Form1
     End Sub
 
     Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
-
-        '' Set the form background color
-        'Me.BackColor = If(DarkModeCheckBox.Checked, Color.Black, Color.White)
-
-        '' Set the form foreground color
-        'Me.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-
-        ''' Set the form border style
-        ''Me.FormBorderStyle = If(DarkModeCheckBox.Checked, FormBorderStyle.Sizable, FormBorderStyle.Fixed3D)
-
-        '' Set the form border width
-        'Me.Width = If(DarkModeCheckBox.Checked, 1, 2)
-
-
-
 
         ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.Silver, Color.DodgerBlue)))
 
