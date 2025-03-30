@@ -346,18 +346,18 @@ Public Class Form1
         VScrollBar1.Value = 0
 
         ' Update Button1
-        Button1.Top = HScrollBar1.Top
-        Button1.Left = VScrollBar1.Left
-        Button1.Width = vScrollBarWidth
-        Button1.Height = hScrollBarHeight
+        'Button1.Top = HScrollBar1.Top
+        'Button1.Left = VScrollBar1.Left
+        Button1.Width = vScrollBarWidth + 2
+        'Button1.Height = hScrollBarHeight
         'Button1.Visible = False
 
-        Panel1.Top = HScrollBar1.Top
-        Panel1.Left = VScrollBar1.Left
+        GroupBox1.Top = HScrollBar1.Top
+        GroupBox1.Left = VScrollBar1.Left
 
-        Panel1.Width = vScrollBarWidth
-        Panel1.Height = hScrollBarHeight
-
+        GroupBox1.Width = vScrollBarWidth
+        GroupBox1.Height = hScrollBarHeight
+        'GroupBox1.Visible = False
 
         ' Update CheckBoxes
         HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
