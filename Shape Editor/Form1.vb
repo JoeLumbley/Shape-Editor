@@ -306,9 +306,9 @@ Public Class Form1
         Dim hScrollBarHeight As Integer = HScrollBar1.Height
         Dim vScrollBarWidth As Integer = VScrollBar1.Width
 
-        UpdateDrawingCenter()
+        'UpdateDrawingCenter()
 
-
+        CenterDrawingArea()
 
         ' Update TextBox1
         TextBox1.Top = ClientRectangle.Top + menuStripHeight
@@ -369,23 +369,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateDrawingCenter()
-
-        ' Calculate common values
-        Dim clientWidth As Integer = ClientSize.Width
-        Dim clientHeight As Integer = ClientSize.Height
-        Dim halfClientWidth As Integer = clientWidth \ 2
-        Dim quarterClientWidth As Integer = clientWidth \ 4
-        Dim menuStripHeight As Integer = MenuStrip1.Height
-        Dim trackBarHeight As Integer = TrackBar1.Height
-        Dim hScrollBarHeight As Integer = HScrollBar1.Height
-        Dim vScrollBarWidth As Integer = VScrollBar1.Width
-
-        ' Update drawing center
-        DrawingCenter = New Point(quarterClientWidth - vScrollBarWidth \ 2, (clientHeight - trackBarHeight - hScrollBarHeight + menuStripHeight) \ 2)
-
-    End Sub
-
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
 
         ResetScrollBars()
@@ -441,14 +424,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub CenterDrawingArea()
-
-        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2
-
-        DrawingCenter.X = ClientSize.Width \ 4 - VScrollBar1.Width \ 2
-
-    End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         ResetScrollBars()
@@ -456,14 +431,6 @@ Public Class Form1
         CenterDrawingArea()
 
         Invalidate()
-
-    End Sub
-
-
-    Private Sub ResetScrollBars()
-
-        HScrollBar1.Value = 0
-        VScrollBar1.Value = 0
 
     End Sub
 
@@ -477,48 +444,7 @@ Public Class Form1
 
     Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
 
-        ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.Silver, Color.DodgerBlue)))
-
-        ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
-
-        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DodgerBlue, Color.DarkGray)))
-
-        HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.Orchid, Color.Gray)))
-
-        TextBox1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-
-        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-
-        Label1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        Label1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-
-        HideControlHandlesCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        HideControlHandlesCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-
-        FillShapeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-
-
-        DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-
-        MenuStrip1.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
-        MenuStrip1.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
-
-        FileToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
-        FileToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
-
-        OpenToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        OpenToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        SaveToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        SaveToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        NewToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        NewToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        ExitToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        ExitToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        AboutToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        AboutToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        UpdateUIForDarkMode()
 
         Invalidate()
 
@@ -603,7 +529,6 @@ Public Class Form1
         End Using
 
     End Sub
-
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Close()
@@ -691,6 +616,87 @@ Public Class Form1
         GeneratePointArrayText()
 
         Invalidate()
+
+    End Sub
+
+    Private Sub CenterDrawingArea()
+
+        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2
+
+        DrawingCenter.X = ClientSize.Width \ 4 - VScrollBar1.Width \ 2
+
+    End Sub
+
+    'Private Sub UpdateDrawingCenter()
+
+    '    ' Calculate common values
+    '    Dim clientWidth As Integer = ClientSize.Width
+    '    Dim clientHeight As Integer = ClientSize.Height
+    '    Dim halfClientWidth As Integer = clientWidth \ 2
+    '    Dim quarterClientWidth As Integer = clientWidth \ 4
+    '    Dim menuStripHeight As Integer = MenuStrip1.Height
+    '    Dim trackBarHeight As Integer = TrackBar1.Height
+    '    Dim hScrollBarHeight As Integer = HScrollBar1.Height
+    '    Dim vScrollBarWidth As Integer = VScrollBar1.Width
+
+    '    ' Update drawing center
+    '    DrawingCenter = New Point(quarterClientWidth - vScrollBarWidth \ 2, (clientHeight - trackBarHeight - hScrollBarHeight + menuStripHeight) \ 2)
+
+    'End Sub
+
+
+
+    Private Sub ResetScrollBars()
+
+        HScrollBar1.Value = 0
+        VScrollBar1.Value = 0
+
+    End Sub
+
+    Private Sub UpdateUIForDarkMode()
+
+        ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.Silver, Color.DodgerBlue)))
+
+        ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
+
+        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DodgerBlue, Color.DarkGray)))
+
+        HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.Orchid, Color.Gray)))
+
+        TextBox1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+
+        Label1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        Label1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        HideControlHandlesCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        HideControlHandlesCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        FillShapeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+
+
+        DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+
+        MenuStrip1.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
+        MenuStrip1.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
+
+        FileToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
+        FileToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
+
+        OpenToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        OpenToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        SaveToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        SaveToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        NewToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        NewToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        ExitToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        ExitToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        AboutToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        AboutToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
     End Sub
 
