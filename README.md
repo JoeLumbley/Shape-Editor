@@ -18,6 +18,7 @@ The Shape Editor is an innovative tool designed to facilitate the interactive cr
 
 - **Interactive Development**: Encourages a hands-on approach to shape creation and coding, allowing for greater creativity and experimentation.
 
+- **File Access and Creation**: Open and save files in **plain text format** with a **.txt** extension, which contains comma-separated values representing the coordinates of the shapes.
 
 
 
@@ -78,6 +79,53 @@ Enhances your experience, particularly in low-light environments.
 To enable Dark Mode, you simply need to check the box for the Dark Mode option, instantly transforming the interface to suit your preferences. This feature not only enhances usability but also aligns with modern design trends.
 
 To begin using the Shape Editor, simply launch the application and start creating shapes. The generated code will be available for you to copy and use in your projects.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Comma-Separated Values (CSV) Files in Shape Editor
+
+ **File Format**:
+   - CSV files are plain text files where data is organized in a tabular format, with each value separated by a comma.
+   - For the Shape Editor, each line in the CSV file represents a point in the shape, formatted as:
+
+
+
+    41,0
+    41,0
+    -18,-24
+    -18,24
+    -40,-20
+    -40,20
+    -19,0
+    -19,0
+
+
+ **Usage**:
+   - **Saving Shapes**: Users can save their drawn shapes as CSV files, allowing easy storage and retrieval of shape data.
+   - **Loading Shapes**: The application can read CSV files to reconstruct shapes, making it convenient for users to work on projects across sessions.
+   - **Data Integration**: CSV format allows for easy integration with other applications or programming environments, facilitating further processing or analysis of shape data.
+
+ **Benefits**:
+   - **Simplicity**: The CSV format is easy to read and write, making it user-friendly.
+   - **Compatibility**: Many applications, including spreadsheet software and programming languages, can easily handle CSV files.
+   - **Portability**: CSV files can be easily shared and transferred between different systems and platforms.
+
+This structure makes it efficient for users to manage and manipulate shape data within the Shape Editor and beyond.
+
 
 
 
