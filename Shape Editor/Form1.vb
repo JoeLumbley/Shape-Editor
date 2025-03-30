@@ -483,12 +483,12 @@ Public Class Form1
         DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
 
-        MenuStrip1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        MenuStrip1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        MenuStrip1.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
+        MenuStrip1.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
 
-        FileToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        FileToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
 
-        FileToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        FileToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
 
 
 
