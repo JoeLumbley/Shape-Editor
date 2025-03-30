@@ -26,8 +26,8 @@ The Shape Editor is an innovative tool designed to facilitate the interactive cr
 Easily create symmetrical shapes with the point mirroring feature, streamlining the design process.
 
 
-![024](https://github.com/user-attachments/assets/6f39c640-d8ab-4d82-b694-58fd03f2e80d)
 
+![003](https://github.com/user-attachments/assets/209a8083-7f29-45a6-8899-19f4e058721f)
 
 
 
