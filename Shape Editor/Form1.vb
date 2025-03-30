@@ -309,9 +309,6 @@ Public Class Form1
         ' Update DrawingCenter
         DrawingCenter = New Point(quarterClientWidth - vScrollBarWidth \ 2, (clientHeight - trackBarHeight - hScrollBarHeight) \ 2)
 
-
-        'TextBox1.SuspendLayout()
-
         ' Update TextBox1
         TextBox1.Top = ClientRectangle.Top + menuStripHeight
         TextBox1.Left = halfClientWidth
@@ -464,7 +461,6 @@ Public Class Form1
         HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.Orchid, Color.Gray)))
 
         TextBox1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-
         TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
         TrackBar1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
@@ -482,16 +478,11 @@ Public Class Form1
         DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
         DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
-
         MenuStrip1.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
         MenuStrip1.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
 
         FileToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
-
         FileToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
-
-
-
 
         OpenToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
         OpenToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
@@ -504,24 +495,9 @@ Public Class Form1
         AboutToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
         AboutToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
-
-        'Me.BackColor = If(DarkModeCheckBox.Checked, Color.Black, Color.White)
-        'Me.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-
-
-
         Invalidate()
 
     End Sub
-
-
-
-
-
-
-
-
-
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
         points.Clear()
@@ -549,7 +525,6 @@ Public Class Form1
 
                 ' Add file name to "Shape Editor - Code with Joe" and display in titlebar.
                 Text = $"{Path.GetFileName(saveFileDialog.FileName)} - Shape Editor - Code with Joe"
-
 
             End If
 
