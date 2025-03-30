@@ -61,8 +61,8 @@ Point mirroring in the Shape Editor is a powerful feature that streamlines the p
 
 Enhances your experience, particularly in low-light environments. 
   
-![022](https://github.com/user-attachments/assets/30dfd866-5653-4cfa-9765-4d6d3ef6231b)
 
+![001](https://github.com/user-attachments/assets/268cc0d3-bc66-414b-8008-7aaed2167266)
 
 
 - **Visual Comfort**: Dark Mode reduces eye strain by using darker colors for the interface, making it easier to work for extended periods without discomfort.
