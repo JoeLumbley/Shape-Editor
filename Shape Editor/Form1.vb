@@ -540,10 +540,16 @@ Public Class Form1
             If saveFileDialog.ShowDialog(Me) = DialogResult.OK Then
 
                 Using writer As New StreamWriter(saveFileDialog.FileName)
+
                     For Each point As Point In points
                         writer.WriteLine($"{point.X},{point.Y}")
                     Next
+
                 End Using
+
+                ' Add file name to "Shape Editor - Code with Joe" and display in titlebar.
+                Text = $"{Path.GetFileName(saveFileDialog.FileName)} - Shape Editor - Code with Joe"
+
 
             End If
 
