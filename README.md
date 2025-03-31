@@ -58,6 +58,10 @@ CSV files are plain text files where data is organized in a tabular format, with
 x,y
 ```
 
+
+![026](https://github.com/user-attachments/assets/7836f375-e1d0-467a-b768-5a5ba5ed339e)
+
+
 ### Usage
 - **Saving Shapes**: Users can save drawn shapes as CSV files for easy storage and retrieval.
 - **Loading Shapes**: The application can read CSV files to reconstruct shapes, facilitating project continuity.
@@ -67,6 +71,15 @@ x,y
 - **Simplicity**: Easy to read and write, making it user-friendly.
 - **Compatibility**: Works with various applications, including spreadsheet software and programming languages.
 - **Portability**: Easily shared and transferred between different systems.
+
+
+
+
+
+
+
+
+
 
 ## Getting Started
 To begin using the Shape Editor, launch the application and start creating shapes. The generated code will be available for you to copy and use in your projects.
