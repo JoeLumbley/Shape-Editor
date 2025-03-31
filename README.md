@@ -868,13 +868,6 @@ Return orderedPoints
 ```
 If there are points, it adds the first point again to close the shape and returns the ordered list.
 
-## Conclusion
-
-This detailed walkthrough of the Shape Editor code provides a comprehensive understanding of how each part of the application works. From handling user inputs to drawing shapes and managing UI elements, every line of code plays a crucial role in creating a functional and interactive shape editor.
-
-Feel free to explore the code further, modify it, and experiment with different features. Happy coding!
-```
-
 
 
 
