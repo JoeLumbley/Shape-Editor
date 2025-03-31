@@ -125,27 +125,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DrawGrid(g As Graphics)
-
-        ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
-        Dim stepSize As Integer = CInt(20 * ScaleFactor)
-
-        Dim gridPen As Pen = If(DarkModeCheckBox.Checked, GridPenDark, Pens.Gainsboro)
-
-        ' Draw vertical grid lines
-        For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
-            Dim x As Integer = i * stepSize
-            g.DrawLine(gridPen, x, -ClientSize.Height * 8, x, ClientSize.Height * 8)
-        Next
-
-        ' Draw horizontal grid lines
-        For i As Integer = -((ClientSize.Height * 8) \ stepSize) To (ClientSize.Height * 8) \ stepSize
-            Dim y As Integer = i * stepSize
-            g.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
-        Next
-
-    End Sub
-
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
 
         If e.Button = MouseButtons.Left Then
@@ -233,66 +212,6 @@ Public Class Form1
         End If
 
     End Sub
-
-    Private Function GetPointIndexAtLocation(location As Point) As Integer
-
-        For i As Integer = 0 To points.Count - 1 Step 2
-            Dim point As Point = points(i)
-            Dim scaledPoint As New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
-            Dim rect As New Rectangle(scaledPoint.X - handleSize / 2, scaledPoint.Y - handleSize / 2, handleSize, handleSize)
-
-            If rect.Contains(New Point(CInt(location.X * ScaleFactor), CInt(location.Y * ScaleFactor))) Then
-                Return i
-            End If
-        Next
-
-        Return -1
-
-    End Function
-
-    Private Sub GeneratePointArrayText()
-
-        Dim sb As New System.Text.StringBuilder()
-
-        sb.AppendLine("Dim ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed")
-        sb.AppendLine("")
-        sb.AppendLine("Dim Shape As Point() = {")
-
-        Dim orderedPoints = GetOrderedPoints()
-
-        For i As Integer = 0 To orderedPoints.Count - 1
-            If i < orderedPoints.Count - 1 Then
-                sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor)),")
-            Else
-                sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor))")
-            End If
-        Next
-
-        sb.AppendLine("}")
-
-        TextBox1.Text = sb.ToString()
-
-    End Sub
-
-    Private Function GetOrderedPoints() As List(Of Point)
-
-        Dim orderedPoints As New List(Of Point)()
-
-        For i As Integer = 0 To points.Count - 1 Step 2
-            orderedPoints.Add(points(i))
-        Next
-
-        For i As Integer = points.Count - 1 To 1 Step -2
-            orderedPoints.Add(points(i))
-        Next
-
-        If points.Count > 0 Then
-            orderedPoints.Add(points(0)) ' Close the shape
-        End If
-
-        Return orderedPoints
-
-    End Function
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
 
@@ -627,25 +546,6 @@ Public Class Form1
 
     End Sub
 
-    'Private Sub UpdateDrawingCenter()
-
-    '    ' Calculate common values
-    '    Dim clientWidth As Integer = ClientSize.Width
-    '    Dim clientHeight As Integer = ClientSize.Height
-    '    Dim halfClientWidth As Integer = clientWidth \ 2
-    '    Dim quarterClientWidth As Integer = clientWidth \ 4
-    '    Dim menuStripHeight As Integer = MenuStrip1.Height
-    '    Dim trackBarHeight As Integer = TrackBar1.Height
-    '    Dim hScrollBarHeight As Integer = HScrollBar1.Height
-    '    Dim vScrollBarWidth As Integer = VScrollBar1.Width
-
-    '    ' Update drawing center
-    '    DrawingCenter = New Point(quarterClientWidth - vScrollBarWidth \ 2, (clientHeight - trackBarHeight - hScrollBarHeight + menuStripHeight) \ 2)
-
-    'End Sub
-
-
-
     Private Sub ResetScrollBars()
 
         HScrollBar1.Value = 0
@@ -699,5 +599,86 @@ Public Class Form1
         AboutToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
     End Sub
+
+    Private Sub DrawGrid(g As Graphics)
+
+        ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
+        Dim stepSize As Integer = CInt(20 * ScaleFactor)
+
+        Dim gridPen As Pen = If(DarkModeCheckBox.Checked, GridPenDark, Pens.Gainsboro)
+
+        ' Draw vertical grid lines
+        For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
+            Dim x As Integer = i * stepSize
+            g.DrawLine(gridPen, x, -ClientSize.Height * 8, x, ClientSize.Height * 8)
+        Next
+
+        ' Draw horizontal grid lines
+        For i As Integer = -((ClientSize.Height * 8) \ stepSize) To (ClientSize.Height * 8) \ stepSize
+            Dim y As Integer = i * stepSize
+            g.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
+        Next
+
+    End Sub
+
+    Private Function GetPointIndexAtLocation(location As Point) As Integer
+
+        For i As Integer = 0 To points.Count - 1 Step 2
+            Dim point As Point = points(i)
+            Dim scaledPoint As New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
+            Dim rect As New Rectangle(scaledPoint.X - handleSize / 2, scaledPoint.Y - handleSize / 2, handleSize, handleSize)
+
+            If rect.Contains(New Point(CInt(location.X * ScaleFactor), CInt(location.Y * ScaleFactor))) Then
+                Return i
+            End If
+        Next
+
+        Return -1
+
+    End Function
+
+    Private Sub GeneratePointArrayText()
+
+        Dim sb As New System.Text.StringBuilder()
+
+        sb.AppendLine("Dim ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed")
+        sb.AppendLine("")
+        sb.AppendLine("Dim Shape As Point() = {")
+
+        Dim orderedPoints = GetOrderedPoints()
+
+        For i As Integer = 0 To orderedPoints.Count - 1
+            If i < orderedPoints.Count - 1 Then
+                sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor)),")
+            Else
+                sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor))")
+            End If
+        Next
+
+        sb.AppendLine("}")
+
+        TextBox1.Text = sb.ToString()
+
+    End Sub
+
+    Private Function GetOrderedPoints() As List(Of Point)
+
+        Dim orderedPoints As New List(Of Point)()
+
+        For i As Integer = 0 To points.Count - 1 Step 2
+            orderedPoints.Add(points(i))
+        Next
+
+        For i As Integer = points.Count - 1 To 1 Step -2
+            orderedPoints.Add(points(i))
+        Next
+
+        If points.Count > 0 Then
+            orderedPoints.Add(points(0)) ' Close the shape
+        End If
+
+        Return orderedPoints
+
+    End Function
 
 End Class
