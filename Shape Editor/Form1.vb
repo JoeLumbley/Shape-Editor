@@ -372,6 +372,8 @@ Public Class Form1
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
         points.Clear()
         TextBox1.Clear()
+        CenterDrawingArea()
+        ResetScrollBars()
         Invalidate()
     End Sub
 
@@ -440,6 +442,9 @@ Public Class Form1
                 End Using
 
                 GeneratePointArrayText()
+
+                CenterDrawingArea()
+                ResetScrollBars()
 
                 Invalidate()
 
