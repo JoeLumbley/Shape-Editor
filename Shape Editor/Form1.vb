@@ -293,11 +293,23 @@ Public Class Form1
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
 
+        ' UpdateScaleFactor()
+
+        ScaleFactor = TrackBar1.Value / 100.0
+
+        UpdateUIScaleFactor()
+
+        GeneratePointArrayText()
+
+        Invalidate()
+
+    End Sub
+
+    Private Sub UpdateUIScaleFactor()
+
         ResetScrollBars()
 
         CenterDrawingArea()
-
-        ScaleFactor = TrackBar1.Value / 100.0
 
         Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
 
@@ -322,10 +334,6 @@ Public Class Form1
             If VScrollBar1.Enabled Then VScrollBar1.Enabled = False
 
         End If
-
-        GeneratePointArrayText()
-
-        Invalidate()
 
     End Sub
 
@@ -444,11 +452,18 @@ Public Class Form1
 
                 End Using
 
+
+                ScaleFactor = 8 
+
+                TrackBar1.Value = CInt(ScaleFactor * 100)
+
+                UpdateUIScaleFactor()
+
+                'CenterDrawingArea()
+
+                'ResetScrollBars()
+
                 GeneratePointArrayText()
-
-                CenterDrawingArea()
-
-                ResetScrollBars()
 
                 Invalidate()
 
