@@ -34,7 +34,7 @@ Public Class Form1
     Private ScaleFactor As Double = 1.0
 
     Private ShapePen As New Pen(Color.Black, 2)
-    Private ShapeBrush As New SolidBrush(Color.FromArgb(128, Color.Blue))
+
     Private DrawingCenter As Point
     Private AdjustedMouseLocation As Point
     Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
@@ -48,6 +48,10 @@ Public Class Form1
     Private GridPenDark As New Pen(GridColorDark, 1)
     Private GridPenLight As New Pen(GridColorLight, 1)
 
+    Private ShapeColorLight As Color = Color.FromArgb(128, Color.Blue)
+    Private ShapeColorDark As Color = Color.FromArgb(128, 128, 128, 128)
+    Private ShapeBrush As New SolidBrush(ShapeColorLight)
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
@@ -56,6 +60,8 @@ Public Class Form1
         ' Set focus to the form itself
         'Me.Focus()
         'Me.ActiveControl = Nothing
+
+        Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
 
         Text = "Shape Editor - Code with Joe"
 
@@ -579,7 +585,12 @@ Public Class Form1
 
     Private Sub UpdateUIForDarkMode()
 
-        ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.Silver, Color.DodgerBlue)))
+        'ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.Silver, Color.DodgerBlue)))
+        ShapeBrush = New SolidBrush(If(DarkModeCheckBox.Checked, ShapeColorDark, ShapeColorLight))
+
+
+
+
 
         ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
 
