@@ -41,10 +41,13 @@ Public Class Form1
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
 
     Private GridColorDark As Color = Color.FromArgb(255, 64, 64, 64)
+    Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
 
     Private DarkModeControlColor As Color = Color.FromArgb(255, 32, 32, 32)
 
     Private GridPenDark As New Pen(GridColorDark, 1)
+    Private GridPenLight As New Pen(GridColorLight, 1)
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
@@ -444,6 +447,7 @@ Public Class Form1
                 GeneratePointArrayText()
 
                 CenterDrawingArea()
+
                 ResetScrollBars()
 
                 Invalidate()
@@ -610,7 +614,7 @@ Public Class Form1
         ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
         Dim stepSize As Integer = CInt(20 * ScaleFactor)
 
-        Dim gridPen As Pen = If(DarkModeCheckBox.Checked, GridPenDark, Pens.Gainsboro)
+        Dim gridPen As Pen = If(DarkModeCheckBox.Checked, GridPenDark, GridPenLight)
 
         ' Draw vertical grid lines
         For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
