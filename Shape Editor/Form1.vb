@@ -24,8 +24,51 @@
 ' SOFTWARE.
 
 Imports System.IO
+Imports System.Runtime.InteropServices
+
+
+
+
 
 Public Class Form1
+
+
+    Public Enum DwmWindowAttribute
+        dwmwa_invalid = -1
+        DWMWA_NCRENDERING_ENABLED = 1
+
+        DWMWA_CAPTION_COLOR = 3
+        DWMWA_FLIP3D_POLICY = 8
+        DWMWA_EXTENDED_FRAME_BOUNDS = 9
+        DWMWA_HAS_ICONIC_BITMAP = 10
+        DWMWA_DISALLOW_PEEK = 11
+        DWMWA_EXCLUDED_FROM_PEEK = 12
+        DWMWA_LAST = 13
+
+
+
+
+        dwmwa_use_dark_theme = 19
+
+        dwmwa_use_light_theme = 20
+        DWMWA_USE_IMMERSIVE_DARK_MODE = 21
+        DWMWA_MICA_EFFECT = 1029
+
+
+
+
+
+    End Enum
+
+    <DllImport("dwmapi.dll", CharSet:=CharSet.Unicode, SetLastError:=True)>
+    Public Shared Function DwmSetWindowAttribute(hWnd As IntPtr, dwAttribute As DwmWindowAttribute, ByRef pvAttribute As Integer, cbAttribute As Integer) As Integer
+    End Function
+
+    <DllImport("uxtheme.dll", CharSet:=CharSet.Unicode, SetLastError:=True)>
+    Public Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
+    End Function
+
+
     Private points As New List(Of Point)()
     Private isDrawing As Boolean = False
     Private selectedPointIndex As Integer = -1
@@ -51,6 +94,30 @@ Public Class Form1
     Private ShapeColorLight As Color = Color.FromArgb(128, Color.Blue)
     Private ShapeColorDark As Color = Color.FromArgb(128, 128, 128, 128)
     Private ShapeBrush As New SolidBrush(ShapeColorLight)
+
+    '' Import SetWindowPos function from user32.dll
+    '<DllImport("user32.dll", SetLastError:=True)>
+    'Private Shared Function SetWindowPos(hWnd As IntPtr, hWndInsertAfter As IntPtr, x As Integer, y As Integer, cx As Integer, cy As Integer, uFlags As UInteger) As Boolean
+    'End Function
+
+    '' Constants for SetWindowPos
+    'Private Const SWP_NOSIZE As UInteger = &H1
+    'Private Const SWP_NOMOVE As UInteger = &H2
+    'Private Const SWP_NOZORDER As UInteger = &H4
+    'Private Const SWP_NOREDRAW As UInteger = &H8
+    'Private Const SWP_NOACTIVATE As UInteger = &H10
+    'Private Const SWP_FRAMECHANGED As UInteger = &H20
+    'Private Const SWP_SHOWWINDOW As UInteger = &H40
+    'Private Const SWP_HIDEWINDOW As UInteger = &H80
+    'Private Const SWP_NOCOPYBITS As UInteger = &H100
+    'Private Const SWP_NOOWNERZORDER As UInteger = &H200
+    'Private Const SWP_NOSENDCHANGING As UInteger = &H400
+    'Private HWND_TOP As IntPtr = IntPtr.Zero
+
+
+
+
+
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -459,7 +526,7 @@ Public Class Form1
                 End Using
 
 
-                ScaleFactor = 8 
+                ScaleFactor = 8
 
                 TrackBar1.Value = CInt(ScaleFactor * 100)
 
@@ -585,12 +652,114 @@ Public Class Form1
 
     Private Sub UpdateUIForDarkMode()
 
-        'ShapeBrush = New SolidBrush(Color.FromArgb(128, If(DarkModeCheckBox.Checked, Color.Silver, Color.DodgerBlue)))
+
+
+
+        'MenuStrip1.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
+        'MenuStrip1.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
+
+        'FileToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
+        'FileToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
+
+        'OpenToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        'OpenToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        'SaveToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        'SaveToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        'NewToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        'NewToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        'ExitToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        'ExitToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        'AboutToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        'AboutToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        Dim renderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 8, 8, 8), Color.FromArgb(255, 50, 50, 50), Color.FromArgb(255, 8, 8, 8), Color.FromArgb(255, 50, 50, 50), Color.FromArgb(255, 64, 64, 64), Color.FromArgb(255, 255, 255, 255), Color.FromArgb(255, 255, 255, 255))
+
+        If DarkModeCheckBox.Checked Then
+
+            SetWindowTheme(HScrollBar1.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
+            SetWindowTheme(VScrollBar1.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
+
+            SetWindowTheme(Button1.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
+
+            SetWindowTheme(GroupBox1.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
+
+            SetWindowTheme(TextBox1.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
+
+
+
+
+
+
+            renderer.MenuItemBackground = Color.FromArgb(255, 32, 32, 32)
+            renderer.MenuItemBackgroundSelected = Color.FromArgb(255, 50, 50, 50)
+            renderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32)
+            renderer.BorderColor = Color.FromArgb(255, 50, 50, 50)
+            renderer.MenuItemSelectedColor = Color.FromArgb(255, 64, 64, 64)
+            renderer.TextColor = Color.FromArgb(255, 255, 255, 255)
+            renderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
+
+        Else
+            renderer.MenuItemBackground = Color.FromArgb(255, 240, 240, 240)
+            renderer.MenuItemBackgroundSelected = Color.FromArgb(255, 255, 255, 255)
+            renderer.ToolStripBackground = SystemColors.Control
+            renderer.BorderColor = Color.FromArgb(255, 255, 255, 255)
+            renderer.MenuItemSelectedColor = Color.FromArgb(64, Color.Gray)
+            renderer.TextColor = Color.FromArgb(255, 0, 0, 0)
+            renderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
+
+            SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+            SetWindowTheme(VScrollBar1.Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+            SetWindowTheme(Button1.Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+
+            SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+
+            SetWindowTheme(TextBox1.Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+
+
+        End If
+
+        MainMenuStrip.Renderer = renderer
+
+        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+
+        DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+
+        FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+
+
+        TextBox1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+
         ShapeBrush = New SolidBrush(If(DarkModeCheckBox.Checked, ShapeColorDark, ShapeColorLight))
-
-
-
-
 
         ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
 
@@ -598,40 +767,19 @@ Public Class Form1
 
         HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.Orchid, Color.Gray)))
 
-        TextBox1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-
-        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-
         Label1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        Label1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
         HideControlHandlesCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+
+        TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        Label1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
         HideControlHandlesCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
         FillShapeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-
 
         DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-
-        MenuStrip1.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
-        MenuStrip1.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
-
-        FileToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, Color.Gray, SystemColors.Control)
-        FileToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.Black, Color.Black)
-
-        OpenToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        OpenToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        SaveToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        SaveToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        NewToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        NewToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        ExitToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        ExitToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-        AboutToolStripMenuItem.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
-        AboutToolStripMenuItem.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
     End Sub
 
@@ -717,3 +865,247 @@ Public Class Form1
     End Function
 
 End Class
+
+
+
+Public Class CustomColorMenuStripRenderer
+    Inherits ToolStripProfessionalRenderer
+    'properties for menu color
+    Public MenuItemBackground As Color
+    Public MenuItemBackgroundSelected As Color
+    Public ToolStripBackground As Color
+    Public BorderColor As Color
+    Public SelectedBorderColor As Color
+    Public MenuItemSelectedColor As Color
+    Public MenuItemSelectedGradientBegin As Color
+    Public MenuItemSelectedGradientEnd As Color
+    Public SeparatorColor As Color
+    Public CheckmarkColor As Color
+    Public TextColor As Color
+
+
+
+
+
+    'constructor
+    Public Sub New(menuItemBackground As Color, menuItemBackgroundSelected As Color, toolStripBackground As Color, borderColor As Color, menuItemSelectedColor As Color, textColor As Color, selectedBorderColor As Color)
+        Me.MenuItemBackground = menuItemBackground
+        Me.MenuItemBackgroundSelected = menuItemBackgroundSelected
+        Me.ToolStripBackground = toolStripBackground
+        Me.BorderColor = borderColor
+        Me.MenuItemSelectedColor = menuItemSelectedColor
+        Me.TextColor = textColor
+        Me.SelectedBorderColor = selectedBorderColor
+
+
+        'borderColor = Color.FromArgb(255, 50, 50, 50)
+        'menuItemSelectedColor = Color.FromArgb(255, 64, 64, 64)
+        MenuItemSelectedGradientBegin = Color.FromArgb(255, 64, 64, 64)
+        MenuItemSelectedGradientEnd = Color.FromArgb(255, 64, 64, 64)
+        SeparatorColor = Color.FromArgb(255, 50, 50, 50)
+        CheckmarkColor = Color.FromArgb(255, 255, 255, 255)
+        'textColor = Color.FromArgb(255, 255, 255, 255)
+    End Sub
+
+    ' Render the menu item text
+    Protected Overrides Sub OnRenderItemText(e As ToolStripItemTextRenderEventArgs)
+        e.Item.ForeColor = TextColor
+        MyBase.OnRenderItemText(e)
+    End Sub
+
+
+
+
+    ' Render the menu item background
+    'Protected Overrides Sub OnRenderMenuItemBackground(e As ToolStripItemRenderEventArgs)
+    '    If e.Item.Selected Then
+
+
+    '        Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+
+    '            Dim rect As New Rectangle(Point.Empty, e.Item.Size)
+
+    '            e.Graphics.FillRectangle(Brush, rect)
+
+    '            e.Graphics.DrawRectangle(Pens.DodgerBlue, rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
+
+    '        End Using
+
+
+
+
+    '    Else
+
+    '        Dim rect As New Rectangle(Point.Empty, e.Item.Size)
+    '        Using Brush As New SolidBrush(MenuItemBackground)
+
+    '            e.Graphics.FillRectangle(Brush, rect)
+
+    '        End Using
+
+
+
+    '    End If
+
+    'End Sub
+
+
+
+    Protected Overrides Sub OnRenderMenuItemBackground(e As ToolStripItemRenderEventArgs)
+        Dim rect As New Rectangle(Point.Empty, e.Item.Size)
+
+        'If e.Item.Selected OrElse (TypeOf e.Item Is ToolStripMenuItem AndAlso CType(e.Item, ToolStripMenuItem).DropDown.Visible) Then
+        '    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+        '        e.Graphics.FillRectangle(Brush, rect)
+        '        e.Graphics.DrawRectangle(Pens.DodgerBlue, rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
+        '    End Using
+        'Else
+        '    Using Brush As New SolidBrush(MenuItemBackground)
+        '        e.Graphics.FillRectangle(Brush, rect)
+        '    End Using
+        'End If
+
+
+
+        If e.Item.Selected Then
+
+            If TypeOf e.Item Is ToolStripMenuItem Then
+
+                If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
+
+                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+                        e.Graphics.FillRectangle(Brush, rect)
+                        'e.Graphics.DrawRectangle(New Pen(BorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
+                    End Using
+
+                Else 'SelectedBorderColor
+
+                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+                        e.Graphics.FillRectangle(Brush, rect)
+                        e.Graphics.DrawRectangle(New Pen(SelectedBorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
+
+                    End Using
+
+                End If
+
+            Else
+
+                If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
+
+                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+                        e.Graphics.FillRectangle(Brush, rect)
+                        e.Graphics.DrawRectangle(New Pen(SelectedBorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
+                    End Using
+
+                Else
+
+                    Using Brush As New SolidBrush(MenuItemBackground)
+                        e.Graphics.FillRectangle(Brush, rect)
+                    End Using
+
+                End If
+
+            End If
+
+        Else
+            'Not selected
+
+            ' Check if the item is a ToolStripMenuItem
+            If TypeOf e.Item Is ToolStripMenuItem Then
+
+                If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
+
+                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+                        e.Graphics.FillRectangle(Brush, rect)
+                        'e.Graphics.DrawRectangle(New Pen(BorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
+                    End Using
+
+                Else
+
+                    Using Brush As New SolidBrush(MenuItemBackground)
+                        e.Graphics.FillRectangle(Brush, rect)
+                    End Using
+
+                End If
+
+            Else
+
+                If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
+
+                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+                        e.Graphics.FillRectangle(Brush, rect)
+                        e.Graphics.DrawRectangle(New Pen(SelectedBorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
+                    End Using
+
+                Else
+
+                    Using Brush As New SolidBrush(MenuItemBackground)
+                        e.Graphics.FillRectangle(Brush, rect)
+                    End Using
+
+                End If
+
+            End If
+
+        End If
+
+
+
+
+
+        'If e.Item.Selected AndAlso (TypeOf e.Item Is ToolStripMenuItem AndAlso CType(e.Item, ToolStripMenuItem).DropDown.Visible) Then
+
+        '    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+        '        e.Graphics.FillRectangle(Brush, rect)
+        '        e.Graphics.DrawRectangle(Pens.DodgerBlue, rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
+        '    End Using
+
+        'ElseIf (TypeOf e.Item Is ToolStripMenuItem AndAlso CType(e.Item, ToolStripMenuItem).DropDown.Visible) Then
+
+        '    Using Brush As New SolidBrush(MenuItemBackground)
+        '        e.Graphics.FillRectangle(Brush, rect)
+        '        e.Graphics.DrawRectangle(New Pen(BorderColor), rect.Left, rect.Top, rect.Right - 1, rect.Bottom + 8)
+        '    End Using
+
+
+        'Else
+
+
+
+
+        '    Using Brush As New SolidBrush(MenuItemBackground)
+        '        e.Graphics.FillRectangle(Brush, rect)
+        '    End Using
+        'End If
+
+
+
+
+
+    End Sub
+
+    ' Render the overall background
+    Protected Overrides Sub OnRenderToolStripBackground(e As ToolStripRenderEventArgs)
+        'Dim gradientBrush As New LinearGradientBrush(e.AffectedBounds, Color.Black, Color.Gray, LinearGradientMode.Vertical)
+        Using Brush As New SolidBrush(ToolStripBackground)
+            e.Graphics.FillRectangle(Brush, e.AffectedBounds)
+        End Using
+        'e.Graphics.FillRectangle(gradientBrush, e.AffectedBounds)
+        'gradientBrush.Dispose()
+    End Sub
+
+    ' Render the border
+    Protected Overrides Sub OnRenderToolStripBorder(e As ToolStripRenderEventArgs)
+        e.Graphics.DrawRectangle(New Pen(BorderColor), New Rectangle(Point.Empty, e.ToolStrip.Size - New Size(1, 1)))
+    End Sub
+
+    ' Render the separator
+    Protected Overrides Sub OnRenderSeparator(e As ToolStripSeparatorRenderEventArgs)
+        Dim rect As Rectangle = e.Item.ContentRectangle
+        Dim pen As New Pen(SeparatorColor)
+        e.Graphics.DrawLine(pen, rect.Left, rect.Height \ 2, rect.Right, rect.Height \ 2)
+        pen.Dispose()
+    End Sub
+End Class
+
+
