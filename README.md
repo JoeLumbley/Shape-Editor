@@ -58,8 +58,8 @@ CSV files are plain text files where data is organized in a tabular format, with
 x,y
 ```
 
+![028](https://github.com/user-attachments/assets/a048f2c6-1e18-4532-976f-f8447372d141)
 
-![027](https://github.com/user-attachments/assets/8999f11b-2e50-476d-9a1d-cbd7226669e3)
 
 
 ### Usage
