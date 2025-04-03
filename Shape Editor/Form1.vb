@@ -78,13 +78,13 @@ Public Class Form1
     Private ShapeColorDark As Color = Color.FromArgb(128, 128, 128, 128)
     Private ShapeBrush As New SolidBrush(ShapeColorLight)
 
-    Dim renderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 8, 8, 8),
-                                                     Color.FromArgb(255, 50, 50, 50),
-                                                     Color.FromArgb(255, 8, 8, 8),
-                                                     Color.FromArgb(255, 50, 50, 50),
-                                                     Color.FromArgb(255, 64, 64, 64),
-                                                     Color.FromArgb(255, 255, 255, 255),
-                                                     Color.FromArgb(255, 255, 255, 255))
+    Dim renderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 240, 240, 240),' MenuItemBackground
+                                                     Color.FromArgb(255, 255, 255, 255), ' MenuItemBackgroundSelected
+                                                     Color.FromArgb(255, 240, 240, 240), ' ToolStripBackground
+                                                     Color.FromArgb(255, 255, 255, 255), ' BorderColor
+                                                     Color.FromArgb(64, 128, 128, 128), ' MenuItemSelectedColor
+                                                     Color.FromArgb(255, 0, 0, 0), ' TextColor 
+                                                     Color.FromArgb(255, 30, 144, 255))
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
@@ -106,6 +106,11 @@ Public Class Form1
 
         ' Maximize the form
         WindowState = FormWindowState.Maximized
+
+        MainMenuStrip.Renderer = renderer
+
+        MenuStrip1.Refresh()
+
 
     End Sub
 
