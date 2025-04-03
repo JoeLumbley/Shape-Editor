@@ -4,8 +4,8 @@
 The Shape Editor is an innovative tool designed for the interactive creation of shapes. It seamlessly generates a corresponding array of points in code that represent the drawn shape, making it an essential resource for developers looking to integrate shape data into their projects.
 
 
-![002](https://github.com/user-attachments/assets/9cbcd506-613c-4f06-8f22-a444ad4b5ed3)
 
+![030](https://github.com/user-attachments/assets/c5df5da1-76fb-4f09-b2ac-7665f2e18b13)
 
 
 
@@ -21,7 +21,7 @@ The Shape Editor is an innovative tool designed for the interactive creation of 
 
 
 
-![004](https://github.com/user-attachments/assets/e328602a-22af-4f5b-aace-ca03877acdd6)
+![031](https://github.com/user-attachments/assets/a435c1d2-9818-48fb-9b6b-2ea64fd65fa4)
 
 
 
@@ -36,19 +36,7 @@ The Shape Editor is an innovative tool designed for the interactive creation of 
 - **Precision**: Ensures both sides of the shape are aligned and proportional, enhancing design quality.
 - **User-Friendly**: Accessible for beginners while still being valuable for experienced developers.
 
-## Dark Mode
 
-
-
-![001](https://github.com/user-attachments/assets/268cc0d3-bc66-414b-8008-7aaed2167266)
-
-
-
-
-- **Visual Comfort**: Reduces eye strain in low-light environments with a darker interface.
-- **Aesthetic Appeal**: Offers a sleek, modern design that many users prefer.
-- **Energy Efficiency**: Saves battery life on OLED screens by using less power for darker pixels.
-- **User Preference**: Easily toggle between Light and Dark Modes to suit your environment or personal taste.
 
 ## Comma-Separated Values (CSV) Files
 
@@ -58,8 +46,8 @@ CSV files are plain text files where data is organized in a tabular format, with
 x,y
 ```
 
+![028](https://github.com/user-attachments/assets/a048f2c6-1e18-4532-976f-f8447372d141)
 
-![027](https://github.com/user-attachments/assets/8999f11b-2e50-476d-9a1d-cbd7226669e3)
 
 
 ### Usage
@@ -79,10 +67,35 @@ x,y
 
 
 
+## Dark Mode
+
+
+
+
+![033](https://github.com/user-attachments/assets/36abcc6c-7e79-496e-bf1e-8649b6d80f7d)
+
+
+
+- **Visual Comfort**: Reduces eye strain in low-light environments with a darker interface.
+- **Aesthetic Appeal**: Offers a sleek, modern design that many users prefer.
+- **Energy Efficiency**: Saves battery life on OLED screens by using less power for darker pixels.
+- **User Preference**: Easily toggle between Light and Dark Modes to suit your environment or personal taste.
+
+
+
+
+
+
 
 
 ## Getting Started
 To begin using the Shape Editor, launch the application and start creating shapes. The generated code will be available for you to copy and use in your projects.
+
+
+
+
+
+
 
 ## License
 This project is licensed under the MIT License.
