@@ -430,7 +430,7 @@ Public Class Form1
 
     Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
 
-        UpdateUIForDarkMode()
+        ApplyUITheme()
 
         Invalidate()
 
@@ -628,11 +628,11 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateUIForDarkMode()
-
+    Private Sub ApplyUITheme()
 
         If DarkModeCheckBox.Checked Then
 
+            ' Set the theme to dark mode
             SetWindowTheme(HScrollBar1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
@@ -653,6 +653,7 @@ Public Class Form1
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
+            ' Set the custom colors for dark mode
             CustomMenuStripRenderer.MenuItemBackground = Color.FromArgb(255, 32, 32, 32)
             CustomMenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 50, 50, 50)
             CustomMenuStripRenderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32) ' *****************
@@ -663,6 +664,7 @@ Public Class Form1
 
         Else
 
+            ' Set the theme back to light mode
             SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
