@@ -77,7 +77,7 @@ Public Class Form1
     Private CoordinateSystemPenDarkMode As New Pen(Color.FromArgb(255, 64, 64, 64), 1)
     Private CoordinateSystemPenLightMode As New Pen(Color.FromArgb(255, 200, 200, 200), 1)
 
-
+    ' Set the fill color for the shape in light and dark modes
     Private ShapeFillColorLightMode As Color = Color.FromArgb(98, 30, 144, 255)
     Private ShapeFillColorDarkMode As Color = Color.FromArgb(98, 128, 128, 128)
     Private ShapeFillBrushLightMode As New SolidBrush(ShapeFillColorLightMode)
@@ -159,10 +159,13 @@ Public Class Form1
 
             ' Fill the shape if the checkbox is checked
             If FillShapeCheckBox.Checked Then
-                e.Graphics.FillPolygon(ShapeFillBrushDarkMode, scaledPoints)
+
+                e.Graphics.FillPolygon(ShapeFillBrush, scaledPoints)
+
             End If
 
             e.Graphics.DrawPolygon(ShapePen, scaledPoints)
+
         End If
 
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
@@ -702,7 +705,9 @@ Public Class Form1
 
         TextBox1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), SystemColors.Control)
 
-        ShapeFillBrushDarkMode = New SolidBrush(If(DarkModeCheckBox.Checked, ShapeFillColorDarkMode, ShapeFillColorLightMode)) ' ***************************
+        'ShapeFillBrushDarkMode = New SolidBrush(If(DarkModeCheckBox.Checked, ShapeFillColorDarkMode, ShapeFillColorLightMode)) ' ***************************
+
+        ShapeFillBrush = If(DarkModeCheckBox.Checked, ShapeFillBrushDarkMode, ShapeFillBrushLightMode)
 
         ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
 
