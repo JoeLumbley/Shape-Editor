@@ -94,11 +94,51 @@ Public Class Form1
                                                               Color.FromArgb(255, 0, 0, 0),             ' TextColor 
                                                               Color.FromArgb(255, 30, 144, 255))        ' SelectedBorderColor
 
+    <DllImport("dwmapi.dll")>
+    Private Shared Function DwmSetWindowAttribute(hWnd As IntPtr,
+                                                  Attribute As Integer,
+                                                  ByRef Value As Integer,
+                                                  SizeOfValue As Integer) As Integer
+    End Function
+
+    Private Const DWMWA_CAPTION_COLOR As Integer = 19
+    Private Const DWMWA_TEXT_COLOR As Integer = 20
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         Me.DoubleBuffered = True
+
         Me.KeyPreview = True
 
         Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
+
+        ' set title color - light mode
+        DwmSetWindowAttribute(Me.Handle, DWMWA_TEXT_COLOR, &H0, Marshal.SizeOf(&H0))
+
+        ' Set the default theme to light mode
+        SetWindowTheme(Me.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(Me.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(Me.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(VScrollBar1.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(Button1.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(TextBox1.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(MenuStrip1.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(MenuStrip1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(MenuStrip1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(TrackBar1.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+        Application.EnableVisualStyles()
 
         Text = "Shape Editor - Code with Joe"
 
@@ -112,8 +152,7 @@ Public Class Form1
 
         CenterToScreen()
 
-        ' Maximize the form
-        WindowState = FormWindowState.Maximized
+
 
         MenuStrip1.RenderMode = ToolStripRenderMode.Professional
 
@@ -122,6 +161,8 @@ Public Class Form1
 
         MenuStrip1.Refresh()
 
+        ' Maximize the form
+        WindowState = FormWindowState.Maximized
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
@@ -630,9 +671,27 @@ Public Class Form1
 
     Private Sub ApplyUITheme()
 
+        Visible = False
+
+        Me.SuspendLayout()
+        HScrollBar1.SuspendLayout()
+        VScrollBar1.SuspendLayout()
+        Button1.SuspendLayout()
+        VScrollBar1.SuspendLayout()
+        GroupBox1.SuspendLayout()
+        TextBox1.SuspendLayout()
+        MenuStrip1.SuspendLayout()
+
         If DarkModeCheckBox.Checked Then
 
+            'set title color - dark mode
+            DwmSetWindowAttribute(Me.Handle, DWMWA_TEXT_COLOR, &HFFFFFF, Marshal.SizeOf(&HFFFFFF))
+
             ' Set the theme to dark mode
+            SetWindowTheme(Me.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(Me.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(Me.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
             SetWindowTheme(HScrollBar1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
@@ -663,6 +722,9 @@ Public Class Form1
             CustomMenuStripRenderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
 
         Else
+
+            'set title color - light mode
+            DwmSetWindowAttribute(Me.Handle, DWMWA_TEXT_COLOR, &H0, Marshal.SizeOf(&H0))
 
             ' Set the theme to light mode
             SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
@@ -696,9 +758,11 @@ Public Class Form1
 
         End If
 
+
+
         MenuStrip1.Renderer = CustomMenuStripRenderer
 
-        MenuStrip1.Refresh()
+        'MenuStrip1.Refresh()
 
         TrackBar1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), SystemColors.Control)
 
@@ -733,6 +797,17 @@ Public Class Form1
         DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
         Button1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        Me.ResumeLayout()
+        HScrollBar1.ResumeLayout()
+        VScrollBar1.ResumeLayout()
+        Button1.ResumeLayout()
+        VScrollBar1.ResumeLayout()
+        GroupBox1.ResumeLayout()
+        TextBox1.ResumeLayout()
+        MenuStrip1.ResumeLayout()
+
+        Visible = True
 
     End Sub
 
