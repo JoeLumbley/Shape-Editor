@@ -78,13 +78,14 @@ Public Class Form1
     Private ShapeColorDark As Color = Color.FromArgb(128, 128, 128, 128)
     Private ShapeBrush As New SolidBrush(ShapeColorLight)
 
-    Dim renderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 240, 240, 240),' MenuItemBackground
-                                                     Color.FromArgb(255, 255, 255, 255), ' MenuItemBackgroundSelected
-                                                     Color.FromArgb(255, 240, 240, 240), ' ToolStripBackground
-                                                     Color.FromArgb(255, 255, 255, 255), ' BorderColor
-                                                     Color.FromArgb(64, 128, 128, 128), ' MenuItemSelectedColor
-                                                     Color.FromArgb(255, 0, 0, 0), ' TextColor 
-                                                     Color.FromArgb(255, 30, 144, 255))
+    ' Set menu strip to Light mode colors.
+    Dim renderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 240, 240, 240),    ' MenuItemBackground
+                                                     Color.FromArgb(255, 255, 255, 255),    ' MenuItemBackgroundSelected
+                                                     Color.FromArgb(255, 240, 240, 240),    ' ToolStripBackground
+                                                     Color.FromArgb(255, 255, 255, 255),    ' BorderColor
+                                                     Color.FromArgb(64, 128, 128, 128),     ' MenuItemSelectedColor
+                                                     Color.FromArgb(255, 0, 0, 0),          ' TextColor 
+                                                     Color.FromArgb(255, 30, 144, 255))     ' SelectedBorderColor
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
