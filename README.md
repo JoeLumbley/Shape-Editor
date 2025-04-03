@@ -36,19 +36,7 @@ The Shape Editor is an innovative tool designed for the interactive creation of 
 - **Precision**: Ensures both sides of the shape are aligned and proportional, enhancing design quality.
 - **User-Friendly**: Accessible for beginners while still being valuable for experienced developers.
 
-## Dark Mode
 
-
-
-![001](https://github.com/user-attachments/assets/268cc0d3-bc66-414b-8008-7aaed2167266)
-
-
-
-
-- **Visual Comfort**: Reduces eye strain in low-light environments with a darker interface.
-- **Aesthetic Appeal**: Offers a sleek, modern design that many users prefer.
-- **Energy Efficiency**: Saves battery life on OLED screens by using less power for darker pixels.
-- **User Preference**: Easily toggle between Light and Dark Modes to suit your environment or personal taste.
 
 ## Comma-Separated Values (CSV) Files
 
@@ -80,10 +68,35 @@ x,y
 
 
 
+## Dark Mode
+
+
+
+![001](https://github.com/user-attachments/assets/268cc0d3-bc66-414b-8008-7aaed2167266)
+
+
+
+
+- **Visual Comfort**: Reduces eye strain in low-light environments with a darker interface.
+- **Aesthetic Appeal**: Offers a sleek, modern design that many users prefer.
+- **Energy Efficiency**: Saves battery life on OLED screens by using less power for darker pixels.
+- **User Preference**: Easily toggle between Light and Dark Modes to suit your environment or personal taste.
+
+
+
+
+
+
 
 
 ## Getting Started
 To begin using the Shape Editor, launch the application and start creating shapes. The generated code will be available for you to copy and use in your projects.
+
+
+
+
+
+
 
 ## License
 This project is licensed under the MIT License.
