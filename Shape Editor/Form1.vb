@@ -653,7 +653,7 @@ Public Class Form1
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
-            ' Set the custom colors for dark mode
+            ' Set the menu colors for dark mode
             CustomMenuStripRenderer.MenuItemBackground = Color.FromArgb(255, 32, 32, 32)
             CustomMenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 50, 50, 50)
             CustomMenuStripRenderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32) ' *****************
@@ -664,7 +664,7 @@ Public Class Form1
 
         Else
 
-            ' Set the theme back to light mode
+            ' Set the theme to light mode
             SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
@@ -685,6 +685,7 @@ Public Class Form1
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
+            ' Set the menu colors for light mode
             CustomMenuStripRenderer.MenuItemBackground = Color.FromArgb(255, 240, 240, 240)
             CustomMenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 255, 255, 255)
             CustomMenuStripRenderer.ToolStripBackground = SystemColors.Control
