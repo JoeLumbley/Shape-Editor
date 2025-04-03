@@ -79,7 +79,7 @@ Public Class Form1
     Private ShapeBrush As New SolidBrush(ShapeColorLight)
 
     ' Set menu strip to Light mode colors.
-    Dim renderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 240, 240, 240),    ' MenuItemBackground
+    Dim MenuStripRenderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 240, 240, 240),    ' MenuItemBackground
                                                      Color.FromArgb(255, 255, 255, 255),    ' MenuItemBackgroundSelected
                                                      Color.FromArgb(255, 240, 240, 240),    ' ToolStripBackground
                                                      Color.FromArgb(255, 255, 255, 255),    ' BorderColor
@@ -108,7 +108,7 @@ Public Class Form1
         ' Maximize the form
         WindowState = FormWindowState.Maximized
 
-        MainMenuStrip.Renderer = renderer
+        MainMenuStrip.Renderer = MenuStripRenderer
 
         MenuStrip1.Refresh()
 
@@ -637,23 +637,23 @@ Public Class Form1
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
-            renderer.MenuItemBackground = Color.FromArgb(255, 32, 32, 32)
-            renderer.MenuItemBackgroundSelected = Color.FromArgb(255, 50, 50, 50)
-            renderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32) ' *****************
-            renderer.BorderColor = Color.FromArgb(255, 50, 50, 50)
-            renderer.MenuItemSelectedColor = Color.FromArgb(255, 64, 64, 64)
-            renderer.TextColor = Color.FromArgb(255, 255, 255, 255)
-            renderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
+            MenuStripRenderer.MenuItemBackground = Color.FromArgb(255, 32, 32, 32)
+            MenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 50, 50, 50)
+            MenuStripRenderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32) ' *****************
+            MenuStripRenderer.BorderColor = Color.FromArgb(255, 50, 50, 50)
+            MenuStripRenderer.MenuItemSelectedColor = Color.FromArgb(255, 64, 64, 64)
+            MenuStripRenderer.TextColor = Color.FromArgb(255, 255, 255, 255)
+            MenuStripRenderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
 
         Else
 
-            renderer.MenuItemBackground = Color.FromArgb(255, 240, 240, 240)
-            renderer.MenuItemBackgroundSelected = Color.FromArgb(255, 255, 255, 255)
-            renderer.ToolStripBackground = SystemColors.Control
-            renderer.BorderColor = Color.FromArgb(255, 255, 255, 255)
-            renderer.MenuItemSelectedColor = Color.FromArgb(64, Color.Gray)
-            renderer.TextColor = Color.FromArgb(255, 0, 0, 0)
-            renderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
+            MenuStripRenderer.MenuItemBackground = Color.FromArgb(255, 240, 240, 240)
+            MenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 255, 255, 255)
+            MenuStripRenderer.ToolStripBackground = SystemColors.Control
+            MenuStripRenderer.BorderColor = Color.FromArgb(255, 255, 255, 255)
+            MenuStripRenderer.MenuItemSelectedColor = Color.FromArgb(64, Color.Gray)
+            MenuStripRenderer.TextColor = Color.FromArgb(255, 0, 0, 0)
+            MenuStripRenderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
 
             SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
@@ -677,7 +677,7 @@ Public Class Form1
 
         End If
 
-        MainMenuStrip.Renderer = renderer
+        MainMenuStrip.Renderer = MenuStripRenderer
 
         MenuStrip1.Refresh()
 
