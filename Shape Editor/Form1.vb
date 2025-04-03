@@ -78,6 +78,14 @@ Public Class Form1
     Private ShapeColorDark As Color = Color.FromArgb(128, 128, 128, 128)
     Private ShapeBrush As New SolidBrush(ShapeColorLight)
 
+    Dim renderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 8, 8, 8),
+                                                     Color.FromArgb(255, 50, 50, 50),
+                                                     Color.FromArgb(255, 8, 8, 8),
+                                                     Color.FromArgb(255, 50, 50, 50),
+                                                     Color.FromArgb(255, 64, 64, 64),
+                                                     Color.FromArgb(255, 255, 255, 255),
+                                                     Color.FromArgb(255, 255, 255, 255))
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
         Me.KeyPreview = True
@@ -600,7 +608,6 @@ Public Class Form1
 
     Private Sub UpdateUIForDarkMode()
 
-        Dim renderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 8, 8, 8), Color.FromArgb(255, 50, 50, 50), Color.FromArgb(255, 8, 8, 8), Color.FromArgb(255, 50, 50, 50), Color.FromArgb(255, 64, 64, 64), Color.FromArgb(255, 255, 255, 255), Color.FromArgb(255, 255, 255, 255))
 
         If DarkModeCheckBox.Checked Then
 
@@ -626,13 +633,14 @@ Public Class Form1
 
             renderer.MenuItemBackground = Color.FromArgb(255, 32, 32, 32)
             renderer.MenuItemBackgroundSelected = Color.FromArgb(255, 50, 50, 50)
-            renderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32)
+            renderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32) ' *****************
             renderer.BorderColor = Color.FromArgb(255, 50, 50, 50)
             renderer.MenuItemSelectedColor = Color.FromArgb(255, 64, 64, 64)
             renderer.TextColor = Color.FromArgb(255, 255, 255, 255)
             renderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
 
         Else
+
             renderer.MenuItemBackground = Color.FromArgb(255, 240, 240, 240)
             renderer.MenuItemBackgroundSelected = Color.FromArgb(255, 255, 255, 255)
             renderer.ToolStripBackground = SystemColors.Control
@@ -665,13 +673,15 @@ Public Class Form1
 
         MainMenuStrip.Renderer = renderer
 
-        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        MenuStrip1.Refresh()
+
+        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), SystemColors.Control)
 
         DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
         FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
-        TextBox1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        TextBox1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), SystemColors.Control)
 
         ShapeBrush = New SolidBrush(If(DarkModeCheckBox.Checked, ShapeColorDark, ShapeColorLight))
 
@@ -694,6 +704,8 @@ Public Class Form1
         FillShapeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
         DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+
+        Button1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
     End Sub
 
