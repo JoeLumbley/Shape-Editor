@@ -74,22 +74,25 @@ Public Class Form1
     Private GridPenDark As New Pen(GridColorDark, 1)
     Private GridPenLight As New Pen(GridColorLight, 1)
 
-    Private CoordinateSystemPenDarkMode As New Pen(Color.FromArgb(255, 75, 75, 75), 1)
+    Private CoordinateSystemPenDarkMode As New Pen(Color.FromArgb(255, 64, 64, 64), 1)
     Private CoordinateSystemPenLightMode As New Pen(Color.FromArgb(255, 200, 200, 200), 1)
 
 
-    Private ShapeColorLight As Color = Color.FromArgb(128, Color.Blue)
-    Private ShapeColorDark As Color = Color.FromArgb(128, 128, 128, 128)
-    Private ShapeBrush As New SolidBrush(ShapeColorLight)
+    Private ShapeFillColorLightMode As Color = Color.FromArgb(98, 30, 144, 255)
+    Private ShapeFillColorDarkMode As Color = Color.FromArgb(98, 128, 128, 128)
+    Private ShapeFillBrushLightMode As New SolidBrush(ShapeFillColorLightMode)
+    Private ShapeFillBrushDarkMode As New SolidBrush(ShapeFillColorDarkMode)
+    Private ShapeFillBrush As New SolidBrush(ShapeFillColorLightMode)
+
 
     ' Set menu strip to Light mode colors.
-    Dim CustomMenuStripRenderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 240, 240, 240),   ' MenuItemBackground
-                                                              Color.FromArgb(255, 255, 255, 255),   ' MenuItemBackgroundSelected
-                                                              Color.FromArgb(255, 240, 240, 240),   ' ToolStripBackground
-                                                              Color.FromArgb(255, 255, 255, 255),   ' BorderColor
-                                                              Color.FromArgb(64, 128, 128, 128),    ' MenuItemSelectedColor
-                                                              Color.FromArgb(255, 0, 0, 0),         ' TextColor 
-                                                              Color.FromArgb(255, 30, 144, 255))    ' SelectedBorderColor
+    Dim CustomMenuStripRenderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 240, 240, 240), ' MenuItemBackground
+                                                              Color.FromArgb(255, 255, 255, 255),       ' MenuItemBackgroundSelected
+                                                              Color.FromArgb(255, 240, 240, 240),       ' ToolStripBackground
+                                                              Color.FromArgb(255, 255, 255, 255),       ' BorderColor
+                                                              Color.FromArgb(64, 128, 128, 128),        ' MenuItemSelectedColor
+                                                              Color.FromArgb(255, 0, 0, 0),             ' TextColor 
+                                                              Color.FromArgb(255, 30, 144, 255))        ' SelectedBorderColor
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.DoubleBuffered = True
@@ -124,12 +127,16 @@ Public Class Form1
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
         MyBase.OnPaint(e)
 
-        e.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
-        e.Graphics.Clear(If(DarkModeCheckBox.Checked, Color.Black, Color.White))
-        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
-
         ' Translate the origin to the center of the drawing area
         e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
+
+        e.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
+        e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighSpeed
+        e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.Bilinear
+        e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.None
+        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
+
+        e.Graphics.Clear(If(DarkModeCheckBox.Checked, Color.Black, Color.White))
 
         DrawGrid(e.Graphics)
 
@@ -137,7 +144,7 @@ Public Class Form1
         e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0) ' X-axis
         e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8) ' Y-axis
 
-        ' Draw intersecting lines at the origin
+        ' Draw intersecting lines at the origin, the center of the drawing area
         e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.White, Pens.Black), -5, 0, 5, 0) ' Horizontal line
         e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.White, Pens.Black), 0, -5, 0, 5) ' Vertical line
 
@@ -152,7 +159,7 @@ Public Class Form1
 
             ' Fill the shape if the checkbox is checked
             If FillShapeCheckBox.Checked Then
-                e.Graphics.FillPolygon(ShapeBrush, scaledPoints)
+                e.Graphics.FillPolygon(ShapeFillBrushDarkMode, scaledPoints)
             End If
 
             e.Graphics.DrawPolygon(ShapePen, scaledPoints)
@@ -695,7 +702,7 @@ Public Class Form1
 
         TextBox1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), SystemColors.Control)
 
-        ShapeBrush = New SolidBrush(If(DarkModeCheckBox.Checked, ShapeColorDark, Color.FromArgb(98, 30, 144, 255))) ' ***************************
+        ShapeFillBrushDarkMode = New SolidBrush(If(DarkModeCheckBox.Checked, ShapeFillColorDarkMode, ShapeFillColorLightMode)) ' ***************************
 
         ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
 
