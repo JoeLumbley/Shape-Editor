@@ -66,7 +66,7 @@ Public Class Form1
     Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
 
-    Private GridColorDark As Color = Color.FromArgb(255, 64, 64, 64)
+    Private GridColorDark As Color = Color.FromArgb(255, 42, 42, 42)
     Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
 
     Private DarkModeControlColor As Color = Color.FromArgb(255, 32, 32, 32)
@@ -74,12 +74,16 @@ Public Class Form1
     Private GridPenDark As New Pen(GridColorDark, 1)
     Private GridPenLight As New Pen(GridColorLight, 1)
 
+    Private CoordinateSystemPenDarkMode As New Pen(Color.FromArgb(255, 75, 75, 75), 1)
+    Private CoordinateSystemPenLightMode As New Pen(Color.FromArgb(255, 200, 200, 200), 1)
+
+
     Private ShapeColorLight As Color = Color.FromArgb(128, Color.Blue)
     Private ShapeColorDark As Color = Color.FromArgb(128, 128, 128, 128)
     Private ShapeBrush As New SolidBrush(ShapeColorLight)
 
     ' Set menu strip to Light mode colors.
-    Dim MenuStripRenderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 240, 240, 240),   ' MenuItemBackground
+    Dim CustomMenuStripRenderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 240, 240, 240),   ' MenuItemBackground
                                                               Color.FromArgb(255, 255, 255, 255),   ' MenuItemBackgroundSelected
                                                               Color.FromArgb(255, 240, 240, 240),   ' ToolStripBackground
                                                               Color.FromArgb(255, 255, 255, 255),   ' BorderColor
@@ -108,10 +112,12 @@ Public Class Form1
         ' Maximize the form
         WindowState = FormWindowState.Maximized
 
-        MainMenuStrip.Renderer = MenuStripRenderer
+        MenuStrip1.RenderMode = ToolStripRenderMode.Professional
+
+        ' Inject our custom rendering into the MenuStrip
+        MenuStrip1.Renderer = CustomMenuStripRenderer
 
         MenuStrip1.Refresh()
-
 
     End Sub
 
@@ -128,8 +134,8 @@ Public Class Form1
         DrawGrid(e.Graphics)
 
         ' Draw the coordinate system
-        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Silver), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0) ' X-axis
-        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.Gray, Pens.Silver), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8) ' Y-axis
+        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0) ' X-axis
+        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8) ' Y-axis
 
         ' Draw intersecting lines at the origin
         e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.White, Pens.Black), -5, 0, 5, 0) ' Horizontal line
@@ -637,23 +643,15 @@ Public Class Form1
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
-            MenuStripRenderer.MenuItemBackground = Color.FromArgb(255, 32, 32, 32)
-            MenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 50, 50, 50)
-            MenuStripRenderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32) ' *****************
-            MenuStripRenderer.BorderColor = Color.FromArgb(255, 50, 50, 50)
-            MenuStripRenderer.MenuItemSelectedColor = Color.FromArgb(255, 64, 64, 64)
-            MenuStripRenderer.TextColor = Color.FromArgb(255, 255, 255, 255)
-            MenuStripRenderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
+            CustomMenuStripRenderer.MenuItemBackground = Color.FromArgb(255, 32, 32, 32)
+            CustomMenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 50, 50, 50)
+            CustomMenuStripRenderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32) ' *****************
+            CustomMenuStripRenderer.BorderColor = Color.FromArgb(255, 50, 50, 50)
+            CustomMenuStripRenderer.MenuItemSelectedColor = Color.FromArgb(255, 64, 64, 64)
+            CustomMenuStripRenderer.TextColor = Color.FromArgb(255, 255, 255, 255)
+            CustomMenuStripRenderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
 
         Else
-
-            MenuStripRenderer.MenuItemBackground = Color.FromArgb(255, 240, 240, 240)
-            MenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 255, 255, 255)
-            MenuStripRenderer.ToolStripBackground = SystemColors.Control
-            MenuStripRenderer.BorderColor = Color.FromArgb(255, 255, 255, 255)
-            MenuStripRenderer.MenuItemSelectedColor = Color.FromArgb(64, Color.Gray)
-            MenuStripRenderer.TextColor = Color.FromArgb(255, 0, 0, 0)
-            MenuStripRenderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
 
             SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
@@ -675,9 +673,17 @@ Public Class Form1
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
+            CustomMenuStripRenderer.MenuItemBackground = Color.FromArgb(255, 240, 240, 240)
+            CustomMenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 255, 255, 255)
+            CustomMenuStripRenderer.ToolStripBackground = SystemColors.Control
+            CustomMenuStripRenderer.BorderColor = Color.FromArgb(255, 255, 255, 255)
+            CustomMenuStripRenderer.MenuItemSelectedColor = Color.FromArgb(64, Color.Gray)
+            CustomMenuStripRenderer.TextColor = Color.FromArgb(255, 0, 0, 0)
+            CustomMenuStripRenderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
+
         End If
 
-        MainMenuStrip.Renderer = MenuStripRenderer
+        MenuStrip1.Renderer = CustomMenuStripRenderer
 
         MenuStrip1.Refresh()
 
@@ -689,7 +695,7 @@ Public Class Form1
 
         TextBox1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), SystemColors.Control)
 
-        ShapeBrush = New SolidBrush(If(DarkModeCheckBox.Checked, ShapeColorDark, ShapeColorLight))
+        ShapeBrush = New SolidBrush(If(DarkModeCheckBox.Checked, ShapeColorDark, Color.FromArgb(98, 30, 144, 255))) ' ***************************
 
         ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
 
@@ -701,7 +707,7 @@ Public Class Form1
 
         HideControlHandlesCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
-        TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 230, 230, 230), Color.FromArgb(255, 32, 32, 32))
 
         Label1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
