@@ -84,7 +84,6 @@ Public Class Form1
     Private ShapeFillBrushDarkMode As New SolidBrush(ShapeFillColorDarkMode)
     Private ShapeFillBrush As New SolidBrush(ShapeFillColorLightMode)
 
-
     ' Set menu strip to Light mode colors.
     Dim CustomMenuStripRenderer As New CustomColorMenuStripRenderer(Color.FromArgb(255, 240, 240, 240), ' MenuItemBackground
                                                               Color.FromArgb(255, 255, 255, 255),       ' MenuItemBackgroundSelected
@@ -152,8 +151,6 @@ Public Class Form1
 
         CenterToScreen()
 
-
-
         MenuStrip1.RenderMode = ToolStripRenderMode.Professional
 
         ' Inject our custom rendering into the MenuStrip
@@ -163,6 +160,7 @@ Public Class Form1
 
         ' Maximize the form
         WindowState = FormWindowState.Maximized
+
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
