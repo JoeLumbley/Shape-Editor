@@ -141,15 +141,6 @@ Public Class Form1
     Private LightModeMenuStripColor As Color = Color.FromArgb(255, 240, 240, 240) ' Light mode menu strip color
 
 
-    Private LightModeMenuItemTextColorSelected As Color = Color.FromArgb(255, 0, 0, 0) ' Light mode selected text color
-
-
-    Private LightModeSelectedBackgroundColor As Color = Color.FromArgb(255, 212, 212, 255) ' Light mode selected background color
-    Private LightModeBorderColor As Color = Color.FromArgb(255, 200, 200, 200) ' Light mode border color
-    Private LightModeSelectedBorderColor As Color = Color.FromArgb(255, Color.DodgerBlue) ' Light mode selected border color
-    Private ShapePenDarkMode As New Pen(Color.FromArgb(255, 255, 255, 255), 2) ' Dark mode shape pen
-    Private ShapePenLightMode As New Pen(Color.FromArgb(255, 0, 0, 0), 2) ' Light mode shape pen
-
 
 
 
@@ -158,18 +149,18 @@ Public Class Form1
 
 
     ' Light mode colors
-    Private MenuItemBackgroundColorLightMode As Color = Color.FromArgb(255, 240, 240, 240) ' Light mode background color
-    Private MenuItemBackgroundSelectedLightMode As Color = Color.FromArgb(16, Color.DodgerBlue) ' Light mode selected background color
-    Private ToolStripBackgroundLightMode As Color = Color.FromArgb(255, 240, 240, 240) ' Light mode selected background color
-    Private MenuItemBorderColorLightMode As Color = Color.FromArgb(255, 200, 200, 200) ' Light mode border color
-    Private LightModeMenuItemSelectedColor As Color = Color.FromArgb(255, 128, 128, 128) ' Light mode selected item color
-    Private LightModeMenuItemTextColor As Color = Color.FromArgb(255, Color.Black) ' Light mode text color
-    Private LightModeMenuItemSelectedBorderColor As Color = Color.FromArgb(255, Color.DodgerBlue) ' Light mode selected border color
+    Private MenuItemBackgroundColor_LightMode As Color = Color.FromArgb(255, 240, 240, 240) ' Light mode background color
+    Private MenuItemBackgroundSelected_LightMode As Color = Color.FromArgb(16, Color.DodgerBlue) ' Light mode selected background color
+    Private ToolStripBackground_LightMode As Color = Color.FromArgb(255, 240, 240, 240) ' Light mode selected background color
+    Private MenuItemBorderColor_LightMode As Color = Color.FromArgb(255, 200, 200, 200) ' Light mode border color
+    Private MenuItemSelectedColor_LightMode As Color = Color.FromArgb(64, Color.Gray) ' Light mode selected item color
+    Private MenuItemTextColor_LightMode As Color = Color.FromArgb(255, Color.Black) ' Light mode text color
+    Private SelectedBorderColor_LightMode As Color = Color.FromArgb(255, Color.DodgerBlue) ' Light mode selected border color
 
     ' Dark mode colors
     Private DarkModeMenuItemBackgroundColor As Color = Color.FromArgb(255, 240, 240, 240) ' Light mode background color
     Private DarkModeMenuItemBackgroundSelectedColor As Color = Color.FromArgb(16, Color.DodgerBlue) ' Light mode selected background color
-    Private DarkModeToolStripBackground As Color = Color.FromArgb(255, 240, 240, 240) ' Light mode selected background color
+    Private DarkModeToolStripBackground As Color = Color.FromArgb(255, 0, 0, 0) ' Light mode selected background color
     Private DarkModeMenuItemBorderColor As Color = Color.FromArgb(255, 200, 200, 200) ' Light mode border color
     Private DarkModeMenuItemSelectedColor As Color = Color.FromArgb(255, 128, 128, 128) ' Light mode selected item color
     Private DarkModeMenuItemTextColor As Color = Color.FromArgb(255, 0, 0, 0) ' Light mode text color
@@ -177,13 +168,13 @@ Public Class Form1
 
 
     ' Set menu strip to Light mode colors.
-    Dim CustomMenuRenderer As New CustomColorMenuStripRenderer(MenuItemBackgroundColorLightMode, ' MenuItemBackground
-                                                                    MenuItemBackgroundSelectedLightMode,       ' MenuItemBackgroundSelected
-                                                                    ToolStripBackgroundLightMode,       ' ToolStripBackground
-                                                                    MenuItemBorderColorLightMode,       ' BorderColor
-                                                                    Color.FromArgb(255, 128, 128, 128),        ' MenuItemSelectedColor
-                                                                    Color.FromArgb(255, 0, 0, 0),             ' TextColor 
-                                                                    Color.FromArgb(255, 30, 144, 255))        ' SelectedBorderColor
+    Dim CustomMenuRenderer As New CustomColorMenuStripRenderer(MenuItemBackgroundColor_LightMode, ' MenuItemBackground
+                                                                    MenuItemBackgroundSelected_LightMode,       ' MenuItemBackgroundSelected
+                                                                    ToolStripBackground_LightMode,       ' ToolStripBackground
+                                                                    MenuItemBorderColor_LightMode,       ' BorderColor
+                                                                    MenuItemSelectedColor_LightMode,        ' MenuItemSelectedColor
+                                                                    MenuItemTextColor_LightMode,             ' TextColor 
+                                                                    SelectedBorderColor_LightMode)        ' SelectedBorderColor
 
     <DllImport("dwmapi.dll")>
     Private Shared Function DwmSetWindowAttribute(hWnd As IntPtr,
@@ -857,13 +848,13 @@ Public Class Form1
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
             ' Set the menu colors for light mode
-            CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColorLightMode
-            CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelectedLightMode
-            CustomMenuRenderer.ToolStripBackground = ToolStripBackgroundLightMode
-            CustomMenuRenderer.BorderColor = MenuItemBorderColorLightMode
-            CustomMenuRenderer.MenuItemSelectedColor = Color.FromArgb(64, Color.Gray)
-            CustomMenuRenderer.TextColor = Color.FromArgb(255, 0, 0, 0)
-            CustomMenuRenderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
+            CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_LightMode
+            CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelected_LightMode
+            CustomMenuRenderer.ToolStripBackground = ToolStripBackground_LightMode
+            CustomMenuRenderer.BorderColor = MenuItemBorderColor_LightMode
+            CustomMenuRenderer.MenuItemSelectedColor = MenuItemSelectedColor_LightMode
+            CustomMenuRenderer.TextColor = MenuItemTextColor_LightMode
+            CustomMenuRenderer.SelectedBorderColor = SelectedBorderColor_LightMode
 
         End If
 
