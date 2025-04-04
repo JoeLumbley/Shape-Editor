@@ -93,7 +93,7 @@ Public Class Form1
     Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
 
-    Private GridColorDark As Color = Color.FromArgb(255, 42, 42, 42)
+    Private GridColorDark As Color = Color.FromArgb(255, 50, 50, 50)
     Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
 
     Private DarkModeControlColor As Color = Color.FromArgb(255, 32, 32, 32)
@@ -142,7 +142,7 @@ Public Class Form1
         Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
 
         ' set title color - light mode
-        DwmSetWindowAttribute(Handle, 20, 0, Marshal.SizeOf(0))
+        DwmSetWindowAttribute(Handle, 20, 0, Marshal.SizeOf(GetType(Boolean)))
 
         'set title color - dark mode
         'DwmSetWindowAttribute(Handle, 20, 1, Marshal.SizeOf(1))
@@ -716,12 +716,7 @@ Public Class Form1
         If DarkModeCheckBox.Checked Then
 
             'set title color - dark mode
-            'DwmSetWindowAttribute(Me.Handle, DWMWA_TEXT_COLOR, &HFFFFFF, Marshal.SizeOf(&HFFFFFF))
-
-            DwmSetWindowAttribute(Handle, 20, 1, Marshal.SizeOf(1))
-
-
-
+            DwmSetWindowAttribute(Handle, 20, 1, Marshal.SizeOf(GetType(Boolean)))
 
             ' Set the theme to dark mode
             SetWindowTheme(Me.Handle, "DarkMode_Explorer", Nothing)
@@ -750,7 +745,7 @@ Public Class Form1
 
             ' Set the menu colors for dark mode
             CustomMenuStripRenderer.MenuItemBackground = Color.FromArgb(255, 32, 32, 32)
-            CustomMenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 50, 50, 50)
+            CustomMenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 64, 64, 64)
             CustomMenuStripRenderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32) ' *****************
             CustomMenuStripRenderer.BorderColor = Color.FromArgb(255, 50, 50, 50)
             CustomMenuStripRenderer.MenuItemSelectedColor = Color.FromArgb(255, 64, 64, 64)
@@ -760,11 +755,7 @@ Public Class Form1
         Else
 
             'set title color - light mode
-            'DwmSetWindowAttribute(Me.Handle, DWMWA_TEXT_COLOR, &H0, Marshal.SizeOf(&H0))
-
-            DwmSetWindowAttribute(Handle, 20, 0, Marshal.SizeOf(0))
-
-
+            DwmSetWindowAttribute(Handle, 20, 0, Marshal.SizeOf(GetType(Boolean)))
 
             ' Set the theme to light mode
             SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
@@ -791,7 +782,7 @@ Public Class Form1
             CustomMenuStripRenderer.MenuItemBackground = Color.FromArgb(255, 240, 240, 240)
             CustomMenuStripRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 255, 255, 255)
             CustomMenuStripRenderer.ToolStripBackground = SystemColors.Control
-            CustomMenuStripRenderer.BorderColor = Color.FromArgb(255, 255, 255, 255)
+            CustomMenuStripRenderer.BorderColor = Color.FromArgb(255, 200, 200, 200)
             CustomMenuStripRenderer.MenuItemSelectedColor = Color.FromArgb(64, Color.Gray)
             CustomMenuStripRenderer.TextColor = Color.FromArgb(255, 0, 0, 0)
             CustomMenuStripRenderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
