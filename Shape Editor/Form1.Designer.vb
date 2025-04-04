@@ -33,8 +33,8 @@ Partial Class Form1
         DarkModeCheckBox = New CheckBox()
         MenuStrip1 = New MenuStrip()
         FileToolStripMenuItem = New ToolStripMenuItem()
-        OpenToolStripMenuItem = New ToolStripMenuItem()
         NewToolStripMenuItem = New ToolStripMenuItem()
+        OpenToolStripMenuItem = New ToolStripMenuItem()
         SaveToolStripMenuItem = New ToolStripMenuItem()
         AboutToolStripMenuItem = New ToolStripMenuItem()
         ExitToolStripMenuItem = New ToolStripMenuItem()
@@ -58,12 +58,15 @@ Partial Class Form1
         ' 
         ' TrackBar1
         ' 
+        TrackBar1.LargeChange = 100
         TrackBar1.Location = New Point(12, 388)
         TrackBar1.Maximum = 6400
         TrackBar1.Minimum = 100
         TrackBar1.Name = "TrackBar1"
         TrackBar1.Size = New Size(156, 69)
+        TrackBar1.SmallChange = 10
         TrackBar1.TabIndex = 1
+        TrackBar1.TickFrequency = 5
         TrackBar1.Value = 800
         ' 
         ' Label1
@@ -148,19 +151,19 @@ Partial Class Form1
         FileToolStripMenuItem.Size = New Size(54, 29)
         FileToolStripMenuItem.Text = "File"
         ' 
-        ' OpenToolStripMenuItem
-        ' 
-        OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        OpenToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.O
-        OpenToolStripMenuItem.Size = New Size(235, 34)
-        OpenToolStripMenuItem.Text = "Open..."
-        ' 
         ' NewToolStripMenuItem
         ' 
         NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         NewToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.N
         NewToolStripMenuItem.Size = New Size(235, 34)
         NewToolStripMenuItem.Text = "New"
+        ' 
+        ' OpenToolStripMenuItem
+        ' 
+        OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+        OpenToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.O
+        OpenToolStripMenuItem.Size = New Size(235, 34)
+        OpenToolStripMenuItem.Text = "Open..."
         ' 
         ' SaveToolStripMenuItem
         ' 
