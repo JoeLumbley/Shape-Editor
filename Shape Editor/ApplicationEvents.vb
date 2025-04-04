@@ -24,6 +24,13 @@ Namespace My
     ' End Sub
 
     Partial Friend Class MyApplication
+        Private Sub MyApplication_Startup(sender As Object, e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
+            ' Custom startup code here
+            '' For example, setting high DPI mode
+            'Application.SetHighDpiMode(HighDpiMode.PerMonitorV2)
+            '' You can also set the default font for the application here
+            'Application.SetDefaultFont(New Font("Arial", 10))
 
+        End Sub
     End Class
 End Namespace

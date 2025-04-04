@@ -26,6 +26,33 @@
 Imports System.IO
 Imports System.Runtime.InteropServices
 
+'Module Program
+'    Sub Main()
+
+'        ' Enable visual styles for the application
+'        Application.EnableVisualStyles()
+
+'        ' Set the default text rendering mode for the application
+'        Application.SetCompatibleTextRenderingDefault(False)
+
+'        ' Set the default font for the application
+'        Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
+
+'        ' Set the default font for the application
+'        Application.SetDefaultFont(New Font("Segoe UI", 9.0F, FontStyle.Regular, GraphicsUnit.Point, 0))
+
+'        ' Set the default DPI settings for the application
+'        Application.SetHighDpiMode(HighDpiMode.PerMonitorV2)
+
+'        ' Run the application
+'        Application.Run(New Form1())
+
+'    End Sub
+
+'End Module
+
+
+
 Public Class Form1
 
     Public Enum DwmWindowAttribute
@@ -103,6 +130,9 @@ Public Class Form1
     Private Const DWMWA_CAPTION_COLOR As Integer = 19
     Private Const DWMWA_TEXT_COLOR As Integer = 20
 
+
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Me.DoubleBuffered = True
@@ -112,7 +142,10 @@ Public Class Form1
         Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
 
         ' set title color - light mode
-        DwmSetWindowAttribute(Me.Handle, DWMWA_TEXT_COLOR, &H0, Marshal.SizeOf(&H0))
+        DwmSetWindowAttribute(Handle, 20, 0, Marshal.SizeOf(0))
+
+        'set title color - dark mode
+        'DwmSetWindowAttribute(Handle, 20, 1, Marshal.SizeOf(1))
 
         ' Set the default theme to light mode
         SetWindowTheme(Me.Handle, "Explorer", Nothing)
@@ -160,7 +193,7 @@ Public Class Form1
 
         ' Maximize the form
         WindowState = FormWindowState.Maximized
-
+        'Visible = True
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
@@ -683,7 +716,12 @@ Public Class Form1
         If DarkModeCheckBox.Checked Then
 
             'set title color - dark mode
-            DwmSetWindowAttribute(Me.Handle, DWMWA_TEXT_COLOR, &HFFFFFF, Marshal.SizeOf(&HFFFFFF))
+            'DwmSetWindowAttribute(Me.Handle, DWMWA_TEXT_COLOR, &HFFFFFF, Marshal.SizeOf(&HFFFFFF))
+
+            DwmSetWindowAttribute(Handle, 20, 1, Marshal.SizeOf(1))
+
+
+
 
             ' Set the theme to dark mode
             SetWindowTheme(Me.Handle, "DarkMode_Explorer", Nothing)
@@ -722,7 +760,11 @@ Public Class Form1
         Else
 
             'set title color - light mode
-            DwmSetWindowAttribute(Me.Handle, DWMWA_TEXT_COLOR, &H0, Marshal.SizeOf(&H0))
+            'DwmSetWindowAttribute(Me.Handle, DWMWA_TEXT_COLOR, &H0, Marshal.SizeOf(&H0))
+
+            DwmSetWindowAttribute(Handle, 20, 0, Marshal.SizeOf(0))
+
+
 
             ' Set the theme to light mode
             SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
@@ -889,6 +931,7 @@ Public Class Form1
         Return orderedPoints
 
     End Function
+
 
 End Class
 
