@@ -521,7 +521,7 @@ Public Class Form1
         Using saveFileDialog As New SaveFileDialog()
 
             saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
-            saveFileDialog.Title = "Save Points"
+            saveFileDialog.Title = "Save Shape"
             saveFileDialog.InitialDirectory = Application.StartupPath
 
             If saveFileDialog.ShowDialog(Me) = DialogResult.OK Then
@@ -548,12 +548,14 @@ Public Class Form1
         Using openFileDialog As New OpenFileDialog()
 
             openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
-            openFileDialog.Title = "Open Points"
+            openFileDialog.Title = "Open Shape"
             openFileDialog.InitialDirectory = Application.StartupPath
 
             If openFileDialog.ShowDialog() = DialogResult.OK Then
 
                 points.Clear()
+
+                Dim fileIsValid As Boolean = False
 
                 Using reader As New StreamReader(openFileDialog.FileName)
 
@@ -569,6 +571,11 @@ Public Class Form1
 
                             If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
                                 points.Add(New Point(x, y))
+
+                                ' Validate the point
+                                fileIsValid = Integer.TryParse(parts(0), x)
+                                fileIsValid = Integer.TryParse(parts(1), y)
+
                             End If
 
                         End If
@@ -579,6 +586,12 @@ Public Class Form1
                     Text = $"{Path.GetFileName(openFileDialog.FileName)} - Shape Editor - Code with Joe"
 
                 End Using
+
+                If Not fileIsValid Then
+
+                    Text = $"Bad File - Shape Editor - Code with Joe"
+
+                End If
 
                 ScaleFactor = 8
 
