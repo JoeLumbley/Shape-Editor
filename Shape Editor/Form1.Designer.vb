@@ -143,7 +143,7 @@ Partial Class Form1
         ' 
         ' FileToolStripMenuItem
         ' 
-        FileToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {OpenToolStripMenuItem, NewToolStripMenuItem, SaveToolStripMenuItem, AboutToolStripMenuItem, ExitToolStripMenuItem})
+        FileToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {NewToolStripMenuItem, OpenToolStripMenuItem, SaveToolStripMenuItem, AboutToolStripMenuItem, ExitToolStripMenuItem})
         FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         FileToolStripMenuItem.Size = New Size(54, 29)
         FileToolStripMenuItem.Text = "File"
@@ -152,33 +152,33 @@ Partial Class Form1
         ' 
         OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         OpenToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.O
-        OpenToolStripMenuItem.Size = New Size(223, 34)
-        OpenToolStripMenuItem.Text = "Open"
+        OpenToolStripMenuItem.Size = New Size(235, 34)
+        OpenToolStripMenuItem.Text = "Open..."
         ' 
         ' NewToolStripMenuItem
         ' 
         NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         NewToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.N
-        NewToolStripMenuItem.Size = New Size(223, 34)
+        NewToolStripMenuItem.Size = New Size(235, 34)
         NewToolStripMenuItem.Text = "New"
         ' 
         ' SaveToolStripMenuItem
         ' 
         SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         SaveToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.S
-        SaveToolStripMenuItem.Size = New Size(223, 34)
-        SaveToolStripMenuItem.Text = "Save"
+        SaveToolStripMenuItem.Size = New Size(235, 34)
+        SaveToolStripMenuItem.Text = "Save..."
         ' 
         ' AboutToolStripMenuItem
         ' 
         AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        AboutToolStripMenuItem.Size = New Size(223, 34)
-        AboutToolStripMenuItem.Text = "About"
+        AboutToolStripMenuItem.Size = New Size(235, 34)
+        AboutToolStripMenuItem.Text = "About..."
         ' 
         ' ExitToolStripMenuItem
         ' 
         ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        ExitToolStripMenuItem.Size = New Size(223, 34)
+        ExitToolStripMenuItem.Size = New Size(235, 34)
         ExitToolStripMenuItem.Text = "Exit"
         ' 
         ' GroupBox1
