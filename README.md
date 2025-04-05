@@ -97,13 +97,7 @@ To begin using the Shape Editor, launch the application and start creating shape
 
 
 
-## License
-This project is licensed under the MIT License.
 
-
-
-
-![038](https://github.com/user-attachments/assets/9ccae402-4d60-4032-9696-6770b2872a27)
 
 
 
@@ -899,7 +893,13 @@ If there are points, it adds the first point again to close the shape and return
 
 
 
+## License
+This project is licensed under the MIT License.
 
+
+
+
+![038](https://github.com/user-attachments/assets/9ccae402-4d60-4032-9696-6770b2872a27)
 
 
 
