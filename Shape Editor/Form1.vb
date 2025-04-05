@@ -139,7 +139,7 @@ Public Class Form1
     Private DarkModeMenuItemSelectedBorderColor As Color = Color.FromArgb(255, Color.DodgerBlue) ' Light mode selected border color
 
 
-    ' Set menu strip to Light mode colors.
+    ' Set menu to Light mode colors.
     Dim CustomMenuRenderer As New CustomColorMenuStripRenderer(MenuItemBackgroundColor_LightMode, ' MenuItemBackground
                                                                     MenuItemBackgroundSelected_LightMode,       ' MenuItemBackgroundSelected
                                                                     ToolStripBackground_LightMode,       ' ToolStripBackground
