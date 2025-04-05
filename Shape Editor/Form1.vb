@@ -132,11 +132,11 @@ Public Class Form1
     ' Dark mode colors
     Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 32, 32, 32) ' Light mode background color
     Private MenuItemBackgroundSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64) ' Light mode selected background color
-    Private DarkModeToolStripBackground As Color = Color.FromArgb(255, 32, 32, 32) ' Light mode selected background color
-    Private DarkModeMenuItemBorderColor As Color = Color.FromArgb(255, 50, 50, 50) ' Light mode border color
-    Private DarkModeMenuItemSelectedColor As Color = Color.FromArgb(255, 64, 64, 64) ' Light mode selected item color
-    Private DarkModeMenuItemTextColor As Color = Color.FromArgb(255, 255, 255, 255) ' Light mode text color
-    Private DarkModeMenuItemSelectedBorderColor As Color = Color.FromArgb(255, Color.DodgerBlue) ' Light mode selected border color
+    Private ToolStripBackground_DarkMode As Color = Color.FromArgb(255, 32, 32, 32) ' Light mode selected background color
+    Private MenuItemBorderColor_DarkMode As Color = Color.FromArgb(255, 50, 50, 50) ' Light mode border color
+    Private MenuItemSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64) ' Light mode selected item color
+    Private MenuItemTextColor_DarkMode As Color = Color.FromArgb(255, 255, 255, 255) ' Light mode text color
+    Private MenuItemSelectedBorderColor_DarkMode As Color = Color.FromArgb(255, Color.DodgerBlue) ' Light mode selected border color
 
 
     ' Set menu to Light mode colors.
@@ -222,6 +222,11 @@ Public Class Form1
         ' Maximize the form
         WindowState = FormWindowState.Maximized
         'Visible = True
+
+
+
+        CreateShapesFiles()
+
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
@@ -787,11 +792,11 @@ Public Class Form1
             ' Set the menu colors for dark mode
             CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_DarkMode
             CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelectedColor_DarkMode
-            CustomMenuRenderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32) ' *****************
-            CustomMenuRenderer.BorderColor = Color.FromArgb(255, 50, 50, 50)
-            CustomMenuRenderer.MenuItemSelectedColor = Color.FromArgb(255, 64, 64, 64)
-            CustomMenuRenderer.TextColor = Color.FromArgb(255, 255, 255, 255)
-            CustomMenuRenderer.SelectedBorderColor = Color.FromArgb(255, Color.DodgerBlue)
+            CustomMenuRenderer.ToolStripBackground = ToolStripBackground_DarkMode ' *****************
+            CustomMenuRenderer.BorderColor = MenuItemBorderColor_DarkMode
+            CustomMenuRenderer.MenuItemSelectedColor = MenuItemSelectedColor_DarkMode
+            CustomMenuRenderer.TextColor = MenuItemTextColor_DarkMode
+            CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColor_DarkMode
 
         Else
 
@@ -964,6 +969,31 @@ Public Class Form1
 
     End Function
 
+    Private Sub CreateShapesFiles()
+
+        Dim FilePath As String = Path.Combine(Application.StartupPath, "Airplane.txt")
+
+        CreateFileFromResource(FilePath, My.Resources.Resource1.Airplane)
+
+    End Sub
+
+    Private Sub CreateFileFromResource(filepath As String, resource As Byte())
+
+        Try
+
+            If Not IO.File.Exists(filepath) Then
+
+                IO.File.WriteAllBytes(filepath, resource)
+
+            End If
+
+        Catch ex As Exception
+
+            Debug.Print($"Error creating file: {ex.Message}")
+
+        End Try
+
+    End Sub
 
 End Class
 
