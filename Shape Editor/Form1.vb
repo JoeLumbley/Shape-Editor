@@ -26,33 +26,6 @@
 Imports System.IO
 Imports System.Runtime.InteropServices
 
-'Module Program
-'    Sub Main()
-
-'        ' Enable visual styles for the application
-'        Application.EnableVisualStyles()
-
-'        ' Set the default text rendering mode for the application
-'        Application.SetCompatibleTextRenderingDefault(False)
-
-'        ' Set the default font for the application
-'        Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
-
-'        ' Set the default font for the application
-'        Application.SetDefaultFont(New Font("Segoe UI", 9.0F, FontStyle.Regular, GraphicsUnit.Point, 0))
-
-'        ' Set the default DPI settings for the application
-'        Application.SetHighDpiMode(HighDpiMode.PerMonitorV2)
-
-'        ' Run the application
-'        Application.Run(New Form1())
-
-'    End Sub
-
-'End Module
-
-
-
 Public Class Form1
 
     Public Enum DwmWindowAttribute
@@ -158,12 +131,12 @@ Public Class Form1
     Private SelectedBorderColor_LightMode As Color = Color.FromArgb(255, Color.DodgerBlue) ' Light mode selected border color
 
     ' Dark mode colors
-    Private DarkModeMenuItemBackgroundColor As Color = Color.FromArgb(255, 240, 240, 240) ' Light mode background color
-    Private DarkModeMenuItemBackgroundSelectedColor As Color = Color.FromArgb(16, Color.DodgerBlue) ' Light mode selected background color
-    Private DarkModeToolStripBackground As Color = Color.FromArgb(255, 0, 0, 0) ' Light mode selected background color
-    Private DarkModeMenuItemBorderColor As Color = Color.FromArgb(255, 200, 200, 200) ' Light mode border color
-    Private DarkModeMenuItemSelectedColor As Color = Color.FromArgb(255, 128, 128, 128) ' Light mode selected item color
-    Private DarkModeMenuItemTextColor As Color = Color.FromArgb(255, 0, 0, 0) ' Light mode text color
+    Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 32, 32, 32) ' Light mode background color
+    Private MenuItemBackgroundSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64) ' Light mode selected background color
+    Private DarkModeToolStripBackground As Color = Color.FromArgb(255, 32, 32, 32) ' Light mode selected background color
+    Private DarkModeMenuItemBorderColor As Color = Color.FromArgb(255, 50, 50, 50) ' Light mode border color
+    Private DarkModeMenuItemSelectedColor As Color = Color.FromArgb(255, 64, 64, 64) ' Light mode selected item color
+    Private DarkModeMenuItemTextColor As Color = Color.FromArgb(255, 255, 255, 255) ' Light mode text color
     Private DarkModeMenuItemSelectedBorderColor As Color = Color.FromArgb(255, Color.DodgerBlue) ' Light mode selected border color
 
 
@@ -813,8 +786,8 @@ Public Class Form1
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
             ' Set the menu colors for dark mode
-            CustomMenuRenderer.MenuItemBackground = Color.FromArgb(255, 32, 32, 32)
-            CustomMenuRenderer.MenuItemBackgroundSelected = Color.FromArgb(255, 64, 64, 64)
+            CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_DarkMode
+            CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelectedColor_DarkMode
             CustomMenuRenderer.ToolStripBackground = Color.FromArgb(255, 32, 32, 32) ' *****************
             CustomMenuRenderer.BorderColor = Color.FromArgb(255, 50, 50, 50)
             CustomMenuRenderer.MenuItemSelectedColor = Color.FromArgb(255, 64, 64, 64)
