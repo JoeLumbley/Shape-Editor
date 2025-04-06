@@ -38,17 +38,34 @@ The Shape Editor is an innovative tool designed for the interactive creation of 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Comma-Separated Values (CSV) Files
 
 ### File Format
-CSV files are plain text files where data is organized in a tabular format, with each value separated by a comma. For the Shape Editor, each line represents a point in the shape, formatted as:
+CSV files, are a simple and widely used format for storing and exchanging data in a tabular structure. For the Shape Editor, each line represents a point in the shape, formatted as:
 ```
 x,y
 ```
 
-![028](https://github.com/user-attachments/assets/a048f2c6-1e18-4532-976f-f8447372d141)
+
+![045](https://github.com/user-attachments/assets/25b80078-8a66-41b8-b3e0-a0bbede41d03)
 
 
+
+- The first row often serves as a header, describing the column names.
+- Each subsequent row contains data corresponding to the columns.
 
 ### Usage
 - **Saving Shapes**: Users can save drawn shapes as CSV files for easy storage and retrieval.
@@ -56,9 +73,51 @@ x,y
 - **Data Integration**: CSV format allows for easy integration with other applications or programming environments.
 
 ### Benefits
+- **Plain Text**: CSV files are plain text files, which means they are lightweight and easy to read and write.
 - **Simplicity**: Easy to read and write, making it user-friendly.
-- **Compatibility**: Works with various applications, including spreadsheet software and programming languages.
+- **Compatibility**: CSV files can be opened and edited in many applications, including text editors (like Notepad) and spreadsheet software (like Excel or Google Sheets).
 - **Portability**: Easily shared and transferred between different systems.
+- **Human-Readable**: The simplicity of CSV files makes them understandable without specialized tools.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
