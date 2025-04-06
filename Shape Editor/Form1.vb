@@ -440,7 +440,7 @@ Public Class Form1
 
         Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
 
-        If ScaleFactor >= 3 Then
+        If ScaleFactor >= 8 Then
 
             HScrollBar1.Minimum = -ClientSize.Width * (ScaleFactor / 16)
 
@@ -519,13 +519,16 @@ Public Class Form1
 
         Using saveFileDialog As New SaveFileDialog()
 
-            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+            saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"
             saveFileDialog.Title = "Save Shape"
             saveFileDialog.InitialDirectory = Application.StartupPath
 
             If saveFileDialog.ShowDialog(Me) = DialogResult.OK Then
 
                 Using writer As New StreamWriter(saveFileDialog.FileName)
+
+                    ' Write the CSV headers (optional).
+                    writer.WriteLine("X,Y")
 
                     For Each point As Point In points
                         writer.WriteLine($"{point.X},{point.Y}")
@@ -546,7 +549,7 @@ Public Class Form1
 
         Using openFileDialog As New OpenFileDialog()
 
-            openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+            openFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"
             openFileDialog.Title = "Open Shape"
             openFileDialog.InitialDirectory = Application.StartupPath
 
@@ -556,35 +559,68 @@ Public Class Form1
 
                 Dim fileIsValid As Boolean = False
 
-                Using reader As New StreamReader(openFileDialog.FileName)
+                Try
 
-                    While Not reader.EndOfStream
+                    ' Read the file and parse the points
+                    Using reader As New StreamReader(openFileDialog.FileName)
 
-                        Dim line As String = reader.ReadLine()
-                        Dim parts As String() = line.Split(","c)
 
-                        If parts.Length = 2 Then
 
-                            Dim x As Integer
-                            Dim y As Integer
 
-                            If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
-                                points.Add(New Point(x, y))
+                        While Not reader.EndOfStream
 
-                                ' Validate the point
-                                fileIsValid = Integer.TryParse(parts(0), x)
-                                fileIsValid = Integer.TryParse(parts(1), y)
+                            Dim line As String = reader.ReadLine()
+                            Dim parts As String() = line.Split(","c)
+
+                            If parts.Length = 2 Then
+
+                                Dim x As Integer
+                                Dim y As Integer
+
+                                If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
+                                    points.Add(New Point(x, y))
+
+                                    ' Validate the point
+                                    fileIsValid = Integer.TryParse(parts(0), x)
+                                    fileIsValid = Integer.TryParse(parts(1), y)
+
+                                End If
 
                             End If
 
-                        End If
+                        End While
 
-                    End While
+                        ' Add file name to "Shape Editor - Code with Joe" and display in titlebar.
+                        Text = $"{Path.GetFileName(openFileDialog.FileName)} "
 
-                    ' Add file name to "Shape Editor - Code with Joe" and display in titlebar.
-                    Text = $"{Path.GetFileName(openFileDialog.FileName)} - Shape Editor - Code with Joe"
+                    End Using
 
-                End Using
+
+
+
+                Catch ex As Exception
+                    ' Handle the exception if needed
+                    'MessageBox.Show("Error reading file: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+
+                    Select Case True
+                        Case TypeOf ex Is IOException
+                            ' Handle IOException (e.g., file being used by another process)
+                            MessageBox.Show("The file in use by another app. Close the file and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Case TypeOf ex Is UnauthorizedAccessException
+                            ' Handle UnauthorizedAccessException
+                            MessageBox.Show("You do not have permission to access this file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Case Else
+                            ' Handle other exceptions
+                            MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Select
+
+
+                    fileIsValid = False
+
+                End Try
+
+
 
                 If Not fileIsValid Then
 
@@ -667,29 +703,37 @@ Public Class Form1
 
         ScaleFactor = TrackBar1.Value / 100.0
 
-        Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
 
-        If ScaleFactor >= 3 Then
 
-            HScrollBar1.Minimum = -ClientSize.Width * (ScaleFactor / 16)
 
-            HScrollBar1.Maximum = ClientSize.Width * (ScaleFactor / 16)
 
-            VScrollBar1.Minimum = -ClientSize.Height * (ScaleFactor / 16)
 
-            VScrollBar1.Maximum = ClientSize.Height * (ScaleFactor / 16)
+        UpdateUIScaleFactor()
 
-            If Not HScrollBar1.Enabled Then HScrollBar1.Enabled = True
 
-            If Not VScrollBar1.Enabled Then VScrollBar1.Enabled = True
+        'Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
 
-        Else
+        'If ScaleFactor >= 8 Then
 
-            If HScrollBar1.Enabled Then HScrollBar1.Enabled = False
+        '    HScrollBar1.Minimum = -ClientSize.Width * (ScaleFactor / 16)
 
-            If VScrollBar1.Enabled Then VScrollBar1.Enabled = False
+        '    HScrollBar1.Maximum = ClientSize.Width * (ScaleFactor / 16)
 
-        End If
+        '    VScrollBar1.Minimum = -ClientSize.Height * (ScaleFactor / 16)
+
+        '    VScrollBar1.Maximum = ClientSize.Height * (ScaleFactor / 16)
+
+        '    If Not HScrollBar1.Enabled Then HScrollBar1.Enabled = True
+
+        '    If Not VScrollBar1.Enabled Then VScrollBar1.Enabled = True
+
+        'Else
+
+        '    If HScrollBar1.Enabled Then HScrollBar1.Enabled = False
+
+        '    If VScrollBar1.Enabled Then VScrollBar1.Enabled = False
+
+        'End If
 
         GeneratePointArrayText()
 
@@ -917,7 +961,7 @@ Public Class Form1
         Dim sb As New System.Text.StringBuilder()
 
         ' Add a line defining the scale factor variable with a comment.
-        sb.AppendLine($"Dim ScaleFactor As Double = {ScaleFactor} ' Adjust the scale factor as needed")
+        sb.AppendLine("Dim ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed")
         sb.AppendLine("") ' Add a blank line for better readability.
 
         ' Start defining the array of Points.
