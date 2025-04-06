@@ -178,6 +178,21 @@ Public Class Form1
 
         CreateShapesFiles()
 
+        ' Set the TextBox1 to read-only to prevent user edits.
+        TextBox1.ReadOnly = True
+
+        ' Set the TextBox1 to multiline to allow for multiple lines of text.
+        TextBox1.Multiline = True
+
+        ' Set the TextBox1 to word wrap to ensure long lines are wrapped.
+        TextBox1.WordWrap = True
+
+        ' Set the TextBox1 to auto-scroll to allow scrolling through the text.
+        TextBox1.ScrollBars = ScrollBars.Vertical
+
+        ' Set the TextBox1 to accept only read-only text.
+        TextBox1.AcceptsTab = False
+
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
@@ -870,26 +885,62 @@ Public Class Form1
 
     End Function
 
+    'Private Sub GeneratePointArrayText()
+
+    '    Dim sb As New System.Text.StringBuilder()
+
+    '    sb.AppendLine("Dim ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed")
+    '    sb.AppendLine("")
+    '    sb.AppendLine("Dim Shape As Point() = {")
+
+    '    Dim orderedPoints = GetOrderedPoints()
+
+    '    For i As Integer = 0 To orderedPoints.Count - 1
+    '        If i < orderedPoints.Count - 1 Then
+    '            sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor)),")
+    '        Else
+    '            sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor))")
+    '        End If
+    '    Next
+
+    '    sb.AppendLine("}")
+
+    '    TextBox1.Text = sb.ToString()
+
+    'End Sub
+
+
+
     Private Sub GeneratePointArrayText()
 
+        ' Create a new StringBuilder to construct the output text.
         Dim sb As New System.Text.StringBuilder()
 
-        sb.AppendLine("Dim ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed")
-        sb.AppendLine("")
+        ' Add a line defining the scale factor variable with a comment.
+        sb.AppendLine($"Dim ScaleFactor As Double = {ScaleFactor} ' Adjust the scale factor as needed")
+        sb.AppendLine("") ' Add a blank line for better readability.
+
+        ' Start defining the array of Points.
         sb.AppendLine("Dim Shape As Point() = {")
 
+        ' Retrieve the ordered list of points (assumed to be a method returning a collection of points).
         Dim orderedPoints = GetOrderedPoints()
 
+        ' Iterate through all the ordered points to format them as scaled Point objects.
         For i As Integer = 0 To orderedPoints.Count - 1
             If i < orderedPoints.Count - 1 Then
+                ' Append each point with a trailing comma if it's not the last point in the list.
                 sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor)),")
             Else
+                ' Append the last point without a trailing comma.
                 sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor))")
             End If
         Next
 
+        ' Close the array definition.
         sb.AppendLine("}")
 
+        ' Set the constructed string as the content of TextBox1.
         TextBox1.Text = sb.ToString()
 
     End Sub
