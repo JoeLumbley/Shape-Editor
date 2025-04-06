@@ -676,62 +676,26 @@ Public Class Form1
         CenterDrawingArea()
 
         If e.Delta > 0 Then
-
             If TrackBar1.Value + 100 <= TrackBar1.Maximum Then
-
                 TrackBar1.Value += 100
-
             Else
-
                 TrackBar1.Value = TrackBar1.Maximum
-
             End If
 
         Else
 
             If TrackBar1.Value - 100 >= TrackBar1.Minimum Then
-
                 TrackBar1.Value -= 100
-
             Else
-
                 TrackBar1.Value = TrackBar1.Minimum
-
             End If
-
         End If
 
         ScaleFactor = TrackBar1.Value / 100.0
 
-
         UpdateUIScaleFactor()
 
-
-        'Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
-
-        'If ScaleFactor >= 8 Then
-
-        '    HScrollBar1.Minimum = -ClientSize.Width * (ScaleFactor / 16)
-
-        '    HScrollBar1.Maximum = ClientSize.Width * (ScaleFactor / 16)
-
-        '    VScrollBar1.Minimum = -ClientSize.Height * (ScaleFactor / 16)
-
-        '    VScrollBar1.Maximum = ClientSize.Height * (ScaleFactor / 16)
-
-        '    If Not HScrollBar1.Enabled Then HScrollBar1.Enabled = True
-
-        '    If Not VScrollBar1.Enabled Then VScrollBar1.Enabled = True
-
-        'Else
-
-        '    If HScrollBar1.Enabled Then HScrollBar1.Enabled = False
-
-        '    If VScrollBar1.Enabled Then VScrollBar1.Enabled = False
-
-        'End If
-
-        GeneratePointArrayText()
+        'GeneratePointArrayText()
 
         Invalidate()
 
@@ -1007,7 +971,7 @@ Public Class Form1
 
     Private Sub CreateShapesFiles()
 
-        Dim FilePath As String = Path.Combine(Application.StartupPath, "Airplane.txt")
+        Dim FilePath As String = Path.Combine(Application.StartupPath, "Airplane.csv")
 
         CreateFileFromResource(FilePath, My.Resources.Resource1.Airplane)
 
