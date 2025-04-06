@@ -54,7 +54,7 @@ The Shape Editor is an innovative tool designed for the interactive creation of 
 ## Comma-Separated Values (CSV) Files
 
 ### File Format
-CSV files, or **Comma-Separated Values** files, are a simple and widely used format for storing and exchanging data in a tabular structure. For the Shape Editor, each line represents a point in the shape, formatted as:
+CSV files, are a simple and widely used format for storing and exchanging data in a tabular structure. For the Shape Editor, each line represents a point in the shape, formatted as:
 ```
 x,y
 ```
