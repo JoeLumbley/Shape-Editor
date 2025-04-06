@@ -704,10 +704,6 @@ Public Class Form1
         ScaleFactor = TrackBar1.Value / 100.0
 
 
-
-
-
-
         UpdateUIScaleFactor()
 
 
