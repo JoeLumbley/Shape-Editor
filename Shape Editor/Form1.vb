@@ -266,6 +266,14 @@ Public Class Form1
 
             selectedPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
 
+
+
+
+
+            ' TODO make tool.Add Tool.Sub Tool.move
+            'If CurrentTool = Tool.Add Then
+
+
             ' If no point was selected, add a new point
             If selectedPointIndex = -1 Then
                 ' Add the point
@@ -276,6 +284,14 @@ Public Class Form1
 
                 selectedPointIndex = points.Count - 2
             End If
+
+
+            'End If
+
+
+
+
+
 
             isDrawing = True
 
