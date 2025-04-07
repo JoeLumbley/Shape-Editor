@@ -564,9 +564,6 @@ Public Class Form1
                     ' Read the file and parse the points
                     Using reader As New StreamReader(openFileDialog.FileName)
 
-
-
-
                         While Not reader.EndOfStream
 
                             Dim line As String = reader.ReadLine()
@@ -595,31 +592,44 @@ Public Class Form1
 
                     End Using
 
-
-
-
                 Catch ex As Exception
-                    ' Handle the exception if needed
-                    'MessageBox.Show("Error reading file: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
 
                     Select Case True
                         Case TypeOf ex Is IOException
                             ' Handle IOException (e.g., file being used by another process)
                             MessageBox.Show("The file in use by another app. Close the file and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                        Case TypeOf ex Is FileNotFoundException
+                            ' Handle FileNotFoundException
+                            MessageBox.Show("The file was not found. Please check the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                        Case TypeOf ex Is FormatException
+                            ' Handle FormatException
+                            MessageBox.Show("The file format is invalid. Please check the file contents.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                        Case TypeOf ex Is ArgumentException
+                            ' Handle ArgumentException
+                            MessageBox.Show("The file path is invalid. Please check the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                        Case TypeOf ex Is PathTooLongException
+                            ' Handle PathTooLongException
+                            MessageBox.Show("The file path is too long. Please shorten the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                        Case TypeOf ex Is NotSupportedException
+
                         Case TypeOf ex Is UnauthorizedAccessException
                             ' Handle UnauthorizedAccessException
                             MessageBox.Show("You do not have permission to access this file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
                         Case Else
                             ' Handle other exceptions
                             MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End Select
 
+                    End Select
 
                     fileIsValid = False
 
                 End Try
-
 
 
                 If Not fileIsValid Then
@@ -694,8 +704,6 @@ Public Class Form1
         ScaleFactor = TrackBar1.Value / 100.0
 
         UpdateUIScaleFactor()
-
-        'GeneratePointArrayText()
 
         Invalidate()
 
