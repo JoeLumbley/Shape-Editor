@@ -450,15 +450,15 @@ Public Class Form1
 
             VScrollBar1.Maximum = ClientSize.Height * (ScaleFactor / 16)
 
-            If Not HScrollBar1.Enabled Then HScrollBar1.Enabled = True
+            If Not HScrollBar1.Visible Then HScrollBar1.Visible = True
 
-            If Not VScrollBar1.Enabled Then VScrollBar1.Enabled = True
+            If Not VScrollBar1.Visible Then VScrollBar1.Visible = True
 
         Else
 
-            If HScrollBar1.Enabled Then HScrollBar1.Enabled = False
+            If HScrollBar1.Visible Then HScrollBar1.Visible = False
 
-            If VScrollBar1.Enabled Then VScrollBar1.Enabled = False
+            If VScrollBar1.Visible Then VScrollBar1.Visible = False
 
         End If
 
@@ -1031,6 +1031,7 @@ Public Class CustomColorMenuStripRenderer
         If e.Item.Selected Then
 
             If TypeOf e.Item Is ToolStripMenuItem Then
+
 
                 If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
 
