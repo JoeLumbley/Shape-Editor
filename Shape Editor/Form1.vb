@@ -259,6 +259,8 @@ Public Class Form1
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
 
         If e.Button = MouseButtons.Left Then
+
+            ' Calculate the adjusted mouse location based on the scale factor
             AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor),
                                               CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
@@ -420,8 +422,6 @@ Public Class Form1
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
 
-        ' UpdateScaleFactor()
-
         ScaleFactor = TrackBar1.Value / 100.0
 
         UpdateUIScaleFactor()
@@ -475,6 +475,7 @@ Public Class Form1
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
 
+        ' Update the drawing center based on the scroll value
         DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
 
         Invalidate()
