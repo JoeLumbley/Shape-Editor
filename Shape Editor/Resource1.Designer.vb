@@ -67,6 +67,26 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
+        Friend Shared ReadOnly Property AddPointToolButton() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("AddPointToolButton", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property AddPointToolButtonSelected() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("AddPointToolButtonSelected", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
         Friend Shared ReadOnly Property Airplane() As Byte()
             Get
                 Dim obj As Object = ResourceManager.GetObject("Airplane", resourceCulture)

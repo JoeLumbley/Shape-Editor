@@ -39,6 +39,7 @@ Partial Class Form1
         AboutToolStripMenuItem = New ToolStripMenuItem()
         ExitToolStripMenuItem = New ToolStripMenuItem()
         GroupBox1 = New GroupBox()
+        Button2 = New Button()
         CType(TrackBar1, ComponentModel.ISupportInitialize).BeginInit()
         MenuStrip1.SuspendLayout()
         GroupBox1.SuspendLayout()
@@ -194,11 +195,22 @@ Partial Class Form1
         GroupBox1.TabIndex = 11
         GroupBox1.TabStop = False
         ' 
+        ' Button2
+        ' 
+        Button2.Font = New Font("Segoe UI", 10.2089548F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Button2.Location = New Point(691, 213)
+        Button2.Name = "Button2"
+        Button2.Size = New Size(47, 43)
+        Button2.TabIndex = 12
+        Button2.TabStop = False
+        Button2.UseVisualStyleBackColor = True
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1258, 664)
+        Controls.Add(Button2)
         Controls.Add(GroupBox1)
         Controls.Add(HScrollBar1)
         Controls.Add(VScrollBar1)
@@ -238,5 +250,6 @@ Partial Class Form1
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents Button2 As Button
 
 End Class

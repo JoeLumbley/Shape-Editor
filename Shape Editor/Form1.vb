@@ -27,6 +27,16 @@ Imports System.IO
 Imports System.Runtime.InteropServices
 
 Public Class Form1
+    Enum Tool
+        Add
+        Subtract
+        Move
+    End Enum
+
+    Private CurrentTool As Tool = Tool.Add
+
+
+
 
     Public Enum DwmWindowAttribute
         dwmwa_invalid = -1
@@ -120,6 +130,17 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
+        'Button2.Image = My.Resources.Resource1.AddPointToolButton
+
+        ' Convert the byte array to an Image
+        Dim imageBytes As Byte() = My.Resources.Resource1.AddPointToolButtonSelected
+        Using ms As New MemoryStream(imageBytes)
+            Button2.Image = Image.FromStream(ms)
+        End Using
+
+
+
         Me.DoubleBuffered = True
 
         Me.KeyPreview = True
@@ -151,6 +172,13 @@ Public Class Form1
         SetWindowTheme(TrackBar1.Handle, "Explorer", Nothing)
         DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
         DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+
+
+        SetWindowTheme(Button2.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
 
         Application.EnableVisualStyles()
 
@@ -268,28 +296,22 @@ Public Class Form1
 
 
 
+            If CurrentTool = Tool.Add Then
 
+                ' If no point was selected, add a new point
+                If selectedPointIndex = -1 Then
 
-            ' TODO make tool.Add Tool.Sub Tool.move
-            'If CurrentTool = Tool.Add Then
+                    ' Add the point
+                    points.Add(AdjustedMouseLocation)
 
+                    ' Add the mirror point
+                    points.Add(New Point(AdjustedMouseLocation.X, -AdjustedMouseLocation.Y))
 
-            ' If no point was selected, add a new point
-            If selectedPointIndex = -1 Then
-                ' Add the point
-                points.Add(AdjustedMouseLocation)
+                    selectedPointIndex = points.Count - 2
 
-                ' Add the mirror point
-                points.Add(New Point(AdjustedMouseLocation.X, -AdjustedMouseLocation.Y))
+                End If
 
-                selectedPointIndex = points.Count - 2
             End If
-
-
-            'End If
-
-
-
 
 
 
@@ -302,6 +324,7 @@ Public Class Form1
         End If
 
     End Sub
+
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
 
@@ -415,6 +438,18 @@ Public Class Form1
         'Button1.Left = VScrollBar1.Left
         Button1.Width = vScrollBarWidth + 2
         Button1.Height = hScrollBarHeight + 2
+
+
+
+        Button2.Top = HScrollBar1.Top - Button2.Height
+        Button2.Left = VScrollBar1.Left - Button2.Width
+
+        'Button2.Width = Button1.Width
+        'Button2.Height = Button1.Height
+
+
+
+
 
         GroupBox1.Top = HScrollBar1.Top
         GroupBox1.Left = VScrollBar1.Left
@@ -776,6 +811,15 @@ Public Class Form1
             DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
+
+            SetWindowTheme(Button2.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
+
+
+
+
             SetWindowTheme(GroupBox1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
@@ -810,6 +854,13 @@ Public Class Form1
             SetWindowTheme(Button1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+
+            SetWindowTheme(Button2.Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+
 
             SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
