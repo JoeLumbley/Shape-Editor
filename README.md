@@ -414,7 +414,7 @@ Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handle
 
 - This method opens a file dialog to read points from a CSV file and populate the `points` list.
 
-### Conclusion
+
 
 This code provides a comprehensive framework for a shape editor application in VB.NET. It covers essential programming concepts such as event handling, graphics rendering, and file I/O, making it a valuable learning resource for beginners. 
 
