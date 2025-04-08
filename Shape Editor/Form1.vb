@@ -130,9 +130,6 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
-        'Button2.Image = My.Resources.Resource1.AddPointToolButton
-
         ' Convert the byte array to an Image
         Dim imageBytes As Byte() = My.Resources.Resource1.AddPointToolButtonSelected
         Using ms As New MemoryStream(imageBytes)
@@ -172,7 +169,6 @@ Public Class Form1
         SetWindowTheme(TrackBar1.Handle, "Explorer", Nothing)
         DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
         DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-
 
 
         SetWindowTheme(Button2.Handle, "Explorer", Nothing)
