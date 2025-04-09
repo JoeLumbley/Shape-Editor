@@ -437,14 +437,6 @@ By understanding each part of this code, you will gain insights into Windows For
 
 
 
-## License
-This project is licensed under the MIT License.
-
-
-
-
-![038](https://github.com/user-attachments/assets/9ccae402-4d60-4032-9696-6770b2872a27)
-
 
 
 
@@ -455,11 +447,11 @@ This project is licensed under the MIT License.
 
 
 
-# Tool Buttons
+## Tool Buttons
 
 
 
-## Making icons ( transparent .png files ) in GIMP.
+### Making icons ( transparent .png files ) in GIMP.
 
 1. **Open GIMP**:
    - Launch the GIMP application on your computer.
@@ -559,20 +551,29 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        ' Convert the byte array to an Image
-        Dim ImageBytes As Byte() = My.Resources.Resource1.YourIconName
-
         ' Set the icon for the form
-        Using ms As New MemoryStream(ImageBytes)
-            Me.Icon = Image.FromStream(ms)
-        End Using
+        me.Icon = ResourceToImage(My.Resources.Resource1.YourIconName)
 
         ' Optionally, set the icon for a button
-        Using ms As New MemoryStream(ImageBytes)
-            Button1.Image = Image.FromStream(ms)
-        End Using
+        Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelected)
 
     End Sub
+
+    Private Function ResourceToImage(resource As Byte()) As Image
+        ' Convert the byte array to an Image using a MemoryStream and the
+        ' Image.FromStream method to create an Image object from the byte array.
+        ' This allows you to use the byte array as an image.
+
+        Using ms As New MemoryStream(resource)
+
+            Return Image.FromStream(ms)
+
+        End Using
+
+        ' The MemoryStream is disposed of automatically when it goes out of scope,
+        ' so you don't need to worry about memory management.
+
+    End Function
 
 End Class
 
@@ -620,7 +621,7 @@ This code snippet converts a byte array from the resources into an `Image` objec
 
 
 
-# Clones
+## Clones
 
 
 ![051](https://github.com/user-attachments/assets/f3e72a16-16c3-4e62-b978-ebf4219a12a7)
@@ -635,6 +636,14 @@ This code snippet converts a byte array from the resources into an `Image` objec
 
 
 
+
+## License
+This project is licensed under the MIT License.
+
+
+
+
+![038](https://github.com/user-attachments/assets/9ccae402-4d60-4032-9696-6770b2872a27)
 
 
 
