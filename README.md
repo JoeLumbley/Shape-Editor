@@ -540,8 +540,7 @@ End Class
 
 ### Conclusion
 
-By following these steps, you can successfully add icons to your resource file in a VB.NET project. If you have any further questions or need assistance with specific code implementations, feel free to ask!
-
+By following these steps, you can successfully add icons to your resource file in a VB.NET project. 
 
 
 
