@@ -458,13 +458,23 @@ By understanding each part of this code, you will gain insights into Windows For
 
  **Create New File for the Icon**:
    - Go to **File** > **New** enter your icon size select Fill with Transparency then select ok.
+     
+![059](https://github.com/user-attachments/assets/a0ae2244-6441-4947-815e-e6565e5f3526)
+
+
    - You should now have a transparent Background Layer (indicated by a checkerboard pattern).
   
+![067](https://github.com/user-attachments/assets/699bfa95-ddd5-4665-b8a7-666e2b87ab42)
 
 
 
 
-![059](https://github.com/user-attachments/assets/a0ae2244-6441-4947-815e-e6565e5f3526)
+
+
+ **Zoom In**:
+ - **Zoom In**: Use the zoom tool to work on detailed areas more easily.
+
+
 
 
  **Create New Layer**:
@@ -474,8 +484,7 @@ By understanding each part of this code, you will gain insights into Windows For
    
 ![061](https://github.com/user-attachments/assets/1f7dd5da-8eb3-4427-8ccd-c5951b01f4f9)
 
- **Zoom In**:
- - **Zoom In**: Use the zoom tool to work on detailed areas more easily.
+
 
 
 
