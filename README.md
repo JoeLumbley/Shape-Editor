@@ -437,14 +437,6 @@ By understanding each part of this code, you will gain insights into Windows For
 
 
 
-## License
-This project is licensed under the MIT License.
-
-
-
-
-![038](https://github.com/user-attachments/assets/9ccae402-4d60-4032-9696-6770b2872a27)
-
 
 
 
@@ -455,11 +447,11 @@ This project is licensed under the MIT License.
 
 
 
-# Tool Buttons
+## Tool Buttons
 
 
 
-## Making icons ( transparent .png files ) in GIMP.
+### Making icons ( transparent .png files ) in GIMP.
 
 1. **Open GIMP**:
    - Launch the GIMP application on your computer.
@@ -620,7 +612,7 @@ This code snippet converts a byte array from the resources into an `Image` objec
 
 
 
-# Clones
+## Clones
 
 
 ![051](https://github.com/user-attachments/assets/f3e72a16-16c3-4e62-b978-ebf4219a12a7)
@@ -635,6 +627,14 @@ This code snippet converts a byte array from the resources into an `Image` objec
 
 
 
+
+## License
+This project is licensed under the MIT License.
+
+
+
+
+![038](https://github.com/user-attachments/assets/9ccae402-4d60-4032-9696-6770b2872a27)
 
 
 
