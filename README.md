@@ -475,7 +475,13 @@ By understanding each part of this code, you will gain insights into Windows For
  - **Zoom In**: Use the zoom tool to work on detailed areas more easily.
 
 
-![070](https://github.com/user-attachments/assets/dec6e0f9-552f-4531-a51f-4105ec0ef78e)
+![071](https://github.com/user-attachments/assets/4629c209-16e5-44db-89dd-94220e782b94)
+
+
+
+
+
+
 
 
  **Create New Layer**:
