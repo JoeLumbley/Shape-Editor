@@ -132,10 +132,9 @@ Public Class Form1
 
         Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelected)
 
+        DoubleBuffered = True
 
-        Me.DoubleBuffered = True
-
-        Me.KeyPreview = True
+        KeyPreview = True
 
         Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
 
@@ -143,9 +142,9 @@ Public Class Form1
         DwmSetWindowAttribute(Handle, 20, 0, Marshal.SizeOf(GetType(Boolean)))
 
         ' Set the default theme to light mode
-        SetWindowTheme(Me.Handle, "Explorer", Nothing)
-        DwmSetWindowAttribute(Me.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        DwmSetWindowAttribute(Me.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
         SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
         DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
         DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
