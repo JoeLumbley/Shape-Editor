@@ -458,6 +458,7 @@ By understanding each part of this code, you will gain insights into Windows For
 
  **Create New File for the Icon**:
    - Go to **File** > **New** enter your icon size select Fill with Transparency then select ok.
+   - You should now have a transparent Background Layer (indicated by a checkerboard pattern).
   
 
 
@@ -473,12 +474,22 @@ By understanding each part of this code, you will gain insights into Windows For
    
 ![061](https://github.com/user-attachments/assets/1f7dd5da-8eb3-4427-8ccd-c5951b01f4f9)
 
+ **Zoom In**:
+     - **Zoom In**: Use the zoom tool to work on detailed areas more easily.
 
 
- **Use Pencil to Draw the icon.**:
-   - Press the **Delete** key on your keyboard. The selected area should now be transparent (indicated by a checkerboard pattern).
+
+     
 
 
+
+ **Click to Draw**:
+     - **Use Pencil to Draw***: Set your pencil size to 1 pixel.
+
+
+     
+ **Undo**:
+     - **Undo**: If you make a mistake, use **Ctrl + Z** to undo.
 
 
 
