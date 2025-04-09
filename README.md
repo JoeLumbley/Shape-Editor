@@ -447,35 +447,6 @@ By understanding each part of this code, you will gain insights into Windows For
 
 
 
-## Tool Buttons
-
-
-
-### Making icons ( transparent .png files ) in GIMP.
-
- **Open GIMP**:
-   - Launch the GIMP application on your computer.
-
- **Create New File for the Icon**:
-   - Go to **File** > **New** enter your icon size select Fill with Transparency then select ok.
-     
-![059](https://github.com/user-attachments/assets/a0ae2244-6441-4947-815e-e6565e5f3526)
-
-
-   - You should now have a transparent Background Layer (indicated by a checkerboard pattern).
-  
-![067](https://github.com/user-attachments/assets/699bfa95-ddd5-4665-b8a7-666e2b87ab42)
-
-
-
-
-
-
- **Zoom In**:
- - **Zoom In**: Use the zoom tool to work on detailed areas more easily.
-
-
-![071](https://github.com/user-attachments/assets/4629c209-16e5-44db-89dd-94220e782b94)
 
 
 
@@ -483,55 +454,59 @@ By understanding each part of this code, you will gain insights into Windows For
 
 
 
+# Creating Transparent Icons in GIMP
 
- **Create New Layer**:
-   - Go to **Layer** > **New** enter your layer name select Fill with Transparency then select ok.
+Here’s a step-by-step guide to making transparent .png icons in GIMP.
 
+## Step 1: Open GIMP
+- Launch the GIMP application on your computer.
 
-   
-![061](https://github.com/user-attachments/assets/1f7dd5da-8eb3-4427-8ccd-c5951b01f4f9)
+## Step 2: Create New File for the Icon
+- Go to **File** > **New**.
+- Enter your desired icon size and select **Fill with Transparency**, then click **OK**.
 
+![Creating New File](https://github.com/user-attachments/assets/a0ae2244-6441-4947-815e-e6565e5f3526)
 
+- You should now see a transparent background layer (indicated by a checkerboard pattern).
 
+![Transparent Background](https://github.com/user-attachments/assets/699bfa95-ddd5-4665-b8a7-666e2b87ab42)
 
-![072](https://github.com/user-attachments/assets/aca0386b-a044-4273-8aa0-2db721a6f6d3)
+## Step 3: Zoom In
+- Use the zoom tool to focus on detailed areas for easier drawing.
 
-     
+![Zoom In](https://github.com/user-attachments/assets/4629c209-16e5-44db-89dd-94220e782b94)
 
+## Step 4: Create New Layer
+- Go to **Layer** > **New**.
+- Enter your layer name, select **Fill with Transparency**, then click **OK**.
 
+![New Layer](https://github.com/user-attachments/assets/1f7dd5da-8eb3-4427-8ccd-c5951b01f4f9)
 
- **Click to Draw**:
- - **Use Pencil to Draw**: Set your pencil size to 1 pixel.
+![Layer Management](https://github.com/user-attachments/assets/aca0386b-a044-4273-8aa0-2db721a6f6d3)
 
-![063](https://github.com/user-attachments/assets/a2d8df8d-5511-413c-af27-24530296c971)
+## Step 5: Click to Draw
+- Use the **Pencil Tool** to draw. Set your pencil size to 1 pixel.
 
+![Pencil Tool](https://github.com/user-attachments/assets/a2d8df8d-5511-413c-af27-24530296c971)
 
+## Step 6: Undo Mistakes
+- If you make a mistake, use **Ctrl + Z** to undo.
 
+## Step 7: Export the Image
+- Go to **File** > **Export As**.
+- Choose **PNG** as the file format in the dialog.
+- Click **Export**.
 
-     
- **Undo**:
- - **Undo**: If you make a mistake, use **Ctrl + Z** to undo.
+![Export Image](https://github.com/user-attachments/assets/6350105d-06b2-4c0e-ab14-eea2caa6788d)
 
-
-
-
-
- **Export the Image**:
-   - Go to **File** > **Export As**.
-   - In the dialog, choose **PNG** as the file format.
-   - Click **Export**.
-  
-
-
-![058](https://github.com/user-attachments/assets/6350105d-06b2-4c0e-ab14-eea2caa6788d)
-
-
-
- **Save Your Work**:
-   - Save your project in GIMP format (.xcf) if you want to retain layers for future editing.
+## Step 8: Save Your Work
+- Save your project in GIMP format (.xcf) if you want to retain layers for future editing.
 
 ### Tip
-- **Layer Management**: Keep an eye on the layers panel to manage multiple layers if you’re working with more complex images.
+- **Layer Management**: Keep an eye on the layers panel to manage multiple layers effectively if you’re working with more complex images.
+
+
+
 
 
 
