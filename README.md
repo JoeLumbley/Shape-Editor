@@ -457,7 +457,6 @@ This project is licensed under the MIT License.
 
 # Tool Buttons
 
-![056](https://github.com/user-attachments/assets/91829b77-57cc-4323-b2b7-78f926e05df2)
 
 
 ## Making icons ( transparent .png files ) in GIMP.
@@ -471,6 +470,11 @@ This project is licensed under the MIT License.
 3. **Select the Area to Make Transparent**:
    - Use the **Select Tool** (e.g., Fuzzy Select Tool, Color Select Tool, or Rectangle Select Tool) to select the area of the icon you want to make transparent.
    - Adjust the selection as needed.
+  
+   
+![056](https://github.com/user-attachments/assets/91829b77-57cc-4323-b2b7-78f926e05df2)
+
+
 
 4. **Delete the Selected Area**:
    - Press the **Delete** key on your keyboard. The selected area should now be transparent (indicated by a checkerboard pattern).
