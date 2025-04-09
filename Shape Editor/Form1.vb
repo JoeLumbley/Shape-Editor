@@ -214,13 +214,18 @@ Public Class Form1
     End Sub
 
     Private Function ResourceToImage(resource As Byte()) As Image
+        ' Convert the byte array to an Image using a MemoryStream and the
+        ' Image.FromStream method to create an Image object from the byte array.
+        ' This allows you to use the byte array as an image.
 
-        ' Convert the byte array to an Image
         Using ms As New MemoryStream(resource)
 
             Return Image.FromStream(ms)
 
         End Using
+
+        ' The MemoryStream is disposed of automatically
+        ' when it goes out of scope, so you don't need to worry about memory management.
 
     End Function
 
