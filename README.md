@@ -478,9 +478,7 @@ This project is licensed under the MIT License.
 
 
 
-
-
-
+Make icons transparent .png files in GIMP.
 
 
 
