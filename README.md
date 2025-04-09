@@ -531,13 +531,33 @@ End Class
 ```
 
 
+
+This code snippet converts a byte array from the resources into an `Image` object and assigns it to a button's image property.
+
+### Explanation of the Code
+
+1. **Byte Array Retrieval**:
+   - `Dim imageBytes As Byte() = My.Resources.Resource1.AddPointToolButtonSelected`
+   - This line retrieves the byte array for the image stored in your resources. Ensure that `AddPointToolButtonSelected` is the correct name of the resource.
+
+2. **MemoryStream Usage**:
+   - `Using ms As New MemoryStream(imageBytes)`
+   - A `MemoryStream` is created to hold the byte array in memory, allowing it to be used as a stream.
+
+3. **Image Creation**:
+   - `Button2.Image = Image.FromStream(ms)`
+   - The `Image.FromStream` method converts the stream into an `Image` object, which is then assigned to `Button2`.
+
+
+
 ![057](https://github.com/user-attachments/assets/64737783-951f-4f02-8b1a-20af085a8e91)
-
-
 
 
 ### Important Notes
 
+- **Error Handling**: Consider adding error handling to manage any issues that may arise when loading the image.
+- **Image Size**: Ensure that the size of `Button2` is appropriate for the image to avoid distortion.
+- **Resource Management**: The `Using` statement ensures that the `MemoryStream` is disposed of properly after use, which is a good practice for resource management.
 - **File Format**: Ensure your icon files are in an appropriate format (.ico or .png) for compatibility.
 - **Resource Management**: The resources are embedded in your application, making them accessible at runtime without needing to manage external files.
 - **Rebuild Your Project**: After adding resources, it’s a good practice to rebuild your project to ensure everything is up to date.
