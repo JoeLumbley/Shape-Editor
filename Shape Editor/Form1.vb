@@ -130,12 +130,8 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        ' Convert the byte array to an Image
-        Dim imageBytes As Byte() = My.Resources.Resource1.AddPointToolButtonSelected
+        Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelected)
 
-        Using ms As New MemoryStream(imageBytes)
-            Button2.Image = Image.FromStream(ms)
-        End Using
 
         Me.DoubleBuffered = True
 
@@ -217,6 +213,17 @@ Public Class Form1
         TextBox1.AcceptsTab = False
 
     End Sub
+
+    Private Function ResourceToImage(resource As Byte()) As Image
+
+        ' Convert the byte array to an Image
+        Using ms As New MemoryStream(resource)
+
+            Return Image.FromStream(ms)
+
+        End Using
+
+    End Function
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
         MyBase.OnPaint(e)

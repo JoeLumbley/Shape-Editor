@@ -210,7 +210,6 @@ Partial Class Form1
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1258, 664)
-        Controls.Add(Button2)
         Controls.Add(GroupBox1)
         Controls.Add(HScrollBar1)
         Controls.Add(VScrollBar1)
@@ -221,6 +220,7 @@ Partial Class Form1
         Controls.Add(TrackBar1)
         Controls.Add(TextBox1)
         Controls.Add(MenuStrip1)
+        Controls.Add(Button2)
         KeyPreview = True
         MainMenuStrip = MenuStrip1
         Name = "Form1"
