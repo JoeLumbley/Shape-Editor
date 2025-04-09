@@ -453,11 +453,11 @@ By understanding each part of this code, you will gain insights into Windows For
 
 ### Making icons ( transparent .png files ) in GIMP.
 
-1. **Open GIMP**:
+ **Open GIMP**:
    - Launch the GIMP application on your computer.
 
-2. **Create New File for the Icon**:
-   - Go to **File** > **New** enter your icon size like width 41, height 41 select Fill with Transparency then select ok.
+ **Create New File for the Icon**:
+   - Go to **File** > **New** enter your icon size select Fill with Transparency then select ok.
   
 
 
@@ -466,13 +466,16 @@ By understanding each part of this code, you will gain insights into Windows For
 ![059](https://github.com/user-attachments/assets/a0ae2244-6441-4947-815e-e6565e5f3526)
 
 
+ **Create New Layer**:
+   - Go to **Layer** > **New** enter your icon size select Fill with Transparency then select ok.
 
-  
+
    
+![061](https://github.com/user-attachments/assets/1f7dd5da-8eb3-4427-8ccd-c5951b01f4f9)
 
 
 
-4. **Use Pencil to Draw the icon.**:
+ **Use Pencil to Draw the icon.**:
    - Press the **Delete** key on your keyboard. The selected area should now be transparent (indicated by a checkerboard pattern).
 
 
