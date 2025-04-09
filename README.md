@@ -484,7 +484,11 @@ By understanding each part of this code, you will gain insights into Windows For
 
 
  **Click to Draw**:
- - **Use Pencil to Draw***: Set your pencil size to 1 pixel.
+ - **Use Pencil to Draw**: Set your pencil size to 1 pixel.
+
+![063](https://github.com/user-attachments/assets/a2d8df8d-5511-413c-af27-24530296c971)
+
+
 
 
      
@@ -493,7 +497,6 @@ By understanding each part of this code, you will gain insights into Windows For
 
 
 
-![063](https://github.com/user-attachments/assets/a2d8df8d-5511-413c-af27-24530296c971)
 
 
 6. **Export the Image**:
