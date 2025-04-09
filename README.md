@@ -472,13 +472,17 @@ This project is licensed under the MIT License.
 
 
 
+Make icons transparent .png files in GIMP.
+
+
+
+
 
 
 ![057](https://github.com/user-attachments/assets/64737783-951f-4f02-8b1a-20af085a8e91)
 
 
 
-Make icons transparent .png files in GIMP.
 
 
 
