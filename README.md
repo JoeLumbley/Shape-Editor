@@ -457,11 +457,16 @@ By understanding each part of this code, you will gain insights into Windows For
    - Launch the GIMP application on your computer.
 
 2. **Create New File for the Icon**:
-   - Go to **File** > **New** enter your icon size like width 41, height 41 then select ok.
+   - Go to **File** > **New** enter your icon size like width 41, height 41 select Fill with Transparency then select ok.
+  
 
-3. **Select the Area to Make Transparent**:
-   - Use the **Select Tool** (e.g., Fuzzy Select Tool, Color Select Tool, or Rectangle Select Tool) to select the area of the icon you want to make transparent.
-   - Adjust the selection as needed.
+
+
+
+![059](https://github.com/user-attachments/assets/a0ae2244-6441-4947-815e-e6565e5f3526)
+
+
+
   
    
 
