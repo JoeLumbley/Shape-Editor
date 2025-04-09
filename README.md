@@ -464,21 +464,17 @@ By understanding each part of this code, you will gain insights into Windows For
    - Adjust the selection as needed.
   
    
-![056](https://github.com/user-attachments/assets/91829b77-57cc-4323-b2b7-78f926e05df2)
 
+![058](https://github.com/user-attachments/assets/6350105d-06b2-4c0e-ab14-eea2caa6788d)
 
 
 4. **Delete the Selected Area**:
    - Press the **Delete** key on your keyboard. The selected area should now be transparent (indicated by a checkerboard pattern).
 
-5. **Refine Edges (Optional)**:
-   - If needed, use tools like the **Eraser Tool** or **Feather** to smooth the edges of your selection.
-
 6. **Export the Image**:
    - Go to **File** > **Export As**.
    - In the dialog, choose **PNG** as the file format.
-   - Ensure that the **Save color values from transparent pixels** option is checked.
-   - Click **Export** and adjust any settings as needed.
+   - Click **Export**.
 
 7. **Save Your Work**:
    - Save your project in GIMP format (.xcf) if you want to retain layers for future editing.
