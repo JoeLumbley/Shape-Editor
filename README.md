@@ -452,37 +452,175 @@ This project is licensed under the MIT License.
 
 ---
 
-# Year Book
 
 
 
+# Tool Buttons
 
+
+
+## Making icons ( transparent .png files ) in GIMP.
+
+1. **Open GIMP**:
+   - Launch the GIMP application on your computer.
+
+2. **Create New File for the Icon**:
+   - Go to **File** > **New** enter your icon size like width 41, height 41 then select ok.
+
+3. **Select the Area to Make Transparent**:
+   - Use the **Select Tool** (e.g., Fuzzy Select Tool, Color Select Tool, or Rectangle Select Tool) to select the area of the icon you want to make transparent.
+   - Adjust the selection as needed.
+  
+   
 ![056](https://github.com/user-attachments/assets/91829b77-57cc-4323-b2b7-78f926e05df2)
 
 
 
+4. **Delete the Selected Area**:
+   - Press the **Delete** key on your keyboard. The selected area should now be transparent (indicated by a checkerboard pattern).
+
+5. **Refine Edges (Optional)**:
+   - If needed, use tools like the **Eraser Tool** or **Feather** to smooth the edges of your selection.
+
+6. **Export the Image**:
+   - Go to **File** > **Export As**.
+   - In the dialog, choose **PNG** as the file format.
+   - Ensure that the **Save color values from transparent pixels** option is checked.
+   - Click **Export** and adjust any settings as needed.
+
+7. **Save Your Work**:
+   - Save your project in GIMP format (.xcf) if you want to retain layers for future editing.
+
+### Tips
+- **Undo**: If you make a mistake, use **Ctrl + Z** to undo.
+- **Zoom In**: Use the zoom tool to work on detailed areas more easily.
+- **Layer Management**: Keep an eye on the layers panel to manage multiple layers if you’re working with more complex images.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Adding Icons to a Resource File
+
+1. **Open Your Project**:
+   - Launch Visual Studio and open your project.
+
+2. **Locate the Resource File**:
+   - In the **Solution Explorer**, navigate to the `My Project` folder.
+   - Open the `Resources.resx` file (it may be named `resource1.resx` or similar).
+
+3. **Open the Resource Editor**:
+   - Double-click on the `Resources.resx` file to open it in the resource editor.
 
 
 ![050](https://github.com/user-attachments/assets/80edabed-3b00-490f-a0c0-1fee9dc83104)
 
 
+4. **Add an Icon File**:
+   - In the resource editor, right-click in the blank area or on any existing resource.
+   - Select **Add Resource** > **Add Existing File...**.
+
+5. **Select Your Icon File**:
+   - Navigate to the location of your icon file (e.g., .ico or .png), select it, and click **Open**.
+
+6. **Rename the Resource (Optional)**:
+   - After adding the icon, you can rename it for easier reference. Click on the name in the resource editor to edit it.
+
+7. **Accessing the Icon in Code**:
+   - You can access the icon in your code using the following syntax:
 
 
 
+```vb.net
+
+Public Class Form1
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ' Convert the byte array to an Image
+        Dim ImageBytes As Byte() = My.Resources.Resource1.YourIconName
+
+        ' Set the icon for the form
+        Using ms As New MemoryStream(ImageBytes)
+            Me.Icon = Image.FromStream(ms)
+        End Using
+
+        ' Optionally, set the icon for a button
+        Using ms As New MemoryStream(ImageBytes)
+            Button1.Image = Image.FromStream(ms)
+        End Using
+
+    End Sub
+
+End Class
+
+```
+
+
+
+This code snippet converts a byte array from the resources into an `Image` object and assigns it to a button's image property.
+
+### Explanation of the Code
+
+1. **Byte Array Retrieval**:
+   - `Dim imageBytes As Byte() = My.Resources.Resource1.AddPointToolButtonSelected`
+   - This line retrieves the byte array for the image stored in your resources. Ensure that `AddPointToolButtonSelected` is the correct name of the resource.
+
+2. **MemoryStream Usage**:
+   - `Using ms As New MemoryStream(imageBytes)`
+   - A `MemoryStream` is created to hold the byte array in memory, allowing it to be used as a stream.
+
+3. **Image Creation**:
+   - `Button2.Image = Image.FromStream(ms)`
+   - The `Image.FromStream` method converts the stream into an `Image` object, which is then assigned to `Button2`.
 
 
 
 ![057](https://github.com/user-attachments/assets/64737783-951f-4f02-8b1a-20af085a8e91)
 
 
+### Important Notes
+
+- **Error Handling**: Consider adding error handling to manage any issues that may arise when loading the image.
+- **Image Size**: Ensure that the size of `Button2` is appropriate for the image to avoid distortion.
+- **Resource Management**: The `Using` statement ensures that the `MemoryStream` is disposed of properly after use, which is a good practice for resource management.
+- **File Format**: Ensure your icon files are in an appropriate format (.ico or .png) for compatibility.
+- **Resource Management**: The resources are embedded in your application, making them accessible at runtime without needing to manage external files.
+- **Rebuild Your Project**: After adding resources, it’s a good practice to rebuild your project to ensure everything is up to date.
 
 
 
 
 
 
+
+
+
+
+
+# Clones
 
 
 ![051](https://github.com/user-attachments/assets/f3e72a16-16c3-4e62-b978-ebf4219a12a7)
