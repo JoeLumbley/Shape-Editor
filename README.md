@@ -473,9 +473,8 @@ Making icons ( transparent .png files ) in GIMP.
 
 
 
-![050](https://github.com/user-attachments/assets/80edabed-3b00-490f-a0c0-1fee9dc83104)
 
-### Adding Icons to a Resource File
+## Adding Icons to a Resource File
 
 1. **Open Your VB.NET Project**:
    - Launch Visual Studio and open your existing VB.NET project.
@@ -486,6 +485,10 @@ Making icons ( transparent .png files ) in GIMP.
 
 3. **Open the Resource Editor**:
    - Double-click on the `Resources.resx` file to open it in the resource editor.
+
+
+![050](https://github.com/user-attachments/assets/80edabed-3b00-490f-a0c0-1fee9dc83104)
+
 
 4. **Add an Icon File**:
    - In the resource editor, right-click in the blank area or on any existing resource.
@@ -514,14 +517,15 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        ' Set the icon for the form
-        Me.Icon = My.Resources.Resource1.YourIconName
-
-        ' Optionally, set the icon for a button
-
         ' Convert the byte array to an Image
         Dim ImageBytes As Byte() = My.Resources.Resource1.YourIconName
 
+        ' Set the icon for the form
+        Using ms As New MemoryStream(ImageBytes)
+            Me.Icon = My.Resources.Resource1.YourIconName
+        End Using
+
+        ' Optionally, set the icon for a button
         Using ms As New MemoryStream(ImageBytes)
             Button1.Image = Image.FromStream(ms)
         End Using
@@ -532,21 +536,24 @@ End Class
 
 ```
 
+
+![057](https://github.com/user-attachments/assets/64737783-951f-4f02-8b1a-20af085a8e91)
+
+
+
+
 ### Important Notes
 
 - **File Format**: Ensure your icon files are in an appropriate format (.ico or .png) for compatibility.
 - **Resource Management**: The resources are embedded in your application, making them accessible at runtime without needing to manage external files.
 - **Rebuild Your Project**: After adding resources, it’s a good practice to rebuild your project to ensure everything is up to date.
 
-### Conclusion
-
-By following these steps, you can successfully add icons to your resource file in a VB.NET project. 
 
 
 
 
 
-![057](https://github.com/user-attachments/assets/64737783-951f-4f02-8b1a-20af085a8e91)
+
 
 
 
