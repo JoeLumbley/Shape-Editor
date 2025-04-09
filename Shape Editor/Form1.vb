@@ -35,9 +35,6 @@ Public Class Form1
 
     Private CurrentTool As Tool = Tool.Add
 
-
-
-
     Public Enum DwmWindowAttribute
         dwmwa_invalid = -1
         DWMWA_NCRENDERING_ENABLED = 1
@@ -80,14 +77,14 @@ Public Class Form1
     Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
 
     Private DarkModeControlColor As Color = Color.FromArgb(255, 32, 32, 32)
-
+    '
     Private GridPenDark As New Pen(GridColorDark, 1)
     Private GridPenLight As New Pen(GridColorLight, 1)
 
     Private CoordinateSystemPenDarkMode As New Pen(Color.FromArgb(255, 64, 64, 64), 1)
     Private CoordinateSystemPenLightMode As New Pen(Color.FromArgb(255, 200, 200, 200), 1)
 
-    '' Set the fill color for the shape in light and dark modes
+    ' Set the fill color for the shape in light and dark modes
     Private ShapeFillColorLightMode As Color = Color.FromArgb(98, 30, 144, 255)
     Private ShapeFillColorDarkMode As Color = Color.FromArgb(98, 128, 128, 128)
     Private ShapeFillBrushLightMode As New SolidBrush(ShapeFillColorLightMode)
@@ -95,31 +92,31 @@ Public Class Form1
     Private ShapeFillBrush As New SolidBrush(ShapeFillColorLightMode)
 
     ' Light mode colors
-    Private MenuItemBackgroundColor_LightMode As Color = Color.FromArgb(255, 240, 240, 240) ' Light mode background color
-    Private MenuItemBackgroundSelected_LightMode As Color = Color.FromArgb(16, Color.DodgerBlue) ' Light mode selected background color
-    Private ToolStripBackground_LightMode As Color = Color.FromArgb(255, 240, 240, 240) ' Light mode selected background color
-    Private MenuItemBorderColor_LightMode As Color = Color.FromArgb(255, 200, 200, 200) ' Light mode border color
-    Private MenuItemSelectedColor_LightMode As Color = Color.FromArgb(64, Color.Gray) ' Light mode selected item color
-    Private MenuItemTextColor_LightMode As Color = Color.FromArgb(255, Color.Black) ' Light mode text color
-    Private SelectedBorderColor_LightMode As Color = Color.FromArgb(255, Color.DodgerBlue) ' Light mode selected border color
+    Private MenuItemBackgroundColor_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
+    Private MenuItemBackgroundSelected_LightMode As Color = Color.FromArgb(16, Color.DodgerBlue)
+    Private ToolStripBackground_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
+    Private MenuItemBorderColor_LightMode As Color = Color.FromArgb(255, 200, 200, 200)
+    Private MenuItemSelectedColor_LightMode As Color = Color.FromArgb(64, Color.Gray)
+    Private MenuItemTextColor_LightMode As Color = Color.FromArgb(255, Color.Black)
+    Private SelectedBorderColor_LightMode As Color = Color.FromArgb(255, Color.DodgerBlue)
 
     ' Dark mode colors
-    Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 32, 32, 32) ' Light mode background color
-    Private MenuItemBackgroundSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64) ' Light mode selected background color
-    Private ToolStripBackground_DarkMode As Color = Color.FromArgb(255, 32, 32, 32) ' Light mode selected background color
-    Private MenuItemBorderColor_DarkMode As Color = Color.FromArgb(255, 50, 50, 50) ' Light mode border color
-    Private MenuItemSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64) ' Light mode selected item color
-    Private MenuItemTextColor_DarkMode As Color = Color.FromArgb(255, 255, 255, 255) ' Light mode text color
-    Private MenuItemSelectedBorderColor_DarkMode As Color = Color.FromArgb(255, Color.DodgerBlue) ' Light mode selected border color
+    Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 32, 32, 32)
+    Private MenuItemBackgroundSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64)
+    Private ToolStripBackground_DarkMode As Color = Color.FromArgb(255, 32, 32, 32)
+    Private MenuItemBorderColor_DarkMode As Color = Color.FromArgb(255, 50, 50, 50)
+    Private MenuItemSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64)
+    Private MenuItemTextColor_DarkMode As Color = Color.FromArgb(255, 255, 255, 255)
+    Private MenuItemSelectedBorderColor_DarkMode As Color = Color.FromArgb(255, Color.DodgerBlue)
 
     ' Set menu to Light mode colors.
-    Dim CustomMenuRenderer As New CustomColorMenuStripRenderer(MenuItemBackgroundColor_LightMode, ' MenuItemBackground
-                                                                    MenuItemBackgroundSelected_LightMode,       ' MenuItemBackgroundSelected
-                                                                    ToolStripBackground_LightMode,       ' ToolStripBackground
-                                                                    MenuItemBorderColor_LightMode,       ' BorderColor
-                                                                    MenuItemSelectedColor_LightMode,        ' MenuItemSelectedColor
-                                                                    MenuItemTextColor_LightMode,             ' TextColor 
-                                                                    SelectedBorderColor_LightMode)        ' SelectedBorderColor
+    Dim CustomMenuRenderer As New CustomColorMenuStripRenderer(MenuItemBackgroundColor_LightMode,
+                                                                    MenuItemBackgroundSelected_LightMode,
+                                                                    ToolStripBackground_LightMode,
+                                                                    MenuItemBorderColor_LightMode,
+                                                                    MenuItemSelectedColor_LightMode,
+                                                                    MenuItemTextColor_LightMode,
+                                                                    SelectedBorderColor_LightMode)
 
     <DllImport("dwmapi.dll")>
     Private Shared Function DwmSetWindowAttribute(hWnd As IntPtr,
@@ -153,6 +150,10 @@ Public Class Form1
         DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
         SetWindowTheme(Button1.Handle, "Explorer", Nothing)
         DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(Button2.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
         SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
         DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
         SetWindowTheme(TextBox1.Handle, "Explorer", Nothing)
@@ -163,12 +164,6 @@ Public Class Form1
         SetWindowTheme(TrackBar1.Handle, "Explorer", Nothing)
         DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
         DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-
-
-        SetWindowTheme(Button2.Handle, "Explorer", Nothing)
-        DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-
 
         Application.EnableVisualStyles()
 
