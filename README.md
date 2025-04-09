@@ -516,7 +516,7 @@ By understanding each part of this code, you will gain insights into Windows For
 
 
 
-6. **Export the Image**:
+ **Export the Image**:
    - Go to **File** > **Export As**.
    - In the dialog, choose **PNG** as the file format.
    - Click **Export**.
@@ -527,12 +527,10 @@ By understanding each part of this code, you will gain insights into Windows For
 
 
 
-8. **Save Your Work**:
+ **Save Your Work**:
    - Save your project in GIMP format (.xcf) if you want to retain layers for future editing.
 
-### Tips
-- **Undo**: If you make a mistake, use **Ctrl + Z** to undo.
-- **Zoom In**: Use the zoom tool to work on detailed areas more easily.
+### Tip
 - **Layer Management**: Keep an eye on the layers panel to manage multiple layers if you’re working with more complex images.
 
 
