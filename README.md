@@ -467,7 +467,7 @@ By understanding each part of this code, you will gain insights into Windows For
 
 
  **Create New Layer**:
-   - Go to **Layer** > **New** enter your icon size select Fill with Transparency then select ok.
+   - Go to **Layer** > **New** enter your layer name select Fill with Transparency then select ok.
 
 
    
