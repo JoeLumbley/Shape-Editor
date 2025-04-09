@@ -474,7 +474,10 @@ By understanding each part of this code, you will gain insights into Windows For
    
 ![061](https://github.com/user-attachments/assets/1f7dd5da-8eb3-4427-8ccd-c5951b01f4f9)
 
- **Zoom In**:
+
+
+
+**Zoom In**:
      - **Zoom In**: Use the zoom tool to work on detailed areas more easily.
 
 
