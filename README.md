@@ -484,12 +484,12 @@ By understanding each part of this code, you will gain insights into Windows For
 
 
  **Click to Draw**:
-     - **Use Pencil to Draw***: Set your pencil size to 1 pixel.
+ - **Use Pencil to Draw***: Set your pencil size to 1 pixel.
 
 
      
  **Undo**:
-     - **Undo**: If you make a mistake, use **Ctrl + Z** to undo.
+ - **Undo**: If you make a mistake, use **Ctrl + Z** to undo.
 
 
 
