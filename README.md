@@ -476,8 +476,8 @@ Making icons ( transparent .png files ) in GIMP.
 
 ## Adding Icons to a Resource File
 
-1. **Open Your VB.NET Project**:
-   - Launch Visual Studio and open your existing VB.NET project.
+1. **Open Your Project**:
+   - Launch Visual Studio and open your project.
 
 2. **Locate the Resource File**:
    - In the **Solution Explorer**, navigate to the `My Project` folder.
@@ -501,15 +501,17 @@ Making icons ( transparent .png files ) in GIMP.
    - After adding the icon, you can rename it for easier reference. Click on the name in the resource editor to edit it.
 
 7. **Accessing the Icon in Code**:
-   - You can access the icon in your VB.NET code using the following syntax:
+   - You can access the icon in your code using the following syntax:
 
 ```vb.net
+
 Dim myIcon As Icon = My.Resources.Resource1.YourIconName
+
 ```
 
 ### Example Usage in a Windows Forms Application
 
-Here’s how you can use the icon in a Windows Forms application:
+Here’s how you can use the icon in your application:
 
 ```vb.net
 
