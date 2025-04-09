@@ -503,15 +503,7 @@ Making icons ( transparent .png files ) in GIMP.
 7. **Accessing the Icon in Code**:
    - You can access the icon in your code using the following syntax:
 
-```vb.net
 
-Dim myIcon As Icon = My.Resources.Resource1.YourIconName
-
-```
-
-### Example Usage in a Windows Forms Application
-
-Here’s how you can use the icon in your application:
 
 ```vb.net
 
@@ -524,7 +516,7 @@ Public Class Form1
 
         ' Set the icon for the form
         Using ms As New MemoryStream(ImageBytes)
-            Me.Icon = My.Resources.Resource1.YourIconName
+            Me.Icon = Image.FromStream(ms)
         End Using
 
         ' Optionally, set the icon for a button
