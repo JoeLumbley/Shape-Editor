@@ -470,18 +470,30 @@ By understanding each part of this code, you will gain insights into Windows For
   
    
 
-![058](https://github.com/user-attachments/assets/6350105d-06b2-4c0e-ab14-eea2caa6788d)
 
 
-4. **Delete the Selected Area**:
+4. **Use Pencil to Draw the icon.**:
    - Press the **Delete** key on your keyboard. The selected area should now be transparent (indicated by a checkerboard pattern).
+
+
+
+
+
+![063](https://github.com/user-attachments/assets/a2d8df8d-5511-413c-af27-24530296c971)
+
 
 6. **Export the Image**:
    - Go to **File** > **Export As**.
    - In the dialog, choose **PNG** as the file format.
    - Click **Export**.
+  
 
-7. **Save Your Work**:
+
+![058](https://github.com/user-attachments/assets/6350105d-06b2-4c0e-ab14-eea2caa6788d)
+
+
+
+8. **Save Your Work**:
    - Save your project in GIMP format (.xcf) if you want to retain layers for future editing.
 
 ### Tips
