@@ -334,6 +334,16 @@ Public Class Form1
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
 
+
+        ' Clear the active control
+        Me.ActiveControl = Nothing
+
+        ' Set the focus to the form
+        Me.Focus()
+
+
+
+        ' Calculate the adjusted mouse location based on the scale factor
         AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
         If isDrawing AndAlso selectedPointIndex <> -1 Then
@@ -1097,6 +1107,9 @@ Public Class Form1
         End Try
 
     End Sub
+
+
+
 
 End Class
 
