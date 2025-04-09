@@ -551,20 +551,29 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        ' Convert the byte array to an Image
-        Dim ImageBytes As Byte() = My.Resources.Resource1.YourIconName
-
         ' Set the icon for the form
-        Using ms As New MemoryStream(ImageBytes)
-            Me.Icon = Image.FromStream(ms)
-        End Using
+        me.Icon = ResourceToImage(My.Resources.Resource1.YourIconName)
 
         ' Optionally, set the icon for a button
-        Using ms As New MemoryStream(ImageBytes)
-            Button1.Image = Image.FromStream(ms)
-        End Using
+        Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelected)
 
     End Sub
+
+    Private Function ResourceToImage(resource As Byte()) As Image
+        ' Convert the byte array to an Image using a MemoryStream and the
+        ' Image.FromStream method to create an Image object from the byte array.
+        ' This allows you to use the byte array as an image.
+
+        Using ms As New MemoryStream(resource)
+
+            Return Image.FromStream(ms)
+
+        End Using
+
+        ' The MemoryStream is disposed of automatically when it goes out of scope,
+        ' so you don't need to worry about memory management.
+
+    End Function
 
 End Class
 
