@@ -225,7 +225,9 @@ Partial Class Form1
         KeyPreview = True
         MainMenuStrip = MenuStrip1
         Name = "Form1"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
+        WindowState = FormWindowState.Maximized
         CType(TrackBar1, ComponentModel.ISupportInitialize).EndInit()
         MenuStrip1.ResumeLayout(False)
         MenuStrip1.PerformLayout()
