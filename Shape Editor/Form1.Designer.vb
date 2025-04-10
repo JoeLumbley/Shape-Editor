@@ -56,6 +56,7 @@ Partial Class Form1
         TextBox1.Size = New Size(382, 55)
         TextBox1.TabIndex = 0
         TextBox1.TabStop = False
+        TextBox1.WordWrap = False
         ' 
         ' TrackBar1
         ' 

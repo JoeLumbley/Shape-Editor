@@ -1,6 +1,6 @@
 ﻿' Shape Editor
 
-' A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET.
+' A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET code.
 
 ' MIT License
 ' Copyright(c) 2025 Joseph W. Lumbley
@@ -198,10 +198,10 @@ Public Class Form1
         TextBox1.Multiline = True
 
         ' Set the TextBox1 to word wrap to ensure long lines are wrapped.
-        TextBox1.WordWrap = True
+        'TextBox1.WordWrap = True
 
         ' Set the TextBox1 to auto-scroll to allow scrolling through the text.
-        TextBox1.ScrollBars = ScrollBars.Vertical
+        TextBox1.ScrollBars = ScrollBars.Both
 
         ' Set the TextBox1 to accept only read-only text.
         TextBox1.AcceptsTab = False
