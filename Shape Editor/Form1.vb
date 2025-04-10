@@ -731,7 +731,7 @@ Public Class Form1
 
         UpdateUIScaleFactor()
 
-        GeneratePointArrayText()
+        'GeneratePointArrayText()
 
         Invalidate()
 
@@ -743,36 +743,40 @@ Public Class Form1
 
         CenterDrawingArea()
 
-        Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
-
         If ScaleFactor >= 8 Then
 
-            HScrollBar1.Minimum = -ClientSize.Width * (ScaleFactor / 16)
+            Button2.Top = HScrollBar1.Top - Button2.Height
 
-            HScrollBar1.Maximum = ClientSize.Width * (ScaleFactor / 16)
+            Button2.Left = VScrollBar1.Left - Button2.Width
 
-            VScrollBar1.Minimum = -ClientSize.Height * (ScaleFactor / 16)
+            Dim ScaleFactorDiv16 = ScaleFactor / 16
 
-            VScrollBar1.Maximum = ClientSize.Height * (ScaleFactor / 16)
+            HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
+
+            HScrollBar1.Maximum = ClientSize.Width * ScaleFactorDiv16
+
+            VScrollBar1.Minimum = -ClientSize.Height * ScaleFactorDiv16
+
+            VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
 
             If Not HScrollBar1.Visible Then HScrollBar1.Visible = True
 
             If Not VScrollBar1.Visible Then VScrollBar1.Visible = True
 
-            Button2.Top = HScrollBar1.Top - Button2.Height
-            Button2.Left = VScrollBar1.Left - Button2.Width
-
         Else
+
+            Button2.Top = HScrollBar1.Top - Button2.Height
+
+            Button2.Left = GroupBox1.Left - 1
 
             If HScrollBar1.Visible Then HScrollBar1.Visible = False
 
             If VScrollBar1.Visible Then VScrollBar1.Visible = False
 
-
-            Button2.Top = HScrollBar1.Top - Button2.Height
-            Button2.Left = GroupBox1.Left - 1
-
         End If
+
+        Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
+
 
     End Sub
 
