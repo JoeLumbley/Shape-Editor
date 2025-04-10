@@ -125,12 +125,6 @@ Public Class Form1
                                                   SizeOfValue As Integer) As Integer
     End Function
 
-
-
-
-
-
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         KeyPreview = True
