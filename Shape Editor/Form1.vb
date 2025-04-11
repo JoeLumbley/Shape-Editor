@@ -629,6 +629,11 @@ Public Class Form1
 
         Using openFileDialog As New OpenFileDialog()
 
+            openFileDialog.AutoUpgradeEnabled = True
+            openFileDialog.ShowReadOnly = False
+            openFileDialog.ShowHelp = False
+
+
             openFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"
             openFileDialog.Title = "Open Shape"
             openFileDialog.InitialDirectory = Application.StartupPath
@@ -842,6 +847,14 @@ Public Class Form1
             SetWindowTheme(TextBox1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
+
+            SetWindowTheme(TextBox1.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
+
+
 
             ' Set the menu colors for dark mode
             CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_DarkMode
