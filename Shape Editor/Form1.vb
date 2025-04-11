@@ -26,32 +26,7 @@
 Imports System.IO
 Imports System.Runtime.InteropServices
 
-
-' Interface to handle theme changes
-Public Interface IThemeChangedEventHandler
-    Sub OnThemeChanged(sender As Object, e As EventArgs)
-End Interface
-
 Public Class Form1
-
-    'Implements IThemeChangedEventHandler
-
-    '' Implement the event handler
-    'Public Sub OnThemeChanged(sender As Object, e As EventArgs) Implements IThemeChangedEventHandler.OnThemeChanged
-    '    ' Handle the theme change event here if needed
-
-
-    '    ' For example, you can call ApplyUITheme() to reapply the theme
-    '    ApplyUITheme()
-    '    ' Force a repaint of the non-client area (including title bar)
-    '    'SendMessage(Me.Handle, WM_NCPAINT, IntPtr.Zero, IntPtr.Zero)
-    '    'Invalidate()
-
-    '    Refresh()
-
-    'End Sub
-
-
 
     Enum Tool
         Add
@@ -157,39 +132,6 @@ Public Class Form1
     Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As IntPtr, lParam As IntPtr) As IntPtr
     End Function
 
-    ' <DllImport("user32.dll")>
-    ' Private Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
-    ' End Function
-    ' <DllImport("dwmapi.dll")>
-    ' Private Shared Function DwmSetWindowAttribute(hWnd As IntPtr, dwAttribute As DwmWindowAttribute, ByRef pvAttribute As Integer, cbAttribute As Integer) As Integer
-    ' End Function
-    ' <DllImport("uxtheme.dll")>
-    ' Private Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
-    ' End Function
-    ' <DllImport("uxtheme.dll")>
-    ' Private Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
-    ' End Function
-    ' <DllImport("uxtheme.dll")>
-    ' Private Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
-    ' End Function
-    ' <DllImport("uxtheme.dll")>
-    ' Private Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
-    'IThemeChangedEventHandler
-
-
-
-
-    'Public Sub New()
-    '    InitializeComponent()
-    '    Me.DoubleBuffered = True
-
-
-    'End Sub
-
-
-
-
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         KeyPreview = True
@@ -201,42 +143,6 @@ Public Class Form1
         Application.EnableVisualStyles()
 
         ApplyUITheme()
-
-
-        '' set title color - light mode
-        'DwmSetWindowAttribute(Handle, 20, 0, Marshal.SizeOf(GetType(Boolean)))
-
-        '' Set the default theme to light mode
-        'SetWindowTheme(Handle, "Explorer", Nothing)
-        'DwmSetWindowAttribute(Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        'DwmSetWindowAttribute(Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-        'SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
-        'DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        'DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-        'SetWindowTheme(VScrollBar1.Handle, "Explorer", Nothing)
-        'DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        'DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-        'SetWindowTheme(Button1.Handle, "Explorer", Nothing)
-        'DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        'DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-        'SetWindowTheme(Button2.Handle, "Explorer", Nothing)
-        'DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        'DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-        'SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
-        'DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        'SetWindowTheme(TextBox1.Handle, "Explorer", Nothing)
-        'DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        'SetWindowTheme(MenuStrip1.Handle, "Explorer", Nothing)
-        'DwmSetWindowAttribute(MenuStrip1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        'DwmSetWindowAttribute(MenuStrip1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-        'SetWindowTheme(TrackBar1.Handle, "Explorer", Nothing)
-        'DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        'DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-
-
-
-        Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
-
 
         Text = "Shape Editor - Code with Joe"
 
@@ -267,7 +173,6 @@ Public Class Form1
         '' Maximize the form
         WindowState = FormWindowState.Maximized
 
-
         MenuStrip1.RenderMode = ToolStripRenderMode.Professional
 
         ' Inject our custom rendering into the MenuStrip
@@ -276,7 +181,6 @@ Public Class Form1
         LayoutForm()
 
         MenuStrip1.Refresh()
-
 
     End Sub
 
@@ -344,135 +248,6 @@ Public Class Form1
         End If
 
     End Sub
-
-    'Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
-
-    '    If e.Button = MouseButtons.Left Then
-
-    '        ' Calculate the adjusted mouse location based on the scale factor
-    '        AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor),
-    '                                          CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
-
-    '        selectedPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
-
-
-
-    '        If CurrentTool = Tool.Add Then
-
-    '            ' If no point was selected, add a new point
-    '            If selectedPointIndex = -1 Then
-
-    '                ' Add the point
-    '                points.Add(AdjustedMouseLocation)
-
-    '                ' Add the mirror point
-    '                points.Add(New Point(AdjustedMouseLocation.X, -AdjustedMouseLocation.Y))
-
-    '                selectedPointIndex = points.Count - 2
-
-    '            End If
-
-    '        End If
-
-    '        If CurrentTool = Tool.Move Then
-
-    '            ' If a point was selected, start moving it
-    '            If selectedPointIndex <> -1 Then
-    '                ' Move the point to the new location
-    '                points(selectedPointIndex) = AdjustedMouseLocation
-    '                points(selectedPointIndex + 1) = New Point(AdjustedMouseLocation.X, -AdjustedMouseLocation.Y)
-    '            End If
-
-    '        End If
-
-    '        If CurrentTool = Tool.Subtract Then
-
-    '            ' If a point was selected, remove it
-    '            If selectedPointIndex <> -1 Then
-
-    '                ' Remove the selected point
-    '                points.RemoveAt(selectedPointIndex)
-    '                points.RemoveAt(selectedPointIndex)
-    '                selectedPointIndex = -1
-
-    '                ' Remove the mirror point
-    '                points.RemoveAt(selectedPointIndex + 1)
-    '                points.RemoveAt(selectedPointIndex + 2)
-    '                selectedPointIndex = -1
-    '                selectedPointIndex = points.Count - 2
-
-
-    '                ' If the selected point is the last point, remove it
-    '                If selectedPointIndex = points.Count - 1 Then
-    '                    points.RemoveAt(selectedPointIndex)
-    '                    points.RemoveAt(selectedPointIndex - 1)
-    '                    selectedPointIndex = -1
-    '                Else
-    '                    points.RemoveAt(selectedPointIndex)
-    '                    points.RemoveAt(selectedPointIndex + 1)
-    '                    selectedPointIndex = -1
-    '                End If
-
-    '            End If
-
-    '        End If
-
-    '        ' Set the drawing flag to true
-    '        isDrawing = True
-
-    '        GeneratePointArrayText()
-
-    '        Invalidate()
-
-    '    End If
-
-    'End Sub
-
-
-    'Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
-
-
-    '    ' Clear the active control
-    '    Me.ActiveControl = Nothing
-
-    '    ' Set the focus to the form
-    '    Me.Focus()
-
-
-
-    '    ' Calculate the adjusted mouse location based on the scale factor
-    '    AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
-
-    '    If isDrawing AndAlso selectedPointIndex <> -1 Then
-    '        points(selectedPointIndex) = AdjustedMouseLocation
-    '        points(selectedPointIndex + 1) = New Point(AdjustedMouseLocation.X, -AdjustedMouseLocation.Y)
-
-    '        GeneratePointArrayText()
-
-    '        Invalidate()
-    '    End If
-
-    '    ' Update hovered point index
-    '    Dim newHoveredPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
-
-    '    If newHoveredPointIndex <> hoveredPointIndex Then
-    '        hoveredPointIndex = newHoveredPointIndex
-    '        Invalidate()
-    '    End If
-
-    'End Sub
-
-    'Private Sub Form1_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
-
-    '    If e.Button = MouseButtons.Left Then
-    '        isDrawing = False
-    '        selectedPointIndex = -1
-    '        GeneratePointArrayText()
-    '    End If
-
-    'End Sub
-
-
 
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
         If e.Button = MouseButtons.Left Then
@@ -552,47 +327,10 @@ Public Class Form1
         points(selectedPointIndex + 1) = GetMirroredPoint(location)
     End Sub
 
-    '' Helper method for removing points and their mirrored counterparts
-    'Private Sub RemovePoint(index As Integer)
-    '    If index >= 0 AndAlso index < points.Count - 1 Then
-    '        points.RemoveAt(index + 1) ' Remove mirrored point
-    '        points.RemoveAt(index)     ' Remove actual point
-    '    End If
-    '    selectedPointIndex = -1
-    'End Sub
-
     ' Helper method to calculate the mirrored point
     Private Function GetMirroredPoint(p As Point) As Point
         Return New Point(p.X, -p.Y)
     End Function
-
-    'Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-
-    '    If e.KeyCode = Keys.Enter AndAlso points.Count > 2 Then
-    '        points.Add(points(0)) ' Close the shape
-    '        points.Add(New Point(points(1).X, -points(1).Y)) ' Close the mirror shape
-
-    '        Invalidate()
-    '        GeneratePointArrayText()
-    '    ElseIf e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
-    '        points.RemoveAt(selectedPointIndex)
-    '        points.RemoveAt(selectedPointIndex)
-
-    '        selectedPointIndex = -1
-    '        GeneratePointArrayText()
-    '        Invalidate()
-    '    ElseIf e.KeyCode = Keys.N AndAlso selectedPointIndex <> -1 Then
-    '        Dim newPoint As New Point(points(selectedPointIndex).X + 10, points(selectedPointIndex).Y + 10)
-    '        points.Insert(selectedPointIndex + 2, newPoint)
-    '        points.Insert(selectedPointIndex + 3, New Point(newPoint.X, -newPoint.Y))
-
-    '        selectedPointIndex += 2
-    '        GeneratePointArrayText()
-    '        Invalidate()
-    '    End If
-
-    'End Sub
-
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         If e.KeyCode = Keys.Enter AndAlso points.Count > 2 Then
@@ -616,6 +354,7 @@ Public Class Form1
         End If
     End Sub
 
+
     ' Helper method to close the shape
     Private Sub CloseShape()
         points.Add(points(0)) ' Close the shape
@@ -623,6 +362,7 @@ Public Class Form1
         GeneratePointArrayText()
         Invalidate()
     End Sub
+
 
     ' Helper method to remove a point
     Private Sub RemovePoint(index As Integer)
@@ -635,6 +375,7 @@ Public Class Form1
         Invalidate()
     End Sub
 
+
     ' Helper method to insert a new point near the selected point
     Private Sub InsertNewPoint(index As Integer)
         Dim newPoint As New Point(points(index).X + 10, points(index).Y + 10)
@@ -645,23 +386,12 @@ Public Class Form1
         Invalidate()
     End Sub
 
-    '' Helper method to calculate the mirrored point
-    'Private Function GetMirroredPoint(p As Point) As Point
-    '    Return New Point(p.X, -p.Y)
-    'End Function
-
-
-
-
-
-
-
-
-
-
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
 
         LayoutForm()
+
+        Invalidate()
+
 
     End Sub
 
@@ -717,25 +447,17 @@ Public Class Form1
         Button1.Width = vScrollBarWidth + 2
         Button1.Height = hScrollBarHeight + 2
 
-
-
         Button2.Top = HScrollBar1.Top - Button2.Height
         Button2.Left = VScrollBar1.Left - Button2.Width
         Button2.ImageAlign = ContentAlignment.TopLeft
         Button2.Width = Button1.Width
         Button2.Height = Button1.Height
 
-
-
-
-
         GroupBox1.Top = HScrollBar1.Top
         GroupBox1.Left = VScrollBar1.Left
 
         GroupBox1.Width = vScrollBarWidth
         GroupBox1.Height = hScrollBarHeight
-
-
 
         If ScaleFactor >= 8 Then
 
@@ -776,7 +498,7 @@ Public Class Form1
         DarkModeCheckBox.Top = HideControlHandlesCheckBox.Top
         DarkModeCheckBox.Left = FillShapeCheckBox.Right + 25
 
-        Invalidate()
+        'Invalidate()
     End Sub
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
@@ -830,7 +552,6 @@ Public Class Form1
         End If
 
         Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
-
 
     End Sub
 
@@ -1097,17 +818,6 @@ Public Class Form1
 
     Private Sub ApplyUITheme()
 
-        'Visible = False
-
-        'Me.SuspendLayout()
-        'HScrollBar1.SuspendLayout()
-        'VScrollBar1.SuspendLayout()
-        'Button1.SuspendLayout()
-        'VScrollBar1.SuspendLayout()
-        'GroupBox1.SuspendLayout()
-        'TextBox1.SuspendLayout()
-        'MenuStrip1.SuspendLayout()
-
         If DarkModeCheckBox.Checked Then
 
             'set title color - dark mode
@@ -1151,6 +861,9 @@ Public Class Form1
             CustomMenuRenderer.TextColor = MenuItemTextColor_DarkMode
             CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColor_DarkMode
 
+            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
+
+
         Else
 
             'set title color - light mode
@@ -1190,6 +903,9 @@ Public Class Form1
             CustomMenuRenderer.TextColor = MenuItemTextColor_LightMode
             CustomMenuRenderer.SelectedBorderColor = SelectedBorderColor_LightMode
 
+            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+
+
         End If
 
         MenuStrip1.Renderer = CustomMenuRenderer
@@ -1226,16 +942,8 @@ Public Class Form1
 
         Button1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
-        'Me.ResumeLayout()
-        'HScrollBar1.ResumeLayout()
-        'VScrollBar1.ResumeLayout()
-        'Button1.ResumeLayout()
-        'VScrollBar1.ResumeLayout()
-        'GroupBox1.ResumeLayout()
-        'TextBox1.ResumeLayout()
-        'MenuStrip1.ResumeLayout()
 
-        'Visible = True
+        GroupBox1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), Color.White)
 
     End Sub
 
@@ -1378,11 +1086,6 @@ Public Class Form1
 
     End Function
 
-    Private Sub Form1_Activated(sender As Object, e As EventArgs) Handles Me.Activated
-        ' Maximize the form
-        WindowState = FormWindowState.Maximized
-
-    End Sub
 End Class
 
 Public Class CustomColorMenuStripRenderer
