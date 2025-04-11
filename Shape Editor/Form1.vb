@@ -144,9 +144,9 @@ Public Class Form1
         Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
 
         ' Add event handlers for checkboxes
-        AddHandler HideControlHandlesCheckBox.CheckedChanged, AddressOf HideControlHandlesCheckBox_CheckedChanged
-        AddHandler FillShapeCheckBox.CheckedChanged, AddressOf FillShapeCheckBox_CheckedChanged
-        AddHandler DarkModeCheckBox.CheckedChanged, AddressOf DarkModeCheckBox_CheckedChanged
+        'AddHandler HideControlHandlesCheckBox.CheckedChanged, AddressOf HideControlHandlesCheckBox_CheckedChanged
+        'AddHandler FillShapeCheckBox.CheckedChanged, AddressOf FillShapeCheckBox_CheckedChanged
+        'AddHandler DarkModeCheckBox.CheckedChanged, AddressOf DarkModeCheckBox_CheckedChanged
 
         CreateShapesFiles()
 
@@ -577,21 +577,15 @@ Public Class Form1
 
     End Sub
 
-    Private Sub HideControlHandlesCheckBox_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub HideControlHandlesCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles HideControlHandlesCheckBox.CheckedChanged
         Invalidate()
     End Sub
 
-    Private Sub FillShapeCheckBox_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub FillShapeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles FillShapeCheckBox.CheckedChanged
         Invalidate()
     End Sub
 
-    Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
 
-        ApplyUITheme()
-
-        Refresh()
-
-    End Sub
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
         points.Clear()
@@ -1079,6 +1073,23 @@ Public Class Form1
         ' so you don't need to worry about memory management.
 
     End Function
+
+    Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
+
+        ApplyUITheme()
+
+        Refresh()
+
+        Invalidate()
+
+        If Not OperatingSystem.IsWindowsVersionAtLeast(11, 0, 0) Then
+
+            ' Show a message box if the OS is not Windows 11 or later
+            MsgBox("Success.", MsgBoxStyle.Information, "Apply UI Theme")
+
+        End If
+
+    End Sub
 
 End Class
 
