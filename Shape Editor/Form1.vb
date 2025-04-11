@@ -634,7 +634,10 @@ Public Class Form1
             openFileDialog.ShowHelp = False
 
 
-            openFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"
+            'openFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"
+
+            openFileDialog.Filter = "All Files (*.*)|*.*|CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt"
+
             openFileDialog.Title = "Open Shape"
             openFileDialog.InitialDirectory = Application.StartupPath
 
