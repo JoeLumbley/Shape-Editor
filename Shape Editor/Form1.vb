@@ -766,17 +766,6 @@ Public Class Form1
 
         End If
 
-
-
-
-
-
-
-
-
-
-
-
         ' Update CheckBoxes
         HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
         HideControlHandlesCheckBox.Left = Label1.Right + 25
@@ -881,76 +870,13 @@ Public Class Form1
         Invalidate()
     End Sub
 
-    'Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
-
-    '    ApplyUITheme()
-
-    '    ' Force a repaint of the non-client area (including title bar)
-    '    SendMessage(Me.Handle, WM_NCPAINT, IntPtr.Zero, IntPtr.Zero)
-
-    '    Invalidate()
-
-    'End Sub
-
-
-
-    'Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
-    '    Try
-    '        'ApplyUITheme()
-
-    '        ' Force a repaint of the non-client area (including title bar)
-    '        'SendMessage(Me.Handle, WM_NCPAINT, IntPtr.Zero, IntPtr.Zero)
-
-    '        'Refresh()
-
-
-
-
-    '        ' Raise the event to notify the form that the theme has changed
-    '        Dim raisedEventHandler = DirectCast(Me, IThemeChangedEventHandler)
-    '        If raisedEventHandler IsNot Nothing Then
-    '            raisedEventHandler.OnThemeChanged(Me, EventArgs.Empty)
-    '        End If
-
-
-    '        'Invalidate()
-
-    '    Catch ex As Exception
-    '        MessageBox.Show("An error occurred while applying the theme: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '    End Try
-    'End Sub
-
-
-
     Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
-        'Try
+
         ApplyUITheme()
 
         Refresh()
 
-        'Invalidate()
-
-        If DarkModeCheckBox.Checked Then
-
-            'MessageBox.Show(Me, "Dark Mode Engaged!", "Theme Applied", MessageBoxIcon.Information) ' Debugging line
-
-            MessageBox.Show(Me, "Dark Mode Engaged!", "Theme Applied", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Else
-
-            MessageBox.Show("Light Mode Engaged!") ' Debugging line
-
-
-        End If
-
-        'MessageBox.Show("Dark Mode Engaged!") ' Debugging line
-
-        'Catch ex As Exception
-        '    MessageBox.Show("An error occurred while applying the theme: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'End Try
     End Sub
-
-
-
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
         points.Clear()
