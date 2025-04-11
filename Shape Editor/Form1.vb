@@ -126,12 +126,6 @@ Public Class Form1
                                                   SizeOfValue As Integer) As Integer
     End Function
 
-    Private Const WM_NCPAINT As Integer = &H85
-
-    <DllImport("user32.dll")>
-    Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As IntPtr, lParam As IntPtr) As IntPtr
-    End Function
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         KeyPreview = True
@@ -775,6 +769,7 @@ Public Class Form1
 
     Private Sub Form1_MouseWheel(sender As Object, e As MouseEventArgs) Handles MyBase.MouseWheel
 
+
         CenterDrawingArea()
 
         If e.Delta > 0 Then
@@ -798,6 +793,8 @@ Public Class Form1
         UpdateUIScaleFactor()
 
         Invalidate()
+
+
 
     End Sub
 
@@ -863,7 +860,6 @@ Public Class Form1
 
             Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
 
-
         Else
 
             'set title color - light mode
@@ -905,7 +901,6 @@ Public Class Form1
 
             Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
 
-
         End If
 
         MenuStrip1.Renderer = CustomMenuRenderer
@@ -941,7 +936,6 @@ Public Class Form1
         DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
         Button1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
-
 
         GroupBox1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), Color.White)
 
