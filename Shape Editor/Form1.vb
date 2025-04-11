@@ -26,7 +26,33 @@
 Imports System.IO
 Imports System.Runtime.InteropServices
 
+
+' Interface to handle theme changes
+Public Interface IThemeChangedEventHandler
+    Sub OnThemeChanged(sender As Object, e As EventArgs)
+End Interface
+
 Public Class Form1
+
+    'Implements IThemeChangedEventHandler
+
+    '' Implement the event handler
+    'Public Sub OnThemeChanged(sender As Object, e As EventArgs) Implements IThemeChangedEventHandler.OnThemeChanged
+    '    ' Handle the theme change event here if needed
+
+
+    '    ' For example, you can call ApplyUITheme() to reapply the theme
+    '    ApplyUITheme()
+    '    ' Force a repaint of the non-client area (including title bar)
+    '    'SendMessage(Me.Handle, WM_NCPAINT, IntPtr.Zero, IntPtr.Zero)
+    '    'Invalidate()
+
+    '    Refresh()
+
+    'End Sub
+
+
+
     Enum Tool
         Add
         Subtract
@@ -125,6 +151,45 @@ Public Class Form1
                                                   SizeOfValue As Integer) As Integer
     End Function
 
+    Private Const WM_NCPAINT As Integer = &H85
+
+    <DllImport("user32.dll")>
+    Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As IntPtr, lParam As IntPtr) As IntPtr
+    End Function
+
+    ' <DllImport("user32.dll")>
+    ' Private Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
+    ' End Function
+    ' <DllImport("dwmapi.dll")>
+    ' Private Shared Function DwmSetWindowAttribute(hWnd As IntPtr, dwAttribute As DwmWindowAttribute, ByRef pvAttribute As Integer, cbAttribute As Integer) As Integer
+    ' End Function
+    ' <DllImport("uxtheme.dll")>
+    ' Private Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
+    ' End Function
+    ' <DllImport("uxtheme.dll")>
+    ' Private Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
+    ' End Function
+    ' <DllImport("uxtheme.dll")>
+    ' Private Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
+    ' End Function
+    ' <DllImport("uxtheme.dll")>
+    ' Private Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
+    'IThemeChangedEventHandler
+
+
+
+
+    'Public Sub New()
+    '    InitializeComponent()
+    '    Me.DoubleBuffered = True
+
+
+    'End Sub
+
+
+
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         KeyPreview = True
@@ -170,7 +235,7 @@ Public Class Form1
 
 
 
-        Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelected)
+        Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
 
 
         Text = "Shape Editor - Code with Joe"
@@ -200,7 +265,7 @@ Public Class Form1
         'CenterToScreen()
 
         '' Maximize the form
-        'WindowState = FormWindowState.Maximized
+        WindowState = FormWindowState.Maximized
 
 
         MenuStrip1.RenderMode = ToolStripRenderMode.Professional
@@ -816,13 +881,76 @@ Public Class Form1
         Invalidate()
     End Sub
 
-    Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
+    'Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
 
+    '    ApplyUITheme()
+
+    '    ' Force a repaint of the non-client area (including title bar)
+    '    SendMessage(Me.Handle, WM_NCPAINT, IntPtr.Zero, IntPtr.Zero)
+
+    '    Invalidate()
+
+    'End Sub
+
+
+
+    'Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
+    '    Try
+    '        'ApplyUITheme()
+
+    '        ' Force a repaint of the non-client area (including title bar)
+    '        'SendMessage(Me.Handle, WM_NCPAINT, IntPtr.Zero, IntPtr.Zero)
+
+    '        'Refresh()
+
+
+
+
+    '        ' Raise the event to notify the form that the theme has changed
+    '        Dim raisedEventHandler = DirectCast(Me, IThemeChangedEventHandler)
+    '        If raisedEventHandler IsNot Nothing Then
+    '            raisedEventHandler.OnThemeChanged(Me, EventArgs.Empty)
+    '        End If
+
+
+    '        'Invalidate()
+
+    '    Catch ex As Exception
+    '        MessageBox.Show("An error occurred while applying the theme: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    End Try
+    'End Sub
+
+
+
+    Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
+        'Try
         ApplyUITheme()
 
-        Invalidate()
+        Refresh()
 
+        'Invalidate()
+
+        If DarkModeCheckBox.Checked Then
+
+            'MessageBox.Show(Me, "Dark Mode Engaged!", "Theme Applied", MessageBoxIcon.Information) ' Debugging line
+
+            MessageBox.Show(Me, "Dark Mode Engaged!", "Theme Applied", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+
+            MessageBox.Show("Light Mode Engaged!") ' Debugging line
+
+
+        End If
+
+        'MessageBox.Show("Dark Mode Engaged!") ' Debugging line
+
+        'Catch ex As Exception
+        '    MessageBox.Show("An error occurred while applying the theme: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'End Try
     End Sub
+
+
+
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
         points.Clear()
@@ -1043,16 +1171,16 @@ Public Class Form1
 
     Private Sub ApplyUITheme()
 
-        Visible = False
+        'Visible = False
 
-        Me.SuspendLayout()
-        HScrollBar1.SuspendLayout()
-        VScrollBar1.SuspendLayout()
-        Button1.SuspendLayout()
-        VScrollBar1.SuspendLayout()
-        GroupBox1.SuspendLayout()
-        TextBox1.SuspendLayout()
-        MenuStrip1.SuspendLayout()
+        'Me.SuspendLayout()
+        'HScrollBar1.SuspendLayout()
+        'VScrollBar1.SuspendLayout()
+        'Button1.SuspendLayout()
+        'VScrollBar1.SuspendLayout()
+        'GroupBox1.SuspendLayout()
+        'TextBox1.SuspendLayout()
+        'MenuStrip1.SuspendLayout()
 
         If DarkModeCheckBox.Checked Then
 
@@ -1172,16 +1300,16 @@ Public Class Form1
 
         Button1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
-        Me.ResumeLayout()
-        HScrollBar1.ResumeLayout()
-        VScrollBar1.ResumeLayout()
-        Button1.ResumeLayout()
-        VScrollBar1.ResumeLayout()
-        GroupBox1.ResumeLayout()
-        TextBox1.ResumeLayout()
-        MenuStrip1.ResumeLayout()
+        'Me.ResumeLayout()
+        'HScrollBar1.ResumeLayout()
+        'VScrollBar1.ResumeLayout()
+        'Button1.ResumeLayout()
+        'VScrollBar1.ResumeLayout()
+        'GroupBox1.ResumeLayout()
+        'TextBox1.ResumeLayout()
+        'MenuStrip1.ResumeLayout()
 
-        Visible = True
+        'Visible = True
 
     End Sub
 
