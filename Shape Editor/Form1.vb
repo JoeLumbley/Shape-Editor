@@ -1089,7 +1089,11 @@ Public Class Form1
 
         Invalidate()
 
-        If Not OperatingSystem.IsWindowsVersionAtLeast(11, 0, 0) Then
+
+        Dim osVersion As Version = Environment.OSVersion.Version
+
+        ' Check if the OS is Windows 11 or later
+        If Not osVersion.Major = 10 And osVersion.Minor = 0 And osVersion.Build >= 22000 Then
 
             ' Show a message box if the OS is not Windows 11 or later
             MsgBox("Success.", MsgBoxStyle.Information, "Apply UI Theme")
