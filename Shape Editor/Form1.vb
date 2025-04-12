@@ -126,6 +126,12 @@ Public Class Form1
                                                   SizeOfValue As Integer) As Integer
     End Function
 
+    Private OsVersion As Version = Environment.OSVersion.Version
+
+
+
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         KeyPreview = True
@@ -1089,15 +1095,15 @@ Public Class Form1
 
         Invalidate()
 
+        ' Fixes title bar theme update issue in Windows 10
+        ' Check if the OS is Windows 10
+        If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
+            ' The first public build of Windows 11 had the build number 10.0.22000
 
-        Dim osVersion As Version = Environment.OSVersion.Version
+            ' Force a redraw of the form by showing a message box.
+            MsgBox("Applying UI Theme", MsgBoxStyle.OkOnly, "Shape Editor - Code with Joe")
 
-        ' Check if the OS is Windows 11 or later
-        If Not osVersion.Major = 10 And osVersion.Minor = 0 And osVersion.Build >= 22000 Then
-
-            ' Show a message box if the OS is not Windows 11 or later
-            MsgBox("Success.", MsgBoxStyle.Information, "Apply UI Theme")
-
+            ' 10.0.19045.5737 - Windows 10 Home Version	22H2
         End If
 
     End Sub
