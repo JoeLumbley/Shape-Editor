@@ -860,8 +860,8 @@ Public Class Form1
             CustomMenuRenderer.TextColor = MenuItemTextColor_DarkMode
             CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColor_DarkMode
 
+            ' Set the button images for dark mode
             Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
-
             Button1.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonDarkMode)
 
 
@@ -904,9 +904,8 @@ Public Class Form1
             CustomMenuRenderer.TextColor = MenuItemTextColor_LightMode
             CustomMenuRenderer.SelectedBorderColor = SelectedBorderColor_LightMode
 
+            ' Set the button images for light mode
             Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
-
-
             Button1.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonLightMode)
 
 
