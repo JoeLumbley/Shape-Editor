@@ -347,6 +347,9 @@ Public Class Form1
             InsertNewPoint(selectedPointIndex)
 
         End If
+
+        e.Handled = True
+
     End Sub
 
 
