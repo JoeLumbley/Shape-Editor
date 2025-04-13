@@ -149,11 +149,6 @@ Public Class Form1
         ScaleFactor = TrackBar1.Value / 100.0
         Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
 
-        ' Add event handlers for checkboxes
-        'AddHandler HideControlHandlesCheckBox.CheckedChanged, AddressOf HideControlHandlesCheckBox_CheckedChanged
-        'AddHandler FillShapeCheckBox.CheckedChanged, AddressOf FillShapeCheckBox_CheckedChanged
-        'AddHandler DarkModeCheckBox.CheckedChanged, AddressOf DarkModeCheckBox_CheckedChanged
-
         CreateShapesFiles()
 
         ' Set the TextBox1 to read-only to prevent user edits.
@@ -867,6 +862,9 @@ Public Class Form1
 
             Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
 
+            Button1.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonDarkMode)
+
+
         Else
 
             'set title color - light mode
@@ -907,6 +905,10 @@ Public Class Form1
             CustomMenuRenderer.SelectedBorderColor = SelectedBorderColor_LightMode
 
             Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+
+
+            Button1.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonLightMode)
+
 
         End If
 

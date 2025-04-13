@@ -113,5 +113,25 @@ Namespace My.Resources
                 Return CType(obj,Byte())
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property CenterDrawingToolButtonDarkMode() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("CenterDrawingToolButtonDarkMode", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property CenterDrawingToolButtonLightMode() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("CenterDrawingToolButtonLightMode", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
     End Class
 End Namespace
