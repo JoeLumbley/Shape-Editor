@@ -414,12 +414,15 @@ Public Class Form1
 
         ElseIf keyData = Keys.Right Then
 
+            ' Check if the scroll value exceeds the maximum limit
             If HScrollBar1.Value + 10 > HScrollBar1.Maximum Then
 
+                ' Set the scroll value to the maximum limit
                 HScrollBar1.Value = HScrollBar1.Maximum
 
             Else
 
+                ' Move the drawing area to the right
                 HScrollBar1.Value += 10
 
             End If
@@ -430,7 +433,6 @@ Public Class Form1
             Invalidate()
 
             Return True
-
 
         End If
 
