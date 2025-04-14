@@ -442,18 +442,18 @@ Public Class Form1
         ' Update Button1
         'Button1.Top = HScrollBar1.Top
         'Button1.Left = VScrollBar1.Left
-        Button1.Width = vScrollBarWidth + 2
-        Button1.Height = hScrollBarHeight + 2
+        CenterDrawingButton.Width = vScrollBarWidth + 2
+        CenterDrawingButton.Height = hScrollBarHeight + 2
 
         'Button2.Top = HScrollBar1.Top - Button2.Height
         'Button2.Left = VScrollBar1.Left - Button2.Width
         Button2.ImageAlign = ContentAlignment.TopLeft
-        Button2.Width = Button1.Width
-        Button2.Height = Button1.Height
+        Button2.Width = CenterDrawingButton.Width
+        Button2.Height = CenterDrawingButton.Height
 
         Button3.ImageAlign = ContentAlignment.TopLeft
-        Button3.Width = Button1.Width
-        Button3.Height = Button1.Height
+        Button3.Width = CenterDrawingButton.Width
+        Button3.Height = CenterDrawingButton.Height
 
         GroupBox1.Top = HScrollBar1.Top
         GroupBox1.Left = VScrollBar1.Left
@@ -587,7 +587,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles CenterDrawingButton.Click
 
         ResetScrollBars()
 
@@ -850,9 +850,9 @@ Public Class Form1
             DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
-            SetWindowTheme(Button1.Handle, "DarkMode_Explorer", Nothing)
-            DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
-            DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+            SetWindowTheme(CenterDrawingButton.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(CenterDrawingButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(CenterDrawingButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
             SetWindowTheme(Button2.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
@@ -896,7 +896,7 @@ Public Class Form1
 
             End If
 
-            Button1.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonDarkMode)
+            CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonDarkMode)
 
         Else
 
@@ -912,9 +912,9 @@ Public Class Form1
             DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(VScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
-            SetWindowTheme(Button1.Handle, "Explorer", Nothing)
-            DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-            DwmSetWindowAttribute(Button1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+            SetWindowTheme(CenterDrawingButton.Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(CenterDrawingButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(CenterDrawingButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
             SetWindowTheme(Button2.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
@@ -943,7 +943,7 @@ Public Class Form1
 
             ' Set the button images for light mode
             Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
-            Button1.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonLightMode)
+            CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonLightMode)
 
         End If
 
@@ -979,7 +979,7 @@ Public Class Form1
 
         DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
-        Button1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        CenterDrawingButton.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
         GroupBox1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), Color.White)
 
