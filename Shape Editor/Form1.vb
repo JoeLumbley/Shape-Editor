@@ -136,6 +136,7 @@ Public Class Form1
         DoubleBuffered = True
 
         Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
+
         Application.EnableVisualStyles()
 
         ApplyUITheme()
