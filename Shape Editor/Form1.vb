@@ -349,11 +349,95 @@ Public Class Form1
             ' Insert a new point near the selected point
             InsertNewPoint(selectedPointIndex)
 
+
+
         End If
 
-        e.Handled = True
+        'e.Handled = True
 
     End Sub
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+        ' Intercept the Arrow keys
+
+        If keyData = Keys.Up Then
+
+            If VScrollBar1.Value - 10 < VScrollBar1.Minimum Then
+
+                VScrollBar1.Value = VScrollBar1.Minimum
+
+            Else
+
+                VScrollBar1.Value -= 10
+
+            End If
+
+            ' Update the drawing center based on the scroll value
+            DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
+
+            Invalidate()
+
+            ' Return True to indicate the key event has been handled
+            Return True
+
+        ElseIf keyData = Keys.Down Then
+
+            If VScrollBar1.Value + 10 > VScrollBar1.Maximum Then
+                VScrollBar1.Value = VScrollBar1.Maximum
+            Else
+                VScrollBar1.Value += 10
+            End If
+            ' Update the drawing center based on the scroll value
+            DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
+            Invalidate()
+            ' Return True to indicate the key event has been handled
+            Return True
+
+        ElseIf keyData = Keys.Left Then
+
+            If HScrollBar1.Value - 10 < HScrollBar1.Minimum Then
+
+                HScrollBar1.Value = HScrollBar1.Minimum
+
+            Else
+
+                HScrollBar1.Value -= 10
+
+            End If
+
+            ' Update the drawing center based on the scroll value
+            DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
+
+            Invalidate()
+
+            Return True
+
+        ElseIf keyData = Keys.Right Then
+
+            If HScrollBar1.Value + 10 > HScrollBar1.Maximum Then
+
+                HScrollBar1.Value = HScrollBar1.Maximum
+
+            Else
+
+                HScrollBar1.Value += 10
+
+            End If
+
+            ' Update the drawing center based on the scroll value
+            DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
+
+            Invalidate()
+
+            Return True
+
+
+        End If
+
+        ' Call the base class implementation for other keys
+        Return MyBase.ProcessCmdKey(msg, keyData)
+
+    End Function
 
 
     Private Sub CloseShape()
