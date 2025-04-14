@@ -129,15 +129,11 @@ Public Class Form1
     Private OsVersion As Version = Environment.OSVersion.Version
 
 
-
-
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         KeyPreview = True
 
         DoubleBuffered = True
-
 
         Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
         Application.EnableVisualStyles()
@@ -238,7 +234,6 @@ Public Class Form1
                     e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
                 End If
 
-
             Next
         End If
 
@@ -309,21 +304,24 @@ Public Class Form1
         End If
     End Sub
 
-    ' Helper method for adding points and their mirrored counterparts
     Private Sub AddPoint(location As Point)
+        ' Helper method for adding points and their mirrored counterparts
+
         points.Add(location)
         points.Add(GetMirroredPoint(location))
         selectedPointIndex = points.Count - 2
     End Sub
 
-    ' Helper method for moving points and updating their mirrored counterparts
     Private Sub MovePoint(location As Point)
+        ' Helper method for moving points and updating their mirrored counterparts
+
         points(selectedPointIndex) = location
         points(selectedPointIndex + 1) = GetMirroredPoint(location)
     End Sub
 
-    ' Helper method to calculate the mirrored point
     Private Function GetMirroredPoint(p As Point) As Point
+        ' Helper method to calculate the mirrored point
+
         Return New Point(p.X, -p.Y)
     End Function
 
@@ -353,7 +351,6 @@ Public Class Form1
     End Sub
 
 
-    ' Helper method to close the shape
     Private Sub CloseShape()
         points.Add(points(0)) ' Close the shape
         points.Add(GetMirroredPoint(points(1))) ' Close the mirror shape
@@ -362,7 +359,6 @@ Public Class Form1
     End Sub
 
 
-    ' Helper method to remove a point
     Private Sub RemovePoint(index As Integer)
         If index >= 0 AndAlso index < points.Count - 1 Then
             points.RemoveAt(index + 1) ' Remove mirrored point
@@ -374,7 +370,6 @@ Public Class Form1
     End Sub
 
 
-    ' Helper method to insert a new point near the selected point
     Private Sub InsertNewPoint(index As Integer)
         Dim newPoint As New Point(points(index).X + 10, points(index).Y + 10)
         points.Insert(index + 2, newPoint)
@@ -390,10 +385,10 @@ Public Class Form1
 
         Invalidate()
 
-
     End Sub
 
     Private Sub LayoutForm()
+
         ' Calculate common values
         Dim clientWidth As Integer = ClientSize.Width
         Dim clientHeight As Integer = ClientSize.Height
@@ -525,6 +520,11 @@ Public Class Form1
 
             Button2.Left = VScrollBar1.Left - Button2.Width
 
+            Button3.Top = HScrollBar1.Top - Button2.Height - Button3.Height
+
+            Button3.Left = VScrollBar1.Left - Button2.Width
+
+
             Dim ScaleFactorDiv16 = ScaleFactor / 16
 
             HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
@@ -544,6 +544,11 @@ Public Class Form1
             Button2.Top = HScrollBar1.Top - Button2.Height
 
             Button2.Left = GroupBox1.Left - 1
+
+            Button3.Top = HScrollBar1.Top - Button2.Height - Button3.Height
+
+            Button3.Left = GroupBox1.Left - 1
+
 
             If HScrollBar1.Visible Then HScrollBar1.Visible = False
 
