@@ -283,8 +283,11 @@ Public Class Form1
 
         If isDrawing AndAlso selectedPointIndex <> -1 Then
             MovePoint(AdjustedMouseLocation)
+
             GeneratePointArrayText()
+
             Invalidate()
+
         End If
 
         ' Update hovered point index
@@ -294,6 +297,8 @@ Public Class Form1
             hoveredPointIndex = newHoveredPointIndex
             Invalidate()
         End If
+
+
     End Sub
 
     Private Sub Form1_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
@@ -445,6 +450,10 @@ Public Class Form1
         Button2.ImageAlign = ContentAlignment.TopLeft
         Button2.Width = Button1.Width
         Button2.Height = Button1.Height
+
+        Button3.ImageAlign = ContentAlignment.TopLeft
+        Button3.Width = Button1.Width
+        Button3.Height = Button1.Height
 
         GroupBox1.Top = HScrollBar1.Top
         GroupBox1.Left = VScrollBar1.Left
@@ -1078,6 +1087,10 @@ Public Class Form1
         Dim FilePath As String = Path.Combine(Application.StartupPath, "Airplane.csv")
 
         CreateFileFromResource(FilePath, My.Resources.Resource1.Airplane)
+
+        FilePath = Path.Combine(Application.StartupPath, "Alien Ship.csv")
+
+        CreateFileFromResource(FilePath, My.Resources.Resource1.Alien_Ship)
 
     End Sub
 
