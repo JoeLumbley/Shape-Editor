@@ -445,8 +445,8 @@ Public Class Form1
         Button1.Width = vScrollBarWidth + 2
         Button1.Height = hScrollBarHeight + 2
 
-        Button2.Top = HScrollBar1.Top - Button2.Height
-        Button2.Left = VScrollBar1.Left - Button2.Width
+        'Button2.Top = HScrollBar1.Top - Button2.Height
+        'Button2.Left = VScrollBar1.Left - Button2.Width
         Button2.ImageAlign = ContentAlignment.TopLeft
         Button2.Width = Button1.Width
         Button2.Height = Button1.Height
@@ -474,6 +474,11 @@ Public Class Form1
             Button2.Top = HScrollBar1.Top - Button2.Height
             Button2.Left = VScrollBar1.Left - Button2.Width
 
+            Button3.Top = HScrollBar1.Top - Button2.Height - Button3.Height
+            Button3.Left = VScrollBar1.Left - Button2.Width
+
+
+
         Else
 
             'If HScrollBar1.Visible Then HScrollBar1.Visible = False
@@ -483,6 +488,9 @@ Public Class Form1
 
             Button2.Top = HScrollBar1.Top - Button2.Height
             Button2.Left = GroupBox1.Left - 1
+
+
+
 
         End If
 
@@ -846,6 +854,13 @@ Public Class Form1
             DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
+            SetWindowTheme(Button3.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
+
+
+
             SetWindowTheme(GroupBox1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
@@ -863,9 +878,26 @@ Public Class Form1
             CustomMenuRenderer.TextColor = MenuItemTextColor_DarkMode
             CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColor_DarkMode
 
-            ' Set the button images for dark mode
-            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
+
+            If CurrentTool = Tool.Add Then
+
+                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
+                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+            ElseIf CurrentTool = Tool.Move Then
+
+                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
+
+            ElseIf CurrentTool = Tool.Subtract Then
+
+                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+            End If
+
             Button1.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonDarkMode)
+
 
 
         Else
@@ -889,6 +921,14 @@ Public Class Form1
             SetWindowTheme(Button2.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+            SetWindowTheme(Button3.Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+
+
+
 
             SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
@@ -1111,6 +1151,25 @@ Public Class Form1
         End If
 
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        CurrentTool = Tool.Move
+        Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+        Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        CurrentTool = Tool.Add
+        Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
+        Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+    End Sub
+
+
+
 
 End Class
 

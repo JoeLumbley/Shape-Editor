@@ -40,6 +40,7 @@ Partial Class Form1
         ExitToolStripMenuItem = New ToolStripMenuItem()
         GroupBox1 = New GroupBox()
         Button2 = New Button()
+        Button3 = New Button()
         CType(TrackBar1, ComponentModel.ISupportInitialize).BeginInit()
         MenuStrip1.SuspendLayout()
         GroupBox1.SuspendLayout()
@@ -206,11 +207,22 @@ Partial Class Form1
         Button2.TabStop = False
         Button2.UseVisualStyleBackColor = True
         ' 
+        ' Button3
+        ' 
+        Button3.Location = New Point(851, 191)
+        Button3.Name = "Button3"
+        Button3.Size = New Size(42, 40)
+        Button3.TabIndex = 13
+        Button3.TabStop = False
+        Button3.UseVisualStyleBackColor = True
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(9F, 23F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1132, 611)
+        Controls.Add(MenuStrip1)
+        Controls.Add(Button3)
         Controls.Add(GroupBox1)
         Controls.Add(HScrollBar1)
         Controls.Add(VScrollBar1)
@@ -220,7 +232,6 @@ Partial Class Form1
         Controls.Add(Label1)
         Controls.Add(TrackBar1)
         Controls.Add(TextBox1)
-        Controls.Add(MenuStrip1)
         Controls.Add(Button2)
         KeyPreview = True
         MainMenuStrip = MenuStrip1
@@ -253,5 +264,6 @@ Partial Class Form1
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
 
 End Class
