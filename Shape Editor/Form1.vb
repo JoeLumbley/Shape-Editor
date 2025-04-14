@@ -240,6 +240,8 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
+
+        ' Check if the left mouse button is pressed
         If e.Button = MouseButtons.Left Then
             ' Calculate the adjusted mouse location based on the scale factor
             AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor),
@@ -268,20 +270,33 @@ Public Class Form1
             isDrawing = True
 
             GeneratePointArrayText()
+
             Invalidate()
+
         End If
+
     End Sub
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
-        ' Clear the active control
-        Me.ActiveControl = Nothing
-        Me.Focus()
 
         ' Calculate the adjusted mouse location based on the scale factor
         AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor),
-                                      CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
+                                          CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
+        If ActiveControl IsNot Nothing Then
+
+            ' Clear the active control
+            ActiveControl = Nothing
+
+            Focus()
+
+        End If
+
+        ' Check if the left mouse button is pressed and and a point is selected
         If isDrawing AndAlso selectedPointIndex <> -1 Then
+            'Yes, we are moving a point
+
+            ' Adjust the selected point's location based on the mouse movement
             MovePoint(AdjustedMouseLocation)
 
             GeneratePointArrayText()
@@ -291,13 +306,19 @@ Public Class Form1
         End If
 
         ' Update hovered point index
+        ' Get the new hovered point index based on the adjusted mouse location
         Dim newHoveredPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
 
+        ' If the new hovered point index is different from the current hovered point index then
         If newHoveredPointIndex <> hoveredPointIndex Then
-            hoveredPointIndex = newHoveredPointIndex
-            Invalidate()
-        End If
 
+            ' Set the new hovered point index
+            hoveredPointIndex = newHoveredPointIndex
+
+            ' Invalidate the form to trigger a repaint
+            Invalidate()
+
+        End If
 
     End Sub
 
@@ -634,20 +655,20 @@ Public Class Form1
 
             If Not VScrollBar1.Visible Then VScrollBar1.Visible = True
 
-        Else
+            'Else
 
-            Button2.Top = HScrollBar1.Top - Button2.Height
+            '    Button2.Top = HScrollBar1.Top - Button2.Height
 
-            Button2.Left = GroupBox1.Left - 1
+            '    Button2.Left = GroupBox1.Left - 1
 
-            Button3.Top = HScrollBar1.Top - Button2.Height - Button3.Height
+            '    Button3.Top = HScrollBar1.Top - Button2.Height - Button3.Height
 
-            Button3.Left = GroupBox1.Left - 1
+            '    Button3.Left = GroupBox1.Left - 1
 
 
-            If HScrollBar1.Visible Then HScrollBar1.Visible = False
+            '    If HScrollBar1.Visible Then HScrollBar1.Visible = False
 
-            If VScrollBar1.Visible Then VScrollBar1.Visible = False
+            '    If VScrollBar1.Visible Then VScrollBar1.Visible = False
 
         End If
 

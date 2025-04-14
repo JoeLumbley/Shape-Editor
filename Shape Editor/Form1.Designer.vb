@@ -48,7 +48,7 @@ Partial Class Form1
         ' 
         ' TextBox1
         ' 
-        TextBox1.Location = New Point(473, 137)
+        TextBox1.Location = New Point(478, 171)
         TextBox1.Multiline = True
         TextBox1.Name = "TextBox1"
         TextBox1.PlaceholderText = "< Draw shape in the area to the left."
@@ -91,7 +91,7 @@ Partial Class Form1
         ' 
         ' VScrollBar1
         ' 
-        VScrollBar1.Location = New Point(350, 174)
+        VScrollBar1.Location = New Point(968, 171)
         VScrollBar1.Name = "VScrollBar1"
         VScrollBar1.Size = New Size(39, 180)
         VScrollBar1.TabIndex = 4
@@ -157,33 +157,33 @@ Partial Class Form1
         ' 
         NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         NewToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.N
-        NewToolStripMenuItem.Size = New Size(270, 34)
+        NewToolStripMenuItem.Size = New Size(237, 34)
         NewToolStripMenuItem.Text = "New"
         ' 
         ' OpenToolStripMenuItem
         ' 
         OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         OpenToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.O
-        OpenToolStripMenuItem.Size = New Size(270, 34)
+        OpenToolStripMenuItem.Size = New Size(237, 34)
         OpenToolStripMenuItem.Text = "Open"
         ' 
         ' SaveToolStripMenuItem
         ' 
         SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         SaveToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.S
-        SaveToolStripMenuItem.Size = New Size(270, 34)
+        SaveToolStripMenuItem.Size = New Size(237, 34)
         SaveToolStripMenuItem.Text = "Save As"
         ' 
         ' AboutToolStripMenuItem
         ' 
         AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        AboutToolStripMenuItem.Size = New Size(270, 34)
+        AboutToolStripMenuItem.Size = New Size(237, 34)
         AboutToolStripMenuItem.Text = "About"
         ' 
         ' ExitToolStripMenuItem
         ' 
         ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        ExitToolStripMenuItem.Size = New Size(270, 34)
+        ExitToolStripMenuItem.Size = New Size(237, 34)
         ExitToolStripMenuItem.Text = "Exit"
         ' 
         ' GroupBox1
@@ -208,7 +208,7 @@ Partial Class Form1
         ' 
         ' Button3
         ' 
-        Button3.Location = New Point(946, 208)
+        Button3.Location = New Point(447, 171)
         Button3.Name = "Button3"
         Button3.Size = New Size(47, 43)
         Button3.TabIndex = 13
@@ -220,17 +220,17 @@ Partial Class Form1
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1258, 664)
+        Controls.Add(TextBox1)
         Controls.Add(MenuStrip1)
+        Controls.Add(VScrollBar1)
         Controls.Add(Button3)
         Controls.Add(GroupBox1)
         Controls.Add(HScrollBar1)
-        Controls.Add(VScrollBar1)
         Controls.Add(DarkModeCheckBox)
         Controls.Add(FillShapeCheckBox)
         Controls.Add(HideControlHandlesCheckBox)
         Controls.Add(Label1)
         Controls.Add(TrackBar1)
-        Controls.Add(TextBox1)
         Controls.Add(Button2)
         KeyPreview = True
         MainMenuStrip = MenuStrip1
