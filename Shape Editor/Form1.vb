@@ -489,9 +489,6 @@ Public Class Form1
             Button2.Top = HScrollBar1.Top - Button2.Height
             Button2.Left = GroupBox1.Left - 1
 
-
-
-
         End If
 
         ' Update CheckBoxes
@@ -504,7 +501,6 @@ Public Class Form1
         DarkModeCheckBox.Top = HideControlHandlesCheckBox.Top
         DarkModeCheckBox.Left = FillShapeCheckBox.Right + 25
 
-        'Invalidate()
     End Sub
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
@@ -512,8 +508,6 @@ Public Class Form1
         ScaleFactor = TrackBar1.Value / 100.0
 
         UpdateUIScaleFactor()
-
-        'GeneratePointArrayText()
 
         Invalidate()
 
@@ -730,7 +724,6 @@ Public Class Form1
 
                 End Try
 
-
                 If Not fileIsValid Then
 
                     Text = $"Bad File - Shape Editor - Code with Joe"
@@ -782,7 +775,6 @@ Public Class Form1
 
     Private Sub Form1_MouseWheel(sender As Object, e As MouseEventArgs) Handles MyBase.MouseWheel
 
-
         CenterDrawingArea()
 
         If e.Delta > 0 Then
@@ -806,8 +798,6 @@ Public Class Form1
         UpdateUIScaleFactor()
 
         Invalidate()
-
-
 
     End Sub
 
@@ -858,9 +848,6 @@ Public Class Form1
             DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
-
-
-
             SetWindowTheme(GroupBox1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
@@ -877,7 +864,6 @@ Public Class Form1
             CustomMenuRenderer.MenuItemSelectedColor = MenuItemSelectedColor_DarkMode
             CustomMenuRenderer.TextColor = MenuItemTextColor_DarkMode
             CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColor_DarkMode
-
 
             If CurrentTool = Tool.Add Then
 
@@ -897,8 +883,6 @@ Public Class Form1
             End If
 
             Button1.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonDarkMode)
-
-
 
         Else
 
@@ -926,10 +910,6 @@ Public Class Form1
             DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
-
-
-
-
             SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
@@ -950,7 +930,6 @@ Public Class Form1
             ' Set the button images for light mode
             Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
             Button1.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonLightMode)
-
 
         End If
 
@@ -1155,6 +1134,7 @@ Public Class Form1
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
         CurrentTool = Tool.Move
+
         Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
         Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
 
@@ -1163,13 +1143,11 @@ Public Class Form1
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
         CurrentTool = Tool.Add
+
         Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
         Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
 
     End Sub
-
-
-
 
 End Class
 
