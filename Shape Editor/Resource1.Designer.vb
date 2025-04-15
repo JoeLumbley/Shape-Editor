@@ -163,5 +163,25 @@ Namespace My.Resources
                 Return CType(obj,Byte())
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property MovePointToolButtonLightMode() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("MovePointToolButtonLightMode", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property MovePointToolButtonSelectedLightMode() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("MovePointToolButtonSelectedLightMode", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
     End Class
 End Namespace

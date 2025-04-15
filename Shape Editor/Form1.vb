@@ -1049,11 +1049,31 @@ Public Class Form1
             CustomMenuRenderer.TextColor = MenuItemTextColor_LightMode
             CustomMenuRenderer.SelectedBorderColor = SelectedBorderColor_LightMode
 
-            ' Set the button images for light mode
-            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+            If CurrentTool = Tool.Add Then
+
+                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+            ElseIf CurrentTool = Tool.Move Then
+
+                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
+
+            ElseIf CurrentTool = Tool.Subtract Then
+
+                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+            End If
+
             CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonLightMode)
 
         End If
+
+
+
+
+
 
         MenuStrip1.Renderer = CustomMenuRenderer
 
@@ -1261,8 +1281,17 @@ Public Class Form1
 
         CurrentTool = Tool.Move
 
-        Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-        Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
+        If DarkModeCheckBox.Checked Then
+
+            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+            Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
+
+        Else
+
+            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+            Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
+
+        End If
 
     End Sub
 
@@ -1270,8 +1299,17 @@ Public Class Form1
 
         CurrentTool = Tool.Add
 
-        Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
-        Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+        If DarkModeCheckBox.Checked Then
+
+            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
+            Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+        Else
+
+            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+            Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+        End If
 
     End Sub
 
