@@ -1283,9 +1283,6 @@ Public Class Form1
 
         End Using
 
-        ' The MemoryStream is disposed of automatically when it goes out of scope,
-        ' so you don't need to worry about memory management.
-
     End Function
 
     Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
