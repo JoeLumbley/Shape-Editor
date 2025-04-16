@@ -1087,6 +1087,15 @@ Public Class Form1
             CustomMenuRenderer.TextColor = MenuItemTextColor_LightMode
             CustomMenuRenderer.SelectedBorderColor = SelectedBorderColor_LightMode
 
+            SaveToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+            MenuStrip1.AutoSize = False
+            SaveToolStripMenuItem.AutoSize = False
+            SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsLight)
+            OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileLight)
+            OpenToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+            OpenToolStripMenuItem.AutoSize = False
+
+
             If CurrentTool = Tool.Add Then
 
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
