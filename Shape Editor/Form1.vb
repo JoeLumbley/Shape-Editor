@@ -555,13 +555,19 @@ Public Class Form1
 
         'Button2.Top = HScrollBar1.Top - Button2.Height
         'Button2.Left = VScrollBar1.Left - Button2.Width
-        Button2.ImageAlign = ContentAlignment.TopLeft
-        Button2.Width = CenterDrawingButton.Width
-        Button2.Height = CenterDrawingButton.Height
+        AddPointToolButton.ImageAlign = ContentAlignment.TopLeft
+        AddPointToolButton.Width = CenterDrawingButton.Width
+        AddPointToolButton.Height = CenterDrawingButton.Height
 
-        Button3.ImageAlign = ContentAlignment.TopLeft
-        Button3.Width = CenterDrawingButton.Width
-        Button3.Height = CenterDrawingButton.Height
+        MovePointToolButton.ImageAlign = ContentAlignment.TopLeft
+        MovePointToolButton.Width = CenterDrawingButton.Width
+        MovePointToolButton.Height = CenterDrawingButton.Height
+
+        SubtractPointToolButton.ImageAlign = ContentAlignment.TopLeft
+        SubtractPointToolButton.Width = CenterDrawingButton.Width
+        SubtractPointToolButton.Height = CenterDrawingButton.Height
+
+
 
         GroupBox1.Top = HScrollBar1.Top
         GroupBox1.Left = VScrollBar1.Left
@@ -569,39 +575,42 @@ Public Class Form1
         GroupBox1.Width = vScrollBarWidth
         GroupBox1.Height = hScrollBarHeight
 
-        If ScaleFactor >= 8 Then
+        'If ScaleFactor >= 8 Then
 
-            'HScrollBar1.Minimum = -ClientSize.Width * (ScaleFactor / 16)
+        'HScrollBar1.Minimum = -ClientSize.Width * (ScaleFactor / 16)
 
-            'HScrollBar1.Maximum = ClientSize.Width * (ScaleFactor / 16)
+        'HScrollBar1.Maximum = ClientSize.Width * (ScaleFactor / 16)
 
-            'VScrollBar1.Minimum = -ClientSize.Height * (ScaleFactor / 16)
+        'VScrollBar1.Minimum = -ClientSize.Height * (ScaleFactor / 16)
 
-            'VScrollBar1.Maximum = ClientSize.Height * (ScaleFactor / 16)
+        'VScrollBar1.Maximum = ClientSize.Height * (ScaleFactor / 16)
 
-            'If Not HScrollBar1.Visible Then HScrollBar1.Visible = True
+        'If Not HScrollBar1.Visible Then HScrollBar1.Visible = True
 
-            'If Not VScrollBar1.Visible Then VScrollBar1.Visible = True
+        'If Not VScrollBar1.Visible Then VScrollBar1.Visible = True
 
-            Button2.Top = HScrollBar1.Top - Button2.Height
-            Button2.Left = VScrollBar1.Left - Button2.Width
+        AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
+        AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-            Button3.Top = HScrollBar1.Top - Button2.Height - Button3.Height
-            Button3.Left = VScrollBar1.Left - Button2.Width
-
-
-
-        Else
-
-            'If HScrollBar1.Visible Then HScrollBar1.Visible = False
-
-            'If VScrollBar1.Visible Then VScrollBar1.Visible = False
+        MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
+        MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
 
-            Button2.Top = HScrollBar1.Top - Button2.Height
-            Button2.Left = GroupBox1.Left - 1
+        SubtractPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height - SubtractPointToolButton.Height
+        SubtractPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-        End If
+
+        'Else
+
+        'If HScrollBar1.Visible Then HScrollBar1.Visible = False
+
+        'If VScrollBar1.Visible Then VScrollBar1.Visible = False
+
+
+        'AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
+        '    AddPointToolButton.Left = GroupBox1.Left - 1
+
+        'End If
 
         ' Update CheckBoxes
         HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
@@ -614,6 +623,7 @@ Public Class Form1
         DarkModeCheckBox.Left = FillShapeCheckBox.Right + 25
 
     End Sub
+
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
 
@@ -633,13 +643,13 @@ Public Class Form1
 
         If ScaleFactor >= 8 Then
 
-            Button2.Top = HScrollBar1.Top - Button2.Height
+            AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
 
-            Button2.Left = VScrollBar1.Left - Button2.Width
+            AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-            Button3.Top = HScrollBar1.Top - Button2.Height - Button3.Height
+            MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
 
-            Button3.Left = VScrollBar1.Left - Button2.Width
+            MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
 
             Dim ScaleFactorDiv16 = ScaleFactor / 16
@@ -962,13 +972,21 @@ Public Class Form1
             DwmSetWindowAttribute(CenterDrawingButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(CenterDrawingButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
-            SetWindowTheme(Button2.Handle, "DarkMode_Explorer", Nothing)
-            DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
-            DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+            SetWindowTheme(AddPointToolButton.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(AddPointToolButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(AddPointToolButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
-            SetWindowTheme(Button3.Handle, "DarkMode_Explorer", Nothing)
-            DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
-            DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+            SetWindowTheme(MovePointToolButton.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(MovePointToolButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(MovePointToolButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
+            SetWindowTheme(SubtractPointToolButton.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
+
+
+
 
             SetWindowTheme(GroupBox1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
@@ -989,18 +1007,21 @@ Public Class Form1
 
             If CurrentTool = Tool.Add Then
 
-                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
-                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
+
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
 
             ElseIf CurrentTool = Tool.Move Then
 
-                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
 
             ElseIf CurrentTool = Tool.Subtract Then
 
-                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
 
             End If
 
@@ -1024,13 +1045,24 @@ Public Class Form1
             DwmSetWindowAttribute(CenterDrawingButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(CenterDrawingButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
-            SetWindowTheme(Button2.Handle, "Explorer", Nothing)
-            DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-            DwmSetWindowAttribute(Button2.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+            SetWindowTheme(AddPointToolButton.Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(AddPointToolButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(AddPointToolButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
-            SetWindowTheme(Button3.Handle, "Explorer", Nothing)
-            DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-            DwmSetWindowAttribute(Button3.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+            SetWindowTheme(MovePointToolButton.Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(MovePointToolButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(MovePointToolButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+            SetWindowTheme(SubtractPointToolButton.Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
+
+
+
+
+
+
 
             SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
@@ -1051,18 +1083,18 @@ Public Class Form1
 
             If CurrentTool = Tool.Add Then
 
-                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
-                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
 
             ElseIf CurrentTool = Tool.Move Then
 
-                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
-                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
 
             ElseIf CurrentTool = Tool.Subtract Then
 
-                Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
-                Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
 
             End If
 
@@ -1277,37 +1309,37 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub MovePointToolButton_Click(sender As Object, e As EventArgs) Handles MovePointToolButton.Click
 
         CurrentTool = Tool.Move
 
         If DarkModeCheckBox.Checked Then
 
-            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-            Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
 
         Else
 
-            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
-            Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
 
         End If
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub AddPointToolButton_Click(sender As Object, e As EventArgs) Handles AddPointToolButton.Click
 
         CurrentTool = Tool.Add
 
         If DarkModeCheckBox.Checked Then
 
-            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
-            Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
 
         Else
 
-            Button2.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
-            Button3.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
 
         End If
 

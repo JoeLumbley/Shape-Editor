@@ -39,8 +39,9 @@ Partial Class Form1
         AboutToolStripMenuItem = New ToolStripMenuItem()
         ExitToolStripMenuItem = New ToolStripMenuItem()
         GroupBox1 = New GroupBox()
-        Button2 = New Button()
-        Button3 = New Button()
+        AddPointToolButton = New Button()
+        MovePointToolButton = New Button()
+        SubtractPointToolButton = New Button()
         CType(TrackBar1, ComponentModel.ISupportInitialize).BeginInit()
         MenuStrip1.SuspendLayout()
         GroupBox1.SuspendLayout()
@@ -196,24 +197,32 @@ Partial Class Form1
         GroupBox1.TabIndex = 11
         GroupBox1.TabStop = False
         ' 
-        ' Button2
+        ' AddPointToolButton
         ' 
-        Button2.Font = New Font("Segoe UI", 10.2089548F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Button2.Location = New Point(691, 213)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(47, 43)
-        Button2.TabIndex = 12
-        Button2.TabStop = False
-        Button2.UseVisualStyleBackColor = True
+        AddPointToolButton.Font = New Font("Segoe UI", 10.2089548F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        AddPointToolButton.Location = New Point(691, 213)
+        AddPointToolButton.Name = "AddPointToolButton"
+        AddPointToolButton.Size = New Size(47, 43)
+        AddPointToolButton.TabIndex = 12
+        AddPointToolButton.TabStop = False
+        AddPointToolButton.UseVisualStyleBackColor = True
         ' 
-        ' Button3
+        ' MovePointToolButton
         ' 
-        Button3.Location = New Point(447, 171)
-        Button3.Name = "Button3"
-        Button3.Size = New Size(47, 43)
-        Button3.TabIndex = 13
-        Button3.TabStop = False
-        Button3.UseVisualStyleBackColor = True
+        MovePointToolButton.Location = New Point(447, 171)
+        MovePointToolButton.Name = "MovePointToolButton"
+        MovePointToolButton.Size = New Size(47, 43)
+        MovePointToolButton.TabIndex = 13
+        MovePointToolButton.TabStop = False
+        MovePointToolButton.UseVisualStyleBackColor = True
+        ' 
+        ' SubtractPointToolButton
+        ' 
+        SubtractPointToolButton.Location = New Point(447, 74)
+        SubtractPointToolButton.Name = "SubtractPointToolButton"
+        SubtractPointToolButton.Size = New Size(112, 34)
+        SubtractPointToolButton.TabIndex = 14
+        SubtractPointToolButton.UseVisualStyleBackColor = True
         ' 
         ' Form1
         ' 
@@ -221,9 +230,10 @@ Partial Class Form1
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1258, 664)
         Controls.Add(TextBox1)
+        Controls.Add(SubtractPointToolButton)
         Controls.Add(MenuStrip1)
         Controls.Add(VScrollBar1)
-        Controls.Add(Button3)
+        Controls.Add(MovePointToolButton)
         Controls.Add(GroupBox1)
         Controls.Add(HScrollBar1)
         Controls.Add(DarkModeCheckBox)
@@ -231,7 +241,7 @@ Partial Class Form1
         Controls.Add(HideControlHandlesCheckBox)
         Controls.Add(Label1)
         Controls.Add(TrackBar1)
-        Controls.Add(Button2)
+        Controls.Add(AddPointToolButton)
         KeyPreview = True
         MainMenuStrip = MenuStrip1
         Name = "Form1"
@@ -263,7 +273,8 @@ Partial Class Form1
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents AddPointToolButton As Button
+    Friend WithEvents MovePointToolButton As Button
+    Friend WithEvents SubtractPointToolButton As Button
 
 End Class
