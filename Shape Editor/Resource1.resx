@@ -154,4 +154,16 @@
   <data name="MovePointToolButtonSelectedLightMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\MovePointToolButtonSelectedLightMode.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="SubtractPointToolDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\SubtractPointToolDark.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SubtractPointToolLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\SubtractPointToolLight.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SubtractPointToolSelectedDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\SubtractPointToolSelectedDark.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SubtractPointToolSelectedLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\SubtractPointToolSelectedLight.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

@@ -1011,17 +1011,23 @@ Public Class Form1
 
                 MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
 
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
 
             ElseIf CurrentTool = Tool.Move Then
 
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+
                 MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
+
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
 
             ElseIf CurrentTool = Tool.Subtract Then
 
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+
                 MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedDark)
 
             End If
 
@@ -1084,17 +1090,26 @@ Public Class Form1
             If CurrentTool = Tool.Add Then
 
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+
                 MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
 
             ElseIf CurrentTool = Tool.Move Then
 
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+
                 MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
+
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
 
             ElseIf CurrentTool = Tool.Subtract Then
 
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+
                 MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedLight)
 
             End If
 
@@ -1313,12 +1328,20 @@ Public Class Form1
         If DarkModeCheckBox.Checked Then
 
             AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+
             MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
+
 
         Else
 
             AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+
             MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
+
 
         End If
 
@@ -1331,16 +1354,49 @@ Public Class Form1
         If DarkModeCheckBox.Checked Then
 
             AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
+
             MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
 
         Else
 
             AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+
             MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
 
         End If
 
     End Sub
+
+    Private Sub SubtractPointToolButton_Click(sender As Object, e As EventArgs) Handles SubtractPointToolButton.Click
+
+        CurrentTool = Tool.Subtract
+
+        If DarkModeCheckBox.Checked Then
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedDark)
+
+        Else
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedLight)
+
+        End If
+
+
+    End Sub
+
+
 
 End Class
 

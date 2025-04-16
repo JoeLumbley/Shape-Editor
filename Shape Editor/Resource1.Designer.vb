@@ -183,5 +183,45 @@ Namespace My.Resources
                 Return CType(obj,Byte())
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property SubtractPointToolDark() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("SubtractPointToolDark", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property SubtractPointToolLight() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("SubtractPointToolLight", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property SubtractPointToolSelectedDark() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("SubtractPointToolSelectedDark", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property SubtractPointToolSelectedLight() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("SubtractPointToolSelectedLight", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
     End Class
 End Namespace
