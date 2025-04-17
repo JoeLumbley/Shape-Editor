@@ -1093,7 +1093,6 @@ Public Class Form1
             NewToolStripMenuItem.AutoSize = False
 
 
-
             If CurrentTool = Tool.Add Then
 
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
