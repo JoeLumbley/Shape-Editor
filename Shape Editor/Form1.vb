@@ -1099,6 +1099,7 @@ Public Class Form1
             AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutLight)
             AboutToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
             AboutToolStripMenuItem.AutoSize = False
+            ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitLight)
 
 
             If CurrentTool = Tool.Add Then
