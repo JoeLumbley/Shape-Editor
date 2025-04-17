@@ -1005,6 +1005,15 @@ Public Class Form1
             CustomMenuRenderer.TextColor = MenuItemTextColor_DarkMode
             CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColor_DarkMode
 
+
+
+
+            SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsLight)
+            OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileLight)
+            NewToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.NewFileLight)
+            AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutDark)
+
+
             If CurrentTool = Tool.Add Then
 
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
