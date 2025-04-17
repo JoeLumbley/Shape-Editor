@@ -187,6 +187,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
+        Friend Shared ReadOnly Property NewFileLight() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("NewFileLight", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
         Friend Shared ReadOnly Property OpenFileLight() As Byte()
             Get
                 Dim obj As Object = ResourceManager.GetObject("OpenFileLight", resourceCulture)
