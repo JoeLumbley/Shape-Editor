@@ -130,9 +130,9 @@ x,y
 
 
 
+![085](https://github.com/user-attachments/assets/ed56d24b-e783-499c-bf9f-f7598a0c0bc0)
 
 
-![077](https://github.com/user-attachments/assets/4d1e743c-5734-42eb-ba3e-e6dee6637bd3)
 
 
 - **Visual Comfort**: Reduces eye strain in low-light environments with a darker interface.
