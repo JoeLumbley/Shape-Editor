@@ -1006,8 +1006,10 @@ Public Class Form1
 
             SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsLight)
             OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileLight)
-            NewToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.NewFileLight)
+            NewToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.NewFileDark)
             AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutDark)
+            ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitDark)
+
 
 
             If CurrentTool = Tool.Add Then
