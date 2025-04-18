@@ -131,6 +131,8 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
+
         KeyPreview = True
 
         DoubleBuffered = True
@@ -1004,8 +1006,8 @@ Public Class Form1
 
 
 
-            SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsLight)
-            OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileLight)
+            SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsDark)
+            OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileDark)
             NewToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.NewFileDark)
             AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutDark)
             ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitDark)

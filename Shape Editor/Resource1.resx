@@ -172,8 +172,14 @@
   <data name="NewFileLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\NewFileLight.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="OpenFileDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\OpenFileDark.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="OpenFileLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\OpenFileLight.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SaveFileAsDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\SaveFileAsDark.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="SaveFileAsLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\SaveFileAsLight.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
