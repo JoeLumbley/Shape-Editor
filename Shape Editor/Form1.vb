@@ -37,17 +37,6 @@ Public Class Form1
     Private CurrentTool As Tool = Tool.Add
 
     Public Enum DwmWindowAttribute
-        dwmwa_invalid = -1
-        DWMWA_NCRENDERING_ENABLED = 1
-        DWMWA_CAPTION_COLOR = 3
-        DWMWA_FLIP3D_POLICY = 8
-        DWMWA_EXTENDED_FRAME_BOUNDS = 9
-        DWMWA_HAS_ICONIC_BITMAP = 10
-        DWMWA_DISALLOW_PEEK = 11
-        DWMWA_EXCLUDED_FROM_PEEK = 12
-        DWMWA_LAST = 13
-        dwmwa_use_dark_theme = 19
-        dwmwa_use_light_theme = 20
         DWMWA_USE_IMMERSIVE_DARK_MODE = 21
         DWMWA_MICA_EFFECT = 1029
     End Enum
@@ -119,15 +108,7 @@ Public Class Form1
                                                                     MenuItemTextColor_LightMode,
                                                                     SelectedBorderColor_LightMode)
 
-    <DllImport("dwmapi.dll")>
-    Private Shared Function DwmSetWindowAttribute(hWnd As IntPtr,
-                                                  Attribute As Integer,
-                                                  ByRef Value As Integer,
-                                                  SizeOfValue As Integer) As Integer
-    End Function
-
     Private OsVersion As Version = Environment.OSVersion.Version
-
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
