@@ -110,6 +110,11 @@ Public Class Form1
 
     Private OsVersion As Version = Environment.OSVersion.Version
 
+    Dim previousState As FormWindowState
+
+    'Private Sub Form_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+    'End Sub
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -127,26 +132,25 @@ Public Class Form1
         Text = "Shape Editor - Code with Joe"
 
         ScaleFactor = TrackBar1.Value / 100.0
-        Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
+        Label1.Text = $"Scale: {ScaleFactor:N2}"
 
         CreateShapesFiles()
 
-        ' Set the TextBox1 to read-only to prevent user edits.
-        TextBox1.ReadOnly = True
+        '' Set the TextBox1 to read-only to prevent user edits.
+        'TextBox1.ReadOnly = True
 
-        ' Set the TextBox1 to multiline to allow for multiple lines of text.
-        TextBox1.Multiline = True
+        '' Set the TextBox1 to multiline to allow for multiple lines of text.
+        'TextBox1.Multiline = True
 
-        ' Set the TextBox1 to auto-scroll to allow scrolling through the text.
-        TextBox1.ScrollBars = ScrollBars.Both
+        '' Set the TextBox1 to auto-scroll to allow scrolling through the text.
+        'TextBox1.ScrollBars = ScrollBars.Both
 
-        ' Set the TextBox1 to accept only read-only text.
-        TextBox1.AcceptsTab = False
+        '' Set the TextBox1 to accept only read-only text.
+        'TextBox1.AcceptsTab = False
 
-        'CenterToScreen()
 
         '' Maximize the form
-        WindowState = FormWindowState.Maximized
+        'WindowState = FormWindowState.Maximized
 
         MenuStrip1.RenderMode = ToolStripRenderMode.Professional
 
@@ -156,6 +160,7 @@ Public Class Form1
         LayoutForm()
 
         MenuStrip1.Refresh()
+
 
     End Sub
 
@@ -446,14 +451,12 @@ Public Class Form1
 
     End Function
 
-
     Private Sub CloseShape()
         points.Add(points(0)) ' Close the shape
         points.Add(GetMirroredPoint(points(1))) ' Close the mirror shape
         GeneratePointArrayText()
         Invalidate()
     End Sub
-
 
     Private Sub RemovePoint(index As Integer)
         If index >= 0 AndAlso index < points.Count - 1 Then
@@ -464,7 +467,6 @@ Public Class Form1
         GeneratePointArrayText()
         Invalidate()
     End Sub
-
 
     Private Sub InsertNewPoint(index As Integer)
         Dim newPoint As New Point(points(index).X + 10, points(index).Y + 10)
@@ -558,19 +560,7 @@ Public Class Form1
         GroupBox1.Width = vScrollBarWidth
         GroupBox1.Height = hScrollBarHeight
 
-        'If ScaleFactor >= 8 Then
 
-        'HScrollBar1.Minimum = -ClientSize.Width * (ScaleFactor / 16)
-
-        'HScrollBar1.Maximum = ClientSize.Width * (ScaleFactor / 16)
-
-        'VScrollBar1.Minimum = -ClientSize.Height * (ScaleFactor / 16)
-
-        'VScrollBar1.Maximum = ClientSize.Height * (ScaleFactor / 16)
-
-        'If Not HScrollBar1.Visible Then HScrollBar1.Visible = True
-
-        'If Not VScrollBar1.Visible Then VScrollBar1.Visible = True
 
         AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
         AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
@@ -583,17 +573,6 @@ Public Class Form1
         SubtractPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
 
-        'Else
-
-        'If HScrollBar1.Visible Then HScrollBar1.Visible = False
-
-        'If VScrollBar1.Visible Then VScrollBar1.Visible = False
-
-
-        'AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
-        '    AddPointToolButton.Left = GroupBox1.Left - 1
-
-        'End If
 
         ' Update CheckBoxes
         HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
@@ -649,24 +628,11 @@ Public Class Form1
 
             If Not VScrollBar1.Visible Then VScrollBar1.Visible = True
 
-            'Else
 
-            '    Button2.Top = HScrollBar1.Top - Button2.Height
-
-            '    Button2.Left = GroupBox1.Left - 1
-
-            '    Button3.Top = HScrollBar1.Top - Button2.Height - Button3.Height
-
-            '    Button3.Left = GroupBox1.Left - 1
-
-
-            '    If HScrollBar1.Visible Then HScrollBar1.Visible = False
-
-            '    If VScrollBar1.Visible Then VScrollBar1.Visible = False
 
         End If
 
-        Label1.Text = $"Scale Factor: {ScaleFactor:N2}"
+        Label1.Text = $"Scale: {ScaleFactor:N2}"
 
     End Sub
 
@@ -1395,8 +1361,6 @@ Public Class Form1
 
 
     End Sub
-
-
 
 End Class
 
