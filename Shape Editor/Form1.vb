@@ -555,10 +555,12 @@ Public Class Form1
 
 
         GroupBox1.Top = HScrollBar1.Top
-        GroupBox1.Left = VScrollBar1.Left
+        GroupBox1.Left = VScrollBar1.Left - 2
 
-        GroupBox1.Width = vScrollBarWidth
-        GroupBox1.Height = hScrollBarHeight
+        'GroupBox1.Width = vScrollBarWidth
+        'GroupBox1.Height = hScrollBarHeight
+        GroupBox1.Width = vScrollBarWidth + 10
+        GroupBox1.Height = hScrollBarHeight + 10
 
 
 
@@ -1122,7 +1124,7 @@ Public Class Form1
 
         CenterDrawingButton.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
 
-        GroupBox1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), Color.White)
+        GroupBox1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 23, 23, 23), Color.White)
 
     End Sub
 
