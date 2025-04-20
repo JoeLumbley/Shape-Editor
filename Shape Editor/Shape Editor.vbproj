@@ -7,6 +7,13 @@
     <StartupObject>Sub Main</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <Description>A simple editor that allows you to draw shapes and generate the corresponding point array in VB.NET.
+
+https://github.com/JoeLumbley/Shape-Editor</Description>
+    <Copyright>MIT License Copyright(c) 2025 Joseph W. Lumbley</Copyright>
+    <PackageProjectUrl>https://github.com/JoeLumbley/Shape-Editor</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/JoeLumbley/Shape-Editor</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +27,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Update="My Project\Settings.Designer.vb">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Update="Resource1.Designer.vb">
       <DesignTime>True</DesignTime>
@@ -40,6 +52,11 @@
     <None Update="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Update="My Project\Settings.settings">
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
 

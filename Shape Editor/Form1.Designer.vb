@@ -247,6 +247,7 @@ Partial Class Form1
         KeyPreview = True
         MainMenuStrip = MenuStrip1
         Name = "Form1"
+        SizeGripStyle = SizeGripStyle.Show
         StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
         CType(TrackBar1, ComponentModel.ISupportInitialize).EndInit()

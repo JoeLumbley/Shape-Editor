@@ -802,6 +802,13 @@ Public Class Form1
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+
+
+        'AboutBox1.ShowDialog()
+
+
+        'My.Application.Info.Description = "A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET." & vbCrLf & vbCrLf & "MIT License" & vbCrLf & "Copyright(c) 2025 Joseph W. Lumbley" & vbCrLf & vbCrLf & "https://github.com/JoeLumbley/Shape-Editor"
+
         MessageBox.Show("Shape Editor" _
                       & vbCrLf _
                       & "A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET." _
@@ -1053,6 +1060,11 @@ Public Class Form1
         End If
 
         MenuStrip1.Renderer = CustomMenuRenderer
+
+        ' Set the background color of the form and controls based on dark mode
+        Me.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+
+
 
         TrackBar1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
