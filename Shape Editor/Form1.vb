@@ -63,10 +63,10 @@ Public Class Form1
     Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
 
-    Private GridColorDark As Color = Color.FromArgb(255, 42, 42, 42)
+    Private GridColorDark As Color = Color.FromArgb(255, 16, 16, 16)
     Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
 
-    Private DarkModeControlColor As Color = Color.FromArgb(255, 32, 32, 32)
+    Private DarkModeControlColor As Color = Color.FromArgb(255, 23, 23, 23)
     '
     Private GridPenDark As New Pen(GridColorDark, 1)
     Private GridPenLight As New Pen(GridColorLight, 1)
@@ -91,10 +91,10 @@ Public Class Form1
     Private SelectedBorderColor_LightMode As Color = Color.FromArgb(255, Color.DodgerBlue)
 
     ' Dark mode colors
-    Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 32, 32, 32)
+    Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 23, 23, 23)
     Private MenuItemBackgroundSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64)
-    Private ToolStripBackground_DarkMode As Color = Color.FromArgb(255, 32, 32, 32)
-    Private MenuItemBorderColor_DarkMode As Color = Color.FromArgb(255, 32, 32, 32)
+    Private ToolStripBackground_DarkMode As Color = Color.FromArgb(255, 23, 23, 23)
+    Private MenuItemBorderColor_DarkMode As Color = Color.FromArgb(255, 23, 23, 23)
     Private MenuItemSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64)
     Private MenuItemTextColor_DarkMode As Color = Color.FromArgb(255, 255, 255, 255)
     Private MenuItemSelectedBorderColor_DarkMode As Color = Color.FromArgb(255, Color.DodgerBlue)
@@ -1053,20 +1053,15 @@ Public Class Form1
 
         End If
 
-
-
-
-
-
         MenuStrip1.Renderer = CustomMenuRenderer
 
-        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), SystemColors.Control)
+        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
         DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
         FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
-        TextBox1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 32, 32, 32), SystemColors.Control)
+        TextBox1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
 
         ShapeFillBrush = If(DarkModeCheckBox.Checked, ShapeFillBrushDarkMode, ShapeFillBrushLightMode)
 
