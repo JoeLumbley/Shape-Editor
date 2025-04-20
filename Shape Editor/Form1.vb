@@ -100,7 +100,7 @@ Public Class Form1
     Private MenuItemSelectedBorderColor_DarkMode As Color = Color.FromArgb(255, Color.DodgerBlue)
 
     ' Set menu to Light mode colors.
-    Dim CustomMenuRenderer As New CustomColorMenuStripRenderer(MenuItemBackgroundColor_LightMode,
+    Private CustomMenuRenderer As New CustomColorMenuStripRenderer(MenuItemBackgroundColor_LightMode,
                                                                     MenuItemBackgroundSelected_LightMode,
                                                                     ToolStripBackground_LightMode,
                                                                     MenuItemBorderColor_LightMode,
@@ -110,14 +110,9 @@ Public Class Form1
 
     Private OsVersion As Version = Environment.OSVersion.Version
 
-    Dim previousState As FormWindowState
-
-    'Private Sub Form_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-    'End Sub
+    Private previousState As FormWindowState
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-
 
         KeyPreview = True
 
@@ -342,11 +337,7 @@ Public Class Form1
             ' Insert a new point near the selected point
             InsertNewPoint(selectedPointIndex)
 
-
-
         End If
-
-        'e.Handled = True
 
     End Sub
 
@@ -556,7 +547,6 @@ Public Class Form1
 
     End Sub
 
-
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
 
         ScaleFactor = TrackBar1.Value / 100.0
@@ -583,7 +573,6 @@ Public Class Form1
 
             MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-
             Dim ScaleFactorDiv16 = ScaleFactor / 16
 
             HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
@@ -594,11 +583,9 @@ Public Class Form1
 
             VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
 
-            If Not HScrollBar1.Visible Then HScrollBar1.Visible = True
+            'If Not HScrollBar1.Visible Then HScrollBar1.Visible = True
 
-            If Not VScrollBar1.Visible Then VScrollBar1.Visible = True
-
-
+            'If Not VScrollBar1.Visible Then VScrollBar1.Visible = True
 
         End If
 
