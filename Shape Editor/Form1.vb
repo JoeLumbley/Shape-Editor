@@ -85,7 +85,7 @@ Public Class Form1
     Private MenuItemBackgroundColor_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
     Private MenuItemBackgroundSelected_LightMode As Color = Color.FromArgb(16, Color.DodgerBlue)
     Private ToolStripBackground_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
-    Private MenuItemBorderColor_LightMode As Color = Color.FromArgb(255, 200, 200, 200)
+    Private MenuItemBorderColor_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
     Private MenuItemSelectedColor_LightMode As Color = Color.FromArgb(64, Color.Gray)
     Private MenuItemTextColor_LightMode As Color = Color.FromArgb(255, Color.Black)
     Private SelectedBorderColor_LightMode As Color = Color.FromArgb(255, Color.DodgerBlue)
@@ -94,7 +94,7 @@ Public Class Form1
     Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 32, 32, 32)
     Private MenuItemBackgroundSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64)
     Private ToolStripBackground_DarkMode As Color = Color.FromArgb(255, 32, 32, 32)
-    Private MenuItemBorderColor_DarkMode As Color = Color.FromArgb(255, 50, 50, 50)
+    Private MenuItemBorderColor_DarkMode As Color = Color.FromArgb(255, 32, 32, 32)
     Private MenuItemSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64)
     Private MenuItemTextColor_DarkMode As Color = Color.FromArgb(255, 255, 255, 255)
     Private MenuItemSelectedBorderColor_DarkMode As Color = Color.FromArgb(255, Color.DodgerBlue)
@@ -136,22 +136,6 @@ Public Class Form1
 
         CreateShapesFiles()
 
-        '' Set the TextBox1 to read-only to prevent user edits.
-        'TextBox1.ReadOnly = True
-
-        '' Set the TextBox1 to multiline to allow for multiple lines of text.
-        'TextBox1.Multiline = True
-
-        '' Set the TextBox1 to auto-scroll to allow scrolling through the text.
-        'TextBox1.ScrollBars = ScrollBars.Both
-
-        '' Set the TextBox1 to accept only read-only text.
-        'TextBox1.AcceptsTab = False
-
-
-        '' Maximize the form
-        'WindowState = FormWindowState.Maximized
-
         MenuStrip1.RenderMode = ToolStripRenderMode.Professional
 
         ' Inject our custom rendering into the MenuStrip
@@ -160,7 +144,6 @@ Public Class Form1
         LayoutForm()
 
         MenuStrip1.Refresh()
-
 
     End Sub
 
@@ -268,10 +251,6 @@ Public Class Form1
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
 
-        ' Calculate the adjusted mouse location based on the scale factor
-        AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor),
-                                          CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
-
         If ActiveControl IsNot Nothing Then
 
             ' Clear the active control
@@ -280,6 +259,10 @@ Public Class Form1
             Focus()
 
         End If
+
+        ' Calculate the adjusted mouse location based on the scale factor
+        AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor),
+                                          CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
         ' Check if the left mouse button is pressed and and a point is selected
         If isDrawing AndAlso selectedPointIndex <> -1 Then
@@ -532,14 +515,9 @@ Public Class Form1
         VScrollBar1.Maximum = clientHeight * 4
         VScrollBar1.Value = 0
 
-        ' Update Button1
-        'Button1.Top = HScrollBar1.Top
-        'Button1.Left = VScrollBar1.Left
         CenterDrawingButton.Width = vScrollBarWidth + 2
         CenterDrawingButton.Height = hScrollBarHeight + 2
 
-        'Button2.Top = HScrollBar1.Top - Button2.Height
-        'Button2.Left = VScrollBar1.Left - Button2.Width
         AddPointToolButton.ImageAlign = ContentAlignment.TopLeft
         AddPointToolButton.Width = CenterDrawingButton.Width
         AddPointToolButton.Height = CenterDrawingButton.Height
@@ -552,17 +530,10 @@ Public Class Form1
         SubtractPointToolButton.Width = CenterDrawingButton.Width
         SubtractPointToolButton.Height = CenterDrawingButton.Height
 
-
-
         GroupBox1.Top = HScrollBar1.Top
         GroupBox1.Left = VScrollBar1.Left - 2
-
-        'GroupBox1.Width = vScrollBarWidth
-        'GroupBox1.Height = hScrollBarHeight
         GroupBox1.Width = vScrollBarWidth + 10
         GroupBox1.Height = hScrollBarHeight + 10
-
-
 
         AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
         AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
@@ -570,11 +541,8 @@ Public Class Form1
         MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
         MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-
         SubtractPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height - SubtractPointToolButton.Height
         SubtractPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-
 
         ' Update CheckBoxes
         HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5

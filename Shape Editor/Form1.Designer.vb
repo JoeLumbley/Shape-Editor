@@ -49,12 +49,13 @@ Partial Class Form1
         ' 
         ' TextBox1
         ' 
+        TextBox1.BorderStyle = BorderStyle.FixedSingle
         TextBox1.Location = New Point(430, 157)
         TextBox1.Multiline = True
         TextBox1.Name = "TextBox1"
         TextBox1.PlaceholderText = "< Draw shape in the area to the left."
         TextBox1.ReadOnly = True
-        TextBox1.ScrollBars = ScrollBars.Vertical
+        TextBox1.ScrollBars = ScrollBars.Both
         TextBox1.Size = New Size(344, 51)
         TextBox1.TabIndex = 0
         TextBox1.TabStop = False
