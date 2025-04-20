@@ -17,18 +17,30 @@ The Shape Editor is an innovative tool designed for the interactive creation of 
 - **User-Friendly Interface**: Simplifies the process of integrating shape data, making it accessible for users of all skill levels.
 - **Interactive Development**: Encourages hands-on shape creation and coding, fostering creativity and experimentation.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Point Mirroring
-
-
-
-![037](https://github.com/user-attachments/assets/c92103e6-f9fc-4396-8321-c7c1d6be40cd)
-
-
-
 
 ### How It Works
 - **Symmetrical Design**: Draw a shape on one side of the horizontal axis, and the Shape Editor will automatically generate the mirrored counterpart on the opposite side.
 - **Real-Time Updates**: Adjust points or modify the shape on one side, and the mirrored shape updates instantly, providing immediate visual feedback.
+
+
+
+![088](https://github.com/user-attachments/assets/e97c5d38-2376-484f-b8a1-dea229126355)
+
+
 
 ### Benefits
 - **Efficiency**: Saves time in designing symmetrical shapes, making your workflow faster.
