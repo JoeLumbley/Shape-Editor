@@ -1022,7 +1022,6 @@ Public Class Form1
             AboutToolStripMenuItem.AutoSize = False
             ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitLight)
 
-
             If CurrentTool = Tool.Add Then
 
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
