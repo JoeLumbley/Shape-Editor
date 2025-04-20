@@ -583,10 +583,6 @@ Public Class Form1
 
             VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
 
-            'If Not HScrollBar1.Visible Then HScrollBar1.Visible = True
-
-            'If Not VScrollBar1.Visible Then VScrollBar1.Visible = True
-
         End If
 
         Label1.Text = $"Scale: {ScaleFactor:N2}"
