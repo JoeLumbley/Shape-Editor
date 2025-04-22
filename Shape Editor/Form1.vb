@@ -785,37 +785,25 @@ Public Class Form1
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+
         Close()
+
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
 
-
         AboutForm.ShowDialog()
 
-
-        'My.Application.Info.Description = "A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET." & vbCrLf & vbCrLf & "MIT License" & vbCrLf & "Copyright(c) 2025 Joseph W. Lumbley" & vbCrLf & vbCrLf & "https://github.com/JoeLumbley/Shape-Editor"
-
-        'MessageBox.Show("Shape Editor" _
-        '              & vbCrLf _
-        '              & "A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET." _
-        '              & vbCrLf _
-        '              & vbCrLf _
-        '              & "MIT License" _
-        '              & vbCrLf _
-        '              & "Copyright(c) 2025 Joseph W. Lumbley" _
-        '              & vbCrLf _
-        '              & vbCrLf _
-        '              & "https://github.com/JoeLumbley/Shape-Editor",
-        '                "About Shape Editor",
-        '                MessageBoxButtons.OK,
-        '                MessageBoxIcon.Information)
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+
         If MessageBox.Show("Are you sure you want to exit?", "Exit Shape Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+
             e.Cancel = True
+
         End If
+
     End Sub
 
     Private Sub Form1_MouseWheel(sender As Object, e As MouseEventArgs) Handles MyBase.MouseWheel
@@ -823,6 +811,7 @@ Public Class Form1
         CenterDrawingArea()
 
         If e.Delta > 0 Then
+
             If TrackBar1.Value + 100 <= TrackBar1.Maximum Then
                 TrackBar1.Value += 100
             Else
@@ -836,6 +825,7 @@ Public Class Form1
             Else
                 TrackBar1.Value = TrackBar1.Minimum
             End If
+
         End If
 
         ScaleFactor = TrackBar1.Value / 100.0
@@ -914,16 +904,11 @@ Public Class Form1
             CustomMenuRenderer.TextColor = MenuItemTextColor_DarkMode
             CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColor_DarkMode
 
-
-
-
             SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsDark)
             OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileDark)
             NewToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.NewFileDark)
             AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutDark)
             ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitDark)
-
-
 
             If CurrentTool = Tool.Add Then
 
@@ -1048,10 +1033,7 @@ Public Class Form1
 
         MenuStrip1.Renderer = CustomMenuRenderer
 
-        ' Set the background color of the form and controls based on dark mode
-        Me.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
-
-
+        BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
 
         TrackBar1.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
 
