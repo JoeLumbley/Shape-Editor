@@ -63,7 +63,7 @@ Public Class Form1
     Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
 
-    Private GridColorDark As Color = Color.FromArgb(255, 16, 16, 16)
+    Private GridColorDark As Color = Color.FromArgb(255, 40, 40, 40)
     Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
 
     Public ControlColorDark As Color = Color.FromArgb(255, 23, 23, 23)
@@ -307,22 +307,23 @@ Public Class Form1
 
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-        If e.KeyCode = Keys.Enter AndAlso points.Count > 2 Then
-            ' Close the shape
-            CloseShape()
-        ElseIf e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
-            ' Remove the selected point
+        'If e.KeyCode = Keys.Enter AndAlso points.Count > 2 Then
+        '    ' Close the shape
+        '    CloseShape()
+        If e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
+
             RemovePoint(selectedPointIndex)
+
         ElseIf e.KeyCode = Keys.OemMinus AndAlso selectedPointIndex <> -1 Then
-            ' Remove the selected point
+
             RemovePoint(selectedPointIndex)
 
         ElseIf e.KeyCode = Keys.N AndAlso selectedPointIndex <> -1 Then
-            ' Insert a new point near the selected point
+
             InsertNewPoint(selectedPointIndex)
 
         ElseIf e.KeyCode = Keys.Oemplus AndAlso selectedPointIndex <> -1 Then
-            ' Insert a new point near the selected point
+
             InsertNewPoint(selectedPointIndex)
 
         End If
@@ -810,12 +811,12 @@ Public Class Form1
         Return New Point(p.X, -p.Y)
     End Function
 
-    Private Sub CloseShape()
-        points.Add(points(0)) ' Close the shape
-        points.Add(GetMirroredPoint(points(1))) ' Close the mirror shape
-        GeneratePointArrayText()
-        Invalidate()
-    End Sub
+    'Private Sub CloseShape()
+    '    points.Add(points(0)) ' Close the shape
+    '    points.Add(GetMirroredPoint(points(1))) ' Close the mirror shape
+    '    GeneratePointArrayText()
+    '    Invalidate()
+    'End Sub
 
     Private Sub RemovePoint(index As Integer)
         If index >= 0 AndAlso index < points.Count - 1 Then
@@ -828,7 +829,7 @@ Public Class Form1
     End Sub
 
     Private Sub InsertNewPoint(index As Integer)
-        Dim newPoint As New Point(points(index).X + 10, points(index).Y + 10)
+        Dim newPoint As New Point(points(index).X, points(index).Y)
         points.Insert(index + 2, newPoint)
         points.Insert(index + 3, GetMirroredPoint(newPoint))
         selectedPointIndex += 2

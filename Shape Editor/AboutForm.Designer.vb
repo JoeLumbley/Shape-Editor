@@ -35,7 +35,7 @@ Partial Class AboutForm
         ' 
         GitHubLink.AutoSize = True
         GitHubLink.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        GitHubLink.Location = New Point(191, 343)
+        GitHubLink.Location = New Point(211, 301)
         GitHubLink.Name = "GitHubLink"
         GitHubLink.Size = New Size(376, 28)
         GitHubLink.TabIndex = 0
@@ -45,7 +45,7 @@ Partial Class AboutForm
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(328, 227)
+        Label1.Location = New Point(348, 189)
         Label1.Name = "Label1"
         Label1.Size = New Size(103, 25)
         Label1.TabIndex = 1
@@ -53,7 +53,7 @@ Partial Class AboutForm
         ' 
         ' OKButton
         ' 
-        OKButton.Location = New Point(323, 404)
+        OKButton.Location = New Point(343, 379)
         OKButton.Name = "OKButton"
         OKButton.Size = New Size(112, 34)
         OKButton.TabIndex = 2
@@ -63,7 +63,7 @@ Partial Class AboutForm
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(223, 268)
+        Label2.Location = New Point(243, 230)
         Label2.Name = "Label2"
         Label2.Size = New Size(312, 25)
         Label2.TabIndex = 3
@@ -72,26 +72,26 @@ Partial Class AboutForm
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(187, 111)
+        Label3.Location = New Point(204, 93)
         Label3.Name = "Label3"
-        Label3.Size = New Size(384, 25)
+        Label3.Size = New Size(390, 25)
         Label3.TabIndex = 4
-        Label3.Text = "A simple editor that allows you to draw shapes"
+        Label3.Text = "A simple editor that allows you to draw a shape"
         ' 
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(158, 151)
+        Label4.Location = New Point(152, 133)
         Label4.Name = "Label4"
-        Label4.Size = New Size(442, 25)
+        Label4.Size = New Size(494, 25)
         Label4.TabIndex = 5
-        Label4.Text = "and generate the corresponding point array in VB.NET."
+        Label4.Text = "and generates the corresponding point array in VB.NET code."
         ' 
         ' Label5
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(265, 30)
+        Label5.Location = New Point(285, 30)
         Label5.Name = "Label5"
         Label5.Size = New Size(229, 48)
         Label5.TabIndex = 6
