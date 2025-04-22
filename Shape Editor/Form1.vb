@@ -301,26 +301,10 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub AddPoint(location As Point)
-        ' Helper method for adding points and their mirrored counterparts
 
-        points.Add(location)
-        points.Add(GetMirroredPoint(location))
-        selectedPointIndex = points.Count - 2
-    End Sub
 
-    Private Sub MovePoint(location As Point)
-        ' Helper method for moving points and updating their mirrored counterparts
 
-        points(selectedPointIndex) = location
-        points(selectedPointIndex + 1) = GetMirroredPoint(location)
-    End Sub
 
-    Private Function GetMirroredPoint(p As Point) As Point
-        ' Helper method to calculate the mirrored point
-
-        Return New Point(p.X, -p.Y)
-    End Function
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         If e.KeyCode = Keys.Enter AndAlso points.Count > 2 Then
@@ -429,31 +413,10 @@ Public Class Form1
 
     End Function
 
-    Private Sub CloseShape()
-        points.Add(points(0)) ' Close the shape
-        points.Add(GetMirroredPoint(points(1))) ' Close the mirror shape
-        GeneratePointArrayText()
-        Invalidate()
-    End Sub
 
-    Private Sub RemovePoint(index As Integer)
-        If index >= 0 AndAlso index < points.Count - 1 Then
-            points.RemoveAt(index + 1) ' Remove mirrored point
-            points.RemoveAt(index)     ' Remove actual point
-        End If
-        selectedPointIndex = -1
-        GeneratePointArrayText()
-        Invalidate()
-    End Sub
 
-    Private Sub InsertNewPoint(index As Integer)
-        Dim newPoint As New Point(points(index).X + 10, points(index).Y + 10)
-        points.Insert(index + 2, newPoint)
-        points.Insert(index + 3, GetMirroredPoint(newPoint))
-        selectedPointIndex += 2
-        GeneratePointArrayText()
-        Invalidate()
-    End Sub
+
+
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
 
@@ -463,93 +426,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub LayoutForm()
-
-        ' Calculate common values
-        Dim clientWidth As Integer = ClientSize.Width
-        Dim clientHeight As Integer = ClientSize.Height
-        Dim halfClientWidth As Integer = clientWidth \ 2
-        Dim quarterClientWidth As Integer = clientWidth \ 4
-        Dim menuStripHeight As Integer = MenuStrip1.Height
-        Dim trackBarHeight As Integer = TrackBar1.Height
-        Dim hScrollBarHeight As Integer = HScrollBar1.Height
-        Dim vScrollBarWidth As Integer = VScrollBar1.Width
-
-        CenterDrawingArea()
-
-        ' Update TextBox1
-        TextBox1.Top = ClientRectangle.Top + menuStripHeight
-        TextBox1.Left = halfClientWidth
-        TextBox1.Width = halfClientWidth
-        TextBox1.Height = clientHeight - menuStripHeight
-
-        ' Update TrackBar1
-        TrackBar1.Top = ClientRectangle.Bottom - trackBarHeight
-        TrackBar1.Left = ClientRectangle.Left
-        TrackBar1.Width = halfClientWidth
-
-        ' Update Label1
-        Label1.Top = TrackBar1.Bottom - Label1.Height - 5
-        Label1.Left = ClientRectangle.Left + 5
-        Label1.Width = 200
-        Label1.Height = 20
-
-        ' Update HScrollBar1
-        HScrollBar1.Top = ClientRectangle.Bottom - trackBarHeight - hScrollBarHeight
-        HScrollBar1.Left = ClientRectangle.Left
-        HScrollBar1.Width = halfClientWidth - vScrollBarWidth
-        HScrollBar1.Minimum = -clientWidth * 2
-        HScrollBar1.Maximum = clientWidth * 2
-        HScrollBar1.Value = 0
-
-        ' Update VScrollBar1
-        VScrollBar1.Top = ClientRectangle.Top + menuStripHeight
-        VScrollBar1.Left = TextBox1.Left - vScrollBarWidth
-        VScrollBar1.Height = clientHeight - trackBarHeight - hScrollBarHeight - menuStripHeight
-        VScrollBar1.Minimum = -clientHeight * 4
-        VScrollBar1.Maximum = clientHeight * 4
-        VScrollBar1.Value = 0
-
-        CenterDrawingButton.Width = vScrollBarWidth + 2
-        CenterDrawingButton.Height = hScrollBarHeight + 2
-
-        AddPointToolButton.ImageAlign = ContentAlignment.TopLeft
-        AddPointToolButton.Width = CenterDrawingButton.Width
-        AddPointToolButton.Height = CenterDrawingButton.Height
-
-        MovePointToolButton.ImageAlign = ContentAlignment.TopLeft
-        MovePointToolButton.Width = CenterDrawingButton.Width
-        MovePointToolButton.Height = CenterDrawingButton.Height
-
-        SubtractPointToolButton.ImageAlign = ContentAlignment.TopLeft
-        SubtractPointToolButton.Width = CenterDrawingButton.Width
-        SubtractPointToolButton.Height = CenterDrawingButton.Height
-
-        GroupBox1.Top = HScrollBar1.Top
-        GroupBox1.Left = VScrollBar1.Left - 2
-        GroupBox1.Width = vScrollBarWidth + 10
-        GroupBox1.Height = hScrollBarHeight + 10
-
-        AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
-        AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-        MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
-        MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-        SubtractPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height - SubtractPointToolButton.Height
-        SubtractPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-        ' Update CheckBoxes
-        HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
-        HideControlHandlesCheckBox.Left = Label1.Right + 25
-
-        FillShapeCheckBox.Top = HideControlHandlesCheckBox.Top
-        FillShapeCheckBox.Left = HideControlHandlesCheckBox.Right + 25
-
-        DarkModeCheckBox.Top = HideControlHandlesCheckBox.Top
-        DarkModeCheckBox.Left = FillShapeCheckBox.Right + 25
-
-    End Sub
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
 
@@ -561,37 +437,11 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateUIScaleFactor()
 
-        ResetScrollBars()
 
-        CenterDrawingArea()
 
-        If ScaleFactor >= 8 Then
 
-            AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
 
-            AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-            MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
-
-            MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-            Dim ScaleFactorDiv16 = ScaleFactor / 16
-
-            HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
-
-            HScrollBar1.Maximum = ClientSize.Width * ScaleFactorDiv16
-
-            VScrollBar1.Minimum = -ClientSize.Height * ScaleFactorDiv16
-
-            VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
-
-        End If
-
-        Label1.Text = $"Scale: {ScaleFactor:N2}"
-
-    End Sub
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
 
@@ -628,7 +478,6 @@ Public Class Form1
     Private Sub FillShapeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles FillShapeCheckBox.CheckedChanged
         Invalidate()
     End Sub
-
 
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
@@ -833,6 +682,277 @@ Public Class Form1
         UpdateUIScaleFactor()
 
         Invalidate()
+
+    End Sub
+
+    Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
+
+        If DarkModeCheckBox.Checked Then
+
+            DarkMode = True
+
+        Else
+
+            DarkMode = False
+
+        End If
+
+        ApplyUITheme()
+
+        Refresh()
+
+        Invalidate()
+
+        ' Fixes title bar theme update issue in Windows 10
+        ' Check if the OS is Windows 10
+        If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
+            ' The first public build of Windows 11 had the build number 10.0.22000
+
+            ' Force a redraw of the form by showing a message box.
+            MsgBox("Applying UI Theme", MsgBoxStyle.OkOnly, "Shape Editor - Code with Joe")
+
+            ' 10.0.19045.5737 - Windows 10 Home Version	22H2
+        End If
+
+    End Sub
+
+    Private Sub MovePointToolButton_Click(sender As Object, e As EventArgs) Handles MovePointToolButton.Click
+
+        CurrentTool = Tool.Move
+
+        If DarkModeCheckBox.Checked Then
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
+
+
+        Else
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
+
+        End If
+
+    End Sub
+
+    Private Sub AddPointToolButton_Click(sender As Object, e As EventArgs) Handles AddPointToolButton.Click
+
+        CurrentTool = Tool.Add
+
+        If DarkModeCheckBox.Checked Then
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
+
+        Else
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
+
+        End If
+
+    End Sub
+
+    Private Sub SubtractPointToolButton_Click(sender As Object, e As EventArgs) Handles SubtractPointToolButton.Click
+
+        CurrentTool = Tool.Subtract
+
+        If DarkModeCheckBox.Checked Then
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedDark)
+
+        Else
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedLight)
+
+        End If
+
+    End Sub
+
+    Private Sub AddPoint(location As Point)
+        ' Helper method for adding points and their mirrored counterparts
+
+        points.Add(location)
+        points.Add(GetMirroredPoint(location))
+        selectedPointIndex = points.Count - 2
+    End Sub
+
+    Private Sub MovePoint(location As Point)
+        ' Helper method for moving points and updating their mirrored counterparts
+
+        points(selectedPointIndex) = location
+        points(selectedPointIndex + 1) = GetMirroredPoint(location)
+    End Sub
+
+    Private Function GetMirroredPoint(p As Point) As Point
+        ' Helper method to calculate the mirrored point
+
+        Return New Point(p.X, -p.Y)
+    End Function
+
+    Private Sub CloseShape()
+        points.Add(points(0)) ' Close the shape
+        points.Add(GetMirroredPoint(points(1))) ' Close the mirror shape
+        GeneratePointArrayText()
+        Invalidate()
+    End Sub
+
+    Private Sub RemovePoint(index As Integer)
+        If index >= 0 AndAlso index < points.Count - 1 Then
+            points.RemoveAt(index + 1) ' Remove mirrored point
+            points.RemoveAt(index)     ' Remove actual point
+        End If
+        selectedPointIndex = -1
+        GeneratePointArrayText()
+        Invalidate()
+    End Sub
+
+    Private Sub InsertNewPoint(index As Integer)
+        Dim newPoint As New Point(points(index).X + 10, points(index).Y + 10)
+        points.Insert(index + 2, newPoint)
+        points.Insert(index + 3, GetMirroredPoint(newPoint))
+        selectedPointIndex += 2
+        GeneratePointArrayText()
+        Invalidate()
+    End Sub
+
+    Private Sub LayoutForm()
+
+        ' Calculate common values
+        Dim clientWidth As Integer = ClientSize.Width
+        Dim clientHeight As Integer = ClientSize.Height
+        Dim halfClientWidth As Integer = clientWidth \ 2
+        Dim quarterClientWidth As Integer = clientWidth \ 4
+        Dim menuStripHeight As Integer = MenuStrip1.Height
+        Dim trackBarHeight As Integer = TrackBar1.Height
+        Dim hScrollBarHeight As Integer = HScrollBar1.Height
+        Dim vScrollBarWidth As Integer = VScrollBar1.Width
+
+        CenterDrawingArea()
+
+        ' Update TextBox1
+        TextBox1.Top = ClientRectangle.Top + menuStripHeight
+        TextBox1.Left = halfClientWidth
+        TextBox1.Width = halfClientWidth
+        TextBox1.Height = clientHeight - menuStripHeight
+
+        ' Update TrackBar1
+        TrackBar1.Top = ClientRectangle.Bottom - trackBarHeight
+        TrackBar1.Left = ClientRectangle.Left
+        TrackBar1.Width = halfClientWidth
+
+        ' Update Label1
+        Label1.Top = TrackBar1.Bottom - Label1.Height - 5
+        Label1.Left = ClientRectangle.Left + 5
+        Label1.Width = 200
+        Label1.Height = 20
+
+        ' Update HScrollBar1
+        HScrollBar1.Top = ClientRectangle.Bottom - trackBarHeight - hScrollBarHeight
+        HScrollBar1.Left = ClientRectangle.Left
+        HScrollBar1.Width = halfClientWidth - vScrollBarWidth
+        HScrollBar1.Minimum = -clientWidth * 2
+        HScrollBar1.Maximum = clientWidth * 2
+        HScrollBar1.Value = 0
+
+        ' Update VScrollBar1
+        VScrollBar1.Top = ClientRectangle.Top + menuStripHeight
+        VScrollBar1.Left = TextBox1.Left - vScrollBarWidth
+        VScrollBar1.Height = clientHeight - trackBarHeight - hScrollBarHeight - menuStripHeight
+        VScrollBar1.Minimum = -clientHeight * 4
+        VScrollBar1.Maximum = clientHeight * 4
+        VScrollBar1.Value = 0
+
+        CenterDrawingButton.Width = vScrollBarWidth + 2
+        CenterDrawingButton.Height = hScrollBarHeight + 2
+
+        AddPointToolButton.ImageAlign = ContentAlignment.TopLeft
+        AddPointToolButton.Width = CenterDrawingButton.Width
+        AddPointToolButton.Height = CenterDrawingButton.Height
+
+        MovePointToolButton.ImageAlign = ContentAlignment.TopLeft
+        MovePointToolButton.Width = CenterDrawingButton.Width
+        MovePointToolButton.Height = CenterDrawingButton.Height
+
+        SubtractPointToolButton.ImageAlign = ContentAlignment.TopLeft
+        SubtractPointToolButton.Width = CenterDrawingButton.Width
+        SubtractPointToolButton.Height = CenterDrawingButton.Height
+
+        GroupBox1.Top = HScrollBar1.Top
+        GroupBox1.Left = VScrollBar1.Left - 2
+        GroupBox1.Width = vScrollBarWidth + 10
+        GroupBox1.Height = hScrollBarHeight + 10
+
+        AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
+        AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
+
+        MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
+        MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
+
+        SubtractPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height - SubtractPointToolButton.Height
+        SubtractPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
+
+        ' Update CheckBoxes
+        HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
+        HideControlHandlesCheckBox.Left = Label1.Right + 25
+
+        FillShapeCheckBox.Top = HideControlHandlesCheckBox.Top
+        FillShapeCheckBox.Left = HideControlHandlesCheckBox.Right + 25
+
+        DarkModeCheckBox.Top = HideControlHandlesCheckBox.Top
+        DarkModeCheckBox.Left = FillShapeCheckBox.Right + 25
+
+    End Sub
+
+    Private Sub UpdateUIScaleFactor()
+
+        ResetScrollBars()
+
+        CenterDrawingArea()
+
+        If ScaleFactor >= 8 Then
+
+            AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
+
+            AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
+
+            MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
+
+            MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
+
+            Dim ScaleFactorDiv16 = ScaleFactor / 16
+
+            HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
+
+            HScrollBar1.Maximum = ClientSize.Width * ScaleFactorDiv16
+
+            VScrollBar1.Minimum = -ClientSize.Height * ScaleFactorDiv16
+
+            VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
+
+        End If
+
+        Label1.Text = $"Scale: {ScaleFactor:N2}"
 
     End Sub
 
@@ -1122,7 +1242,7 @@ Public Class Form1
         ' Start defining the array of Points.
         sb.AppendLine("Dim Shape As Point() = {")
 
-        ' Retrieve the ordered list of points (assumed to be a method returning a collection of points).
+        ' Retrieve the ordered list of points.
         Dim orderedPoints = GetOrderedPoints()
 
         ' Iterate through all the ordered points to format them as scaled Point objects.
@@ -1210,112 +1330,6 @@ Public Class Form1
         End Using
 
     End Function
-
-    Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
-
-        If DarkModeCheckBox.Checked Then
-
-            DarkMode = True
-
-        Else
-
-            DarkMode = False
-
-        End If
-
-        ApplyUITheme()
-
-        Refresh()
-
-        Invalidate()
-
-        ' Fixes title bar theme update issue in Windows 10
-        ' Check if the OS is Windows 10
-        If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
-            ' The first public build of Windows 11 had the build number 10.0.22000
-
-            ' Force a redraw of the form by showing a message box.
-            MsgBox("Applying UI Theme", MsgBoxStyle.OkOnly, "Shape Editor - Code with Joe")
-
-            ' 10.0.19045.5737 - Windows 10 Home Version	22H2
-        End If
-
-    End Sub
-
-    Private Sub MovePointToolButton_Click(sender As Object, e As EventArgs) Handles MovePointToolButton.Click
-
-        CurrentTool = Tool.Move
-
-        If DarkModeCheckBox.Checked Then
-
-            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-
-            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
-
-            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
-
-
-        Else
-
-            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
-
-            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
-
-            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
-
-
-        End If
-
-    End Sub
-
-    Private Sub AddPointToolButton_Click(sender As Object, e As EventArgs) Handles AddPointToolButton.Click
-
-        CurrentTool = Tool.Add
-
-        If DarkModeCheckBox.Checked Then
-
-            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
-
-            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
-
-            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
-
-        Else
-
-            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
-
-            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
-
-            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
-
-        End If
-
-    End Sub
-
-    Private Sub SubtractPointToolButton_Click(sender As Object, e As EventArgs) Handles SubtractPointToolButton.Click
-
-        CurrentTool = Tool.Subtract
-
-        If DarkModeCheckBox.Checked Then
-
-            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-
-            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
-
-            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedDark)
-
-        Else
-
-            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
-
-            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
-
-            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedLight)
-
-        End If
-
-
-    End Sub
 
 End Class
 
