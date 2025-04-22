@@ -66,7 +66,8 @@ Public Class Form1
     Private GridColorDark As Color = Color.FromArgb(255, 16, 16, 16)
     Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
 
-    Private DarkModeControlColor As Color = Color.FromArgb(255, 23, 23, 23)
+    Public ControlColorDark As Color = Color.FromArgb(255, 23, 23, 23)
+    Public ControlColorLight As Color = Color.FromArgb(255, 240, 240, 240)
     '
     Private GridPenDark As New Pen(GridColorDark, 1)
     Private GridPenLight As New Pen(GridColorLight, 1)
@@ -111,6 +112,9 @@ Public Class Form1
     Private OsVersion As Version = Environment.OSVersion.Version
 
     Private previousState As FormWindowState
+
+    Public DarkMode As Boolean = False
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -787,25 +791,25 @@ Public Class Form1
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
 
 
-        'AboutBox1.ShowDialog()
+        AboutForm.ShowDialog()
 
 
         'My.Application.Info.Description = "A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET." & vbCrLf & vbCrLf & "MIT License" & vbCrLf & "Copyright(c) 2025 Joseph W. Lumbley" & vbCrLf & vbCrLf & "https://github.com/JoeLumbley/Shape-Editor"
 
-        MessageBox.Show("Shape Editor" _
-                      & vbCrLf _
-                      & "A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET." _
-                      & vbCrLf _
-                      & vbCrLf _
-                      & "MIT License" _
-                      & vbCrLf _
-                      & "Copyright(c) 2025 Joseph W. Lumbley" _
-                      & vbCrLf _
-                      & vbCrLf _
-                      & "https://github.com/JoeLumbley/Shape-Editor",
-                        "About Shape Editor",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information)
+        'MessageBox.Show("Shape Editor" _
+        '              & vbCrLf _
+        '              & "A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET." _
+        '              & vbCrLf _
+        '              & vbCrLf _
+        '              & "MIT License" _
+        '              & vbCrLf _
+        '              & "Copyright(c) 2025 Joseph W. Lumbley" _
+        '              & vbCrLf _
+        '              & vbCrLf _
+        '              & "https://github.com/JoeLumbley/Shape-Editor",
+        '                "About Shape Editor",
+        '                MessageBoxButtons.OK,
+        '                MessageBoxIcon.Information)
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -1045,17 +1049,17 @@ Public Class Form1
         MenuStrip1.Renderer = CustomMenuRenderer
 
         ' Set the background color of the form and controls based on dark mode
-        Me.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        Me.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
 
 
 
-        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
 
-        DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
 
-        FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
 
-        TextBox1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        TextBox1.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
 
         ShapeFillBrush = If(DarkModeCheckBox.Checked, ShapeFillBrushDarkMode, ShapeFillBrushLightMode)
 
@@ -1065,9 +1069,9 @@ Public Class Form1
 
         HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.Orchid, Color.DodgerBlue)))
 
-        Label1.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        Label1.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
 
-        HideControlHandlesCheckBox.BackColor = If(DarkModeCheckBox.Checked, DarkModeControlColor, SystemColors.Control)
+        HideControlHandlesCheckBox.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
 
         TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 230, 230, 230), Color.FromArgb(255, 32, 32, 32))
 
@@ -1226,6 +1230,16 @@ Public Class Form1
     End Function
 
     Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
+
+        If DarkModeCheckBox.Checked Then
+
+            DarkMode = True
+
+        Else
+
+            DarkMode = False
+
+        End If
 
         ApplyUITheme()
 
