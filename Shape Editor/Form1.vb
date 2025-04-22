@@ -710,7 +710,15 @@ Public Class Form1
             ' The first public build of Windows 11 had the build number 10.0.22000
 
             ' Force a redraw of the form by showing a message box.
-            MsgBox("Applying UI Theme", MsgBoxStyle.OkOnly, "Shape Editor - Code with Joe")
+            'MsgBox("Applying UI Theme", MsgBoxStyle.OkOnly, "Shape Editor - Code with Joe")
+
+
+            ' Create a new instance of the ApplyingThemeForm
+            Dim ThemeForm As New ApplyingThemeForm()
+
+            ThemeForm.ShowDialog()
+
+            'ThemeForm.Hide()
 
             ' 10.0.19045.5737 - Windows 10 Home Version	22H2
         End If
