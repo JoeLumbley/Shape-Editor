@@ -529,8 +529,6 @@ Public Class Form1
             openFileDialog.ShowReadOnly = False
             openFileDialog.ShowHelp = False
 
-            'openFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"
-
             openFileDialog.Filter = "CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
 
             openFileDialog.Title = "Open Shape"
@@ -580,33 +578,42 @@ Public Class Form1
                     Select Case True
                         Case TypeOf ex Is IOException
                             ' Handle IOException (e.g., file being used by another process)
-                            MessageBox.Show("The file in use by another app. Close the file and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            'MessageBox.Show("The file in use by another app. Close the file and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            MessageForm.Show("This file is in use by another app. Close the file and try again.", "File In Use - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
                         Case TypeOf ex Is FileNotFoundException
                             ' Handle FileNotFoundException
-                            MessageBox.Show("The file was not found. Please check the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            'MessageBox.Show("The file was not found. Please check the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            MessageForm.Show("The file was not found. Please check the file path.", "File Not Found - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
                         Case TypeOf ex Is FormatException
                             ' Handle FormatException
-                            MessageBox.Show("The file format is invalid. Please check the file contents.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            'MessageBox.Show("The file format is invalid. Please check the file contents.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            MessageForm.Show("The file format is invalid. Please check the file contents.", "Bad Format - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
                         Case TypeOf ex Is ArgumentException
                             ' Handle ArgumentException
-                            MessageBox.Show("The file path is invalid. Please check the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            'MessageBox.Show("The file path is invalid. Please check the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            MessageForm.Show("The file path is invalid. Please check the file path.", "Bad Path - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
 
                         Case TypeOf ex Is PathTooLongException
                             ' Handle PathTooLongException
-                            MessageBox.Show("The file path is too long. Please shorten the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            'MessageBox.Show("The file path is too long. Please shorten the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            MessageForm.Show("The file path is too long. Please shorten the file path.", "Path Too Long - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
                         Case TypeOf ex Is NotSupportedException
 
                         Case TypeOf ex Is UnauthorizedAccessException
                             ' Handle UnauthorizedAccessException
-                            MessageBox.Show("You do not have permission to access this file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            'MessageBox.Show("You do not have permission to access this file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            MessageForm.Show("You do not have permission to access this file.", "Unauthorized - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
 
                         Case Else
                             ' Handle other exceptions
-                            MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            'MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            MessageForm.Show("An unexpected error occurred: " & ex.Message, "Error - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
                     End Select
 
@@ -621,9 +628,6 @@ Public Class Form1
                 End If
 
                 CurrentTool = Tool.Move
-
-
-                ' UpdateToolButtonImages()
 
                 RefreshToolIcons()
 
@@ -735,11 +739,19 @@ Public Class Form1
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
 
-        If MessageBox.Show("Are you sure you want to exit?", "Exit Shape Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+        'If MessageBox.Show("Are you sure you want to exit?", "Exit Shape Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+
+        '    e.Cancel = True
+
+        'End If
+
+
+        If MessageForm.Show("Are you sure you want to exit?", "Exit - Shape Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
 
             e.Cancel = True
 
         End If
+
 
     End Sub
 

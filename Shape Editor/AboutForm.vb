@@ -19,7 +19,6 @@ Public Class AboutForm
 
         Text = "About - Shape Editor"
 
-
         If Form1.DarkMode Then
 
             DoDarkMode()
@@ -29,6 +28,12 @@ Public Class AboutForm
             DoLightMode()
 
         End If
+
+    End Sub
+
+    Private Sub OKButton_Click(sender As Object, e As EventArgs) Handles OKButton.Click
+
+        Me.Close()
 
     End Sub
 
@@ -163,21 +168,17 @@ Public Class AboutForm
 
             Catch ex As Exception
 
-                MessageBox.Show("Unable to open the link. Please check your default browser settings.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                'MessageBox.Show("Unable to open the link. Please check your default browser settings.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageForm.Show("Can't open the repo. Please check your internet connection and your browser settings.", "Can't Open - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
             End Try
 
         Else
 
-            MessageBox.Show("The URL is invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            'MessageBox.Show("The URL is invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageForm.Show("Can't open the repo. The URL is invalid.", "Can't Open - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
         End If
-
-    End Sub
-
-    Private Sub OKButton_Click(sender As Object, e As EventArgs) Handles OKButton.Click
-
-        Me.Close()
 
     End Sub
 
