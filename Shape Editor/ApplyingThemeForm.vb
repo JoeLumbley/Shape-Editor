@@ -1,4 +1,5 @@
 ﻿Imports Shape_Editor.Form1
+Imports System.ComponentModel
 Imports System.Runtime.InteropServices
 
 Public Class ApplyingThemeForm

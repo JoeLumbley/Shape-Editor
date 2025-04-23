@@ -795,17 +795,14 @@ Public Class Form1
         ' Check if the OS is Windows 10
         If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
             ' The first public build of Windows 11 had the build number 10.0.22000
-
-            ' Force a redraw of the form by showing a message box.
-            'MsgBox("Applying UI Theme", MsgBoxStyle.OkOnly, "Shape Editor - Code with Joe")
-
+            ' So, we can assume that any build number less than 22000 is Windows 10.
+            ' Force a redraw of the form to apply the theme changes
 
             ' Create a new instance of the ApplyingThemeForm
             Dim ThemeForm As New ApplyingThemeForm()
 
+            ' Force a redraw of form1 by showing applying theme form.
             ThemeForm.ShowDialog()
-
-            'ThemeForm.Hide()
 
             ' 10.0.19045.5737 - Windows 10 Home Version	22H2
         End If
@@ -818,25 +815,6 @@ Public Class Form1
 
         RefreshToolIcons()
 
-        'If DarkModeCheckBox.Checked Then
-
-        '    AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-
-        '    MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
-
-        '    SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
-
-
-        'Else
-
-        '    AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
-
-        '    MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
-
-        '    SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
-
-        'End If
-
     End Sub
 
     Private Sub AddPointToolButton_Click(sender As Object, e As EventArgs) Handles AddPointToolButton.Click
@@ -845,25 +823,6 @@ Public Class Form1
 
         RefreshToolIcons()
 
-
-        'If DarkModeCheckBox.Checked Then
-
-        '    AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
-
-        '    MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
-
-        '    SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
-
-        'Else
-
-        '    AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
-
-        '    MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
-
-        '    SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
-
-        'End If
-
     End Sub
 
     Private Sub SubtractPointToolButton_Click(sender As Object, e As EventArgs) Handles SubtractPointToolButton.Click
@@ -871,26 +830,6 @@ Public Class Form1
         CurrentTool = Tool.Subtract
 
         RefreshToolIcons()
-
-
-
-        'If DarkModeCheckBox.Checked Then
-
-        '    AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-
-        '    MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
-
-        '    SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedDark)
-
-        'Else
-
-        '    AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
-
-        '    MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
-
-        '    SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedLight)
-
-        'End If
 
     End Sub
 
@@ -914,13 +853,6 @@ Public Class Form1
 
         Return New Point(p.X, -p.Y)
     End Function
-
-    'Private Sub CloseShape()
-    '    points.Add(points(0)) ' Close the shape
-    '    points.Add(GetMirroredPoint(points(1))) ' Close the mirror shape
-    '    GeneratePointArrayText()
-    '    Invalidate()
-    'End Sub
 
     Private Sub RemovePoint(index As Integer)
         If index >= 0 AndAlso index < points.Count - 1 Then
