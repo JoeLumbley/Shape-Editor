@@ -15,12 +15,12 @@ Public Class MessageForm
         Select Case buttons
             Case MessageBoxButtons.OK
                 form.OKButton.Visible = True
-                form.CancelButton.Visible = False
+                form.CancelButt.Visible = False
             Case MessageBoxButtons.OKCancel, MessageBoxButtons.YesNo
                 form.OKButton.Visible = True
-                form.CancelButton.Visible = True
+                form.CancelButt.Visible = True
                 form.OKButton.Text = If(buttons = MessageBoxButtons.YesNo, "Yes", "OK")
-                form.CancelButton.Text = If(buttons = MessageBoxButtons.YesNo, "No", "Cancel")
+                form.CancelButt.Text = If(buttons = MessageBoxButtons.YesNo, "No", "Cancel")
         End Select
 
         Select Case icon
@@ -67,9 +67,9 @@ Public Class MessageForm
         Me.Close()
     End Sub
 
-    Private Sub CancelButton_Click(sender As Object, e As EventArgs) Handles CancelButton.Click
+    Private Sub CancelButton_Click(sender As Object, e As EventArgs) Handles CancelButt.Click
         Me.DialogResult = DialogResult.Cancel
-        If CancelButton.Text = "No" Then
+        If CancelButt.Text = "No" Then
             Me.DialogResult = DialogResult.No
         End If
         Me.Close()
@@ -95,11 +95,11 @@ Public Class MessageForm
         OKButton.ForeColor = Color.White
 
         ' Set the theme to dark mode
-        SetWindowTheme(CancelButton.Handle, "DarkMode_Explorer", Nothing)
-        DwmSetWindowAttribute(CancelButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
-        DwmSetWindowAttribute(CancelButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(CancelButt.Handle, "DarkMode_Explorer", Nothing)
+        DwmSetWindowAttribute(CancelButt.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(CancelButt.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
-        CancelButton.ForeColor = Color.White
+        CancelButt.ForeColor = Color.White
 
 
         ' Set the theme to dark mode
@@ -132,11 +132,11 @@ Public Class MessageForm
 
         OKButton.ForeColor = Color.Black
 
-        SetWindowTheme(CancelButton.Handle, "Explorer", Nothing)
-        DwmSetWindowAttribute(CancelButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        DwmSetWindowAttribute(CancelButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(CancelButt.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(CancelButt.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(CancelButt.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
-        CancelButton.ForeColor = Color.Black
+        CancelButt.ForeColor = Color.Black
 
         ' Set the theme to light mode
         SetWindowTheme(MessageTextBox.Handle, "Explorer", Nothing)

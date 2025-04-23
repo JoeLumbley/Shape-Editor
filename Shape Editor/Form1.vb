@@ -158,17 +158,17 @@ Public Class Form1
         e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.None
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
 
-        e.Graphics.Clear(If(DarkModeCheckBox.Checked, Color.Black, Color.White))
+        e.Graphics.Clear(If(DarkMode, Color.Black, Color.White))
 
         DrawGrid(e.Graphics)
 
         ' Draw the coordinate system
-        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0) ' X-axis
-        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8) ' Y-axis
+        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0) ' X-axis
+        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8) ' Y-axis
 
         ' Draw intersecting lines at the origin, the center of the drawing area
-        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.White, Pens.Black), -5, 0, 5, 0) ' Horizontal line
-        e.Graphics.DrawLine(If(DarkModeCheckBox.Checked, Pens.White, Pens.Black), 0, -5, 0, 5) ' Vertical line
+        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), -5, 0, 5, 0) ' Horizontal line
+        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), 0, -5, 0, 5) ' Vertical line
 
         e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
@@ -653,7 +653,7 @@ Public Class Form1
 
         If CurrentTool = Tool.Move Then
 
-            If DarkModeCheckBox.Checked Then
+            If DarkMode Then
                 ' Dark mode
 
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
@@ -679,7 +679,7 @@ Public Class Form1
 
         If CurrentTool = Tool.Add Then
 
-            If DarkModeCheckBox.Checked Then
+            If DarkMode Then
                 ' Dark mode
                 ' Selected
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
@@ -703,7 +703,7 @@ Public Class Form1
 
         If CurrentTool = Tool.Subtract Then
 
-            If DarkModeCheckBox.Checked Then
+            If DarkMode Then
                 ' Dark mode
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
 
@@ -1022,7 +1022,7 @@ Public Class Form1
 
     Private Sub ApplyUITheme()
 
-        If DarkModeCheckBox.Checked Then
+        If DarkMode Then
 
             'set title color - dark mode
             DwmSetWindowAttribute(Handle, 20, 1, Marshal.SizeOf(GetType(Boolean)))
@@ -1202,41 +1202,41 @@ Public Class Form1
 
         MenuStrip1.Renderer = CustomMenuRenderer
 
-        BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
+        BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        TrackBar1.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
+        TrackBar1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        DarkModeCheckBox.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
+        DarkModeCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        FillShapeCheckBox.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
+        FillShapeCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        TextBox1.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
+        TextBox1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        ShapeFillBrush = If(DarkModeCheckBox.Checked, ShapeFillBrushDarkMode, ShapeFillBrushLightMode)
+        ShapeFillBrush = If(DarkMode, ShapeFillBrushDarkMode, ShapeFillBrushLightMode)
 
-        ShapePen = New Pen(If(DarkModeCheckBox.Checked, Color.White, Color.Black), 2)
+        ShapePen = New Pen(If(DarkMode, Color.White, Color.Black), 2)
 
-        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.DodgerBlue, Color.DarkGray)))
+        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkMode, Color.DodgerBlue, Color.DarkGray)))
 
-        HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkModeCheckBox.Checked, Color.Orchid, Color.DodgerBlue)))
+        HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkMode, Color.Orchid, Color.DodgerBlue)))
 
-        Label1.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
+        Label1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        HideControlHandlesCheckBox.BackColor = If(DarkModeCheckBox.Checked, ControlColorDark, SystemColors.Control)
+        HideControlHandlesCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        TextBox1.ForeColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 230, 230, 230), Color.FromArgb(255, 32, 32, 32))
+        TextBox1.ForeColor = If(DarkMode, Color.FromArgb(255, 230, 230, 230), Color.FromArgb(255, 32, 32, 32))
 
-        Label1.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        Label1.ForeColor = If(DarkMode, Color.White, Color.Black)
 
-        HideControlHandlesCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        HideControlHandlesCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
 
-        FillShapeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        FillShapeCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
 
-        DarkModeCheckBox.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        DarkModeCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
 
-        CenterDrawingButton.ForeColor = If(DarkModeCheckBox.Checked, Color.White, Color.Black)
+        CenterDrawingButton.ForeColor = If(DarkMode, Color.White, Color.Black)
 
-        GroupBox1.BackColor = If(DarkModeCheckBox.Checked, Color.FromArgb(255, 23, 23, 23), Color.White)
+        GroupBox1.BackColor = If(DarkMode, Color.FromArgb(255, 23, 23, 23), Color.White)
 
     End Sub
 
@@ -1245,7 +1245,7 @@ Public Class Form1
         ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
         Dim stepSize As Integer = CInt(20 * ScaleFactor)
 
-        Dim gridPen As Pen = If(DarkModeCheckBox.Checked, GridPenDark, GridPenLight)
+        Dim gridPen As Pen = If(DarkMode, GridPenDark, GridPenLight)
 
         ' Draw vertical grid lines
         For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
@@ -1380,6 +1380,48 @@ Public Class Form1
 
     End Function
 
+    Private Sub DarkModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DarkModeToolStripMenuItem.Click
+
+        If DarkMode Then
+
+            DarkMode = False
+
+            'DarkModeToolStripMenuItem.Checked = False
+            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
+
+        Else
+
+            DarkMode = True
+
+            'DarkModeToolStripMenuItem.Checked = True
+            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
+
+        End If
+
+        ApplyUITheme()
+
+        Refresh()
+
+        Invalidate()
+
+        ' Fixes title bar theme update issue in Windows 10
+        ' Check if the OS is Windows 10
+        If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
+            ' The first public build of Windows 11 had the build number 10.0.22000
+            ' So, we can assume that any build number less than 22000 is Windows 10.
+            ' Force a redraw of the form to apply the theme changes
+
+            ' Create a new instance of the ApplyingThemeForm
+            Dim ThemeForm As New ApplyingThemeForm()
+
+            ' Force a redraw of form1 by showing applying theme form.
+            ThemeForm.ShowDialog()
+
+            ' 10.0.19045.5737 - Windows 10 Home Version	22H2
+        End If
+
+    End Sub
+
 End Class
 
 Public Class CustomColorMenuStripRenderer
@@ -1395,6 +1437,8 @@ Public Class CustomColorMenuStripRenderer
     Public MenuItemSelectedGradientEnd As Color
     Public SeparatorColor As Color
     Public CheckmarkColor As Color
+    Public CheckmarkBackColor As Color
+
     Public TextColor As Color
 
     'constructor
@@ -1410,7 +1454,9 @@ Public Class CustomColorMenuStripRenderer
         MenuItemSelectedGradientBegin = Color.FromArgb(255, 64, 64, 64)
         MenuItemSelectedGradientEnd = Color.FromArgb(255, 64, 64, 64)
         SeparatorColor = Color.FromArgb(255, 50, 50, 50)
-        CheckmarkColor = Color.FromArgb(255, 255, 255, 255)
+        CheckmarkColor = Color.Black
+        CheckmarkBackColor = Color.White
+
 
     End Sub
 
@@ -1511,12 +1557,9 @@ Public Class CustomColorMenuStripRenderer
 
     ' Render the overall background
     Protected Overrides Sub OnRenderToolStripBackground(e As ToolStripRenderEventArgs)
-        'Dim gradientBrush As New LinearGradientBrush(e.AffectedBounds, Color.Black, Color.Gray, LinearGradientMode.Vertical)
         Using Brush As New SolidBrush(ToolStripBackground)
             e.Graphics.FillRectangle(Brush, e.AffectedBounds)
         End Using
-        'e.Graphics.FillRectangle(gradientBrush, e.AffectedBounds)
-        'gradientBrush.Dispose()
     End Sub
 
     ' Render the border
@@ -1531,6 +1574,27 @@ Public Class CustomColorMenuStripRenderer
         e.Graphics.DrawLine(pen, rect.Left, rect.Height \ 2, rect.Right, rect.Height \ 2)
         pen.Dispose()
     End Sub
+
+    '' Render the check mark
+    'Protected Overrides Sub OnRenderItemCheck(e As ToolStripItemImageRenderEventArgs)
+    '    Dim rect As Rectangle = e.ImageRectangle
+    '    Using brush As New SolidBrush(CheckmarkBackColor)
+    '        e.Graphics.FillRectangle(brush, rect) ' Fill background
+    '    End Using
+
+    '    ' Define checkmark points
+    '    Dim checkPoints() As Point = {
+    '        New Point(rect.Left + rect.Width \ 4, rect.Top + rect.Height \ 2),
+    '        New Point(rect.Left + rect.Width \ 2, rect.Bottom - rect.Height \ 4),
+    '        New Point(rect.Right - rect.Width \ 4, rect.Top + rect.Height \ 4)
+    '    }
+
+    '    ' Draw checkmark
+    '    Using pen As New Pen(CheckmarkColor, 2)
+    '        e.Graphics.DrawLines(pen, checkPoints)
+    '    End Using
+    'End Sub
+
 
 End Class
 

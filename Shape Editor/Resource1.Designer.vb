@@ -167,6 +167,26 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
+        Friend Shared ReadOnly Property DarkModeOff() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("DarkModeOff", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property DarkModeOn() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("DarkModeOn", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
         Friend Shared ReadOnly Property ExitDark() As Byte()
             Get
                 Dim obj As Object = ResourceManager.GetObject("ExitDark", resourceCulture)

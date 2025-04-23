@@ -24,7 +24,7 @@ Partial Class MessageForm
     Private Sub InitializeComponent()
         IconPictureBox = New PictureBox()
         OKButton = New Button()
-        CancelButton = New Button()
+        CancelButt = New Button()
         MessageTextBox = New TextBox()
         CType(IconPictureBox, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -46,14 +46,14 @@ Partial Class MessageForm
         OKButton.Text = "OK"
         OKButton.UseVisualStyleBackColor = True
         ' 
-        ' CancelButton
+        ' CancelButt
         ' 
-        CancelButton.Location = New Point(299, 157)
-        CancelButton.Name = "CancelButton"
-        CancelButton.Size = New Size(112, 34)
-        CancelButton.TabIndex = 2
-        CancelButton.Text = "Cancel"
-        CancelButton.UseVisualStyleBackColor = True
+        CancelButt.Location = New Point(299, 157)
+        CancelButt.Name = "CancelButt"
+        CancelButt.Size = New Size(112, 34)
+        CancelButt.TabIndex = 2
+        CancelButt.Text = "Cancel"
+        CancelButt.UseVisualStyleBackColor = True
         ' 
         ' MessageTextBox
         ' 
@@ -68,11 +68,11 @@ Partial Class MessageForm
         ' 
         ' MessageForm
         ' 
-        AutoScaleDimensions = New SizeF(10F, 25F)
+        AutoScaleDimensions = New SizeF(10.0F, 25.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(437, 214)
         Controls.Add(MessageTextBox)
-        Controls.Add(CancelButton)
+        Controls.Add(CancelButt)
         Controls.Add(OKButton)
         Controls.Add(IconPictureBox)
         Name = "MessageForm"
@@ -84,6 +84,6 @@ Partial Class MessageForm
 
     Friend WithEvents IconPictureBox As PictureBox
     Friend WithEvents OKButton As Button
-    Friend WithEvents CancelButton As Button
+    Friend WithEvents CancelButt As Button
     Friend WithEvents MessageTextBox As TextBox
 End Class

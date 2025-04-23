@@ -148,6 +148,12 @@
   <data name="CenterDrawingToolButtonLightMode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\CenterDrawingToolButtonLightMode.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="DarkModeOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\DarkModeOff.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DarkModeOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\DarkModeOn.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="ExitDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\ExitDark.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
