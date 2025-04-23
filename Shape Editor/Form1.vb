@@ -1386,14 +1386,12 @@ Public Class Form1
 
             DarkMode = False
 
-            'DarkModeToolStripMenuItem.Checked = False
             DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
 
         Else
 
             DarkMode = True
 
-            'DarkModeToolStripMenuItem.Checked = True
             DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
 
         End If
