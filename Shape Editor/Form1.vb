@@ -972,12 +972,6 @@ Public Class Form1
         HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
         HideControlHandlesCheckBox.Left = Label1.Right + 25
 
-        'FillShapeCheckBox.Top = HideControlHandlesCheckBox.Top
-        'FillShapeCheckBox.Left = HideControlHandlesCheckBox.Right + 25
-
-        'DarkModeCheckBox.Top = HideControlHandlesCheckBox.Top
-        'DarkModeCheckBox.Left = FillShapeCheckBox.Right + 25
-
     End Sub
 
     Private Sub UpdateUIScaleFactor()
@@ -1114,7 +1108,6 @@ Public Class Form1
 
             CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonDarkMode)
 
-
             If FillShape Then
 
                 FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
@@ -1125,7 +1118,6 @@ Public Class Form1
             End If
 
             DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
-
 
         Else
 
@@ -1156,7 +1148,6 @@ Public Class Form1
             SetWindowTheme(SubtractPointToolButton.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-
 
             SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
@@ -1218,7 +1209,6 @@ Public Class Form1
 
             CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonLightMode)
 
-
             If FillShape Then
 
                 FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
@@ -1230,7 +1220,6 @@ Public Class Form1
 
             DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
 
-
         End If
 
         MenuStrip1.Renderer = CustomMenuRenderer
@@ -1238,10 +1227,6 @@ Public Class Form1
         BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
         TrackBar1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
-
-        'DarkModeCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
-
-        'FillShapeCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
         TextBox1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
@@ -1262,10 +1247,6 @@ Public Class Form1
         Label1.ForeColor = If(DarkMode, Color.White, Color.Black)
 
         HideControlHandlesCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
-
-        'FillShapeCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
-
-        'DarkModeCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
 
         CenterDrawingButton.ForeColor = If(DarkMode, Color.White, Color.Black)
 
