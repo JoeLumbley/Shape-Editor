@@ -493,9 +493,214 @@ This calls the `LayoutForm` method to reposition controls and invalidates the fo
 
 The `SaveToolStripMenuItem_Click` and `OpenToolStripMenuItem_Click` methods handle saving shapes to CSV files and opening them, respectively. They ensure the points are written in a readable format and can be easily reconstructed.
 
-### Conclusion
 
-This walkthrough has provided an in-depth look at the Shape Editor code, explaining the purpose of each section and how the application functions. By understanding this code, you will gain insights into Windows Forms applications, event handling, and graphics rendering in VB.NET. Happy coding!
+
+
+
+
+
+
+
+
+
+
+# Save and Open Functionality in Shape Editor
+
+In this section, we will break down the code that handles saving and opening shape files in the Shape Editor application. This functionality allows users to save their drawn shapes as CSV files and load them back into the application.
+
+## Save Functionality
+
+### Method Definition
+
+```vb
+Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+```
+This method is triggered when the user clicks the "Save" option from the menu. It handles the process of saving the current shape points to a file.
+
+### Using SaveFileDialog
+
+```vb
+Using saveFileDialog As New SaveFileDialog()
+```
+This creates a new instance of `SaveFileDialog`, which provides a dialog for the user to specify the file name and location to save the shape.
+
+### Setting Dialog Properties
+
+```vb
+saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"
+saveFileDialog.Title = "Save Shape"
+saveFileDialog.InitialDirectory = Application.StartupPath
+```
+- `Filter`: This specifies the types of files that can be saved. The user can choose to save as CSV files or any file type.
+- `Title`: This sets the title of the dialog window.
+- `InitialDirectory`: This sets the starting directory of the dialog to the application's startup path.
+
+### Showing the Dialog
+
+```vb
+If saveFileDialog.ShowDialog(Me) = DialogResult.OK Then
+```
+This line displays the dialog to the user. If the user selects a file and clicks "OK", the following code block executes.
+
+### Writing to the File
+
+```vb
+Using writer As New StreamWriter(saveFileDialog.FileName)
+```
+This creates a `StreamWriter` to write text to the specified file.
+
+```vb
+' Write the CSV headers (optional).
+writer.WriteLine("X,Y")
+```
+This writes the headers "X,Y" to the CSV file, indicating the format of the data that follows.
+
+### Looping Through Points
+
+```vb
+For Each point As Point In points
+    writer.WriteLine($"{point.X},{point.Y}")
+Next
+```
+This loop iterates through each point in the `points` list and writes its X and Y coordinates to the file in CSV format.
+
+### Updating the Title Bar
+
+```vb
+Text = $"{Path.GetFileName(saveFileDialog.FileName)} - Shape Editor - Code with Joe"
+```
+This updates the title of the form to include the name of the saved file, providing feedback to the user about the current file being edited.
+
+### Closing the Dialog
+
+```vb
+End If
+```
+This ends the conditional block for the `SaveFileDialog`.
+
+## Open Functionality
+
+### Method Definition
+
+```vb
+Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
+```
+This method is triggered when the user clicks the "Open" option from the menu. It handles the process of loading shape points from a file.
+
+### Using OpenFileDialog
+
+```vb
+Using openFileDialog As New OpenFileDialog()
+```
+This creates a new instance of `OpenFileDialog`, which allows the user to select a file to open.
+
+### Setting Dialog Properties
+
+```vb
+openFileDialog.AutoUpgradeEnabled = True
+openFileDialog.ShowReadOnly = False
+openFileDialog.ShowHelp = False
+```
+These properties configure the dialog's behavior:
+- `AutoUpgradeEnabled`: Automatically upgrades the dialog's appearance if needed.
+- `ShowReadOnly`: Allows the user to open files in read-only mode.
+- `ShowHelp`: Disables the help button in the dialog.
+
+```vb
+openFileDialog.Filter = "CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+openFileDialog.Title = "Open Shape"
+openFileDialog.InitialDirectory = Application.StartupPath
+```
+Similar to the save dialog, this sets the file types, title, and initial directory.
+
+### Showing the Dialog
+
+```vb
+If openFileDialog.ShowDialog() = DialogResult.OK Then
+```
+This displays the dialog. If the user selects a file and clicks "OK", the following code block executes.
+
+### Clearing Existing Points
+
+```vb
+points.Clear()
+```
+This clears the existing points from the `points` list to prepare for loading new points from the file.
+
+### Reading from the File
+
+```vb
+Dim fileIsValid As Boolean = False
+
+Try
+    Using reader As New StreamReader(openFileDialog.FileName)
+```
+This initializes a boolean to track validity and attempts to read the selected file using a `StreamReader`.
+
+### Parsing the Points
+
+```vb
+While Not reader.EndOfStream
+    Dim line As String = reader.ReadLine()
+    Dim parts As String() = line.Split(","c)
+```
+This loop reads the file line by line until the end. Each line is split by commas into an array of strings.
+
+```vb
+If parts.Length = 2 Then
+    Dim x As Integer
+    Dim y As Integer
+
+    If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
+        points.Add(New Point(x, y))
+```
+If the line contains two parts (X and Y), it attempts to parse them into integers and adds them as a new `Point` to the `points` list.
+
+### Validating the Points
+
+```vb
+fileIsValid = Integer.TryParse(parts(0), x)
+fileIsValid = Integer.TryParse(parts(1), y)
+```
+This validates the parsed integers, ensuring they are valid coordinates.
+
+### Exception Handling
+
+```vb
+Catch ex As Exception
+```
+This block catches any exceptions that might occur during file reading.
+
+```vb
+Select Case True
+    Case TypeOf ex Is IOException
+        MessageForm.Show("This file is in use by another app. Close the file and try again.", "File In Use - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    ' Other cases for different exceptions...
+End Select
+```
+This switch statement handles specific exceptions, providing user-friendly error messages based on the type of error encountered.
+
+### Updating the Title Bar
+
+```vb
+Text = $"{Path.GetFileName(openFileDialog.FileName)} - Shape Editor - Code with Joe"
+```
+This updates the title to reflect the name of the opened file.
+
+### Final Adjustments
+
+```vb
+CurrentTool = Tool.Move
+RefreshToolIcons()
+ScaleFactor = 8
+TrackBar1.Value = CInt(ScaleFactor * 100)
+UpdateUIScaleFactor()
+GeneratePointArrayText()
+Invalidate()
+```
+These lines reset the current tool to "Move", refresh the tool icons, set the scale factor, and generate the point array text for display. Finally, it calls `Invalidate()` to refresh the form.
+
+This section of code effectively handles saving and opening shapes in the Shape Editor application. It provides a user-friendly interface for managing shape data while ensuring robust error handling and feedback. Understanding this functionality is essential for any VB.NET developer looking to create interactive applications. Happy coding!
 
 
 
