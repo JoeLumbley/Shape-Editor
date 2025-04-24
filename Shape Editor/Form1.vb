@@ -115,6 +115,13 @@ Public Class Form1
 
     Public DarkMode As Boolean = False
 
+    Private FillShape As Boolean = False
+
+    Private HideControlHandles As Boolean = False
+
+
+
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -181,7 +188,7 @@ Public Class Form1
             Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
 
             ' Fill the shape if the checkbox is checked
-            If FillShapeCheckBox.Checked Then
+            If FillShape Then
 
                 e.Graphics.FillPolygon(ShapeFillBrush, scaledPoints)
 
@@ -194,7 +201,7 @@ Public Class Form1
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
 
         ' Draw point handles if the checkbox is not checked
-        If Not HideControlHandlesCheckBox.Checked Then
+        If Not HideControlHandles Then
             For i As Integer = 0 To points.Count - 1 Step 2
                 Dim point = points(i)
                 Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
@@ -476,7 +483,7 @@ Public Class Form1
         Invalidate()
     End Sub
 
-    Private Sub FillShapeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles FillShapeCheckBox.CheckedChanged
+    Private Sub FillShapeCheckBox_CheckedChanged(sender As Object, e As EventArgs)
         Invalidate()
     End Sub
 
@@ -785,41 +792,41 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles DarkModeCheckBox.CheckedChanged
+    'Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs)
 
-        If DarkModeCheckBox.Checked Then
+    '    If DarkModeCheckBox.Checked Then
 
-            DarkMode = True
+    '        DarkMode = True
 
-        Else
+    '    Else
 
-            DarkMode = False
+    '        DarkMode = False
 
-        End If
+    '    End If
 
-        ApplyUITheme()
+    '    ApplyUITheme()
 
-        Refresh()
+    '    Refresh()
 
-        Invalidate()
+    '    Invalidate()
 
-        ' Fixes title bar theme update issue in Windows 10
-        ' Check if the OS is Windows 10
-        If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
-            ' The first public build of Windows 11 had the build number 10.0.22000
-            ' So, we can assume that any build number less than 22000 is Windows 10.
-            ' Force a redraw of the form to apply the theme changes
+    '    ' Fixes title bar theme update issue in Windows 10
+    '    ' Check if the OS is Windows 10
+    '    If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
+    '        ' The first public build of Windows 11 had the build number 10.0.22000
+    '        ' So, we can assume that any build number less than 22000 is Windows 10.
+    '        ' Force a redraw of the form to apply the theme changes
 
-            ' Create a new instance of the ApplyingThemeForm
-            Dim ThemeForm As New ApplyingThemeForm()
+    '        ' Create a new instance of the ApplyingThemeForm
+    '        Dim ThemeForm As New ApplyingThemeForm
 
-            ' Force a redraw of form1 by showing applying theme form.
-            ThemeForm.ShowDialog()
+    '        ' Force a redraw of form1 by showing applying theme form.
+    '        ThemeForm.ShowDialog()
 
-            ' 10.0.19045.5737 - Windows 10 Home Version	22H2
-        End If
+    '        ' 10.0.19045.5737 - Windows 10 Home Version	22H2
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub MovePointToolButton_Click(sender As Object, e As EventArgs) Handles MovePointToolButton.Click
 
@@ -965,11 +972,11 @@ Public Class Form1
         HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
         HideControlHandlesCheckBox.Left = Label1.Right + 25
 
-        FillShapeCheckBox.Top = HideControlHandlesCheckBox.Top
-        FillShapeCheckBox.Left = HideControlHandlesCheckBox.Right + 25
+        'FillShapeCheckBox.Top = HideControlHandlesCheckBox.Top
+        'FillShapeCheckBox.Left = HideControlHandlesCheckBox.Right + 25
 
-        DarkModeCheckBox.Top = HideControlHandlesCheckBox.Top
-        DarkModeCheckBox.Left = FillShapeCheckBox.Right + 25
+        'DarkModeCheckBox.Top = HideControlHandlesCheckBox.Top
+        'DarkModeCheckBox.Left = FillShapeCheckBox.Right + 25
 
     End Sub
 
@@ -1107,6 +1114,19 @@ Public Class Form1
 
             CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonDarkMode)
 
+
+            If FillShape Then
+
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
+
+            Else
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
+
+            End If
+
+            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
+
+
         Else
 
             'set title color - light mode
@@ -1198,6 +1218,19 @@ Public Class Form1
 
             CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonLightMode)
 
+
+            If FillShape Then
+
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
+
+            Else
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
+
+            End If
+
+            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
+
+
         End If
 
         MenuStrip1.Renderer = CustomMenuRenderer
@@ -1206,9 +1239,9 @@ Public Class Form1
 
         TrackBar1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        DarkModeCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
+        'DarkModeCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        FillShapeCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
+        'FillShapeCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
         TextBox1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
@@ -1230,9 +1263,9 @@ Public Class Form1
 
         HideControlHandlesCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
 
-        FillShapeCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
+        'FillShapeCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
 
-        DarkModeCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
+        'DarkModeCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
 
         CenterDrawingButton.ForeColor = If(DarkMode, Color.White, Color.Black)
 
@@ -1419,6 +1452,51 @@ Public Class Form1
         End If
 
     End Sub
+
+    Private Sub FillShapeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FillShapeToolStripMenuItem.Click
+
+        If FillShape Then
+
+            FillShape = False
+
+            If DarkMode Then
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
+            Else
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
+            End If
+
+        Else
+
+            FillShape = True
+
+            If DarkMode Then
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
+            Else
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
+            End If
+
+        End If
+
+        Invalidate()
+
+    End Sub
+
+    Private Sub HideHandlesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HideHandlesToolStripMenuItem.Click
+
+        If HideControlHandles Then
+            HideControlHandles = False
+            HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
+        Else
+            HideControlHandles = True
+            HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
+        End If
+
+        Invalidate()
+
+
+
+    End Sub
+
 
 End Class
 

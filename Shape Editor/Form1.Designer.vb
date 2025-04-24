@@ -29,8 +29,6 @@ Partial Class Form1
         VScrollBar1 = New VScrollBar()
         CenterDrawingButton = New Button()
         HideControlHandlesCheckBox = New CheckBox()
-        FillShapeCheckBox = New CheckBox()
-        DarkModeCheckBox = New CheckBox()
         MenuStrip1 = New MenuStrip()
         FileToolStripMenuItem = New ToolStripMenuItem()
         NewToolStripMenuItem = New ToolStripMenuItem()
@@ -122,26 +120,6 @@ Partial Class Form1
         HideControlHandlesCheckBox.Text = "Hide Handles"
         HideControlHandlesCheckBox.UseVisualStyleBackColor = True
         ' 
-        ' FillShapeCheckBox
-        ' 
-        FillShapeCheckBox.AutoSize = True
-        FillShapeCheckBox.Location = New Point(40, 532)
-        FillShapeCheckBox.Name = "FillShapeCheckBox"
-        FillShapeCheckBox.Size = New Size(113, 29)
-        FillShapeCheckBox.TabIndex = 7
-        FillShapeCheckBox.Text = "Fill Shape"
-        FillShapeCheckBox.UseVisualStyleBackColor = True
-        ' 
-        ' DarkModeCheckBox
-        ' 
-        DarkModeCheckBox.AutoSize = True
-        DarkModeCheckBox.Location = New Point(173, 532)
-        DarkModeCheckBox.Name = "DarkModeCheckBox"
-        DarkModeCheckBox.Size = New Size(127, 29)
-        DarkModeCheckBox.TabIndex = 8
-        DarkModeCheckBox.Text = "Dark Mode"
-        DarkModeCheckBox.UseVisualStyleBackColor = True
-        ' 
         ' MenuStrip1
         ' 
         MenuStrip1.ImageScalingSize = New Size(24, 24)
@@ -202,19 +180,19 @@ Partial Class Form1
         ' HideHandlesToolStripMenuItem
         ' 
         HideHandlesToolStripMenuItem.Name = "HideHandlesToolStripMenuItem"
-        HideHandlesToolStripMenuItem.Size = New Size(270, 34)
+        HideHandlesToolStripMenuItem.Size = New Size(220, 34)
         HideHandlesToolStripMenuItem.Text = "Hide Handles"
         ' 
         ' FillShapeToolStripMenuItem
         ' 
         FillShapeToolStripMenuItem.Name = "FillShapeToolStripMenuItem"
-        FillShapeToolStripMenuItem.Size = New Size(270, 34)
+        FillShapeToolStripMenuItem.Size = New Size(220, 34)
         FillShapeToolStripMenuItem.Text = "Fill Shape"
         ' 
         ' DarkModeToolStripMenuItem
         ' 
         DarkModeToolStripMenuItem.Name = "DarkModeToolStripMenuItem"
-        DarkModeToolStripMenuItem.Size = New Size(270, 34)
+        DarkModeToolStripMenuItem.Size = New Size(220, 34)
         DarkModeToolStripMenuItem.Text = "Dark Mode"
         ' 
         ' GroupBox1
@@ -263,8 +241,6 @@ Partial Class Form1
         Controls.Add(TextBox1)
         Controls.Add(HScrollBar1)
         Controls.Add(HideControlHandlesCheckBox)
-        Controls.Add(DarkModeCheckBox)
-        Controls.Add(FillShapeCheckBox)
         Controls.Add(Label1)
         Controls.Add(TrackBar1)
         Controls.Add(SubtractPointToolButton)
@@ -293,8 +269,6 @@ Partial Class Form1
     Friend WithEvents VScrollBar1 As VScrollBar
     Friend WithEvents CenterDrawingButton As Button
     Friend WithEvents HideControlHandlesCheckBox As CheckBox
-    Friend WithEvents FillShapeCheckBox As CheckBox
-    Friend WithEvents DarkModeCheckBox As CheckBox
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem

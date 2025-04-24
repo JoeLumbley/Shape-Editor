@@ -207,6 +207,66 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
+        Friend Shared ReadOnly Property FillShapeOffDark() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("FillShapeOffDark", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property FillShapeOffLight() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("FillShapeOffLight", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property FillShapeOnDark() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("FillShapeOnDark", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property FillShapeOnLight() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("FillShapeOnLight", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property HideHandlesOffLight() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("HideHandlesOffLight", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend Shared ReadOnly Property HideHandlesOnLight() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("HideHandlesOnLight", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
         Friend Shared ReadOnly Property MovePointToolButtonDarkMode() As Byte()
             Get
                 Dim obj As Object = ResourceManager.GetObject("MovePointToolButtonDarkMode", resourceCulture)
