@@ -174,34 +174,27 @@ To begin using the Shape Editor, launch the application and start creating shape
 
 
 
-
 # Code Walkthrough
 
 
-This document will guide you through each part of the code, explaining what it does and how it works. This will be useful for both beginners and those looking to improve their understanding of VB.NET programming. 
 
-## Overview
-
-This code defines a Windows Forms application that allows users to draw shapes on a canvas. Users can add points, manipulate them, and save/load shapes from CSV files. The application also supports light and dark themes.
-
-## Code Breakdown
-
-### Imports and Class Definition
+### Imports
 
 ```vb
 Imports System.IO
 Imports System.Runtime.InteropServices
+```
+- `Imports System.IO`: This imports the `System.IO` namespace, which contains classes for handling file input and output operations.
+- `Imports System.Runtime.InteropServices`: This imports the `System.Runtime.InteropServices` namespace, used for interoperability with unmanaged code, enabling the use of Windows API functions.
 
+### Class Definition
+
+```vb
 Public Class Form1
 ```
-
-- **Imports System.IO**: This imports the `System.IO` namespace, which provides functionality for working with files and data streams.
-- **Imports System.Runtime.InteropServices**: This imports the `System.Runtime.InteropServices` namespace, which is used for interoperability with unmanaged code, allowing the use of Windows API functions.
-- **Public Class Form1**: This defines a public class named `Form1`, which represents the main form of the application.
+This line defines a public class named `Form1`, which represents the main form of the application. All the functionality of the shape editor will be encapsulated within this class.
 
 ### Enum Definitions
-
-#### Tool Enum
 
 ```vb
 Enum Tool
@@ -209,27 +202,26 @@ Enum Tool
     Subtract
     Move
 End Enum
+```
+This `Enum` defines three tools that the user can select:
+- `Add`: For adding points to the shape.
+- `Subtract`: For removing points from the shape.
+- `Move`: For moving existing points.
 
+```vb
 Private CurrentTool As Tool = Tool.Add
 ```
+This line initializes a variable `CurrentTool` to `Tool.Add`, meaning the default tool when the application starts is the "Add" tool.
 
-- **Enum Tool**: This defines an enumeration called `Tool`, which includes three options: `Add`, `Subtract`, and `Move`. These represent different tools that can be used in the application.
-- **Private CurrentTool**: This variable stores the currently selected tool, initialized to `Tool.Add`.
-
-#### DwmWindowAttribute Enum
+### DWM Window Attributes
 
 ```vb
 Public Enum DwmWindowAttribute
-    dwmwa_invalid = -1
-    DWMWA_NCRENDERING_ENABLED = 1
-    ...
-    DWMWA_LAST = 13
-    dwmwa_use_dark_theme = 19
-    ...
+    DWMWA_USE_IMMERSIVE_DARK_MODE = 21
+    DWMWA_MICA_EFFECT = 1029
 End Enum
 ```
-
-- This enumeration defines various attributes for window management, specifically for the Desktop Window Manager (DWM). These attributes control the appearance and behavior of the window.
+This `Enum` defines attributes for window management, specifically for the Desktop Window Manager (DWM). These attributes control the appearance and behavior of the window.
 
 ### DllImport Declarations
 
@@ -237,128 +229,177 @@ End Enum
 <DllImport("dwmapi.dll", CharSet:=CharSet.Unicode, SetLastError:=True)>
 Public Shared Function DwmSetWindowAttribute(hWnd As IntPtr, dwAttribute As DwmWindowAttribute, ByRef pvAttribute As Integer, cbAttribute As Integer) As Integer
 End Function
+```
+This `DllImport` attribute allows the function `DwmSetWindowAttribute` to be called from the unmanaged `dwmapi.dll`. It sets various attributes for a window.
 
+```vb
 <DllImport("uxtheme.dll", CharSet:=CharSet.Unicode, SetLastError:=True)>
 Public Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
 End Function
 ```
+Similarly, this imports the `SetWindowTheme` function from `uxtheme.dll`, which changes the theme of a window.
 
-- **DllImport**: This attribute is used to import functions from unmanaged DLLs. Here, two functions are imported:
-  - `DwmSetWindowAttribute`: Sets various attributes for a window.
-  - `SetWindowTheme`: Changes the theme of a window.
-
-### Variable Declarations
+### Variables and Constants
 
 ```vb
 Private points As New List(Of Point)()
+```
+This initializes a new list to store the points that define the shapes drawn by the user.
+
+```vb
 Private isDrawing As Boolean = False
+```
+This boolean variable tracks whether the user is currently drawing a shape.
+
+```vb
 Private selectedPointIndex As Integer = -1
-...
+Private hoveredPointIndex As Integer = -1
+```
+These integers track the index of the currently selected point and the point currently hovered over by the mouse.
+
+```vb
+Private Const handleSize As Integer = 15
+```
+This constant defines the size of the handles used to manipulate the points.
+
+```vb
 Private ScaleFactor As Double = 1.0
 ```
+This variable determines the scaling factor for drawing shapes, allowing for zooming in and out.
 
-- **points**: A list to store the points that define the shape.
-- **isDrawing**: A boolean to track whether the user is currently drawing.
-- **selectedPointIndex**: An integer to track the index of the currently selected point.
-- **ScaleFactor**: A double that determines the scaling factor for drawing.
-
-### Pen and Brush Definitions
+### Color and Brush Definitions
 
 ```vb
 Private ShapePen As New Pen(Color.Black, 2)
+```
+This creates a pen with a black color and a width of 2 pixels, used for drawing shapes.
+
+```vb
 Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
 Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
-...
 ```
-
-- **ShapePen**: A pen used to draw shapes, initialized to black with a width of 2.
-- **HandleBrush**: A brush used to draw handles for points, initialized to dark gray.
-- **HoverBrush**: A brush used to indicate when a point is hovered over, initialized to gray.
+These brushes are used to fill the handles for the points and indicate when a point is hovered over.
 
 ### Color Definitions for Light and Dark Modes
 
-The code contains multiple color definitions for different UI elements in both light and dark modes:
-
 ```vb
 Private MenuItemBackgroundColor_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
-Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 32, 32, 32)
-...
+Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 23, 23, 23)
 ```
-
-These colors are used to style the application's UI based on the user's theme preference.
+These variables define the background colors for menu items in light and dark modes.
 
 ### Form Load Event
 
 ```vb
 Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 ```
+This method is called when the form loads. It initializes various components and settings for the application.
 
-- This subroutine runs when the form loads. It initializes various components and settings for the application.
+```vb
+KeyPreview = True
+```
+This allows the form to receive key events before they are passed to the control that has focus.
 
-#### Key Operations in Form Load
+```vb
+DoubleBuffered = True
+```
+This enables double buffering to reduce flickering during drawing operations.
 
-1. **Load Button Image**:
-   ```vb
-   Dim imageBytes As Byte() = My.Resources.Resource1.AddPointToolButton
-   Using ms As New MemoryStream(imageBytes)
-       Button2.Image = Image.FromStream(ms)
-   End Using
-   ```
-   - Converts a byte array from resources to an image for a button.
+```vb
+Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
+Application.EnableVisualStyles()
+```
+These lines enable visual styles for the application, allowing it to have a modern look.
 
-2. **Double Buffering**:
-   ```vb
-   Me.DoubleBuffered = True
-   ```
-   - Enables double buffering to reduce flickering during drawing.
+```vb
+ApplyUITheme()
+```
+This method applies the current UI theme (light or dark) to the application.
 
-3. **Set Window Theme**:
-   ```vb
-   SetWindowTheme(Me.Handle, "Explorer", Nothing)
-   ```
-   - Sets the window theme to "Explorer".
+```vb
+Text = "Shape Editor - Code with Joe"
+```
+This sets the title of the application window.
 
-4. **Initialize UI Elements**:
-   - Various UI components like scrollbars and buttons are themed and styled.
+```vb
+ScaleFactor = TrackBar1.Value / 100.0
+Label1.Text = $"Scale: {ScaleFactor:N2}"
+```
+This initializes the scale factor based on the value of a trackbar and updates a label to display the current scale.
 
-5. **Event Handlers**:
-   ```vb
-   AddHandler HideControlHandlesCheckBox.CheckedChanged, AddressOf HideControlHandlesCheckBox_CheckedChanged
-   ```
-   - Attaches event handlers to checkboxes for dynamic UI updates.
-
-### Paint Event
+### OnPaint Method
 
 ```vb
 Protected Overrides Sub OnPaint(e As PaintEventArgs)
-    MyBase.OnPaint(e)
 ```
+This method is overridden to customize the painting of the form. It handles all the drawing operations on the form's graphics.
 
-- This method is overridden to customize the painting of the form. It handles all the drawing operations on the form's graphics.
+```vb
+e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
+```
+This translates the origin of the drawing area to the center, making it easier to draw shapes relative to the center of the form.
 
-#### Key Drawing Operations
+```vb
+e.Graphics.Clear(If(DarkMode, Color.Black, Color.White))
+```
+This clears the background with either black or white, depending on the current theme.
 
-1. **Translate Graphics Origin**:
-   ```vb
-   e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
-   ```
+### Drawing the Grid and Coordinate System
 
-2. **Clear Background**:
-   ```vb
-   e.Graphics.Clear(If(DarkModeCheckBox.Checked, Color.Black, Color.White))
-   ```
+```vb
+DrawGrid(e.Graphics)
+```
+This method is called to draw a grid on the drawing area.
 
-3. **Draw Grid and Coordinate System**:
-   - Draws the grid and the coordinate axes based on the current mode.
+```vb
+e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0) ' X-axis
+```
+This draws the X-axis of the coordinate system.
 
-4. **Draw Shapes**:
-   ```vb
-   e.Graphics.DrawPolygon(ShapePen, scaledPoints)
-   ```
-   - Draws the polygon based on the points stored in the `points` list.
+```vb
+e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8) ' Y-axis
+```
+This draws the Y-axis of the coordinate system.
 
-5. **Draw Point Handles**:
-   - Draws the handles for each point based on their state (selected, hovered, etc.).
+### Drawing the Shape
+
+```vb
+If points.Count > 1 Then
+    Dim orderedPoints = GetOrderedPoints()
+    Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
+```
+This checks if there are enough points to draw a shape and scales them based on the current scale factor.
+
+```vb
+If FillShape Then
+    e.Graphics.FillPolygon(ShapeFillBrush, scaledPoints)
+End If
+```
+If the fill shape option is enabled, this fills the shape with the specified brush.
+
+```vb
+e.Graphics.DrawPolygon(ShapePen, scaledPoints)
+```
+This draws the outline of the shape using the previously defined pen.
+
+### Drawing Point Handles
+
+```vb
+If Not HideControlHandles Then
+    For i As Integer = 0 To points.Count - 1 Step 2
+        Dim point = points(i)
+        Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
+```
+This loop iterates through the points to draw handles for each point, allowing the user to manipulate them.
+
+```vb
+If i = selectedPointIndex OrElse i = hoveredPointIndex Then
+    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+Else
+    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+End If
+```
+This checks if the point is selected or hovered over to change its appearance accordingly.
 
 ### Mouse Events
 
@@ -367,76 +408,94 @@ Protected Overrides Sub OnPaint(e As PaintEventArgs)
 ```vb
 Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
 ```
+This method is triggered when the mouse button is pressed. It handles point selection and addition.
 
-- This method is triggered when the mouse button is pressed. It handles point selection and addition.
+```vb
+If e.Button = MouseButtons.Left Then
+```
+This checks if the left mouse button was pressed.
 
-#### Mouse Move Event
+```vb
+AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
+```
+This calculates the adjusted mouse location based on the scale factor, allowing accurate point placement.
+
+### Point Manipulation
+
+```vb
+If CurrentTool = Tool.Add Then
+    If selectedPointIndex = -1 Then
+        AddPoint(AdjustedMouseLocation)
+    End If
+```
+If the current tool is "Add" and no point is selected, a new point is added at the adjusted mouse location.
+
+```vb
+ElseIf CurrentTool = Tool.Move Then
+    If selectedPointIndex <> -1 Then
+        MovePoint(AdjustedMouseLocation)
+    End If
+```
+If the current tool is "Move" and a point is selected, that point is moved to the adjusted mouse location.
+
+```vb
+ElseIf CurrentTool = Tool.Subtract Then
+    If selectedPointIndex <> -1 Then
+        RemovePoint(selectedPointIndex)
+    End If
+End If
+```
+If the current tool is "Subtract" and a point is selected, that point is removed.
+
+### Mouse Move Event
 
 ```vb
 Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
 ```
-
-- This method updates the position of selected points as the mouse moves.
-
-#### Mouse Up Event
+This method updates the position of selected points as the mouse moves.
 
 ```vb
-Private Sub Form1_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
+If isDrawing AndAlso selectedPointIndex <> -1 Then
+    MovePoint(AdjustedMouseLocation)
+    GeneratePointArrayText()
+    Invalidate()
+End If
 ```
-
-- This method is triggered when the mouse button is released. It finalizes the drawing action.
+If the user is drawing and a point is selected, the point is moved, and the point array text is generated.
 
 ### Key Events
 
 ```vb
 Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
 ```
+This method handles keyboard inputs for specific actions like closing shapes or deleting points.
 
-- This method handles keyboard inputs for specific actions like closing shapes or deleting points.
+```vb
+If e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
+    RemovePoint(selectedPointIndex)
+```
+If the Delete key is pressed and a point is selected, that point is removed.
 
-### Resize Event
+### Resizing the Form
 
 ```vb
 Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
 ```
-
-- This method adjusts the layout of UI components when the form is resized.
-
-### TrackBar Scroll Event
+This method adjusts the layout of UI components when the form is resized.
 
 ```vb
-Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
+LayoutForm()
+Invalidate()
 ```
+This calls the `LayoutForm` method to reposition controls and invalidates the form to trigger a repaint.
 
-- This method updates the scale factor based on the position of the trackbar.
+### Saving and Opening Shapes
 
-### Save and Open Functionality
+The `SaveToolStripMenuItem_Click` and `OpenToolStripMenuItem_Click` methods handle saving shapes to CSV files and opening them, respectively. They ensure the points are written in a readable format and can be easily reconstructed.
 
-The code includes methods for saving and loading shapes from CSV files, allowing users to persist their drawings.
+### Conclusion
 
-```vb
-Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
-```
-
-- This method opens a save dialog and writes the points to a CSV file.
-
-```vb
-Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
-```
-
-- This method opens a file dialog to read points from a CSV file and populate the `points` list.
-
-
-
-This code provides a comprehensive framework for a shape editor application in VB.NET. It covers essential programming concepts such as event handling, graphics rendering, and file I/O, making it a valuable learning resource for beginners. 
-
-By understanding each part of this code, you will gain insights into Windows Forms applications, object-oriented programming, and the use of external libraries in VB.NET. Happy coding!
-
-
-
-
-
-
+This walkthrough has provided an in-depth look at the Shape Editor code, explaining the purpose of each section and how the application functions. By understanding this code, you will gain insights into Windows Forms applications, event handling, and graphics rendering in VB.NET. Happy coding!
 
 
 
