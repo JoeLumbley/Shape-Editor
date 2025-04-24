@@ -178,7 +178,7 @@ To begin using the Shape Editor, launch the application and start creating shape
 
 
 
-### Imports
+## Imports
 
 ```vb
 Imports System.IO
@@ -187,14 +187,14 @@ Imports System.Runtime.InteropServices
 - `Imports System.IO`: This imports the `System.IO` namespace, which contains classes for handling file input and output operations.
 - `Imports System.Runtime.InteropServices`: This imports the `System.Runtime.InteropServices` namespace, used for interoperability with unmanaged code, enabling the use of Windows API functions.
 
-### Class Definition
+## Class Definition
 
 ```vb
 Public Class Form1
 ```
 This line defines a public class named `Form1`, which represents the main form of the application. All the functionality of the shape editor will be encapsulated within this class.
 
-### Enum Definitions
+## Enum Definitions
 
 ```vb
 Enum Tool
