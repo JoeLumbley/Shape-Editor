@@ -1117,7 +1117,7 @@ Public Class Form1
 
             End If
 
-            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
+            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
 
         Else
 
@@ -1218,7 +1218,7 @@ Public Class Form1
 
             End If
 
-            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
+            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
 
         End If
 
@@ -1400,13 +1400,13 @@ Public Class Form1
 
             DarkMode = False
 
-            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
+            DarkModeToolStripMenuItem.Text = "Dark Mode"
 
         Else
 
             DarkMode = True
 
-            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
+            DarkModeToolStripMenuItem.Text = "Light Mode"
 
         End If
 
