@@ -479,7 +479,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub HideControlHandlesCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles HideControlHandlesCheckBox.CheckedChanged
+    Private Sub HideControlHandlesCheckBox_CheckedChanged(sender As Object, e As EventArgs)
         Invalidate()
     End Sub
 
@@ -969,8 +969,8 @@ Public Class Form1
         SubtractPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
         ' Update CheckBoxes
-        HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
-        HideControlHandlesCheckBox.Left = Label1.Right + 25
+        'HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
+        'HideControlHandlesCheckBox.Left = Label1.Right + 25
 
     End Sub
 
@@ -1025,7 +1025,7 @@ Public Class Form1
 
         If DarkMode Then
 
-            'set title color - dark mode
+            ' set title color - dark mode
             DwmSetWindowAttribute(Handle, 20, 1, Marshal.SizeOf(GetType(Boolean)))
 
             ' Set the theme to dark mode
@@ -1218,6 +1218,17 @@ Public Class Form1
 
             End If
 
+            If HideControlHandles Then
+
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
+
+            Else
+
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
+
+            End If
+
+
             DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
 
         End If
@@ -1240,13 +1251,13 @@ Public Class Form1
 
         Label1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        HideControlHandlesCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
+        'HideControlHandlesCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
         TextBox1.ForeColor = If(DarkMode, Color.FromArgb(255, 230, 230, 230), Color.FromArgb(255, 32, 32, 32))
 
         Label1.ForeColor = If(DarkMode, Color.White, Color.Black)
 
-        HideControlHandlesCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
+        'HideControlHandlesCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
 
         CenterDrawingButton.ForeColor = If(DarkMode, Color.White, Color.Black)
 
@@ -1469,11 +1480,20 @@ Public Class Form1
     Private Sub HideHandlesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HideHandlesToolStripMenuItem.Click
 
         If HideControlHandles Then
+
             HideControlHandles = False
-            HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
-        Else
-            HideControlHandles = True
+
             HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
+
+            HideHandlesToolStripMenuItem.Text = "Hide Handles"
+        Else
+
+            HideControlHandles = True
+
+            HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
+
+            HideHandlesToolStripMenuItem.Text = "Show Handles"
+
         End If
 
         Invalidate()

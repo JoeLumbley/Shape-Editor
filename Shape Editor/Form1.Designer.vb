@@ -28,7 +28,6 @@ Partial Class Form1
         HScrollBar1 = New HScrollBar()
         VScrollBar1 = New VScrollBar()
         CenterDrawingButton = New Button()
-        HideControlHandlesCheckBox = New CheckBox()
         MenuStrip1 = New MenuStrip()
         FileToolStripMenuItem = New ToolStripMenuItem()
         NewToolStripMenuItem = New ToolStripMenuItem()
@@ -109,16 +108,6 @@ Partial Class Form1
         CenterDrawingButton.TabIndex = 5
         CenterDrawingButton.TabStop = False
         CenterDrawingButton.UseVisualStyleBackColor = True
-        ' 
-        ' HideControlHandlesCheckBox
-        ' 
-        HideControlHandlesCheckBox.AutoSize = True
-        HideControlHandlesCheckBox.Location = New Point(350, 477)
-        HideControlHandlesCheckBox.Name = "HideControlHandlesCheckBox"
-        HideControlHandlesCheckBox.Size = New Size(144, 29)
-        HideControlHandlesCheckBox.TabIndex = 6
-        HideControlHandlesCheckBox.Text = "Hide Handles"
-        HideControlHandlesCheckBox.UseVisualStyleBackColor = True
         ' 
         ' MenuStrip1
         ' 
@@ -240,7 +229,6 @@ Partial Class Form1
         Controls.Add(MenuStrip1)
         Controls.Add(TextBox1)
         Controls.Add(HScrollBar1)
-        Controls.Add(HideControlHandlesCheckBox)
         Controls.Add(Label1)
         Controls.Add(TrackBar1)
         Controls.Add(SubtractPointToolButton)
@@ -268,7 +256,6 @@ Partial Class Form1
     Friend WithEvents HScrollBar1 As HScrollBar
     Friend WithEvents VScrollBar1 As VScrollBar
     Friend WithEvents CenterDrawingButton As Button
-    Friend WithEvents HideControlHandlesCheckBox As CheckBox
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
