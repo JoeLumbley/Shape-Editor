@@ -119,10 +119,6 @@ Public Class Form1
 
     Private HideControlHandles As Boolean = False
 
-
-
-
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         KeyPreview = True
@@ -308,11 +304,6 @@ Public Class Form1
         End If
     End Sub
 
-
-
-
-
-
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         'If e.KeyCode = Keys.Enter AndAlso points.Count > 2 Then
         '    ' Close the shape
@@ -421,11 +412,6 @@ Public Class Form1
 
     End Function
 
-
-
-
-
-
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
 
         LayoutForm()
@@ -444,12 +430,6 @@ Public Class Form1
         Invalidate()
 
     End Sub
-
-
-
-
-
-
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
 
@@ -585,41 +565,34 @@ Public Class Form1
                     Select Case True
                         Case TypeOf ex Is IOException
                             ' Handle IOException (e.g., file being used by another process)
-                            'MessageBox.Show("The file in use by another app. Close the file and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             MessageForm.Show("This file is in use by another app. Close the file and try again.", "File In Use - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
                         Case TypeOf ex Is FileNotFoundException
                             ' Handle FileNotFoundException
-                            'MessageBox.Show("The file was not found. Please check the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             MessageForm.Show("The file was not found. Please check the file path.", "File Not Found - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
                         Case TypeOf ex Is FormatException
                             ' Handle FormatException
-                            'MessageBox.Show("The file format is invalid. Please check the file contents.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             MessageForm.Show("The file format is invalid. Please check the file contents.", "Bad Format - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
                         Case TypeOf ex Is ArgumentException
                             ' Handle ArgumentException
-                            'MessageBox.Show("The file path is invalid. Please check the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             MessageForm.Show("The file path is invalid. Please check the file path.", "Bad Path - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
 
                         Case TypeOf ex Is PathTooLongException
                             ' Handle PathTooLongException
-                            'MessageBox.Show("The file path is too long. Please shorten the file path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             MessageForm.Show("The file path is too long. Please shorten the file path.", "Path Too Long - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
                         Case TypeOf ex Is NotSupportedException
 
                         Case TypeOf ex Is UnauthorizedAccessException
                             ' Handle UnauthorizedAccessException
-                            'MessageBox.Show("You do not have permission to access this file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             MessageForm.Show("You do not have permission to access this file.", "Unauthorized - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
 
                         Case Else
                             ' Handle other exceptions
-                            'MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             MessageForm.Show("An unexpected error occurred: " & ex.Message, "Error - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
                     End Select
@@ -637,8 +610,6 @@ Public Class Form1
                 CurrentTool = Tool.Move
 
                 RefreshToolIcons()
-
-
 
                 ScaleFactor = 8
 
@@ -746,19 +717,11 @@ Public Class Form1
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
 
-        'If MessageBox.Show("Are you sure you want to exit?", "Exit Shape Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
-
-        '    e.Cancel = True
-
-        'End If
-
-
         If MessageForm.Show("Are you sure you want to exit?", "Exit - Shape Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
 
             e.Cancel = True
 
         End If
-
 
     End Sub
 
@@ -791,42 +754,6 @@ Public Class Form1
         Invalidate()
 
     End Sub
-
-    'Private Sub DarkModeCheckBox_CheckedChanged(sender As Object, e As EventArgs)
-
-    '    If DarkModeCheckBox.Checked Then
-
-    '        DarkMode = True
-
-    '    Else
-
-    '        DarkMode = False
-
-    '    End If
-
-    '    ApplyUITheme()
-
-    '    Refresh()
-
-    '    Invalidate()
-
-    '    ' Fixes title bar theme update issue in Windows 10
-    '    ' Check if the OS is Windows 10
-    '    If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
-    '        ' The first public build of Windows 11 had the build number 10.0.22000
-    '        ' So, we can assume that any build number less than 22000 is Windows 10.
-    '        ' Force a redraw of the form to apply the theme changes
-
-    '        ' Create a new instance of the ApplyingThemeForm
-    '        Dim ThemeForm As New ApplyingThemeForm
-
-    '        ' Force a redraw of form1 by showing applying theme form.
-    '        ThemeForm.ShowDialog()
-
-    '        ' 10.0.19045.5737 - Windows 10 Home Version	22H2
-    '    End If
-
-    'End Sub
 
     Private Sub MovePointToolButton_Click(sender As Object, e As EventArgs) Handles MovePointToolButton.Click
 
@@ -967,10 +894,6 @@ Public Class Form1
 
         SubtractPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height - SubtractPointToolButton.Height
         SubtractPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-        ' Update CheckBoxes
-        'HideControlHandlesCheckBox.Top = TrackBar1.Bottom - Label1.Height - 5
-        'HideControlHandlesCheckBox.Left = Label1.Right + 25
 
     End Sub
 
@@ -1251,13 +1174,9 @@ Public Class Form1
 
         Label1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        'HideControlHandlesCheckBox.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
-
         TextBox1.ForeColor = If(DarkMode, Color.FromArgb(255, 230, 230, 230), Color.FromArgb(255, 32, 32, 32))
 
         Label1.ForeColor = If(DarkMode, Color.White, Color.Black)
-
-        'HideControlHandlesCheckBox.ForeColor = If(DarkMode, Color.White, Color.Black)
 
         CenterDrawingButton.ForeColor = If(DarkMode, Color.White, Color.Black)
 
