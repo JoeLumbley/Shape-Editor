@@ -988,11 +988,9 @@ This project is licensed under the MIT License.
 
 ## Index
 
-1. **[Introduction](#introduction)**
-   - [Overview of the Shape Editor](#overview-of-the-shape-editor)
-   - [Purpose and functionality](#purpose-and-functionality)
 
-2. **[Features](#features)**
+
+ **[Features](#features)**
    - [Code Generation](#code-generation)
    - [Copy and Paste Functionality](#copy-and-paste-functionality)
    - [Immediate Feedback](#immediate-feedback)
@@ -1000,32 +998,32 @@ This project is licensed under the MIT License.
    - [Interactive Development](#interactive-development)
    - [Point Mirroring](#point-mirroring)
 
-3. **[How It Works](#how-it-works)**
+ **[How It Works](#how-it-works)**
    - [Symmetrical Design](#symmetrical-design)
    - [Real-Time Updates](#real-time-updates)
 
-4. **[Benefits](#benefits)**
+ **[Benefits](#benefits)**
    - [Efficiency](#efficiency)
    - [Creativity](#creativity)
    - [Precision](#precision)
    - [User-Friendly](#user-friendly)
 
-5. **[File Format](#file-format)**
+ **[File Format](#file-format)**
    - [Comma-Separated Values (CSV) Files](#comma-separated-values-csv-files)
      - [Usage](#usage)
      - [Benefits](#benefits-1)
 
-6. **[Dark Mode](#dark-mode)**
+ **[Dark Mode](#dark-mode)**
    - [Visual Comfort](#visual-comfort)
    - [Aesthetic Appeal](#aesthetic-appeal)
    - [Energy Efficiency](#energy-efficiency)
    - [User Preference](#user-preference)
 
-7. **[Getting Started](#getting-started)**
+ **[Getting Started](#getting-started)**
    - [Launching the Application](#launching-the-application)
    - [Creating Shapes](#creating-shapes)
 
-8. **[Code Walkthrough](#code-walkthrough)**
+ **[Code Walkthrough](#code-walkthrough)**
    - [Imports](#imports)
    - [Class Definition](#class-definition)
    - [Enum Definitions](#enum-definitions)
@@ -1040,31 +1038,31 @@ This project is licensed under the MIT License.
    - [Resizing the Form](#resizing-the-form)
    - [Saving and Opening Shapes](#saving-and-opening-shapes)
 
-9. **[Save and Open Functionality](#save-and-open-functionality)**
+ **[Save and Open Functionality](#save-and-open-functionality)**
    - [Save Functionality](#save-functionality)
    - [Open Functionality](#open-functionality)
 
-10. **[Creating Transparent Icons in GIMP](#creating-transparent-icons-in-gimp)**
+ **[Creating Transparent Icons in GIMP](#creating-transparent-icons-in-gimp)**
     - Step-by-Step Guide
 
-11. **[Adding Icons to a Resource File](#adding-icons-to-a-resource-file)**
+ **[Adding Icons to a Resource File](#adding-icons-to-a-resource-file)**
     - [Open Your Project](#open-your-project)
     - [Accessing the Icon in Code](#accessing-the-icon-in-code)
 
-12. **[License](#license)**
+ **[License](#license)**
     - [License Information](#license-information)
 
-13. **[About](#about)**
+ **[About](#about)**
     - [Description of the Shape Editor](#description-of-the-shape-editor)
     - [Topics Covered](#topics-covered)
 
-14. **[Resources](#resources)**
+ **[Resources](#resources)**
     - [Links and References](#links-and-references)
 
-15. **[Activity](#activity)**
+ **[Activity](#activity)**
     - [Project Activity Overview](#project-activity-overview)
 
-16. **[Suggested Workflows](#suggested-workflows)**
+ **[Suggested Workflows](#suggested-workflows)**
     - [.NET Desktop Configuration](#net-desktop-configuration)
 
 
