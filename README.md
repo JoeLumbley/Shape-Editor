@@ -17,7 +17,7 @@ The Shape Editor is an innovative tool designed for the interactive creation of 
 - **User-Friendly Interface**: Simplifies the process of integrating shape data, making it accessible for users of all skill levels.
 - **Interactive Development**: Encourages hands-on shape creation and coding, fostering creativity and experimentation.
 
-
+[Index](#index)
 
 
 
@@ -986,7 +986,7 @@ This project is licensed under the MIT License.
 
 
 
-### Index for Shape Editor README
+## Index
 
 1. **[Introduction](#introduction)**
    - [Overview of the Shape Editor](#overview-of-the-shape-editor)
