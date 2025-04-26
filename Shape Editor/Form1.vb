@@ -1036,6 +1036,7 @@ Public Class Form1
                 FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
 
             Else
+
                 FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
 
             End If
@@ -1137,6 +1138,7 @@ Public Class Form1
                 FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
 
             Else
+
                 FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
 
             End If
@@ -1150,7 +1152,6 @@ Public Class Form1
                 HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
 
             End If
-
 
             DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
 
