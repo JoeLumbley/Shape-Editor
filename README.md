@@ -1039,18 +1039,18 @@ This project is licensed under the MIT License.
    - Saving and Opening Shapes
 
  **[Save and Open Functionality](#save-and-open-functionality)**
-   - Save Functionality
-   - Open Functionality
+ - Save Functionality
+ - Open Functionality
 
  **[Creating Transparent Icons in GIMP](#creating-transparent-icons-in-gimp)**
-    - Step-by-Step Guide
+ - Step-by-Step Guide
 
  **[Adding Icons to a Resource File](#adding-icons-to-a-resource-file)**
-    - Open Your Project
-    - Accessing the Icon in Code
+ - Open Your Project
+ - - Accessing the Icon in Code
 
- **[License](#license)**
-    - License Information
+**[License](#license)**
+- License Information
 
 
 
