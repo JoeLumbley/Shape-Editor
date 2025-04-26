@@ -1047,7 +1047,7 @@ This project is licensed under the MIT License.
 
  **[Adding Icons to a Resource File](#adding-icons-to-a-resource-file)**
  - Open Your Project
- - - Accessing the Icon in Code
+ - Accessing the Icon in Code
 
 **[License](#license)**
 - License Information
