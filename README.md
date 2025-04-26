@@ -48,6 +48,7 @@ The Shape Editor is an innovative tool designed for the interactive creation of 
 - **Precision**: Ensures both sides of the shape are aligned and proportional, enhancing design quality.
 - **User-Friendly**: Accessible for beginners while still being valuable for experienced developers.
 
+[Index](#index)
 
 
 
@@ -91,6 +92,7 @@ x,y
 - **Portability**: Easily shared and transferred between different systems.
 - **Human-Readable**: The simplicity of CSV files makes them understandable without specialized tools.
 
+[Index](#index)
 
 
 
@@ -152,6 +154,7 @@ x,y
 - **Energy Efficiency**: Saves battery life on OLED screens by using less power for darker pixels.
 - **User Preference**: Easily toggle between Light and Dark Modes to suit your environment or personal taste.
 
+[Index](#index)
 
 
 
@@ -702,6 +705,7 @@ These lines reset the current tool to "Move", refresh the tool icons, set the sc
 
 This section of code effectively handles saving and opening shapes in the Shape Editor application. It provides a user-friendly interface for managing shape data while ensuring robust error handling and feedback. Understanding this functionality is essential for any VB.NET developer looking to create interactive applications. Happy coding!
 
+[Index](#index)
 
 
 
