@@ -1045,7 +1045,7 @@ This project is licensed under the MIT License.
    - [Open Functionality](#open-functionality)
 
 10. **[Creating Transparent Icons in GIMP](#creating-transparent-icons-in-gimp)**
-    - [Step-by-Step Guide](#step-by-step-guide)
+    - Step-by-Step Guide
 
 11. **[Adding Icons to a Resource File](#adding-icons-to-a-resource-file)**
     - [Open Your Project](#open-your-project)
