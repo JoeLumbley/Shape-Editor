@@ -1052,23 +1052,6 @@ This project is licensed under the MIT License.
  **[License](#license)**
     - License Information
 
- **[About](#about)**
-    - Description of the Shape Editor
-    - Topics Covered
-
- **[Resources](#resources)**
-    - Links and References
-
- **[Activity](#activity)**
-    - Project Activity Overview
-
- 
- **[Suggested Workflows](#suggested-workflows)**
-    - .NET Desktop Configuration
-
-
-
-
 
 
 
