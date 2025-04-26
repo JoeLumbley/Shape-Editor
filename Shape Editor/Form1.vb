@@ -358,9 +358,12 @@ Public Class Form1
             Else
                 VScrollBar1.Value += 10
             End If
+
             ' Update the drawing center based on the scroll value
             DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
+
             Invalidate()
+
             ' Return True to indicate the key event has been handled
             Return True
 
