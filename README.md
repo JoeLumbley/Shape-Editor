@@ -986,84 +986,86 @@ This project is licensed under the MIT License.
 
 
 
-## Index
+### Index for Shape Editor README
 
 
 
  **[Features](#features)**
-   - [Code Generation](#code-generation)
-   - [Copy and Paste Functionality](#copy-and-paste-functionality)
-   - [Immediate Feedback](#immediate-feedback)
-   - [User-Friendly Interface](#user-friendly-interface)
-   - [Interactive Development](#interactive-development)
-   - [Point Mirroring](#point-mirroring)
+   - Code Generation
+   - Copy and Paste Functionality
+   - Immediate Feedback
+   - User-Friendly Interface
+   - Interactive Development
+   - Point Mirroring
 
  **[How It Works](#how-it-works)**
-   - [Symmetrical Design](#symmetrical-design)
-   - [Real-Time Updates](#real-time-updates)
+   - Symmetrical Design
+   - Real-Time Updates
 
  **[Benefits](#benefits)**
-   - [Efficiency](#efficiency)
-   - [Creativity](#creativity)
-   - [Precision](#precision)
-   - [User-Friendly](#user-friendly)
+   - Efficiency
+   - Creativity
+   - Precision
+   - User-Friendly
 
  **[File Format](#file-format)**
-   - [Comma-Separated Values (CSV) Files](#comma-separated-values-csv-files)
-     - [Usage](#usage)
-     - [Benefits](#benefits-1)
+   - Comma-Separated Values (CSV) Files
+     - Usage
+     - Benefits
 
  **[Dark Mode](#dark-mode)**
-   - [Visual Comfort](#visual-comfort)
-   - [Aesthetic Appeal](#aesthetic-appeal)
-   - [Energy Efficiency](#energy-efficiency)
-   - [User Preference](#user-preference)
+   - Visual Comfort
+   - Aesthetic Appeal
+   - Energy Efficiency
+   - User Preference
 
  **[Getting Started](#getting-started)**
-   - [Launching the Application](#launching-the-application)
-   - [Creating Shapes](#creating-shapes)
+   - Launching the Application
+   - Creating Shapes
 
  **[Code Walkthrough](#code-walkthrough)**
-   - [Imports](#imports)
-   - [Class Definition](#class-definition)
-   - [Enum Definitions](#enum-definitions)
-   - [DWM Window Attributes](#dwm-window-attributes)
-   - [Variables and Constants](#variables-and-constants)
-   - [Color and Brush Definitions](#color-and-brush-definitions)
-   - [Form Load Event](#form-load-event)
-   - [OnPaint Method](#onpaint-method)
-   - [Drawing Operations](#drawing-operations)
-   - [Mouse Events](#mouse-events)
-   - [Key Events](#key-events)
-   - [Resizing the Form](#resizing-the-form)
-   - [Saving and Opening Shapes](#saving-and-opening-shapes)
+   - Imports
+   - Class Definition
+   - Enum Definitions
+   - DWM Window Attributes
+   - Variables and Constants
+   - Color and Brush Definitions
+   - Form Load Event
+   - OnPaint Method
+   - Drawing Operations
+   - Mouse Events
+   - Key Events
+   - Resizing the Form
+   - Saving and Opening Shapes
 
  **[Save and Open Functionality](#save-and-open-functionality)**
-   - [Save Functionality](#save-functionality)
-   - [Open Functionality](#open-functionality)
+   - Save Functionality
+   - Open Functionality
 
  **[Creating Transparent Icons in GIMP](#creating-transparent-icons-in-gimp)**
     - Step-by-Step Guide
 
  **[Adding Icons to a Resource File](#adding-icons-to-a-resource-file)**
-    - [Open Your Project](#open-your-project)
-    - [Accessing the Icon in Code](#accessing-the-icon-in-code)
+    - Open Your Project
+    - Accessing the Icon in Code
 
  **[License](#license)**
-    - [License Information](#license-information)
+    - License Information
 
  **[About](#about)**
-    - [Description of the Shape Editor](#description-of-the-shape-editor)
-    - [Topics Covered](#topics-covered)
+    - Description of the Shape Editor
+    - Topics Covered
 
  **[Resources](#resources)**
-    - [Links and References](#links-and-references)
+    - Links and References
 
  **[Activity](#activity)**
-    - [Project Activity Overview](#project-activity-overview)
+    - Project Activity Overview
 
  **[Suggested Workflows](#suggested-workflows)**
-    - [.NET Desktop Configuration](#net-desktop-configuration)
+    - .NET Desktop Configuration
+
+This index includes links to each section, allowing for easy navigation within the README document.
 
 
 
