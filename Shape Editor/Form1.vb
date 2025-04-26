@@ -467,7 +467,6 @@ Public Class Form1
         Invalidate()
     End Sub
 
-
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
         points.Clear()
         TextBox1.Clear()
@@ -579,17 +578,13 @@ Public Class Form1
                             ' Handle ArgumentException
                             MessageForm.Show("The file path is invalid. Please check the file path.", "Bad Path - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-
                         Case TypeOf ex Is PathTooLongException
                             ' Handle PathTooLongException
                             MessageForm.Show("The file path is too long. Please shorten the file path.", "Path Too Long - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-                        Case TypeOf ex Is NotSupportedException
-
                         Case TypeOf ex Is UnauthorizedAccessException
                             ' Handle UnauthorizedAccessException
                             MessageForm.Show("You do not have permission to access this file.", "Unauthorized - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
 
                         Case Else
                             ' Handle other exceptions
