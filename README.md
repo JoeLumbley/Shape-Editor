@@ -17,7 +17,7 @@ The Shape Editor is an innovative tool designed for the interactive creation of 
 - **User-Friendly Interface**: Simplifies the process of integrating shape data, making it accessible for users of all skill levels.
 - **Interactive Development**: Encourages hands-on shape creation and coding, fostering creativity and experimentation.
 
-
+[Index](#index)
 
 
 
@@ -48,6 +48,7 @@ The Shape Editor is an innovative tool designed for the interactive creation of 
 - **Precision**: Ensures both sides of the shape are aligned and proportional, enhancing design quality.
 - **User-Friendly**: Accessible for beginners while still being valuable for experienced developers.
 
+[Index](#index)
 
 
 
@@ -91,6 +92,7 @@ x,y
 - **Portability**: Easily shared and transferred between different systems.
 - **Human-Readable**: The simplicity of CSV files makes them understandable without specialized tools.
 
+[Index](#index)
 
 
 
@@ -152,6 +154,7 @@ x,y
 - **Energy Efficiency**: Saves battery life on OLED screens by using less power for darker pixels.
 - **User Preference**: Easily toggle between Light and Dark Modes to suit your environment or personal taste.
 
+[Index](#index)
 
 
 
@@ -702,6 +705,7 @@ These lines reset the current tool to "Move", refresh the tool icons, set the sc
 
 This section of code effectively handles saving and opening shapes in the Shape Editor application. It provides a user-friendly interface for managing shape data while ensuring robust error handling and feedback. Understanding this functionality is essential for any VB.NET developer looking to create interactive applications. Happy coding!
 
+[Index](#index)
 
 
 
@@ -950,6 +954,108 @@ This project is licensed under the MIT License.
 
 
 ![038](https://github.com/user-attachments/assets/9ccae402-4d60-4032-9696-6770b2872a27)
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Index
+
+
+
+ **[Features](#features)**
+   - Code Generation
+   - Copy and Paste Functionality
+   - Immediate Feedback
+   - User-Friendly Interface
+   - Interactive Development
+   - Point Mirroring
+
+ **[How It Works](#how-it-works)**
+   - Symmetrical Design
+   - Real-Time Updates
+
+ **[Benefits](#benefits)**
+   - Efficiency
+   - Creativity
+   - Precision
+   - User-Friendly
+
+ **[File Format](#file-format)**
+   - Comma-Separated Values (CSV) Files
+     - Usage
+     - Benefits
+
+ **[Dark Mode](#dark-mode)**
+   - Visual Comfort
+   - Aesthetic Appeal
+   - Energy Efficiency
+   - User Preference
+
+ **[Getting Started](#getting-started)**
+   - Launching the Application
+   - Creating Shapes
+
+ **[Code Walkthrough](#code-walkthrough)**
+   - Imports
+   - Class Definition
+   - Enum Definitions
+   - DWM Window Attributes
+   - Variables and Constants
+   - Color and Brush Definitions
+   - Form Load Event
+   - OnPaint Method
+   - Drawing Operations
+   - Mouse Events
+   - Key Events
+   - Resizing the Form
+   - Saving and Opening Shapes
+
+ **[Save and Open Functionality](#save-and-open-functionality)**
+ - Save Functionality
+ - Open Functionality
+
+ **[Creating Transparent Icons in GIMP](#creating-transparent-icons-in-gimp)**
+ - Step-by-Step Guide
+
+ **[Adding Icons to a Resource File](#adding-icons-to-a-resource-file)**
+ - Open Your Project
+ - Accessing the Icon in Code
+
+**[License](#license)**
+- License Information
+
 
 
 
