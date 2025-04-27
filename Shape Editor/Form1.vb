@@ -878,10 +878,10 @@ Public Class Form1
 
 
 
-        CopyLabel.Top = ClientRectangle.Top + menuStripHeight + 5
+        CopyLabel.Top = ClientRectangle.Top + menuStripHeight + 3
         CopyLabel.Left = ClientRectangle.Right - CopyLabel.Width - VScrollBar1.Width
 
-        LanguageLabel.Top = ClientRectangle.Top + menuStripHeight + 5
+        LanguageLabel.Top = ClientRectangle.Top + menuStripHeight + 3
         LanguageLabel.Left = halfClientWidth + 5
         'LanguageLabel.Width = halfClientWidth
         LanguageLabel.Height = 20
