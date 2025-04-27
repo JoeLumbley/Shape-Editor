@@ -900,7 +900,7 @@ Public Class Form1
         TextBox1.Top = ClientRectangle.Top + menuStripHeight * 2
         TextBox1.Left = halfClientWidth
         TextBox1.Width = halfClientWidth
-        TextBox1.Height = clientHeight - menuStripHeight
+        TextBox1.Height = clientHeight - menuStripHeight * 2
 
         ' Update TrackBar1
         TrackBar1.Top = ClientRectangle.Bottom - trackBarHeight
