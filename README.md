@@ -143,8 +143,8 @@ x,y
 ## Dark Mode
 
 
-![097](https://github.com/user-attachments/assets/9a6d8102-fcde-46e3-9b57-81f8f359905e)
 
+![100](https://github.com/user-attachments/assets/de67b5c7-6feb-472a-9c00-e9e6f66033ee)
 
 
 
