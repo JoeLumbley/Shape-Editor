@@ -4,12 +4,12 @@ Imports System.Runtime.InteropServices
 Public Class AboutForm
 
     Private LinkColorDark As Color = Color.FromArgb(255, 28, 138, 224)
-    Private LinkHoverColorDark As Color = Color.FromArgb(255, 140, 140, 140)
-    Private ActiveLinkColorDark As Color = Color.FromArgb(255, 255, 255)
+    Private LinkHoverColorDark As Color = Color.FromArgb(255, 255, 255, 255)
+    Private ActiveLinkColorDark As Color = Color.Purple
 
     Private LinkColorLight As Color = Color.FromArgb(255, 28, 138, 224)
-    Private LinkHoverColorLight As Color = Color.FromArgb(255, 140, 140, 140)
-    Private ActiveLinkColorLight As Color = Color.FromArgb(255, 0, 0, 0)
+    Private LinkHoverColorLight As Color = Color.FromArgb(255, 0, 0, 0)
+    Private ActiveLinkColorLight As Color = Color.Purple
 
     Private Sub AboutForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -42,7 +42,6 @@ Public Class AboutForm
         OpenGitHubLink()
 
     End Sub
-
 
     Private Sub LinkLabel1_MouseHover(sender As Object, e As EventArgs) Handles GitHubLink.MouseHover
 

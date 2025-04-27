@@ -35,6 +35,7 @@ Partial Class AboutForm
         ' 
         GitHubLink.AutoSize = True
         GitHubLink.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        GitHubLink.LinkBehavior = LinkBehavior.HoverUnderline
         GitHubLink.Location = New Point(211, 301)
         GitHubLink.Name = "GitHubLink"
         GitHubLink.Size = New Size(376, 28)
