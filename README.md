@@ -38,8 +38,8 @@ The Shape Editor is an innovative tool designed for the interactive creation of 
 
 
 
-![098](https://github.com/user-attachments/assets/b1b0bee4-8529-46fc-9f38-036189f8d92d)
 
+![101](https://github.com/user-attachments/assets/845bf830-11d0-42ae-b6c9-19cae3fc9051)
 
 
 ### Benefits
