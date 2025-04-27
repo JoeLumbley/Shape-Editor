@@ -319,6 +319,12 @@ Public Class Form1
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
 
+        ' Check if Control + C is pressed
+        If e.Control AndAlso e.KeyCode = Keys.C Then
+            ' Copy the text from TextBox1 to the clipboard
+            Clipboard.SetText(TextBox1.Text)
+        End If
+
         If e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
 
             RemovePoint(selectedPointIndex)
@@ -341,6 +347,15 @@ Public Class Form1
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
         ' Intercept the Arrow keys
+
+
+
+
+
+
+
+
+
 
         If keyData = Keys.Up Then
 
