@@ -875,8 +875,29 @@ Public Class Form1
 
         CenterDrawingArea()
 
+
+
+
+        CopyLabel.Top = ClientRectangle.Top + menuStripHeight + 5
+        CopyLabel.Left = ClientRectangle.Right - CopyLabel.Width - VScrollBar1.Width
+
+        LanguageLabel.Top = ClientRectangle.Top + menuStripHeight + 5
+        LanguageLabel.Left = halfClientWidth + 5
+        'LanguageLabel.Width = halfClientWidth
+        LanguageLabel.Height = 20
+
+
+
+
+        Panel1.Top = ClientRectangle.Top + menuStripHeight
+        Panel1.Left = halfClientWidth
+        Panel1.Width = halfClientWidth
+        Panel1.Height = menuStripHeight
+
+
+
         ' Update TextBox1
-        TextBox1.Top = ClientRectangle.Top + menuStripHeight
+        TextBox1.Top = ClientRectangle.Top + menuStripHeight * 2
         TextBox1.Left = halfClientWidth
         TextBox1.Width = halfClientWidth
         TextBox1.Height = clientHeight - menuStripHeight
@@ -1225,6 +1246,16 @@ Public Class Form1
 
         GroupBox1.BackColor = If(DarkMode, Color.FromArgb(255, 23, 23, 23), Color.White)
 
+
+
+        Panel1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
+        LanguageLabel.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
+        CopyLabel.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
+
+
+        LanguageLabel.ForeColor = If(DarkMode, Color.White, Color.Black)
+        CopyLabel.LinkColor = If(DarkMode, Color.White, Color.Black)
+
     End Sub
 
     Private Sub DrawGrid(g As Graphics)
@@ -1471,6 +1502,19 @@ Public Class Form1
 
     End Sub
 
+    Private Sub CopyLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles CopyLabel.LinkClicked
+
+        ' Copy the text in TextBox1 to the clipboard
+        Clipboard.SetText(TextBox1.Text)
+        ' Show a message box to confirm the copy action
+        'MessageForm.Show("Text copied to clipboard.", "Copy", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+    End Sub
+
+
+
+
 End Class
 
 Public Class CustomColorMenuStripRenderer
@@ -1623,27 +1667,6 @@ Public Class CustomColorMenuStripRenderer
         e.Graphics.DrawLine(pen, rect.Left, rect.Height \ 2, rect.Right, rect.Height \ 2)
         pen.Dispose()
     End Sub
-
-    '' Render the check mark
-    'Protected Overrides Sub OnRenderItemCheck(e As ToolStripItemImageRenderEventArgs)
-    '    Dim rect As Rectangle = e.ImageRectangle
-    '    Using brush As New SolidBrush(CheckmarkBackColor)
-    '        e.Graphics.FillRectangle(brush, rect) ' Fill background
-    '    End Using
-
-    '    ' Define checkmark points
-    '    Dim checkPoints() As Point = {
-    '        New Point(rect.Left + rect.Width \ 4, rect.Top + rect.Height \ 2),
-    '        New Point(rect.Left + rect.Width \ 2, rect.Bottom - rect.Height \ 4),
-    '        New Point(rect.Right - rect.Width \ 4, rect.Top + rect.Height \ 4)
-    '    }
-
-    '    ' Draw checkmark
-    '    Using pen As New Pen(CheckmarkColor, 2)
-    '        e.Graphics.DrawLines(pen, checkPoints)
-    '    End Using
-    'End Sub
-
 
 End Class
 
