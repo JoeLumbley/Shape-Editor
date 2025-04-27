@@ -217,6 +217,7 @@ Public Class Form1
 
         ' Check if the left mouse button is pressed
         If e.Button = MouseButtons.Left Then
+
             ' Calculate the adjusted mouse location based on the scale factor
             AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor),
                                           CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
@@ -224,20 +225,26 @@ Public Class Form1
             selectedPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
 
             If CurrentTool = Tool.Add Then
+
                 ' If no point was selected, add a new point
                 If selectedPointIndex = -1 Then
                     AddPoint(AdjustedMouseLocation)
                 End If
+
             ElseIf CurrentTool = Tool.Move Then
+
                 ' If a point was selected, start moving it
                 If selectedPointIndex <> -1 Then
                     MovePoint(AdjustedMouseLocation)
                 End If
+
             ElseIf CurrentTool = Tool.Subtract Then
+
                 ' If a point was selected, remove it
                 If selectedPointIndex <> -1 Then
                     RemovePoint(selectedPointIndex)
                 End If
+
             End If
 
             ' Set the drawing flag to true
@@ -297,17 +304,21 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
+
         If e.Button = MouseButtons.Left Then
+
             isDrawing = False
+
             selectedPointIndex = -1
+
             GeneratePointArrayText()
+
         End If
+
     End Sub
 
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-        'If e.KeyCode = Keys.Enter AndAlso points.Count > 2 Then
-        '    ' Close the shape
-        '    CloseShape()
+
         If e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
 
             RemovePoint(selectedPointIndex)
@@ -354,9 +365,13 @@ Public Class Form1
         ElseIf keyData = Keys.Down Then
 
             If VScrollBar1.Value + 10 > VScrollBar1.Maximum Then
+
                 VScrollBar1.Value = VScrollBar1.Maximum
+
             Else
+
                 VScrollBar1.Value += 10
+
             End If
 
             ' Update the drawing center based on the scroll value
@@ -452,23 +467,23 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles CenterDrawingButton.Click
+    'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles CenterDrawingButton.Click
 
-        ResetScrollBars()
+    '    ResetScrollBars()
 
-        CenterDrawingArea()
+    '    CenterDrawingArea()
 
-        Invalidate()
+    '    Invalidate()
 
-    End Sub
+    'End Sub
 
-    Private Sub HideControlHandlesCheckBox_CheckedChanged(sender As Object, e As EventArgs)
-        Invalidate()
-    End Sub
+    'Private Sub HideControlHandlesCheckBox_CheckedChanged(sender As Object, e As EventArgs)
+    '    Invalidate()
+    'End Sub
 
-    Private Sub FillShapeCheckBox_CheckedChanged(sender As Object, e As EventArgs)
-        Invalidate()
-    End Sub
+    'Private Sub FillShapeCheckBox_CheckedChanged(sender As Object, e As EventArgs)
+    '    Invalidate()
+    'End Sub
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
         points.Clear()
@@ -730,17 +745,25 @@ Public Class Form1
         If e.Delta > 0 Then
 
             If TrackBar1.Value + 100 <= TrackBar1.Maximum Then
+
                 TrackBar1.Value += 100
+
             Else
+
                 TrackBar1.Value = TrackBar1.Maximum
+
             End If
 
         Else
 
             If TrackBar1.Value - 100 >= TrackBar1.Minimum Then
+
                 TrackBar1.Value -= 100
+
             Else
+
                 TrackBar1.Value = TrackBar1.Minimum
+
             End If
 
         End If
@@ -781,41 +804,62 @@ Public Class Form1
         ' Helper method for adding points and their mirrored counterparts
 
         points.Add(location)
+
         points.Add(GetMirroredPoint(location))
+
         selectedPointIndex = points.Count - 2
+
     End Sub
 
     Private Sub MovePoint(location As Point)
         ' Helper method for moving points and updating their mirrored counterparts
 
         points(selectedPointIndex) = location
+
         points(selectedPointIndex + 1) = GetMirroredPoint(location)
+
     End Sub
 
     Private Function GetMirroredPoint(p As Point) As Point
         ' Helper method to calculate the mirrored point
 
         Return New Point(p.X, -p.Y)
+
     End Function
 
     Private Sub RemovePoint(index As Integer)
+
         If index >= 0 AndAlso index < points.Count - 1 Then
+
             points.RemoveAt(index + 1) ' Remove mirrored point
             points.RemoveAt(index)     ' Remove actual point
+
         End If
+
         selectedPointIndex = -1
+
         GeneratePointArrayText()
+
         Invalidate()
+
     End Sub
 
     Private Sub InsertNewPoint(index As Integer)
+
         Dim newPoint As New Point(points(index).X, points(index).Y)
+
         points.Insert(index + 2, newPoint)
+
         points.Insert(index + 3, GetMirroredPoint(newPoint))
+
         selectedPointIndex += 2
+
         GeneratePointArrayText()
+
         Invalidate()
+
     End Sub
+
 
     Private Sub LayoutForm()
 
@@ -1404,6 +1448,7 @@ Public Class Form1
             HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
 
             HideHandlesToolStripMenuItem.Text = "Hide Handles"
+
         Else
 
             HideControlHandles = True
@@ -1416,10 +1461,15 @@ Public Class Form1
 
         Invalidate()
 
-
-
     End Sub
 
+    Private Sub CenterDrawingButton_Click(sender As Object, e As EventArgs) Handles CenterDrawingButton.Click
+
+        CenterDrawingArea()
+        ResetScrollBars()
+        Invalidate()
+
+    End Sub
 
 End Class
 
