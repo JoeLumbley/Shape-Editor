@@ -325,8 +325,13 @@ Public Class Form1
         ' Check if Control + C is pressed
         If e.Control AndAlso e.KeyCode = Keys.C Then
 
-            ' Copy the text from TextBox1 to the clipboard
-            Clipboard.SetText(TextBox1.Text)
+            ' Check if TextBox1.Text is not empty
+            If Not String.IsNullOrEmpty(TextBox1.Text) Then
+
+                ' Copy the text from TextBox1 to the clipboard
+                Clipboard.SetText(TextBox1.Text)
+
+            End If
 
         End If
 
