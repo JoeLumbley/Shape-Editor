@@ -1526,16 +1526,6 @@ Public Class Form1
 
     End Sub
 
-    'Private Sub CopyLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles CopyLabel.LinkClicked
-
-    '    ' Copy the text in TextBox1 to the clipboard
-    '    Clipboard.SetText(TextBox1.Text)
-    '    ' Show a message box to confirm the copy action
-    '    'MessageForm.Show("Text copied to clipboard.", "Copy", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-
-    'End Sub
-
     Private Sub CopyLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles CopyLabel.LinkClicked
 
         ' Check if TextBox1.Text is not null or empty
@@ -1547,9 +1537,6 @@ Public Class Form1
         End If
 
     End Sub
-
-
-
 
 End Class
 
