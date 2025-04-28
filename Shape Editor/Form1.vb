@@ -131,6 +131,9 @@ Public Class Form1
 
         ApplyUITheme()
 
+        CopyLabel.Enabled = False
+
+
         Text = "Shape Editor - Code with Joe"
 
         ScaleFactor = TrackBar1.Value / 100.0
@@ -500,6 +503,10 @@ Public Class Form1
         ResetScrollBars()
         CurrentTool = Tool.Add
         RefreshToolIcons()
+        ScaleFactor = 8
+        TrackBar1.Value = CInt(ScaleFactor * 100)
+        UpdateUIScaleFactor()
+        CopyLabel.Enabled = False
         Invalidate()
     End Sub
 
@@ -1264,6 +1271,8 @@ Public Class Form1
         LanguageLabel.ForeColor = If(DarkMode, Color.White, Color.Black)
         CopyLabel.LinkColor = If(DarkMode, Color.White, Color.Black)
 
+
+
     End Sub
 
     Private Sub DrawGrid(g As Graphics)
@@ -1340,6 +1349,13 @@ Public Class Form1
 
         ' Set the constructed string as the content of TextBox1.
         TextBox1.Text = sb.ToString()
+
+        ' Check if TextBox1.Text is not null or empty
+        If Not String.IsNullOrEmpty(TextBox1.Text) Then
+
+            CopyLabel.Enabled = True
+
+        End If
 
     End Sub
 
@@ -1510,13 +1526,25 @@ Public Class Form1
 
     End Sub
 
+    'Private Sub CopyLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles CopyLabel.LinkClicked
+
+    '    ' Copy the text in TextBox1 to the clipboard
+    '    Clipboard.SetText(TextBox1.Text)
+    '    ' Show a message box to confirm the copy action
+    '    'MessageForm.Show("Text copied to clipboard.", "Copy", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+    'End Sub
+
     Private Sub CopyLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles CopyLabel.LinkClicked
 
-        ' Copy the text in TextBox1 to the clipboard
-        Clipboard.SetText(TextBox1.Text)
-        ' Show a message box to confirm the copy action
-        'MessageForm.Show("Text copied to clipboard.", "Copy", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        ' Check if TextBox1.Text is not null or empty
+        If Not String.IsNullOrEmpty(TextBox1.Text) Then
 
+            ' Copy the text in TextBox1 to the clipboard
+            Clipboard.SetText(TextBox1.Text)
+
+        End If
 
     End Sub
 
