@@ -172,8 +172,14 @@
   <data name="FillShapeOnLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\FillShapeOnLight.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="HideHandlesOffDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\HideHandlesOffDark.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="HideHandlesOffLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\HideHandlesOffLight.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HideHandlesOnDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Icons\HideHandlesOnDark.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="HideHandlesOnLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Icons\HideHandlesOnLight.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

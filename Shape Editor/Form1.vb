@@ -1124,6 +1124,30 @@ Public Class Form1
 
             End If
 
+
+
+
+
+
+
+
+            If HideControlHandles Then
+
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffDark)
+
+            Else
+
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnDark)
+
+            End If
+
+
+
+
+
+
+
+
             DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
 
         Else
@@ -1232,7 +1256,7 @@ Public Class Form1
 
             Else
 
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
 
             End If
 
@@ -1505,7 +1529,13 @@ Public Class Form1
 
             HideControlHandles = False
 
-            HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
+            If DarkMode Then
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnDark)
+            Else
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
+            End If
+
+            'HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
 
             HideHandlesToolStripMenuItem.Text = "Hide Handles"
 
@@ -1513,7 +1543,13 @@ Public Class Form1
 
             HideControlHandles = True
 
-            HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
+            If DarkMode Then
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffDark)
+            Else
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
+            End If
+
+            'HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
 
             HideHandlesToolStripMenuItem.Text = "Show Handles"
 
@@ -1522,6 +1558,7 @@ Public Class Form1
         Invalidate()
 
     End Sub
+
 
     Private Sub CenterDrawingButton_Click(sender As Object, e As EventArgs) Handles CenterDrawingButton.Click
 
