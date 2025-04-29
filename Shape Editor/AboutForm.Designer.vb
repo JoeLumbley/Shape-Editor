@@ -36,7 +36,7 @@ Partial Class AboutForm
         GitHubLink.AutoSize = True
         GitHubLink.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         GitHubLink.LinkBehavior = LinkBehavior.HoverUnderline
-        GitHubLink.Location = New Point(211, 301)
+        GitHubLink.Location = New Point(211, 295)
         GitHubLink.Name = "GitHubLink"
         GitHubLink.Size = New Size(376, 28)
         GitHubLink.TabIndex = 0
@@ -64,7 +64,7 @@ Partial Class AboutForm
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(243, 230)
+        Label2.Location = New Point(243, 218)
         Label2.Name = "Label2"
         Label2.Size = New Size(312, 25)
         Label2.TabIndex = 3
@@ -82,7 +82,7 @@ Partial Class AboutForm
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(152, 133)
+        Label4.Location = New Point(152, 122)
         Label4.Name = "Label4"
         Label4.Size = New Size(494, 25)
         Label4.TabIndex = 5
