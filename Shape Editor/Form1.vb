@@ -1469,10 +1469,6 @@ Public Class Form1
 
         ApplyUITheme()
 
-        Refresh()
-
-        Invalidate()
-
         ' Fixes title bar theme update issue in Windows 10
         ' Check if the OS is Windows 10
         If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
@@ -1488,6 +1484,8 @@ Public Class Form1
 
             ' 10.0.19045.5737 - Windows 10 Home Version	22H2
         End If
+
+        Refresh()
 
     End Sub
 
@@ -1534,7 +1532,7 @@ Public Class Form1
     End Sub
 
     Private Sub ToggleHandlesVisibility()
-        ' This method toggles the visibility of control handles in the drawing area from show to hide.
+        ' This method toggles the visibility of control handles in the drawing area.
 
         ' If the control handles are hidden then
         If HideControlHandles Then
