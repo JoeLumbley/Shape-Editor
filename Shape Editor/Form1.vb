@@ -1559,7 +1559,6 @@ Public Class Form1
 
     End Sub
 
-
     Private Sub CenterDrawingButton_Click(sender As Object, e As EventArgs) Handles CenterDrawingButton.Click
 
         CenterDrawingArea()
@@ -1614,7 +1613,6 @@ Public Class CustomColorMenuStripRenderer
         SeparatorColor = Color.FromArgb(255, 50, 50, 50)
         CheckmarkColor = Color.Black
         CheckmarkBackColor = Color.White
-
 
     End Sub
 
