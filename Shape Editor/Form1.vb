@@ -450,7 +450,9 @@ Public Class Form1
 
         LayoutForm()
 
-        Invalidate()
+        'Invalidate()
+
+        Refresh()
 
     End Sub
 
@@ -1124,13 +1126,6 @@ Public Class Form1
 
             End If
 
-
-
-
-
-
-
-
             If HideControlHandles Then
 
                 HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffDark)
@@ -1140,13 +1135,6 @@ Public Class Form1
                 HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnDark)
 
             End If
-
-
-
-
-
-
-
 
             DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
 
