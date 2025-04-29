@@ -1524,38 +1524,55 @@ Public Class Form1
     End Sub
 
     Private Sub HideHandlesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HideHandlesToolStripMenuItem.Click
+        ' The HideHandlesToolStripMenuItem toggles the visibility of control handles.
 
+        ToggleHandlesVisibility()
+
+        ' Refresh the form to apply visual updates
+        Invalidate()
+
+    End Sub
+
+    Private Sub ToggleHandlesVisibility()
+        ' This method toggles the visibility of control handles in the drawing area from show to hide.
+
+        ' If the control handles are hidden then
         If HideControlHandles Then
 
+            ' Show them
             HideControlHandles = False
 
             If DarkMode Then
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnDark)
-            Else
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
-            End If
 
-            'HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnDark)
+
+            Else
+
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
+
+            End If
 
             HideHandlesToolStripMenuItem.Text = "Hide Handles"
 
         Else
+            ' If the control handles are visible
 
+            ' Hide them
             HideControlHandles = True
 
             If DarkMode Then
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffDark)
-            Else
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
-            End If
 
-            'HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffDark)
+
+            Else
+
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
+
+            End If
 
             HideHandlesToolStripMenuItem.Text = "Show Handles"
 
         End If
-
-        Invalidate()
 
     End Sub
 
