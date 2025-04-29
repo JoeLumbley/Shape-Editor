@@ -15,9 +15,11 @@ Public Class AboutForm
 
         CenterToParent()
 
-        Me.FormBorderStyle = FormBorderStyle.FixedDialog
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        MaximizeBox = False
+        MinimizeBox = False
 
-        Text = "About - Shape Editor"
+        Text = "About"
 
         If Form1.DarkMode Then
 

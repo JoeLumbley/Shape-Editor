@@ -450,8 +450,6 @@ Public Class Form1
 
         LayoutForm()
 
-        'Invalidate()
-
         Refresh()
 
     End Sub
@@ -463,7 +461,9 @@ Public Class Form1
 
         UpdateUIScaleFactor()
 
-        Invalidate()
+        'Invalidate()
+
+        Refresh()
 
     End Sub
 
@@ -654,7 +654,9 @@ Public Class Form1
 
                 GeneratePointArrayText()
 
-                Invalidate()
+                'Invalidate()
+
+                Refresh()
 
             End If
 
@@ -794,7 +796,9 @@ Public Class Form1
 
         UpdateUIScaleFactor()
 
-        Invalidate()
+        'Invalidate()
+
+        Refresh()
 
     End Sub
 
@@ -1144,6 +1148,10 @@ Public Class Form1
             DwmSetWindowAttribute(Handle, 20, 0, Marshal.SizeOf(GetType(Boolean)))
 
             ' Set the theme to light mode
+            SetWindowTheme(Handle, "Explorer", Nothing)
+            DwmSetWindowAttribute(Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+
             SetWindowTheme(HScrollBar1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
@@ -1505,7 +1513,9 @@ Public Class Form1
 
         End If
 
-        Invalidate()
+        'Invalidate()
+
+        Refresh()
 
     End Sub
 
