@@ -121,34 +121,7 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        KeyPreview = True
-
-        DoubleBuffered = True
-
-        Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
-
-        Application.EnableVisualStyles()
-
-        ApplyUITheme()
-
-        CopyLabel.Enabled = False
-
-
-        Text = "Shape Editor - Code with Joe"
-
-        ScaleFactor = TrackBar1.Value / 100.0
-        Label1.Text = $"Scale: {ScaleFactor:N2}"
-
-        CreateShapesFiles()
-
-        MenuStrip1.RenderMode = ToolStripRenderMode.Professional
-
-        ' Inject our custom rendering into the MenuStrip
-        MenuStrip1.Renderer = CustomMenuRenderer
-
-        LayoutForm()
-
-        MenuStrip1.Refresh()
+        InitializeApplication()
 
     End Sub
 
@@ -182,75 +155,6 @@ Public Class Form1
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
 
         DrawPointHandles(e)
-
-    End Sub
-
-    Private Sub DrawPointHandles(e As PaintEventArgs)
-
-        ' Draw the point handles if the handles are not hidden
-        If Not HideControlHandles Then
-
-            For i As Integer = 0 To points.Count - 1 Step 2
-
-                Dim point = points(i)
-
-                Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
-
-                ' Check if the point is selected or hovered
-                If i = selectedPointIndex OrElse i = hoveredPointIndex Then
-                    ' Draw the selected or hovered point handle
-                    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-                Else
-                    ' Draw the normal point handle
-                    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-                End If
-
-            Next
-
-        End If
-
-    End Sub
-
-    Private Sub DrawShape(e As PaintEventArgs)
-        ' DrawShape
-        ' Draw the shape if there are points
-
-        If points.Count > 1 Then
-            Dim orderedPoints = GetOrderedPoints()
-            Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
-
-            ' Fill the shape if the checkbox is checked
-            If FillShape Then
-
-                e.Graphics.FillPolygon(ShapeFillBrush, scaledPoints)
-
-            End If
-
-            e.Graphics.DrawPolygon(ShapePen, scaledPoints)
-
-        End If
-    End Sub
-
-    Private Sub DrawCenterMark(e As PaintEventArgs)
-        ' Draw a small cross at the center of the drawing area.
-
-        ' Draw the horizontal line
-        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), -5, 0, 5, 0)
-
-        ' Draw the vertical line
-        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), 0, -5, 0, 5)
-
-    End Sub
-
-    Private Sub DrawCoordinateAxes(e As PaintEventArgs)
-        ' Draw two lines intersecting at the center of the drawing area.
-
-        ' Draw the coordinate axes lines.
-        ' Draw the X-axis line.
-        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0)
-
-        ' Draw the Y-axis line.
-        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8)
 
     End Sub
 
@@ -523,24 +427,6 @@ Public Class Form1
 
     End Sub
 
-    'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles CenterDrawingButton.Click
-
-    '    ResetScrollBars()
-
-    '    CenterDrawingArea()
-
-    '    Invalidate()
-
-    'End Sub
-
-    'Private Sub HideControlHandlesCheckBox_CheckedChanged(sender As Object, e As EventArgs)
-    '    Invalidate()
-    'End Sub
-
-    'Private Sub FillShapeCheckBox_CheckedChanged(sender As Object, e As EventArgs)
-    '    Invalidate()
-    'End Sub
-
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
         points.Clear()
         TextBox1.Clear()
@@ -702,81 +588,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub RefreshToolIcons()
-
-        If CurrentTool = Tool.Move Then
-
-            If DarkMode Then
-                ' Dark mode
-
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-
-                ' Selected
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
-
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
-
-            Else
-                ' Light mode
-
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
-
-                ' Selected
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
-
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
-
-            End If
-
-        End If
-
-        If CurrentTool = Tool.Add Then
-
-            If DarkMode Then
-                ' Dark mode
-                ' Selected
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
-
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
-
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
-
-            Else
-                ' Light mode
-                ' Selected
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
-
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
-
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
-
-            End If
-
-        End If
-
-        If CurrentTool = Tool.Subtract Then
-
-            If DarkMode Then
-                ' Dark mode
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
-                ' Selected
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedDark)
-
-            Else
-                ' Light mode
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
-
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
-                ' Selected
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedLight)
-
-            End If
-
-        End If
-
-    End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
 
@@ -864,6 +675,285 @@ Public Class Form1
 
     End Sub
 
+    Private Sub DarkModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DarkModeToolStripMenuItem.Click
+
+        If DarkMode Then
+
+            DarkMode = False
+
+            DarkModeToolStripMenuItem.Text = "Dark Mode"
+
+        Else
+
+            DarkMode = True
+
+            DarkModeToolStripMenuItem.Text = "Light Mode"
+
+        End If
+
+        ApplyUITheme()
+
+        ' Fixes title bar theme update issue in Windows 10
+        ' Check if the OS is Windows 10
+        If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
+            ' The first public build of Windows 11 had the build number 10.0.22000
+            ' So, we can assume that any build number less than 22000 is Windows 10.
+            ' Force a redraw of the form to apply the theme changes
+
+            ' Create a new instance of the ApplyingThemeForm
+            Dim ThemeForm As New ApplyingThemeForm()
+
+            ' Force a redraw of form1 by showing applying theme form.
+            ThemeForm.ShowDialog()
+
+            ' 10.0.19045.5737 - Windows 10 Home Version	22H2
+        End If
+
+        Refresh()
+
+    End Sub
+
+    Private Sub FillShapeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FillShapeToolStripMenuItem.Click
+
+        If FillShape Then
+
+            FillShape = False
+
+            If DarkMode Then
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
+            Else
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
+            End If
+
+            FillShapeToolStripMenuItem.Text = "Fill Shape"
+
+        Else
+
+            FillShape = True
+
+            If DarkMode Then
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
+            Else
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
+            End If
+
+            FillShapeToolStripMenuItem.Text = "No Fill"
+
+        End If
+
+        'Invalidate()
+
+        Refresh()
+
+    End Sub
+
+    Private Sub HideHandlesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HideHandlesToolStripMenuItem.Click
+        ' The HideHandlesToolStripMenuItem toggles the visibility of control handles.
+
+        ToggleHandlesVisibility()
+
+        ' Refresh the form to apply visual updates
+        Invalidate()
+
+    End Sub
+
+    Private Sub CenterDrawingButton_Click(sender As Object, e As EventArgs) Handles CenterDrawingButton.Click
+
+        CenterDrawingArea()
+        ResetScrollBars()
+        Invalidate()
+
+    End Sub
+
+    Private Sub CopyLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles CopyLabel.LinkClicked
+
+        ' Check if TextBox1.Text is not null or empty
+        If Not String.IsNullOrEmpty(TextBox1.Text) Then
+
+            ' Copy the text in TextBox1 to the clipboard
+            Clipboard.SetText(TextBox1.Text)
+
+        End If
+
+    End Sub
+
+    Private Sub InitializeApplication()
+
+        KeyPreview = True
+
+        DoubleBuffered = True
+
+        Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
+
+        Application.EnableVisualStyles()
+
+        ApplyUITheme()
+
+        CopyLabel.Enabled = False
+
+        Text = "Shape Editor - Code with Joe"
+
+        ScaleFactor = TrackBar1.Value / 100.0
+        Label1.Text = $"Scale: {ScaleFactor:N2}"
+
+        CreateShapesFiles()
+
+        MenuStrip1.RenderMode = ToolStripRenderMode.Professional
+
+        ' Inject our custom rendering into the MenuStrip
+        MenuStrip1.Renderer = CustomMenuRenderer
+
+        LayoutForm()
+
+        MenuStrip1.Refresh()
+
+    End Sub
+
+    Private Sub DrawPointHandles(e As PaintEventArgs)
+
+        ' Draw the point handles if the handles are not hidden
+        If Not HideControlHandles Then
+
+            For i As Integer = 0 To points.Count - 1 Step 2
+
+                Dim point = points(i)
+
+                Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
+
+                ' Check if the point is selected or hovered
+                If i = selectedPointIndex OrElse i = hoveredPointIndex Then
+                    ' Draw the selected or hovered point handle
+                    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+                Else
+                    ' Draw the normal point handle
+                    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+                End If
+
+            Next
+
+        End If
+
+    End Sub
+
+    Private Sub DrawShape(e As PaintEventArgs)
+        ' DrawShape
+        ' Draw the shape if there are points
+
+        If points.Count > 1 Then
+            Dim orderedPoints = GetOrderedPoints()
+            Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
+
+            ' Fill the shape if the checkbox is checked
+            If FillShape Then
+
+                e.Graphics.FillPolygon(ShapeFillBrush, scaledPoints)
+
+            End If
+
+            e.Graphics.DrawPolygon(ShapePen, scaledPoints)
+
+        End If
+    End Sub
+
+    Private Sub DrawCenterMark(e As PaintEventArgs)
+        ' Draw a small cross at the center of the drawing area.
+
+        ' Draw the horizontal line
+        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), -5, 0, 5, 0)
+
+        ' Draw the vertical line
+        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), 0, -5, 0, 5)
+
+    End Sub
+
+    Private Sub DrawCoordinateAxes(e As PaintEventArgs)
+        ' Draw two lines intersecting at the center of the drawing area.
+
+        ' Draw the coordinate axes lines.
+        ' Draw the X-axis line.
+        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0)
+
+        ' Draw the Y-axis line.
+        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8)
+
+    End Sub
+
+    Private Sub RefreshToolIcons()
+
+        If CurrentTool = Tool.Move Then
+
+            If DarkMode Then
+                ' Dark mode
+
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+
+                ' Selected
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
+
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
+
+            Else
+                ' Light mode
+
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+
+                ' Selected
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
+
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
+
+            End If
+
+        End If
+
+        If CurrentTool = Tool.Add Then
+
+            If DarkMode Then
+                ' Dark mode
+                ' Selected
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
+
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
+
+            Else
+                ' Light mode
+                ' Selected
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
+
+            End If
+
+        End If
+
+        If CurrentTool = Tool.Subtract Then
+
+            If DarkMode Then
+                ' Dark mode
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+                ' Selected
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedDark)
+
+            Else
+                ' Light mode
+                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+
+                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+                ' Selected
+                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedLight)
+
+            End If
+
+        End If
+
+    End Sub
+
     Private Sub AddPoint(location As Point)
         ' Helper method for adding points and their mirrored counterparts
 
@@ -924,7 +1014,6 @@ Public Class Form1
 
     End Sub
 
-
     Private Sub LayoutForm()
 
         ' Calculate common values
@@ -939,9 +1028,6 @@ Public Class Form1
 
         CenterDrawingArea()
 
-
-
-
         CopyLabel.Top = ClientRectangle.Top + menuStripHeight + 3
         CopyLabel.Left = ClientRectangle.Right - CopyLabel.Width - VScrollBar1.Width
 
@@ -950,15 +1036,10 @@ Public Class Form1
         'LanguageLabel.Width = halfClientWidth
         LanguageLabel.Height = 20
 
-
-
-
         Panel1.Top = ClientRectangle.Top + menuStripHeight
         Panel1.Left = halfClientWidth
         Panel1.Width = halfClientWidth
         Panel1.Height = menuStripHeight
-
-
 
         ' Update TextBox1
         TextBox1.Top = ClientRectangle.Top + menuStripHeight * 2
@@ -1324,17 +1405,12 @@ Public Class Form1
 
         GroupBox1.BackColor = If(DarkMode, Color.FromArgb(255, 23, 23, 23), Color.White)
 
-
-
         Panel1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
         LanguageLabel.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
         CopyLabel.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-
         LanguageLabel.ForeColor = If(DarkMode, Color.White, Color.Black)
         CopyLabel.LinkColor = If(DarkMode, Color.White, Color.Black)
-
-
 
     End Sub
 
@@ -1485,88 +1561,6 @@ Public Class Form1
 
     End Function
 
-    Private Sub DarkModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DarkModeToolStripMenuItem.Click
-
-        If DarkMode Then
-
-            DarkMode = False
-
-            DarkModeToolStripMenuItem.Text = "Dark Mode"
-
-        Else
-
-            DarkMode = True
-
-            DarkModeToolStripMenuItem.Text = "Light Mode"
-
-        End If
-
-        ApplyUITheme()
-
-        ' Fixes title bar theme update issue in Windows 10
-        ' Check if the OS is Windows 10
-        If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
-            ' The first public build of Windows 11 had the build number 10.0.22000
-            ' So, we can assume that any build number less than 22000 is Windows 10.
-            ' Force a redraw of the form to apply the theme changes
-
-            ' Create a new instance of the ApplyingThemeForm
-            Dim ThemeForm As New ApplyingThemeForm()
-
-            ' Force a redraw of form1 by showing applying theme form.
-            ThemeForm.ShowDialog()
-
-            ' 10.0.19045.5737 - Windows 10 Home Version	22H2
-        End If
-
-        Refresh()
-
-    End Sub
-
-    Private Sub FillShapeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FillShapeToolStripMenuItem.Click
-
-        If FillShape Then
-
-            FillShape = False
-
-            If DarkMode Then
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
-            Else
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
-            End If
-
-            FillShapeToolStripMenuItem.Text = "Fill Shape"
-
-        Else
-
-            FillShape = True
-
-            If DarkMode Then
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
-            Else
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
-            End If
-
-            FillShapeToolStripMenuItem.Text = "No Fill"
-
-        End If
-
-        'Invalidate()
-
-        Refresh()
-
-    End Sub
-
-    Private Sub HideHandlesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HideHandlesToolStripMenuItem.Click
-        ' The HideHandlesToolStripMenuItem toggles the visibility of control handles.
-
-        ToggleHandlesVisibility()
-
-        ' Refresh the form to apply visual updates
-        Invalidate()
-
-    End Sub
-
     Private Sub ToggleHandlesVisibility()
         ' This method toggles the visibility of control handles in the drawing area.
 
@@ -1605,26 +1599,6 @@ Public Class Form1
             End If
 
             HideHandlesToolStripMenuItem.Text = "Show Handles"
-
-        End If
-
-    End Sub
-
-    Private Sub CenterDrawingButton_Click(sender As Object, e As EventArgs) Handles CenterDrawingButton.Click
-
-        CenterDrawingArea()
-        ResetScrollBars()
-        Invalidate()
-
-    End Sub
-
-    Private Sub CopyLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles CopyLabel.LinkClicked
-
-        ' Check if TextBox1.Text is not null or empty
-        If Not String.IsNullOrEmpty(TextBox1.Text) Then
-
-            ' Copy the text in TextBox1 to the clipboard
-            Clipboard.SetText(TextBox1.Text)
 
         End If
 
