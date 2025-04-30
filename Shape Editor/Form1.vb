@@ -168,9 +168,7 @@ Public Class Form1
 
         DrawGrid(e.Graphics)
 
-        ' Draw the coordinate system
-        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0) ' X-axis
-        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8) ' Y-axis
+        DrawCoordinateAxes(e)
 
         ' Draw intersecting lines at the origin, the center of the drawing area
         e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), -5, 0, 5, 0) ' Horizontal line
@@ -213,6 +211,18 @@ Public Class Form1
 
             Next
         End If
+
+    End Sub
+
+    Private Sub DrawCoordinateAxes(e As PaintEventArgs)
+        ' Draw two lines intersecting at the center of the drawing area.
+
+        ' Draw the coordinate axes lines.
+        ' Draw the X-axis line.
+        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0)
+
+        ' Draw the Y-axis line.
+        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8)
 
     End Sub
 
