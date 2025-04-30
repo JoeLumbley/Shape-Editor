@@ -177,7 +177,44 @@ Public Class Form1
         e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
         e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
 
+        DrawShape(e)
+
+        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
+
+        DrawPointHandles(e)
+
+    End Sub
+
+    Private Sub DrawPointHandles(e As PaintEventArgs)
+
+        ' Draw the point handles if the handles are not hidden
+        If Not HideControlHandles Then
+
+            For i As Integer = 0 To points.Count - 1 Step 2
+
+                Dim point = points(i)
+
+                Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
+
+                ' Check if the point is selected or hovered
+                If i = selectedPointIndex OrElse i = hoveredPointIndex Then
+                    ' Draw the selected or hovered point handle
+                    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+                Else
+                    ' Draw the normal point handle
+                    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+                End If
+
+            Next
+
+        End If
+
+    End Sub
+
+    Private Sub DrawShape(e As PaintEventArgs)
+        ' DrawShape
         ' Draw the shape if there are points
+
         If points.Count > 1 Then
             Dim orderedPoints = GetOrderedPoints()
             Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
@@ -192,24 +229,6 @@ Public Class Form1
             e.Graphics.DrawPolygon(ShapePen, scaledPoints)
 
         End If
-
-        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
-
-        ' Draw point handles if the checkbox is not checked
-        If Not HideControlHandles Then
-            For i As Integer = 0 To points.Count - 1 Step 2
-                Dim point = points(i)
-                Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
-
-                If i = selectedPointIndex OrElse i = hoveredPointIndex Then
-                    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-                Else
-                    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-                End If
-
-            Next
-        End If
-
     End Sub
 
     Private Sub DrawCenterMark(e As PaintEventArgs)
