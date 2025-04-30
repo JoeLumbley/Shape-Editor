@@ -166,7 +166,7 @@ Public Class Form1
 
         e.Graphics.Clear(If(DarkMode, Color.Black, Color.White))
 
-        DrawGrid(e.Graphics)
+        DrawGrid(e)
 
         DrawCoordinateAxes(e)
 
@@ -1338,7 +1338,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DrawGrid(g As Graphics)
+    Private Sub DrawGrid(e As PaintEventArgs)
 
         ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
         Dim stepSize As Integer = CInt(20 * ScaleFactor)
@@ -1348,13 +1348,13 @@ Public Class Form1
         ' Draw vertical grid lines
         For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
             Dim x As Integer = i * stepSize
-            g.DrawLine(gridPen, x, -ClientSize.Height * 8, x, ClientSize.Height * 8)
+            e.Graphics.DrawLine(gridPen, x, -ClientSize.Height * 8, x, ClientSize.Height * 8)
         Next
 
         ' Draw horizontal grid lines
         For i As Integer = -((ClientSize.Height * 8) \ stepSize) To (ClientSize.Height * 8) \ stepSize
             Dim y As Integer = i * stepSize
-            g.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
+            e.Graphics.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
         Next
 
     End Sub
