@@ -170,9 +170,7 @@ Public Class Form1
 
         DrawCoordinateAxes(e)
 
-        ' Draw intersecting lines at the origin, the center of the drawing area
-        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), -5, 0, 5, 0) ' Horizontal line
-        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), 0, -5, 0, 5) ' Vertical line
+        DrawCenterMark(e)
 
         e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
@@ -211,6 +209,17 @@ Public Class Form1
 
             Next
         End If
+
+    End Sub
+
+    Private Sub DrawCenterMark(e As PaintEventArgs)
+        ' Draw a small cross at the center of the drawing area.
+
+        ' Draw the horizontal line
+        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), -5, 0, 5, 0)
+
+        ' Draw the vertical line
+        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), 0, -5, 0, 5)
 
     End Sub
 
