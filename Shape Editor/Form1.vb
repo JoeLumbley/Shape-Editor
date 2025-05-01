@@ -206,14 +206,7 @@ Public Class Form1
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
 
         If ActiveControl IsNot Nothing Then
-
             ActiveControl = Nothing
-
-            'Focus()
-            '' Set focus back to Form1
-            'Me.Activate()
-
-
         End If
 
         ' Calculate the adjusted mouse location based on the scale factor
@@ -298,126 +291,6 @@ Public Class Form1
         End If
 
     End Sub
-
-    'Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
-    '    ' Intercept the Arrow keys
-
-    '    If ActiveControl Is Nothing Then
-
-    '        If keyData = Keys.Up Then
-
-    '            If VScrollBar1.Value - 10 < VScrollBar1.Minimum Then
-
-    '                VScrollBar1.Value = VScrollBar1.Minimum
-
-    '            Else
-
-    '                VScrollBar1.Value -= 10
-
-    '            End If
-
-    '            ' Update the drawing center based on the scroll value
-    '            DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
-
-    '            'Invalidate()
-    '            Refresh()
-
-
-    '            ' Return True to indicate the key event has been handled
-    '            Return True
-
-    '        ElseIf keyData = Keys.Down Then
-
-    '            If VScrollBar1.Value + 10 > VScrollBar1.Maximum Then
-
-    '                VScrollBar1.Value = VScrollBar1.Maximum
-
-    '            Else
-
-    '                VScrollBar1.Value += 10
-
-    '            End If
-
-    '            ' Update the drawing center based on the scroll value
-    '            DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
-
-    '            'Invalidate()
-    '            Refresh()
-
-
-    '            ' Return True to indicate the key event has been handled
-    '            Return True
-
-    '        ElseIf keyData = Keys.Left Then
-
-    '            If HScrollBar1.Value - 10 < HScrollBar1.Minimum Then
-
-    '                HScrollBar1.Value = HScrollBar1.Minimum
-
-    '            Else
-
-    '                HScrollBar1.Value -= 10
-
-    '            End If
-
-    '            ' Update the drawing center based on the scroll value
-    '            DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
-
-    '            'Invalidate()
-
-    '            Refresh()
-
-
-    '            Return True
-
-    '        ElseIf keyData = Keys.Right Then
-
-    '            ' Check if the scroll value exceeds the maximum limit
-    '            If HScrollBar1.Value + 10 > HScrollBar1.Maximum Then
-
-    '                If HScrollBar1.Value <> HScrollBar1.Maximum Then
-
-    '                    ' Set the scroll value to the maximum limit
-    '                    HScrollBar1.Value = HScrollBar1.Maximum
-
-    '                    ' Update the drawing center based on the scroll value
-    '                    DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
-
-    '                    ' Refresh the drawing area and tool buttons
-    '                    Invalidate()
-    '                    MovePointToolButton.Invalidate()
-    '                    AddPointToolButton.Invalidate()
-    '                    SubtractPointToolButton.Invalidate()
-
-    '                End If
-
-    '            Else
-    '                ' Move the drawing area to the right
-    '                HScrollBar1.Value += 10
-
-    '                ' Update the drawing center based on the scroll value
-    '                DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
-
-    '                ' Refresh the drawing area and tool buttons
-    '                Invalidate()
-    '                MovePointToolButton.Invalidate()
-    '                AddPointToolButton.Invalidate()
-    '                SubtractPointToolButton.Invalidate()
-
-    '            End If
-
-    '            Return True
-
-    '        End If
-
-    '    End If
-
-    '    ' Call the base class implementation for other keys
-    '    Return MyBase.ProcessCmdKey(msg, keyData)
-
-    'End Function
-
-
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
         ' Intercept the Arrow keys
@@ -519,12 +392,10 @@ Public Class Form1
         SubtractPointToolButton.Invalidate()
     End Sub
 
-    ' Method to update the drawing center Y coordinate
     Private Sub UpdateDrawingCenterY()
         DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
     End Sub
 
-    ' Method to update the drawing center X coordinate
     Private Sub UpdateDrawingCenterX()
         DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
     End Sub
@@ -553,7 +424,6 @@ Public Class Form1
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
 
-        ' Update the drawing center based on the scroll value
         UpdateDrawingCenterX()
 
         Invalidate()
@@ -564,7 +434,6 @@ Public Class Form1
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
 
-        ' Update the drawing center based on the scroll value
         UpdateDrawingCenterY()
 
         Invalidate()
@@ -574,166 +443,21 @@ Public Class Form1
     End Sub
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
-        points.Clear()
-        TextBox1.Clear()
 
-        Text = "Shape Editor - Code with Joe"
+        NewShape()
 
-        CenterDrawingArea()
-        ResetScrollBars()
-        CurrentTool = Tool.Add
-        RefreshToolIcons()
-        ScaleFactor = 8
-        TrackBar1.Value = CInt(ScaleFactor * 100)
-        UpdateUIScaleFactor()
-        CopyLabel.Enabled = False
-        Invalidate()
     End Sub
+
 
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
 
-        Using saveFileDialog As New SaveFileDialog()
-
-            saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"
-            saveFileDialog.Title = "Save Shape"
-            saveFileDialog.InitialDirectory = Application.StartupPath
-
-            If saveFileDialog.ShowDialog(Me) = DialogResult.OK Then
-
-                Using writer As New StreamWriter(saveFileDialog.FileName)
-
-                    ' Write the CSV headers (optional).
-                    writer.WriteLine("X,Y")
-
-                    For Each point As Point In points
-                        writer.WriteLine($"{point.X},{point.Y}")
-                    Next
-
-                End Using
-
-                ' Add file name to "Shape Editor - Code with Joe" and display in titlebar.
-                Text = $"{Path.GetFileName(saveFileDialog.FileName)} - Shape Editor - Code with Joe"
-
-            End If
-
-        End Using
+        SaveShapeToFile()
 
     End Sub
 
     Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
 
-        Using openFileDialog As New OpenFileDialog()
-
-            openFileDialog.AutoUpgradeEnabled = True
-            openFileDialog.ShowReadOnly = False
-            openFileDialog.ShowHelp = False
-
-            openFileDialog.Filter = "CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
-
-            openFileDialog.Title = "Open Shape"
-            openFileDialog.InitialDirectory = Application.StartupPath
-
-            If openFileDialog.ShowDialog() = DialogResult.OK Then
-
-                points.Clear()
-
-                Dim fileIsValid As Boolean = False
-
-                Try
-
-                    ' Read the file and parse the points
-                    Using reader As New StreamReader(openFileDialog.FileName)
-
-                        While Not reader.EndOfStream
-
-                            Dim line As String = reader.ReadLine()
-                            Dim parts As String() = line.Split(","c)
-
-                            If parts.Length = 2 Then
-
-                                Dim x As Integer
-                                Dim y As Integer
-
-                                If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
-                                    points.Add(New Point(x, y))
-
-                                    ' Validate the point
-                                    fileIsValid = Integer.TryParse(parts(0), x)
-                                    fileIsValid = Integer.TryParse(parts(1), y)
-
-                                End If
-
-                            End If
-
-                        End While
-
-                        ' Add file name to "Shape Editor - Code with Joe" and display in titlebar.
-                        Text = $"{Path.GetFileName(openFileDialog.FileName)} - Shape Editor - Code with Joe"
-
-                    End Using
-
-                Catch ex As Exception
-
-                    Select Case True
-                        Case TypeOf ex Is IOException
-                            ' Handle IOException (e.g., file being used by another process)
-                            MessageForm.Show("This file is in use by another app. Close the file and try again.", "File In Use - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                        Case TypeOf ex Is FileNotFoundException
-                            ' Handle FileNotFoundException
-                            MessageForm.Show("The file was not found. Please check the file path.", "File Not Found - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                        Case TypeOf ex Is FormatException
-                            ' Handle FormatException
-                            MessageForm.Show("The file format is invalid. Please check the file contents.", "Bad Format - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                        Case TypeOf ex Is ArgumentException
-                            ' Handle ArgumentException
-                            MessageForm.Show("The file path is invalid. Please check the file path.", "Bad Path - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                        Case TypeOf ex Is PathTooLongException
-                            ' Handle PathTooLongException
-                            MessageForm.Show("The file path is too long. Please shorten the file path.", "Path Too Long - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                        Case TypeOf ex Is UnauthorizedAccessException
-                            ' Handle UnauthorizedAccessException
-                            MessageForm.Show("You do not have permission to access this file.", "Unauthorized - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                        Case Else
-                            ' Handle other exceptions
-                            MessageForm.Show("An unexpected error occurred: " & ex.Message, "Error - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                    End Select
-
-                    fileIsValid = False
-
-                End Try
-
-                If Not fileIsValid Then
-
-                    Text = $"Bad File - Shape Editor - Code with Joe"
-
-                End If
-
-                CurrentTool = Tool.Move
-
-                RefreshToolIcons()
-
-                ScaleFactor = 8
-
-                TrackBar1.Value = CInt(ScaleFactor * 100)
-
-                UpdateUIScaleFactor()
-
-                GeneratePointArrayText()
-
-                Invalidate()
-
-                InvalidateToolButtons()
-
-            End If
-
-        End Using
+        OpenShapeFile()
 
     End Sub
 
@@ -796,9 +520,6 @@ Public Class Form1
         Invalidate()
 
         InvalidateToolButtons()
-
-
-        'Refresh()
 
     End Sub
 
@@ -892,9 +613,8 @@ Public Class Form1
 
         End If
 
-        'Invalidate()
-
-        Refresh()
+        Invalidate()
+        InvalidateToolButtons()
 
     End Sub
 
@@ -905,6 +625,7 @@ Public Class Form1
 
         ' Refresh the form to apply visual updates
         Invalidate()
+        InvalidateToolButtons()
 
     End Sub
 
@@ -928,6 +649,158 @@ Public Class Form1
 
         End If
 
+    End Sub
+
+    Private Sub NewShape()
+
+        points.Clear()
+        TextBox1.Clear()
+
+        Text = "Shape Editor - Code with Joe"
+
+        CenterDrawingArea()
+        ResetScrollBars()
+        CurrentTool = Tool.Add
+        RefreshToolIcons()
+        ScaleFactor = 8
+        TrackBar1.Value = CInt(ScaleFactor * 100)
+        UpdateUIScaleFactor()
+        CopyLabel.Enabled = False
+        Invalidate()
+        InvalidateToolButtons()
+    End Sub
+
+    Private Sub SaveShapeToFile()
+
+        Using saveFileDialog As New SaveFileDialog()
+
+            saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"
+            saveFileDialog.Title = "Save Shape"
+            saveFileDialog.InitialDirectory = Application.StartupPath
+
+            If saveFileDialog.ShowDialog(Me) = DialogResult.OK Then
+
+                Using writer As New StreamWriter(saveFileDialog.FileName)
+
+                    ' Write the CSV headers (optional).
+                    writer.WriteLine("X,Y")
+
+                    For Each point As Point In points
+                        writer.WriteLine($"{point.X},{point.Y}")
+                    Next
+
+                End Using
+
+                ' Add file name to "Shape Editor - Code with Joe" and display in titlebar.
+                Text = $"{Path.GetFileName(saveFileDialog.FileName)} - Shape Editor - Code with Joe"
+
+            End If
+
+        End Using
+    End Sub
+
+    Private Sub OpenShapeFile()
+
+        ' Open a file dialog to select a CSV file
+        Using openFileDialog As New OpenFileDialog()
+
+            openFileDialog.AutoUpgradeEnabled = True
+            openFileDialog.ShowReadOnly = False
+            openFileDialog.ShowHelp = False
+
+            openFileDialog.Filter = "CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+
+            openFileDialog.Title = "Open Shape"
+            openFileDialog.InitialDirectory = Application.StartupPath
+
+            If openFileDialog.ShowDialog() = DialogResult.OK Then
+
+                points.Clear()
+
+                Dim fileIsValid As Boolean = False
+
+                Try
+
+                    ' Read the file and parse the points
+                    Using reader As New StreamReader(openFileDialog.FileName)
+
+                        While Not reader.EndOfStream
+
+                            Dim line As String = reader.ReadLine()
+                            Dim parts As String() = line.Split(","c)
+
+                            If parts.Length = 2 Then
+
+                                Dim x As Integer
+                                Dim y As Integer
+
+                                If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
+                                    points.Add(New Point(x, y))
+
+                                    ' Validate the point
+                                    fileIsValid = Integer.TryParse(parts(0), x)
+                                    fileIsValid = Integer.TryParse(parts(1), y)
+
+                                End If
+
+                            End If
+
+                        End While
+
+                        ' Add file name to "Shape Editor - Code with Joe" and display in titlebar.
+                        Text = $"{Path.GetFileName(openFileDialog.FileName)} - Shape Editor - Code with Joe"
+
+                    End Using
+
+                Catch ex As Exception
+
+                    Select Case True
+                        Case TypeOf ex Is IOException
+                            MessageForm.Show("This file is in use by another app. Close the file and try again.", "File In Use - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Case TypeOf ex Is FileNotFoundException
+                            MessageForm.Show("The file was not found. Please check the file path.", "File Not Found - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Case TypeOf ex Is FormatException
+                            MessageForm.Show("The file format is invalid. Please check the file contents.", "Bad Format - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Case TypeOf ex Is ArgumentException
+                            MessageForm.Show("The file path is invalid. Please check the file path.", "Bad Path - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Case TypeOf ex Is PathTooLongException
+                            MessageForm.Show("The file path is too long. Please shorten the file path.", "Path Too Long - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Case TypeOf ex Is UnauthorizedAccessException
+                            MessageForm.Show("You do not have permission to access this file.", "Unauthorized - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Case Else
+                            ' Handle other exceptions
+                            MessageForm.Show("An unexpected error occurred: " & ex.Message, "Error - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Select
+
+                    fileIsValid = False
+
+                End Try
+
+                If Not fileIsValid Then
+
+                    Text = $"Bad File - Shape Editor - Code with Joe"
+
+                End If
+
+                CurrentTool = Tool.Move
+
+                RefreshToolIcons()
+
+                ScaleFactor = 8
+
+                TrackBar1.Value = CInt(ScaleFactor * 100)
+
+                UpdateUIScaleFactor()
+
+                GeneratePointArrayText()
+
+                Invalidate()
+
+                InvalidateToolButtons()
+
+            End If
+
+        End Using
     End Sub
 
     Private Sub InitializeApplication()
