@@ -209,9 +209,9 @@ Public Class Form1
 
             ActiveControl = Nothing
 
-            Focus()
-            ' Set focus back to Form1
-            Me.Activate()
+            'Focus()
+            '' Set focus back to Form1
+            'Me.Activate()
 
 
         End If
@@ -597,6 +597,9 @@ Public Class Form1
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
         points.Clear()
         TextBox1.Clear()
+
+        Text = "Shape Editor - Code with Joe"
+
         CenterDrawingArea()
         ResetScrollBars()
         CurrentTool = Tool.Add
