@@ -529,15 +529,6 @@ Public Class Form1
         DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
     End Sub
 
-
-
-
-
-
-
-
-
-
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
 
         LayoutForm()
@@ -546,11 +537,7 @@ Public Class Form1
 
         InvalidateToolButtons()
 
-
-        'Refresh()
-
     End Sub
-
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
 
@@ -562,17 +549,12 @@ Public Class Form1
 
         InvalidateToolButtons()
 
-
-        'Refresh()
-
     End Sub
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
 
         ' Update the drawing center based on the scroll value
-        'DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
         UpdateDrawingCenterX()
-
 
         Invalidate()
 
@@ -583,14 +565,11 @@ Public Class Form1
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
 
         ' Update the drawing center based on the scroll value
-        'DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
         UpdateDrawingCenterY()
-
 
         Invalidate()
 
         InvalidateToolButtons()
-
 
     End Sub
 
@@ -748,16 +727,15 @@ Public Class Form1
 
                 GeneratePointArrayText()
 
-                'Invalidate()
+                Invalidate()
 
-                Refresh()
+                InvalidateToolButtons()
 
             End If
 
         End Using
 
     End Sub
-
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
 
