@@ -192,7 +192,6 @@ Public Class Form1
 
             End If
 
-            ' Set the drawing flag to true
             LeftMouseButtonDown = True
 
             GeneratePointArrayText()
@@ -1103,15 +1102,15 @@ Public Class Form1
         CenterDrawingButton.Width = vScrollBarWidth + 2
         CenterDrawingButton.Height = hScrollBarHeight + 2
 
-        AddPointToolButton.ImageAlign = ContentAlignment.TopLeft
+        'AddPointToolButton.ImageAlign = ContentAlignment.TopLeft
         AddPointToolButton.Width = CenterDrawingButton.Width
         AddPointToolButton.Height = CenterDrawingButton.Height
 
-        MovePointToolButton.ImageAlign = ContentAlignment.TopLeft
+        'MovePointToolButton.ImageAlign = ContentAlignment.TopLeft
         MovePointToolButton.Width = CenterDrawingButton.Width
         MovePointToolButton.Height = CenterDrawingButton.Height
 
-        SubtractPointToolButton.ImageAlign = ContentAlignment.TopLeft
+        'SubtractPointToolButton.ImageAlign = ContentAlignment.TopLeft
         SubtractPointToolButton.Width = CenterDrawingButton.Width
         SubtractPointToolButton.Height = CenterDrawingButton.Height
 
@@ -1137,31 +1136,33 @@ Public Class Form1
 
         CenterDrawingArea()
 
-        If ScaleFactor >= 8 Then
+        'If ScaleFactor >= 8 Then
 
-            AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
+        AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
 
-            AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
+        AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-            MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
+        MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
 
-            MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
+        MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-            Dim ScaleFactorDiv16 = ScaleFactor / 16
+        Dim ScaleFactorDiv16 = ScaleFactor / 16
 
-            HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
+        HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
 
-            HScrollBar1.Maximum = ClientSize.Width * ScaleFactorDiv16
+        HScrollBar1.Maximum = ClientSize.Width * ScaleFactorDiv16
 
-            VScrollBar1.Minimum = -ClientSize.Height * ScaleFactorDiv16
+        VScrollBar1.Minimum = -ClientSize.Height * ScaleFactorDiv16
 
-            VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
+        VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
 
-        End If
+
+        'End If
 
         Label1.Text = $"Scale: {ScaleFactor:N2}"
 
     End Sub
+
 
     Private Sub CenterDrawingArea()
 
