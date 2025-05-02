@@ -50,7 +50,7 @@ Public Class Form1
     End Function
 
     Private points As New List(Of Point)()
-    Private isDrawing As Boolean = False
+    Private LeftMouseButtonDown As Boolean = False
     Private selectedPointIndex As Integer = -1
     Private hoveredPointIndex As Integer = -1
     Private Const handleSize As Integer = 15
@@ -193,7 +193,7 @@ Public Class Form1
             End If
 
             ' Set the drawing flag to true
-            isDrawing = True
+            LeftMouseButtonDown = True
 
             GeneratePointArrayText()
 
@@ -213,8 +213,8 @@ Public Class Form1
         AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor),
                                           CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
-        ' Check if the left mouse button is pressed and and a point is selected
-        If isDrawing AndAlso selectedPointIndex <> -1 Then
+        ' Check if the left mouse button is pressed and a point is selected
+        If LeftMouseButtonDown AndAlso selectedPointIndex <> -1 Then
             'Yes, we are moving a point
 
             ' Adjust the selected point's location based on the mouse movement
@@ -247,7 +247,7 @@ Public Class Form1
 
         If e.Button = MouseButtons.Left Then
 
-            isDrawing = False
+            LeftMouseButtonDown = False
 
             selectedPointIndex = -1
 
