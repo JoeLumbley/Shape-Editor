@@ -63,12 +63,12 @@ Public Class Form1
     Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
 
-    Private GridColorDark As Color = Color.FromArgb(255, 40, 40, 40)
+    Private GridColorDark As Color = Color.FromArgb(255, 23, 23, 23)
     Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
 
     Public ControlColorDark As Color = Color.FromArgb(255, 23, 23, 23)
     Public ControlColorLight As Color = Color.FromArgb(255, 240, 240, 240)
-    '
+
     Private GridPenDark As New Pen(GridColorDark, 1)
     Private GridPenLight As New Pen(GridColorLight, 1)
 
@@ -110,8 +110,6 @@ Public Class Form1
                                                                     SelectedBorderColor_LightMode)
 
     Private OsVersion As Version = Environment.OSVersion.Version
-
-    Private previousState As FormWindowState
 
     Public DarkMode As Boolean = False
 
@@ -256,6 +254,46 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Form1_MouseWheel(sender As Object, e As MouseEventArgs) Handles MyBase.MouseWheel
+
+        CenterDrawingArea()
+
+        If e.Delta > 0 Then
+
+            If TrackBar1.Value + 100 <= TrackBar1.Maximum Then
+
+                TrackBar1.Value += 100
+
+            Else
+
+                TrackBar1.Value = TrackBar1.Maximum
+
+            End If
+
+        Else
+
+            If TrackBar1.Value - 100 >= TrackBar1.Minimum Then
+
+                TrackBar1.Value -= 100
+
+            Else
+
+                TrackBar1.Value = TrackBar1.Minimum
+
+            End If
+
+        End If
+
+        ScaleFactor = TrackBar1.Value / 100.0
+
+        UpdateUIScaleFactor()
+
+        Invalidate()
+
+        InvalidateToolButtons()
+
+    End Sub
+
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
 
         ' Check if Control + C is pressed
@@ -268,6 +306,8 @@ Public Class Form1
                 Clipboard.SetText(TextBox1.Text)
 
             End If
+
+            e.Handled = True
 
         End If
 
@@ -385,30 +425,6 @@ Public Class Form1
 
     End Function
 
-    Private Sub InvalidateToolButtons()
-        MovePointToolButton.Invalidate()
-        AddPointToolButton.Invalidate()
-        SubtractPointToolButton.Invalidate()
-    End Sub
-
-    Private Sub UpdateDrawingCenterY()
-        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
-    End Sub
-
-    Private Sub UpdateDrawingCenterX()
-        DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
-    End Sub
-
-    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
-
-        LayoutForm()
-
-        Invalidate()
-
-        InvalidateToolButtons()
-
-    End Sub
-
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
 
         ScaleFactor = TrackBar1.Value / 100.0
@@ -447,7 +463,6 @@ Public Class Form1
 
     End Sub
 
-
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
 
         SaveShapeToFile()
@@ -457,68 +472,6 @@ Public Class Form1
     Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
 
         OpenShapeFile()
-
-    End Sub
-
-    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
-
-        Close()
-
-    End Sub
-
-    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
-
-        AboutForm.ShowDialog()
-
-    End Sub
-
-    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-
-        If MessageForm.Show("Are you sure you want to exit?", "Exit - Shape Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
-
-            e.Cancel = True
-
-        End If
-
-    End Sub
-
-    Private Sub Form1_MouseWheel(sender As Object, e As MouseEventArgs) Handles MyBase.MouseWheel
-
-        CenterDrawingArea()
-
-        If e.Delta > 0 Then
-
-            If TrackBar1.Value + 100 <= TrackBar1.Maximum Then
-
-                TrackBar1.Value += 100
-
-            Else
-
-                TrackBar1.Value = TrackBar1.Maximum
-
-            End If
-
-        Else
-
-            If TrackBar1.Value - 100 >= TrackBar1.Minimum Then
-
-                TrackBar1.Value -= 100
-
-            Else
-
-                TrackBar1.Value = TrackBar1.Minimum
-
-            End If
-
-        End If
-
-        ScaleFactor = TrackBar1.Value / 100.0
-
-        UpdateUIScaleFactor()
-
-        Invalidate()
-
-        InvalidateToolButtons()
 
     End Sub
 
@@ -635,7 +588,6 @@ Public Class Form1
         Invalidate()
         InvalidateToolButtons()
 
-
     End Sub
 
     Private Sub CopyLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles CopyLabel.LinkClicked
@@ -645,6 +597,128 @@ Public Class Form1
 
             ' Copy the text in TextBox1 to the clipboard
             Clipboard.SetText(TextBox1.Text)
+
+        End If
+
+    End Sub
+
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+
+        Close()
+
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+
+        AboutForm.ShowDialog()
+
+    End Sub
+
+    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+
+        LayoutForm()
+
+        Invalidate()
+
+        InvalidateToolButtons()
+
+    End Sub
+
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+
+        If MessageForm.Show("Are you sure you want to exit?", "Exit - Shape Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+
+            e.Cancel = True
+
+        End If
+
+    End Sub
+
+    Private Sub DrawGrid(e As PaintEventArgs)
+
+        ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
+        Dim stepSize As Integer = CInt(20 * ScaleFactor)
+
+        Dim gridPen As Pen = If(DarkMode, GridPenDark, GridPenLight)
+
+        ' Draw vertical grid lines
+        For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
+            Dim x As Integer = i * stepSize
+            e.Graphics.DrawLine(gridPen, x, -ClientSize.Height * 8, x, ClientSize.Height * 8)
+        Next
+
+        ' Draw horizontal grid lines
+        For i As Integer = -((ClientSize.Height * 8) \ stepSize) To (ClientSize.Height * 8) \ stepSize
+            Dim y As Integer = i * stepSize
+            e.Graphics.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
+        Next
+
+    End Sub
+
+    Private Sub DrawCoordinateAxes(e As PaintEventArgs)
+        ' Draw two lines intersecting at the center of the drawing area.
+
+        ' Draw the coordinate axes lines.
+        ' Draw the X-axis line.
+        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0)
+
+        ' Draw the Y-axis line.
+        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8)
+
+    End Sub
+
+    Private Sub DrawCenterMark(e As PaintEventArgs)
+        ' Draw a small cross at the center of the drawing area.
+
+        ' Draw the horizontal line
+        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), -5, 0, 5, 0)
+
+        ' Draw the vertical line
+        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), 0, -5, 0, 5)
+
+    End Sub
+
+    Private Sub DrawShape(e As PaintEventArgs)
+        ' DrawShape
+        ' Draw the shape if there are points
+
+        If points.Count > 1 Then
+            Dim orderedPoints = GetOrderedPoints()
+            Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
+
+            ' Fill the shape if the checkbox is checked
+            If FillShape Then
+
+                e.Graphics.FillPolygon(ShapeFillBrush, scaledPoints)
+
+            End If
+
+            e.Graphics.DrawPolygon(ShapePen, scaledPoints)
+
+        End If
+    End Sub
+
+    Private Sub DrawPointHandles(e As PaintEventArgs)
+
+        ' Draw the point handles if the handles are not hidden
+        If Not HideControlHandles Then
+
+            For i As Integer = 0 To points.Count - 1 Step 2
+
+                Dim point = points(i)
+
+                Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
+
+                ' Check if the point is selected or hovered
+                If i = selectedPointIndex OrElse i = hoveredPointIndex Then
+                    ' Draw the selected or hovered point handle
+                    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+                Else
+                    ' Draw the normal point handle
+                    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+                End If
+
+            Next
 
         End If
 
@@ -802,6 +876,249 @@ Public Class Form1
         End Using
     End Sub
 
+    Private Sub AddPoint(location As Point)
+        ' Helper method for adding points and their mirrored counterparts
+
+        points.Add(location)
+
+        points.Add(GetMirroredPoint(location))
+
+        selectedPointIndex = points.Count - 2
+
+    End Sub
+
+    Private Sub MovePoint(location As Point)
+        ' Helper method for moving points and updating their mirrored counterparts
+
+        points(selectedPointIndex) = location
+
+        points(selectedPointIndex + 1) = GetMirroredPoint(location)
+
+    End Sub
+
+    Private Function GetMirroredPoint(p As Point) As Point
+        ' Helper method to calculate the mirrored point
+
+        Return New Point(p.X, -p.Y)
+
+    End Function
+
+    Private Sub RemovePoint(index As Integer)
+
+        If index >= 0 AndAlso index < points.Count - 1 Then
+
+            points.RemoveAt(index + 1) ' Remove mirrored point
+            points.RemoveAt(index)     ' Remove actual point
+
+        End If
+
+        selectedPointIndex = -1
+
+        GeneratePointArrayText()
+
+        Invalidate()
+
+    End Sub
+
+    Private Sub InsertNewPoint(index As Integer)
+
+        Dim newPoint As New Point(points(index).X, points(index).Y)
+
+        points.Insert(index + 2, newPoint)
+
+        points.Insert(index + 3, GetMirroredPoint(newPoint))
+
+        selectedPointIndex += 2
+
+        GeneratePointArrayText()
+
+        Invalidate()
+
+    End Sub
+
+    Private Function GetPointIndexAtLocation(location As Point) As Integer
+
+        For i As Integer = 0 To points.Count - 1 Step 2
+            Dim point As Point = points(i)
+            Dim scaledPoint As New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
+            Dim rect As New Rectangle(scaledPoint.X - handleSize / 2, scaledPoint.Y - handleSize / 2, handleSize, handleSize)
+
+            If rect.Contains(New Point(CInt(location.X * ScaleFactor), CInt(location.Y * ScaleFactor))) Then
+                Return i
+            End If
+        Next
+
+        Return -1
+
+    End Function
+
+    Private Sub GeneratePointArrayText()
+
+        ' Create a new StringBuilder to construct the output text.
+        Dim sb As New System.Text.StringBuilder()
+
+        ' Add a line defining the scale factor variable with a comment.
+        sb.AppendLine("Dim ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed")
+
+        ' Add a blank line for better readability.
+        sb.AppendLine("")
+
+        ' Start defining the array of Points.
+        sb.AppendLine("Dim Shape As Point() = {")
+
+        ' Retrieve the ordered list of points.
+        Dim orderedPoints = GetOrderedPoints()
+
+        ' Iterate through all the ordered points to format them as scaled Point objects.
+        For i As Integer = 0 To orderedPoints.Count - 1
+            If i < orderedPoints.Count - 1 Then
+
+                ' Append each point with a trailing comma if it's not the last point in the list.
+                sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor)),")
+
+            Else
+
+                ' Append the last point without a trailing comma.
+                sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor))")
+
+            End If
+        Next
+
+        ' Close the array definition.
+        sb.AppendLine("}")
+
+        ' Set the constructed string as the content of TextBox1.
+        TextBox1.Text = sb.ToString()
+
+        ' Check if TextBox1.Text is not null or empty
+        If Not String.IsNullOrEmpty(TextBox1.Text) Then
+
+            CopyLabel.Enabled = True
+
+        End If
+
+    End Sub
+
+    Private Function GetOrderedPoints() As List(Of Point)
+
+        Dim orderedPoints As New List(Of Point)()
+
+        For i As Integer = 0 To points.Count - 1 Step 2
+            orderedPoints.Add(points(i))
+        Next
+
+        For i As Integer = points.Count - 1 To 1 Step -2
+            orderedPoints.Add(points(i))
+        Next
+
+        If points.Count > 0 Then
+            orderedPoints.Add(points(0)) ' Close the shape
+        End If
+
+        Return orderedPoints
+
+    End Function
+
+    Private Sub CreateShapesFiles()
+
+        Dim FilePath As String = Path.Combine(Application.StartupPath, "Airplane.csv")
+
+        CreateFileFromResource(FilePath, My.Resources.Resource1.Airplane)
+
+        FilePath = Path.Combine(Application.StartupPath, "Alien Ship.csv")
+
+        CreateFileFromResource(FilePath, My.Resources.Resource1.Alien_Ship)
+
+    End Sub
+
+    Private Sub CreateFileFromResource(filepath As String, resource As Byte())
+
+        Try
+
+            If Not IO.File.Exists(filepath) Then
+
+                IO.File.WriteAllBytes(filepath, resource)
+
+            End If
+
+        Catch ex As Exception
+
+            Debug.Print($"Error creating file: {ex.Message}")
+
+        End Try
+
+    End Sub
+
+    Private Function ResourceToImage(resource As Byte()) As Image
+        ' Convert the byte array to an Image using a MemoryStream and the
+        ' Image.FromStream method to create an Image object from the byte array.
+        ' This allows you to use the byte array as an image.
+
+        Using ms As New MemoryStream(resource)
+
+            Return Image.FromStream(ms)
+
+        End Using
+
+    End Function
+
+    Private Sub ToggleHandlesVisibility()
+        ' This method toggles the visibility of control handles in the drawing area.
+
+        ' If the control handles are hidden then
+        If HideControlHandles Then
+
+            ' Show them
+            HideControlHandles = False
+
+            If DarkMode Then
+
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnDark)
+
+            Else
+
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
+
+            End If
+
+            HideHandlesToolStripMenuItem.Text = "Hide Handles"
+
+        Else
+            ' If the control handles are visible
+
+            ' Hide them
+            HideControlHandles = True
+
+            If DarkMode Then
+
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffDark)
+
+            Else
+
+                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
+
+            End If
+
+            HideHandlesToolStripMenuItem.Text = "Show Handles"
+
+        End If
+
+    End Sub
+
+    Private Sub InvalidateToolButtons()
+        MovePointToolButton.Invalidate()
+        AddPointToolButton.Invalidate()
+        SubtractPointToolButton.Invalidate()
+    End Sub
+
+    Private Sub UpdateDrawingCenterY()
+        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
+    End Sub
+
+    Private Sub UpdateDrawingCenterX()
+        DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
+    End Sub
+
     Private Sub InitializeApplication()
 
         KeyPreview = True
@@ -834,72 +1151,18 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DrawPointHandles(e As PaintEventArgs)
+    Private Sub CenterDrawingArea()
 
-        ' Draw the point handles if the handles are not hidden
-        If Not HideControlHandles Then
+        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2
 
-            For i As Integer = 0 To points.Count - 1 Step 2
-
-                Dim point = points(i)
-
-                Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
-
-                ' Check if the point is selected or hovered
-                If i = selectedPointIndex OrElse i = hoveredPointIndex Then
-                    ' Draw the selected or hovered point handle
-                    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-                Else
-                    ' Draw the normal point handle
-                    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-                End If
-
-            Next
-
-        End If
+        DrawingCenter.X = ClientSize.Width \ 4 - VScrollBar1.Width \ 2
 
     End Sub
 
-    Private Sub DrawShape(e As PaintEventArgs)
-        ' DrawShape
-        ' Draw the shape if there are points
+    Private Sub ResetScrollBars()
 
-        If points.Count > 1 Then
-            Dim orderedPoints = GetOrderedPoints()
-            Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
-
-            ' Fill the shape if the checkbox is checked
-            If FillShape Then
-
-                e.Graphics.FillPolygon(ShapeFillBrush, scaledPoints)
-
-            End If
-
-            e.Graphics.DrawPolygon(ShapePen, scaledPoints)
-
-        End If
-    End Sub
-
-    Private Sub DrawCenterMark(e As PaintEventArgs)
-        ' Draw a small cross at the center of the drawing area.
-
-        ' Draw the horizontal line
-        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), -5, 0, 5, 0)
-
-        ' Draw the vertical line
-        e.Graphics.DrawLine(If(DarkMode, Pens.White, Pens.Black), 0, -5, 0, 5)
-
-    End Sub
-
-    Private Sub DrawCoordinateAxes(e As PaintEventArgs)
-        ' Draw two lines intersecting at the center of the drawing area.
-
-        ' Draw the coordinate axes lines.
-        ' Draw the X-axis line.
-        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0)
-
-        ' Draw the Y-axis line.
-        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8)
+        HScrollBar1.Value = 0
+        VScrollBar1.Value = 0
 
     End Sub
 
@@ -976,206 +1239,6 @@ Public Class Form1
             End If
 
         End If
-
-    End Sub
-
-    Private Sub AddPoint(location As Point)
-        ' Helper method for adding points and their mirrored counterparts
-
-        points.Add(location)
-
-        points.Add(GetMirroredPoint(location))
-
-        selectedPointIndex = points.Count - 2
-
-    End Sub
-
-    Private Sub MovePoint(location As Point)
-        ' Helper method for moving points and updating their mirrored counterparts
-
-        points(selectedPointIndex) = location
-
-        points(selectedPointIndex + 1) = GetMirroredPoint(location)
-
-    End Sub
-
-    Private Function GetMirroredPoint(p As Point) As Point
-        ' Helper method to calculate the mirrored point
-
-        Return New Point(p.X, -p.Y)
-
-    End Function
-
-    Private Sub RemovePoint(index As Integer)
-
-        If index >= 0 AndAlso index < points.Count - 1 Then
-
-            points.RemoveAt(index + 1) ' Remove mirrored point
-            points.RemoveAt(index)     ' Remove actual point
-
-        End If
-
-        selectedPointIndex = -1
-
-        GeneratePointArrayText()
-
-        Invalidate()
-
-    End Sub
-
-    Private Sub InsertNewPoint(index As Integer)
-
-        Dim newPoint As New Point(points(index).X, points(index).Y)
-
-        points.Insert(index + 2, newPoint)
-
-        points.Insert(index + 3, GetMirroredPoint(newPoint))
-
-        selectedPointIndex += 2
-
-        GeneratePointArrayText()
-
-        Invalidate()
-
-    End Sub
-
-    Private Sub LayoutForm()
-
-        ' Calculate common values
-        Dim clientWidth As Integer = ClientSize.Width
-        Dim clientHeight As Integer = ClientSize.Height
-        Dim halfClientWidth As Integer = clientWidth \ 2
-        Dim quarterClientWidth As Integer = clientWidth \ 4
-        Dim menuStripHeight As Integer = MenuStrip1.Height
-        Dim trackBarHeight As Integer = TrackBar1.Height
-        Dim hScrollBarHeight As Integer = HScrollBar1.Height
-        Dim vScrollBarWidth As Integer = VScrollBar1.Width
-
-        CenterDrawingArea()
-
-        CopyLabel.Top = ClientRectangle.Top + menuStripHeight + 3
-        CopyLabel.Left = ClientRectangle.Right - CopyLabel.Width - VScrollBar1.Width
-
-        LanguageLabel.Top = ClientRectangle.Top + menuStripHeight + 3
-        LanguageLabel.Left = halfClientWidth + 5
-        'LanguageLabel.Width = halfClientWidth
-        LanguageLabel.Height = 20
-
-        Panel1.Top = ClientRectangle.Top + menuStripHeight
-        Panel1.Left = halfClientWidth
-        Panel1.Width = halfClientWidth
-        Panel1.Height = menuStripHeight
-
-        ' Update TextBox1
-        TextBox1.Top = ClientRectangle.Top + menuStripHeight * 2
-        TextBox1.Left = halfClientWidth
-        TextBox1.Width = halfClientWidth
-        TextBox1.Height = clientHeight - menuStripHeight * 2
-
-        ' Update TrackBar1
-        TrackBar1.Top = ClientRectangle.Bottom - trackBarHeight
-        TrackBar1.Left = ClientRectangle.Left
-        TrackBar1.Width = halfClientWidth
-
-        ' Update Label1
-        Label1.Top = TrackBar1.Bottom - Label1.Height - 5
-        Label1.Left = ClientRectangle.Left + 5
-        Label1.Width = 200
-        Label1.Height = 20
-
-        ' Update HScrollBar1
-        HScrollBar1.Top = ClientRectangle.Bottom - trackBarHeight - hScrollBarHeight
-        HScrollBar1.Left = ClientRectangle.Left
-        HScrollBar1.Width = halfClientWidth - vScrollBarWidth
-        HScrollBar1.Minimum = -clientWidth * 2
-        HScrollBar1.Maximum = clientWidth * 2
-        HScrollBar1.Value = 0
-
-        ' Update VScrollBar1
-        VScrollBar1.Top = ClientRectangle.Top + menuStripHeight
-        VScrollBar1.Left = TextBox1.Left - vScrollBarWidth
-        VScrollBar1.Height = clientHeight - trackBarHeight - hScrollBarHeight - menuStripHeight
-        VScrollBar1.Minimum = -clientHeight * 4
-        VScrollBar1.Maximum = clientHeight * 4
-        VScrollBar1.Value = 0
-
-        CenterDrawingButton.Width = vScrollBarWidth + 2
-        CenterDrawingButton.Height = hScrollBarHeight + 2
-
-        'AddPointToolButton.ImageAlign = ContentAlignment.TopLeft
-        AddPointToolButton.Width = CenterDrawingButton.Width
-        AddPointToolButton.Height = CenterDrawingButton.Height
-
-        'MovePointToolButton.ImageAlign = ContentAlignment.TopLeft
-        MovePointToolButton.Width = CenterDrawingButton.Width
-        MovePointToolButton.Height = CenterDrawingButton.Height
-
-        'SubtractPointToolButton.ImageAlign = ContentAlignment.TopLeft
-        SubtractPointToolButton.Width = CenterDrawingButton.Width
-        SubtractPointToolButton.Height = CenterDrawingButton.Height
-
-        GroupBox1.Top = HScrollBar1.Top
-        GroupBox1.Left = VScrollBar1.Left - 2
-        GroupBox1.Width = vScrollBarWidth + 10
-        GroupBox1.Height = hScrollBarHeight + 10
-
-        AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
-        AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-        MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
-        MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-        SubtractPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height - SubtractPointToolButton.Height
-        SubtractPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-    End Sub
-
-    Private Sub UpdateUIScaleFactor()
-
-        ResetScrollBars()
-
-        CenterDrawingArea()
-
-        'If ScaleFactor >= 8 Then
-
-        AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
-
-        AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-        MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
-
-        MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
-
-        Dim ScaleFactorDiv16 = ScaleFactor / 16
-
-        HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
-
-        HScrollBar1.Maximum = ClientSize.Width * ScaleFactorDiv16
-
-        VScrollBar1.Minimum = -ClientSize.Height * ScaleFactorDiv16
-
-        VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
-
-
-        'End If
-
-        Label1.Text = $"Scale: {ScaleFactor:N2}"
-
-    End Sub
-
-
-    Private Sub CenterDrawingArea()
-
-        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2
-
-        DrawingCenter.X = ClientSize.Width \ 4 - VScrollBar1.Width \ 2
-
-    End Sub
-
-    Private Sub ResetScrollBars()
-
-        HScrollBar1.Value = 0
-        VScrollBar1.Value = 0
 
     End Sub
 
@@ -1441,193 +1504,127 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DrawGrid(e As PaintEventArgs)
+    Private Sub LayoutForm()
 
-        ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
-        Dim stepSize As Integer = CInt(20 * ScaleFactor)
+        ' Calculate common values
+        Dim clientWidth As Integer = ClientSize.Width
+        Dim clientHeight As Integer = ClientSize.Height
+        Dim halfClientWidth As Integer = clientWidth \ 2
+        Dim quarterClientWidth As Integer = clientWidth \ 4
+        Dim menuStripHeight As Integer = MenuStrip1.Height
+        Dim trackBarHeight As Integer = TrackBar1.Height
+        Dim hScrollBarHeight As Integer = HScrollBar1.Height
+        Dim vScrollBarWidth As Integer = VScrollBar1.Width
 
-        Dim gridPen As Pen = If(DarkMode, GridPenDark, GridPenLight)
+        CenterDrawingArea()
 
-        ' Draw vertical grid lines
-        For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
-            Dim x As Integer = i * stepSize
-            e.Graphics.DrawLine(gridPen, x, -ClientSize.Height * 8, x, ClientSize.Height * 8)
-        Next
+        CopyLabel.Top = ClientRectangle.Top + menuStripHeight + 3
+        CopyLabel.Left = ClientRectangle.Right - CopyLabel.Width - VScrollBar1.Width
 
-        ' Draw horizontal grid lines
-        For i As Integer = -((ClientSize.Height * 8) \ stepSize) To (ClientSize.Height * 8) \ stepSize
-            Dim y As Integer = i * stepSize
-            e.Graphics.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
-        Next
+        LanguageLabel.Top = ClientRectangle.Top + menuStripHeight + 3
+        LanguageLabel.Left = halfClientWidth + 5
+        'LanguageLabel.Width = halfClientWidth
+        LanguageLabel.Height = 20
 
-    End Sub
+        Panel1.Top = ClientRectangle.Top + menuStripHeight
+        Panel1.Left = halfClientWidth
+        Panel1.Width = halfClientWidth
+        Panel1.Height = menuStripHeight
 
-    Private Function GetPointIndexAtLocation(location As Point) As Integer
+        ' Update TextBox1
+        TextBox1.Top = ClientRectangle.Top + menuStripHeight * 2
+        TextBox1.Left = halfClientWidth
+        TextBox1.Width = halfClientWidth
+        TextBox1.Height = clientHeight - menuStripHeight * 2
 
-        For i As Integer = 0 To points.Count - 1 Step 2
-            Dim point As Point = points(i)
-            Dim scaledPoint As New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
-            Dim rect As New Rectangle(scaledPoint.X - handleSize / 2, scaledPoint.Y - handleSize / 2, handleSize, handleSize)
+        ' Update TrackBar1
+        TrackBar1.Top = ClientRectangle.Bottom - trackBarHeight
+        TrackBar1.Left = ClientRectangle.Left
+        TrackBar1.Width = halfClientWidth
 
-            If rect.Contains(New Point(CInt(location.X * ScaleFactor), CInt(location.Y * ScaleFactor))) Then
-                Return i
-            End If
-        Next
+        ' Update Label1
+        Label1.Top = TrackBar1.Bottom - Label1.Height - 5
+        Label1.Left = ClientRectangle.Left + 5
+        Label1.Width = 200
+        Label1.Height = 20
 
-        Return -1
+        ' Update HScrollBar1
+        HScrollBar1.Top = ClientRectangle.Bottom - trackBarHeight - hScrollBarHeight
+        HScrollBar1.Left = ClientRectangle.Left
+        HScrollBar1.Width = halfClientWidth - vScrollBarWidth
+        HScrollBar1.Minimum = -clientWidth * 2
+        HScrollBar1.Maximum = clientWidth * 2
+        HScrollBar1.Value = 0
 
-    End Function
+        ' Update VScrollBar1
+        VScrollBar1.Top = ClientRectangle.Top + menuStripHeight
+        VScrollBar1.Left = TextBox1.Left - vScrollBarWidth
+        VScrollBar1.Height = clientHeight - trackBarHeight - hScrollBarHeight - menuStripHeight
+        VScrollBar1.Minimum = -clientHeight * 4
+        VScrollBar1.Maximum = clientHeight * 4
+        VScrollBar1.Value = 0
 
-    Private Sub GeneratePointArrayText()
+        CenterDrawingButton.Width = vScrollBarWidth + 2
+        CenterDrawingButton.Height = hScrollBarHeight + 2
 
-        ' Create a new StringBuilder to construct the output text.
-        Dim sb As New System.Text.StringBuilder()
+        'AddPointToolButton.ImageAlign = ContentAlignment.TopLeft
+        AddPointToolButton.Width = CenterDrawingButton.Width
+        AddPointToolButton.Height = CenterDrawingButton.Height
 
-        ' Add a line defining the scale factor variable with a comment.
-        sb.AppendLine("Dim ScaleFactor As Double = 1.0 ' Adjust the scale factor as needed")
+        'MovePointToolButton.ImageAlign = ContentAlignment.TopLeft
+        MovePointToolButton.Width = CenterDrawingButton.Width
+        MovePointToolButton.Height = CenterDrawingButton.Height
 
-        ' Add a blank line for better readability.
-        sb.AppendLine("")
+        'SubtractPointToolButton.ImageAlign = ContentAlignment.TopLeft
+        SubtractPointToolButton.Width = CenterDrawingButton.Width
+        SubtractPointToolButton.Height = CenterDrawingButton.Height
 
-        ' Start defining the array of Points.
-        sb.AppendLine("Dim Shape As Point() = {")
+        GroupBox1.Top = HScrollBar1.Top
+        GroupBox1.Left = VScrollBar1.Left - 2
+        GroupBox1.Width = vScrollBarWidth + 10
+        GroupBox1.Height = hScrollBarHeight + 10
 
-        ' Retrieve the ordered list of points.
-        Dim orderedPoints = GetOrderedPoints()
+        AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
+        AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-        ' Iterate through all the ordered points to format them as scaled Point objects.
-        For i As Integer = 0 To orderedPoints.Count - 1
-            If i < orderedPoints.Count - 1 Then
+        MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
+        MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-                ' Append each point with a trailing comma if it's not the last point in the list.
-                sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor)),")
-
-            Else
-
-                ' Append the last point without a trailing comma.
-                sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor))")
-
-            End If
-        Next
-
-        ' Close the array definition.
-        sb.AppendLine("}")
-
-        ' Set the constructed string as the content of TextBox1.
-        TextBox1.Text = sb.ToString()
-
-        ' Check if TextBox1.Text is not null or empty
-        If Not String.IsNullOrEmpty(TextBox1.Text) Then
-
-            CopyLabel.Enabled = True
-
-        End If
-
-    End Sub
-
-    Private Function GetOrderedPoints() As List(Of Point)
-
-        Dim orderedPoints As New List(Of Point)()
-
-        For i As Integer = 0 To points.Count - 1 Step 2
-            orderedPoints.Add(points(i))
-        Next
-
-        For i As Integer = points.Count - 1 To 1 Step -2
-            orderedPoints.Add(points(i))
-        Next
-
-        If points.Count > 0 Then
-            orderedPoints.Add(points(0)) ' Close the shape
-        End If
-
-        Return orderedPoints
-
-    End Function
-
-    Private Sub CreateShapesFiles()
-
-        Dim FilePath As String = Path.Combine(Application.StartupPath, "Airplane.csv")
-
-        CreateFileFromResource(FilePath, My.Resources.Resource1.Airplane)
-
-        FilePath = Path.Combine(Application.StartupPath, "Alien Ship.csv")
-
-        CreateFileFromResource(FilePath, My.Resources.Resource1.Alien_Ship)
+        SubtractPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height - SubtractPointToolButton.Height
+        SubtractPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
     End Sub
 
-    Private Sub CreateFileFromResource(filepath As String, resource As Byte())
+    Private Sub UpdateUIScaleFactor()
 
-        Try
+        ResetScrollBars()
 
-            If Not IO.File.Exists(filepath) Then
+        CenterDrawingArea()
 
-                IO.File.WriteAllBytes(filepath, resource)
+        'If ScaleFactor >= 8 Then
 
-            End If
+        AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
 
-        Catch ex As Exception
+        AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-            Debug.Print($"Error creating file: {ex.Message}")
+        MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
 
-        End Try
+        MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-    End Sub
+        Dim ScaleFactorDiv16 = ScaleFactor / 16
 
-    Private Function ResourceToImage(resource As Byte()) As Image
-        ' Convert the byte array to an Image using a MemoryStream and the
-        ' Image.FromStream method to create an Image object from the byte array.
-        ' This allows you to use the byte array as an image.
+        HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
 
-        Using ms As New MemoryStream(resource)
+        HScrollBar1.Maximum = ClientSize.Width * ScaleFactorDiv16
 
-            Return Image.FromStream(ms)
+        VScrollBar1.Minimum = -ClientSize.Height * ScaleFactorDiv16
 
-        End Using
+        VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
 
-    End Function
 
-    Private Sub ToggleHandlesVisibility()
-        ' This method toggles the visibility of control handles in the drawing area.
+        'End If
 
-        ' If the control handles are hidden then
-        If HideControlHandles Then
-
-            ' Show them
-            HideControlHandles = False
-
-            If DarkMode Then
-
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnDark)
-
-            Else
-
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
-
-            End If
-
-            HideHandlesToolStripMenuItem.Text = "Hide Handles"
-
-        Else
-            ' If the control handles are visible
-
-            ' Hide them
-            HideControlHandles = True
-
-            If DarkMode Then
-
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffDark)
-
-            Else
-
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
-
-            End If
-
-            HideHandlesToolStripMenuItem.Text = "Show Handles"
-
-        End If
+        Label1.Text = $"Scale: {ScaleFactor:N2}"
 
     End Sub
 
