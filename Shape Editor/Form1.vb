@@ -1119,6 +1119,14 @@ Public Class Form1
         DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
     End Sub
 
+    Private Sub CenterDrawingArea()
+
+        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2
+
+        DrawingCenter.X = ClientSize.Width \ 4 - VScrollBar1.Width \ 2
+
+    End Sub
+
     Private Sub InitializeApplication()
 
         KeyPreview = True
@@ -1148,14 +1156,6 @@ Public Class Form1
         LayoutForm()
 
         MenuStrip1.Refresh()
-
-    End Sub
-
-    Private Sub CenterDrawingArea()
-
-        DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2
-
-        DrawingCenter.X = ClientSize.Width \ 4 - VScrollBar1.Width \ 2
 
     End Sub
 
