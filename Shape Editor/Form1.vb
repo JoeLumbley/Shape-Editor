@@ -104,7 +104,6 @@ Public Class Form1
     Private CustomMenuRenderer As New CustomColorMenuStripRenderer(MenuItemBackgroundColor_LightMode,
                                                                     MenuItemBackgroundSelected_LightMode,
                                                                     ToolStripBackground_LightMode,
-                                                                    MenuItemBorderColor_LightMode,
                                                                     MenuItemSelectedColor_LightMode,
                                                                     MenuItemTextColor_LightMode,
                                                                     SelectedBorderColor_LightMode)
@@ -1290,7 +1289,7 @@ Public Class Form1
             CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_DarkMode
             CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelectedColor_DarkMode
             CustomMenuRenderer.ToolStripBackground = ToolStripBackground_DarkMode ' *****************
-            CustomMenuRenderer.BorderColor = MenuItemBorderColor_DarkMode
+            'CustomMenuRenderer.BorderColor = MenuItemBorderColor_DarkMode
             CustomMenuRenderer.MenuItemSelectedColor = MenuItemSelectedColor_DarkMode
             CustomMenuRenderer.TextColor = MenuItemTextColor_DarkMode
             CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColor_DarkMode
@@ -1397,24 +1396,24 @@ Public Class Form1
             CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_LightMode
             CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelected_LightMode
             CustomMenuRenderer.ToolStripBackground = ToolStripBackground_LightMode
-            CustomMenuRenderer.BorderColor = MenuItemBorderColor_LightMode
+            'CustomMenuRenderer.BorderColor = MenuItemBorderColor_LightMode
             CustomMenuRenderer.MenuItemSelectedColor = MenuItemSelectedColor_LightMode
             CustomMenuRenderer.TextColor = MenuItemTextColor_LightMode
             CustomMenuRenderer.SelectedBorderColor = SelectedBorderColor_LightMode
 
             SaveToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            MenuStrip1.AutoSize = False
-            SaveToolStripMenuItem.AutoSize = False
+            'MenuStrip1.AutoSize = False
+            'SaveToolStripMenuItem.AutoSize = False
             SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsLight)
             OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileLight)
             OpenToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            OpenToolStripMenuItem.AutoSize = False
+            'OpenToolStripMenuItem.AutoSize = False
             NewToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.NewFileLight)
             NewToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            NewToolStripMenuItem.AutoSize = False
+            'NewToolStripMenuItem.AutoSize = False
             AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutLight)
             AboutToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            AboutToolStripMenuItem.AutoSize = False
+            'AboutToolStripMenuItem.AutoSize = False
             ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitLight)
 
             If CurrentTool = Tool.Add Then
@@ -1636,7 +1635,7 @@ Public Class CustomColorMenuStripRenderer
     Public MenuItemBackground As Color
     Public MenuItemBackgroundSelected As Color
     Public ToolStripBackground As Color
-    Public BorderColor As Color
+    'Public BorderColor As Color
     Public SelectedBorderColor As Color
     Public MenuItemSelectedColor As Color
     Public MenuItemSelectedGradientBegin As Color
@@ -1648,11 +1647,11 @@ Public Class CustomColorMenuStripRenderer
     Public TextColor As Color
 
     'constructor
-    Public Sub New(menuItemBackground As Color, menuItemBackgroundSelected As Color, toolStripBackground As Color, borderColor As Color, menuItemSelectedColor As Color, textColor As Color, selectedBorderColor As Color)
+    Public Sub New(menuItemBackground As Color, menuItemBackgroundSelected As Color, toolStripBackground As Color, menuItemSelectedColor As Color, textColor As Color, selectedBorderColor As Color)
         Me.MenuItemBackground = menuItemBackground
         Me.MenuItemBackgroundSelected = menuItemBackgroundSelected
         Me.ToolStripBackground = toolStripBackground
-        Me.BorderColor = borderColor
+        'Me.BorderColor = borderColor
         Me.MenuItemSelectedColor = menuItemSelectedColor
         Me.TextColor = textColor
         Me.SelectedBorderColor = selectedBorderColor
@@ -1673,91 +1672,80 @@ Public Class CustomColorMenuStripRenderer
 
     Protected Overrides Sub OnRenderMenuItemBackground(e As ToolStripItemRenderEventArgs)
 
+        ' Define the rectangle that represents the size of the menu item
         Dim rect As New Rectangle(Point.Empty, e.Item.Size)
 
+        ' Check if the menu item is selected
         If e.Item.Selected Then
-
-            If TypeOf e.Item Is ToolStripMenuItem Then
-
-
-                If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
-
-                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
-                        e.Graphics.FillRectangle(Brush, rect)
-                        'e.Graphics.DrawRectangle(New Pen(BorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
-                    End Using
-
-                Else 'SelectedBorderColor
-
-                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
-                        e.Graphics.FillRectangle(Brush, rect)
-                        e.Graphics.DrawRectangle(New Pen(SelectedBorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
-
-                    End Using
-
-                End If
-
-            Else
-
-                If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
-
-                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
-                        e.Graphics.FillRectangle(Brush, rect)
-                        e.Graphics.DrawRectangle(New Pen(SelectedBorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
-                    End Using
-
-                Else
-
-                    Using Brush As New SolidBrush(MenuItemBackground)
-                        e.Graphics.FillRectangle(Brush, rect)
-                    End Using
-
-                End If
-
-            End If
-
-        Else
-            'Not selected
 
             ' Check if the item is a ToolStripMenuItem
             If TypeOf e.Item Is ToolStripMenuItem Then
 
+                ' Check if the dropdown menu is visible
                 If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
-
+                    ' Use selected background color when the dropdown is open
                     Using Brush As New SolidBrush(MenuItemBackgroundSelected)
                         e.Graphics.FillRectangle(Brush, rect)
-                        'e.Graphics.DrawRectangle(New Pen(BorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
+                        ' e.Graphics.DrawRectangle(New Pen(BorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
                     End Using
-
                 Else
+                    ' Use selected background color and draw a border when dropdown is closed
+                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+                        e.Graphics.FillRectangle(Brush, rect)
+                        e.Graphics.DrawRectangle(New Pen(SelectedBorderColor), rect.Left, rect.Top, rect.Right - 1, rect.Bottom - 1)
+                    End Using
+                End If
 
+            Else ' The item is not a ToolStripMenuItem
+                ' Check if dropdown is visible
+                If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
+                    ' Use selected background color and draw a border when dropdown is open
+                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+                        e.Graphics.FillRectangle(Brush, rect)
+                        'e.Graphics.DrawRectangle(New Pen(SelectedBorderColor), rect.Left + 1, rect.Top, rect.Right - 2, rect.Bottom - 1)
+                    End Using
+                Else
+                    ' Use default background color when not selected
                     Using Brush As New SolidBrush(MenuItemBackground)
                         e.Graphics.FillRectangle(Brush, rect)
                     End Using
-
                 End If
-
-            Else
-
-                If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
-
-                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
-                        e.Graphics.FillRectangle(Brush, rect)
-                        e.Graphics.DrawRectangle(New Pen(SelectedBorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
-                    End Using
-
-                Else
-
-                    Using Brush As New SolidBrush(MenuItemBackground)
-                        e.Graphics.FillRectangle(Brush, rect)
-                    End Using
-
-                End If
-
             End If
 
-        End If
+        Else ' The item is not selected
+            ' Check if the item is a ToolStripMenuItem
+            If TypeOf e.Item Is ToolStripMenuItem Then
 
+                ' Check if dropdown is visible
+                If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
+                    ' Use selected background color when dropdown is open
+                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+                        e.Graphics.FillRectangle(Brush, rect)
+                        ' e.Graphics.DrawRectangle(New Pen(BorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
+                    End Using
+                Else
+                    ' Use default background color when not selected
+                    Using Brush As New SolidBrush(MenuItemBackground)
+                        e.Graphics.FillRectangle(Brush, rect)
+                    End Using
+                End If
+
+            Else ' The item is not a ToolStripMenuItem
+                ' Check if dropdown is visible
+                If CType(e.Item, ToolStripMenuItem).DropDown.Visible Then
+                    ' Use selected background color when dropdown is open
+                    Using Brush As New SolidBrush(MenuItemBackgroundSelected)
+                        e.Graphics.FillRectangle(Brush, rect)
+                        ' e.Graphics.DrawRectangle(New Pen(SelectedBorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
+                    End Using
+                Else
+                    ' Use default background color when not selected
+                    Using Brush As New SolidBrush(MenuItemBackground)
+                        e.Graphics.FillRectangle(Brush, rect)
+                    End Using
+                End If
+            End If
+        End If
     End Sub
 
     ' Render the overall background
@@ -1769,7 +1757,7 @@ Public Class CustomColorMenuStripRenderer
 
     ' Render the border
     Protected Overrides Sub OnRenderToolStripBorder(e As ToolStripRenderEventArgs)
-        e.Graphics.DrawRectangle(New Pen(BorderColor), New Rectangle(Point.Empty, e.ToolStrip.Size - New Size(1, 1)))
+        'e.Graphics.DrawRectangle(New Pen(BorderColor), New Rectangle(Point.Empty, e.ToolStrip.Size - New Size(1, 1)))
     End Sub
 
     ' Render the separator
