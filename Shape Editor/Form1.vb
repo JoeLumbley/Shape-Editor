@@ -49,11 +49,11 @@ Public Class Form1
     Public Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
     End Function
 
-    Private points As New List(Of Point)()
+    Private Points As New List(Of Point)()
     Private LeftMouseButtonDown As Boolean = False
-    Private selectedPointIndex As Integer = -1
-    Private hoveredPointIndex As Integer = -1
-    Private Const handleSize As Integer = 15
+    Private SelectedPointIndex As Integer = -1
+    Private HoveredPointIndex As Integer = -1
+    Private Const ControlHandleSize As Integer = 15
     Private ScaleFactor As Double = 1.0
 
     Private ShapePen As New Pen(Color.Black, 2)
@@ -160,31 +160,32 @@ Public Class Form1
         ' Check if the left mouse button is pressed
         If e.Button = MouseButtons.Left Then
 
-            ' Calculate the adjusted mouse location based on the scale factor
+            ' Calculate the adjusted mouse location based on the scale factor and the drawing center
             AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor),
-                                          CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
+                                              CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
-            selectedPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
+            SelectedPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
 
             If CurrentTool = Tool.Add Then
 
                 ' If no point was selected, add a new point
-                If selectedPointIndex = -1 Then
+                If SelectedPointIndex = -1 Then
                     AddPoint(AdjustedMouseLocation)
                 End If
 
             ElseIf CurrentTool = Tool.Move Then
 
+
                 ' If a point was selected, start moving it
-                If selectedPointIndex <> -1 Then
+                If SelectedPointIndex <> -1 Then
                     MovePoint(AdjustedMouseLocation)
                 End If
 
             ElseIf CurrentTool = Tool.Subtract Then
 
                 ' If a point was selected, remove it
-                If selectedPointIndex <> -1 Then
-                    RemovePoint(selectedPointIndex)
+                If SelectedPointIndex <> -1 Then
+                    RemovePoint(SelectedPointIndex)
                 End If
 
             End If
@@ -210,7 +211,7 @@ Public Class Form1
                                           CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
 
         ' Check if the left mouse button is pressed and a point is selected
-        If LeftMouseButtonDown AndAlso selectedPointIndex <> -1 Then
+        If LeftMouseButtonDown AndAlso SelectedPointIndex <> -1 Then
             'Yes, we are moving a point
 
             ' Adjust the selected point's location based on the mouse movement
@@ -227,10 +228,10 @@ Public Class Form1
         Dim newHoveredPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
 
         ' If the new hovered point index is different from the current hovered point index then
-        If newHoveredPointIndex <> hoveredPointIndex Then
+        If newHoveredPointIndex <> HoveredPointIndex Then
 
             ' Set the new hovered point index
-            hoveredPointIndex = newHoveredPointIndex
+            HoveredPointIndex = newHoveredPointIndex
 
             ' Invalidate the form to trigger a repaint
             Invalidate()
@@ -245,7 +246,7 @@ Public Class Form1
 
             LeftMouseButtonDown = False
 
-            selectedPointIndex = -1
+            SelectedPointIndex = -1
 
             GeneratePointArrayText()
 
@@ -310,21 +311,21 @@ Public Class Form1
 
         End If
 
-        If e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
+        If e.KeyCode = Keys.Delete AndAlso SelectedPointIndex <> -1 Then
 
-            RemovePoint(selectedPointIndex)
+            RemovePoint(SelectedPointIndex)
 
-        ElseIf e.KeyCode = Keys.OemMinus AndAlso selectedPointIndex <> -1 Then
+        ElseIf e.KeyCode = Keys.OemMinus AndAlso SelectedPointIndex <> -1 Then
 
-            RemovePoint(selectedPointIndex)
+            RemovePoint(SelectedPointIndex)
 
-        ElseIf e.KeyCode = Keys.N AndAlso selectedPointIndex <> -1 Then
+        ElseIf e.KeyCode = Keys.N AndAlso SelectedPointIndex <> -1 Then
 
-            InsertNewPoint(selectedPointIndex)
+            InsertNewPoint(SelectedPointIndex)
 
-        ElseIf e.KeyCode = Keys.Oemplus AndAlso selectedPointIndex <> -1 Then
+        ElseIf e.KeyCode = Keys.Oemplus AndAlso SelectedPointIndex <> -1 Then
 
-            InsertNewPoint(selectedPointIndex)
+            InsertNewPoint(SelectedPointIndex)
 
         End If
 
@@ -681,7 +682,7 @@ Public Class Form1
         ' DrawShape
         ' Draw the shape if there are points
 
-        If points.Count > 1 Then
+        If Points.Count > 1 Then
             Dim orderedPoints = GetOrderedPoints()
             Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
 
@@ -702,19 +703,19 @@ Public Class Form1
         ' Draw the point handles if the handles are not hidden
         If Not HideControlHandles Then
 
-            For i As Integer = 0 To points.Count - 1 Step 2
+            For i As Integer = 0 To Points.Count - 1 Step 2
 
-                Dim point = points(i)
+                Dim point = Points(i)
 
                 Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
 
                 ' Check if the point is selected or hovered
-                If i = selectedPointIndex OrElse i = hoveredPointIndex Then
+                If i = SelectedPointIndex OrElse i = HoveredPointIndex Then
                     ' Draw the selected or hovered point handle
-                    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+                    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - ControlHandleSize / 2), CInt(scaledPoint.Y - ControlHandleSize / 2), ControlHandleSize, ControlHandleSize)
                 Else
                     ' Draw the normal point handle
-                    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
+                    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - ControlHandleSize / 2), CInt(scaledPoint.Y - ControlHandleSize / 2), ControlHandleSize, ControlHandleSize)
                 End If
 
             Next
@@ -725,7 +726,7 @@ Public Class Form1
 
     Private Sub NewShape()
 
-        points.Clear()
+        Points.Clear()
         TextBox1.Clear()
 
         Text = "Shape Editor - Code with Joe"
@@ -757,7 +758,7 @@ Public Class Form1
                     ' Write the CSV headers (optional).
                     writer.WriteLine("X,Y")
 
-                    For Each point As Point In points
+                    For Each point As Point In Points
                         writer.WriteLine($"{point.X},{point.Y}")
                     Next
 
@@ -787,7 +788,7 @@ Public Class Form1
 
             If openFileDialog.ShowDialog() = DialogResult.OK Then
 
-                points.Clear()
+                Points.Clear()
 
                 Dim fileIsValid As Boolean = False
 
@@ -807,7 +808,7 @@ Public Class Form1
                                 Dim y As Integer
 
                                 If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
-                                    points.Add(New Point(x, y))
+                                    Points.Add(New Point(x, y))
 
                                     ' Validate the point
                                     fileIsValid = Integer.TryParse(parts(0), x)
@@ -878,20 +879,20 @@ Public Class Form1
     Private Sub AddPoint(location As Point)
         ' Helper method for adding points and their mirrored counterparts
 
-        points.Add(location)
+        Points.Add(location)
 
-        points.Add(GetMirroredPoint(location))
+        Points.Add(GetMirroredPoint(location))
 
-        selectedPointIndex = points.Count - 2
+        SelectedPointIndex = Points.Count - 2
 
     End Sub
 
     Private Sub MovePoint(location As Point)
         ' Helper method for moving points and updating their mirrored counterparts
 
-        points(selectedPointIndex) = location
+        Points(SelectedPointIndex) = location
 
-        points(selectedPointIndex + 1) = GetMirroredPoint(location)
+        Points(SelectedPointIndex + 1) = GetMirroredPoint(location)
 
     End Sub
 
@@ -904,14 +905,14 @@ Public Class Form1
 
     Private Sub RemovePoint(index As Integer)
 
-        If index >= 0 AndAlso index < points.Count - 1 Then
+        If index >= 0 AndAlso index < Points.Count - 1 Then
 
-            points.RemoveAt(index + 1) ' Remove mirrored point
-            points.RemoveAt(index)     ' Remove actual point
+            Points.RemoveAt(index + 1) ' Remove mirrored point
+            Points.RemoveAt(index)     ' Remove actual point
 
         End If
 
-        selectedPointIndex = -1
+        SelectedPointIndex = -1
 
         GeneratePointArrayText()
 
@@ -921,13 +922,13 @@ Public Class Form1
 
     Private Sub InsertNewPoint(index As Integer)
 
-        Dim newPoint As New Point(points(index).X, points(index).Y)
+        Dim newPoint As New Point(Points(index).X, Points(index).Y)
 
-        points.Insert(index + 2, newPoint)
+        Points.Insert(index + 2, newPoint)
 
-        points.Insert(index + 3, GetMirroredPoint(newPoint))
+        Points.Insert(index + 3, GetMirroredPoint(newPoint))
 
-        selectedPointIndex += 2
+        SelectedPointIndex += 2
 
         GeneratePointArrayText()
 
@@ -937,10 +938,10 @@ Public Class Form1
 
     Private Function GetPointIndexAtLocation(location As Point) As Integer
 
-        For i As Integer = 0 To points.Count - 1 Step 2
-            Dim point As Point = points(i)
+        For i As Integer = 0 To Points.Count - 1 Step 2
+            Dim point As Point = Points(i)
             Dim scaledPoint As New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
-            Dim rect As New Rectangle(scaledPoint.X - handleSize / 2, scaledPoint.Y - handleSize / 2, handleSize, handleSize)
+            Dim rect As New Rectangle(scaledPoint.X - ControlHandleSize / 2, scaledPoint.Y - ControlHandleSize / 2, ControlHandleSize, ControlHandleSize)
 
             If rect.Contains(New Point(CInt(location.X * ScaleFactor), CInt(location.Y * ScaleFactor))) Then
                 Return i
@@ -950,6 +951,24 @@ Public Class Form1
         Return -1
 
     End Function
+
+    Private Function GetPointNearLocation(location As Point, proximity As Integer) As Integer
+        For i As Integer = 0 To Points.Count - 1 Step 2
+            Dim point As Point = Points(i)
+            Dim scaledPoint As New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
+
+            ' Expand the detection range based on the proximity parameter
+            Dim rect As New Rectangle(scaledPoint.X - proximity / 2, scaledPoint.Y - proximity / 2, proximity, proximity)
+
+            If rect.Contains(New Point(CInt(location.X * ScaleFactor), CInt(location.Y * ScaleFactor))) Then
+                Return i
+            End If
+        Next
+        Return -1
+    End Function
+
+
+
 
     Private Sub GeneratePointArrayText()
 
@@ -1002,16 +1021,16 @@ Public Class Form1
 
         Dim orderedPoints As New List(Of Point)()
 
-        For i As Integer = 0 To points.Count - 1 Step 2
-            orderedPoints.Add(points(i))
+        For i As Integer = 0 To Points.Count - 1 Step 2
+            orderedPoints.Add(Points(i))
         Next
 
-        For i As Integer = points.Count - 1 To 1 Step -2
-            orderedPoints.Add(points(i))
+        For i As Integer = Points.Count - 1 To 1 Step -2
+            orderedPoints.Add(Points(i))
         Next
 
-        If points.Count > 0 Then
-            orderedPoints.Add(points(0)) ' Close the shape
+        If Points.Count > 0 Then
+            orderedPoints.Add(Points(0)) ' Close the shape
         End If
 
         Return orderedPoints
