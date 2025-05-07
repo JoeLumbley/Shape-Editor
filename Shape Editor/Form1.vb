@@ -128,6 +128,17 @@ Public Class Form1
 
     Private IsInsideBoundingRectangle As Boolean = False
 
+
+
+    Private BoundingColorLightMode As Color = Color.FromArgb(16, 30, 144, 255)
+    Private BoundingColorDarkMode As Color = Color.FromArgb(75, Color.DodgerBlue)
+    Private BoundingBrushLightMode As New SolidBrush(BoundingColorLightMode)
+    Private BoundingBrushDarkMode As New SolidBrush(BoundingColorDarkMode)
+
+    Private BoundingBrush As New SolidBrush(BoundingColorLightMode)
+
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         InitializeApplication()
@@ -165,9 +176,10 @@ Public Class Form1
             ScaledBoundingRectangle.Width = CInt(BoundingRect.Width * ScaleFactor)
             ScaledBoundingRectangle.Height = CInt(BoundingRect.Height * ScaleFactor)
 
-            Dim BoundingBrush As New SolidBrush(Color.FromArgb(16, Color.DodgerBlue))
+            'Dim BoundingBrush As New SolidBrush(Color.FromArgb(16, Color.DodgerBlue))
 
             e.Graphics.FillRectangle(BoundingBrush, ScaledBoundingRectangle)
+
         End If
 
         e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
@@ -1617,6 +1629,9 @@ Public Class Form1
         TextBox1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
         ShapeFillBrush = If(DarkMode, ShapeFillBrushDarkMode, ShapeFillBrushLightMode)
+
+        BoundingBrush = If(DarkMode, BoundingBrushDarkMode, BoundingBrushLightMode)
+
 
         ShapePen = New Pen(If(DarkMode, Color.White, Color.Black), 2)
 
