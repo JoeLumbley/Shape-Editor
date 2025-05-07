@@ -123,6 +123,11 @@ Public Class Form1
 
     Private DrawingArea As Rectangle
 
+    Private MoveStartLocation As Point
+    Private MovingShape As Boolean = False
+
+    Private IsInsideBoundingRectangle As Boolean = False
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         InitializeApplication()
@@ -148,6 +153,22 @@ Public Class Form1
         DrawCoordinateAxes(e)
 
         DrawCenterMark(e)
+
+        If IsInsideBoundingRectangle AndAlso CurrentTool = Tool.Move Then
+
+            ' Define the shapes bounding rectangle.
+            Dim BoundingRect As Rectangle = GetBoundingRectangle()
+
+            Dim ScaledBoundingRectangle As Rectangle = BoundingRect
+            ScaledBoundingRectangle.X = CInt(BoundingRect.X * ScaleFactor)
+            ScaledBoundingRectangle.Y = CInt(BoundingRect.Y * ScaleFactor)
+            ScaledBoundingRectangle.Width = CInt(BoundingRect.Width * ScaleFactor)
+            ScaledBoundingRectangle.Height = CInt(BoundingRect.Height * ScaleFactor)
+
+            Dim BoundingBrush As New SolidBrush(Color.FromArgb(16, Color.DodgerBlue))
+
+            e.Graphics.FillRectangle(BoundingBrush, ScaledBoundingRectangle)
+        End If
 
         e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
@@ -188,11 +209,26 @@ Public Class Form1
 
             ElseIf CurrentTool = Tool.Move Then
 
+                ' Define the shapes bounding rectangle.
+                Dim BoundingRect As Rectangle = GetBoundingRectangle()
 
                 ' If a point was selected, start moving it
                 If SelectedPointIndex <> -1 Then
                     MovePoint(AdjustedMouseLocation)
                 End If
+
+                ' If the inside of the shape was selected, start moving it
+                If SelectedPointIndex <> -1 Then
+                    ' Move a specific point
+                    MovePoint(AdjustedMouseLocation)
+                    'ElseIf IsInsideShape(AdjustedMouseLocation) Then
+                ElseIf BoundingRect.Contains(AdjustedMouseLocation) Then
+
+                    ' Store initial position for moving the entire shape
+                    MoveStartLocation = AdjustedMouseLocation
+                    MovingShape = True
+                End If
+
 
             ElseIf CurrentTool = Tool.Subtract Then
 
@@ -214,7 +250,38 @@ Public Class Form1
 
     End Sub
 
+
+    Function GetBoundingRectangle() As Rectangle
+        If Points.Count = 0 Then Return Rectangle.Empty
+
+        Dim minX As Integer = Points.Min(Function(p) p.X)
+        Dim minY As Integer = Points.Min(Function(p) p.Y)
+        Dim maxX As Integer = Points.Max(Function(p) p.X)
+        Dim maxY As Integer = Points.Max(Function(p) p.Y)
+
+        Return New Rectangle(minX, minY, maxX - minX, maxY - minY)
+    End Function
+
+
+    Function IsInsideShape(P As Point) As Boolean
+        ' Implement a point-in-polygon test
+        Dim inside As Boolean = False
+        Dim j As Integer = Points.Count - 1
+
+        For i = 0 To Points.Count - 1
+            If (Points(i).Y > P.Y) <> (Points(j).Y > P.Y) And
+           (P.X < (Points(j).X - Points(i).X) * (P.Y - Points(i).Y) /
+           (Points(j).Y - Points(i).Y) + Points(i).X) Then
+                inside = Not inside
+            End If
+            j = i
+        Next
+
+        Return inside
+    End Function
+
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
+
 
         If ActiveControl IsNot Nothing Then
             ActiveControl = Nothing
@@ -254,6 +321,36 @@ Public Class Form1
 
         End If
 
+        If MovingShape And LeftMouseButtonDown Then
+            Dim offsetX As Integer = (AdjustedMouseLocation.X - MoveStartLocation.X)
+            Dim offsetY As Integer = (AdjustedMouseLocation.Y - MoveStartLocation.Y)
+
+            ' Shift all points by the movement offset
+            For i = 0 To Points.Count - 1
+                Points(i) = New Point(Points(i).X + offsetX, Points(i).Y + offsetY)
+            Next
+
+            MoveStartLocation = AdjustedMouseLocation ' Update tracking position
+            Invalidate()
+        End If
+
+        ' Define the shapes bounding rectangle.
+        Dim BoundingRect As Rectangle = GetBoundingRectangle()
+
+
+        If BoundingRect.Contains(AdjustedMouseLocation) Then
+
+            IsInsideBoundingRectangle = True
+            Invalidate()
+
+        Else
+
+            IsInsideBoundingRectangle = False
+            Invalidate()
+
+        End If
+
+
     End Sub
 
     Private Sub Form1_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
@@ -265,7 +362,7 @@ Public Class Form1
             SelectedPointIndex = -1
 
             GeneratePointArrayText()
-
+            MovingShape = False
         End If
 
     End Sub
