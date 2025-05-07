@@ -204,13 +204,9 @@ Public Class Form1
             ' Invalidate the drawing area.
             Invalidate(DrawingArea)
 
-
-
         End If
 
     End Sub
-
-
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
 
@@ -231,16 +227,9 @@ Public Class Form1
 
             InvalidateToolButtons()
 
-
-            'Dim DrawingArea As New Rectangle(0,
-            '                              MainMenuStrip.Height,
-            '                              ClientRectangle.Width / 2 - VScrollBar1.Width,
-            '                              (ClientRectangle.Height - MainMenuStrip.Height - TrackBar1.Height - HScrollBar1.Height) - 20)
-
             Invalidate(DrawingArea)
 
             GeneratePointArrayText()
-
 
         End If
 
