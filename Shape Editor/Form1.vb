@@ -258,6 +258,9 @@ Public Class Form1
             ' Invalidate the drawing area.
             Invalidate(DrawingArea)
 
+            InvalidateToolButtons()
+
+
         End If
 
     End Sub
@@ -310,9 +313,9 @@ Public Class Form1
             ' Adjust the selected point's location based on the mouse movement
             MovePoint(AdjustedMouseLocation)
 
-            InvalidateToolButtons()
-
             Invalidate(DrawingArea)
+
+            InvalidateToolButtons()
 
             GeneratePointArrayText()
 
@@ -331,9 +334,12 @@ Public Class Form1
             ' Invalidate the form to trigger a repaint
             Invalidate(DrawingArea)
 
+            InvalidateToolButtons()
+
         End If
 
         If MovingShape And LeftMouseButtonDown Then
+
             Dim offsetX As Integer = (AdjustedMouseLocation.X - MoveStartLocation.X)
             Dim offsetY As Integer = (AdjustedMouseLocation.Y - MoveStartLocation.Y)
 
@@ -343,22 +349,33 @@ Public Class Form1
             Next
 
             MoveStartLocation = AdjustedMouseLocation ' Update tracking position
-            Invalidate()
+
+            Invalidate(DrawingArea)
+
+            InvalidateToolButtons()
+
+            GeneratePointArrayText()
+
         End If
 
         ' Define the shapes bounding rectangle.
         Dim BoundingRect As Rectangle = GetBoundingRectangle()
 
-
         If BoundingRect.Contains(AdjustedMouseLocation) Then
 
             IsInsideBoundingRectangle = True
-            Invalidate()
+
+            Invalidate(DrawingArea)
+
+            InvalidateToolButtons()
 
         Else
 
             IsInsideBoundingRectangle = False
-            Invalidate()
+
+            Invalidate(DrawingArea)
+
+            InvalidateToolButtons()
 
         End If
 
@@ -374,7 +391,9 @@ Public Class Form1
             SelectedPointIndex = -1
 
             GeneratePointArrayText()
+
             MovingShape = False
+
         End If
 
     End Sub
