@@ -116,6 +116,13 @@ Public Class Form1
 
     Private HideControlHandles As Boolean = False
 
+    'Private PointToSegmentDistance As Double = 0.0 ' Distance from a point to a line segment
+
+    Private Const ThresholdDistance As Double = 10.0 ' Distance threshold for point selection
+    'Private Const DefaultScaleFactor As Double = 8.0 ' Default scale factor for the drawing area
+
+    Private DrawingArea As Rectangle
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         InitializeApplication()
@@ -194,11 +201,16 @@ Public Class Form1
 
             GeneratePointArrayText()
 
-            Invalidate()
+            ' Invalidate the drawing area.
+            Invalidate(DrawingArea)
+
+
 
         End If
 
     End Sub
+
+
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
 
@@ -217,9 +229,18 @@ Public Class Form1
             ' Adjust the selected point's location based on the mouse movement
             MovePoint(AdjustedMouseLocation)
 
+            InvalidateToolButtons()
+
+
+            'Dim DrawingArea As New Rectangle(0,
+            '                              MainMenuStrip.Height,
+            '                              ClientRectangle.Width / 2 - VScrollBar1.Width,
+            '                              (ClientRectangle.Height - MainMenuStrip.Height - TrackBar1.Height - HScrollBar1.Height) - 20)
+
+            Invalidate(DrawingArea)
+
             GeneratePointArrayText()
 
-            Invalidate()
 
         End If
 
@@ -234,7 +255,7 @@ Public Class Form1
             HoveredPointIndex = newHoveredPointIndex
 
             ' Invalidate the form to trigger a repaint
-            Invalidate()
+            Invalidate(DrawingArea)
 
         End If
 
@@ -288,7 +309,7 @@ Public Class Form1
 
         UpdateUIScaleFactor()
 
-        Invalidate()
+        Invalidate(DrawingArea)
 
         InvalidateToolButtons()
 
@@ -323,9 +344,13 @@ Public Class Form1
 
             InsertNewPoint(SelectedPointIndex)
 
+            Invalidate(DrawingArea)
+
         ElseIf e.KeyCode = Keys.Oemplus AndAlso SelectedPointIndex <> -1 Then
 
             InsertNewPoint(SelectedPointIndex)
+
+            Invalidate(DrawingArea)
 
         End If
 
@@ -1610,6 +1635,14 @@ Public Class Form1
 
         SubtractPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height - SubtractPointToolButton.Height
         SubtractPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
+
+
+        DrawingArea.X = 0
+        DrawingArea.Y = menuStripHeight
+        DrawingArea.Width = ClientRectangle.Width \ 2 - VScrollBar1.Width
+        DrawingArea.Height = ClientRectangle.Height - menuStripHeight - TrackBar1.Height - HScrollBar1.Height
+
+
 
     End Sub
 
