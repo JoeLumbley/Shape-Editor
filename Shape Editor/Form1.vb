@@ -177,7 +177,13 @@ Public Class Form1
 
                 ' If no point was selected, add a new point
                 If SelectedPointIndex = -1 Then
+
                     AddPoint(AdjustedMouseLocation)
+
+                Else
+
+                    InsertNewPoint(SelectedPointIndex)
+
                 End If
 
             ElseIf CurrentTool = Tool.Move Then
@@ -937,6 +943,9 @@ Public Class Form1
     Private Sub InsertNewPoint(index As Integer)
 
         Dim newPoint As New Point(Points(index).X, Points(index).Y)
+
+        newPoint.Offset(-1, -1)
+
 
         Points.Insert(index + 2, newPoint)
 
