@@ -372,7 +372,8 @@ Public Class Form1
                     UpdateDrawingCenterY()
 
                     ' Invalidate the drawing area and tool buttons
-                    Invalidate()
+                    'Invalidate()
+                    Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
 
@@ -390,7 +391,7 @@ Public Class Form1
                     UpdateDrawingCenterY()
 
                     ' Invalidate the drawing area and tool buttons
-                    Invalidate()
+                    Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
 
@@ -410,7 +411,7 @@ Public Class Form1
                     UpdateDrawingCenterX()
 
                     ' Invalidate the drawing area and tool buttons
-                    Invalidate()
+                    Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
 
@@ -430,7 +431,7 @@ Public Class Form1
                     UpdateDrawingCenterX()
 
                     ' Invalidate the drawing area and tool buttons
-                    Invalidate()
+                    Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
 
@@ -451,7 +452,7 @@ Public Class Form1
 
         UpdateUIScaleFactor()
 
-        Invalidate()
+        Invalidate(DrawingArea)
 
         InvalidateToolButtons()
 
@@ -461,7 +462,7 @@ Public Class Form1
 
         UpdateDrawingCenterX()
 
-        Invalidate()
+        Invalidate(DrawingArea)
 
         InvalidateToolButtons()
 
@@ -471,7 +472,7 @@ Public Class Form1
 
         UpdateDrawingCenterY()
 
-        Invalidate()
+        Invalidate(DrawingArea)
 
         InvalidateToolButtons()
 
@@ -585,7 +586,7 @@ Public Class Form1
 
         End If
 
-        Invalidate()
+        Invalidate(DrawingArea)
         InvalidateToolButtons()
 
     End Sub
@@ -596,7 +597,7 @@ Public Class Form1
         ToggleHandlesVisibility()
 
         ' Refresh the form to apply visual updates
-        Invalidate()
+        Invalidate(DrawingArea)
         InvalidateToolButtons()
 
     End Sub
@@ -605,7 +606,7 @@ Public Class Form1
 
         CenterDrawingArea()
         ResetScrollBars()
-        Invalidate()
+        Invalidate(DrawingArea)
         InvalidateToolButtons()
 
     End Sub
@@ -638,7 +639,7 @@ Public Class Form1
 
         LayoutForm()
 
-        Invalidate()
+        Invalidate(DrawingArea)
 
         InvalidateToolButtons()
 
@@ -759,7 +760,7 @@ Public Class Form1
         TrackBar1.Value = CInt(ScaleFactor * 100)
         UpdateUIScaleFactor()
         CopyLabel.Enabled = False
-        Invalidate()
+        Invalidate(DrawingArea)
         InvalidateToolButtons()
     End Sub
 
@@ -887,7 +888,7 @@ Public Class Form1
 
                 GeneratePointArrayText()
 
-                Invalidate()
+                Invalidate(DrawingArea)
 
                 InvalidateToolButtons()
 
@@ -936,7 +937,7 @@ Public Class Form1
 
         GeneratePointArrayText()
 
-        Invalidate()
+        Invalidate(DrawingArea)
 
     End Sub
 
@@ -955,7 +956,7 @@ Public Class Form1
 
         GeneratePointArrayText()
 
-        Invalidate()
+        Invalidate(DrawingArea)
 
     End Sub
 
