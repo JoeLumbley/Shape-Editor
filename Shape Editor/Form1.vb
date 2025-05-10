@@ -63,7 +63,7 @@ Public Class Form1
     Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
 
-    Private GridColorDark As Color = Color.FromArgb(255, 23, 23, 23)
+    Private GridColorDark As Color = Color.FromArgb(255, 35, 35, 35)
     Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
 
     Public ControlColorDark As Color = Color.FromArgb(255, 23, 23, 23)
@@ -454,6 +454,7 @@ Public Class Form1
             e.Handled = True
 
         End If
+
 
         If e.KeyCode = Keys.Delete AndAlso SelectedPointIndex <> -1 Then
 
