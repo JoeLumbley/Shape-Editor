@@ -2,27 +2,32 @@
 Imports System.Runtime.InteropServices
 
 Public Class MessageForm
+
     Public Overloads Shared Function Show(message As String, title As String, buttons As MessageBoxButtons, icon As MessageBoxIcon) As DialogResult
 
         ' Create a new instance of the MessageForm
         Dim form As New MessageForm()
 
-        ' Set the title and message
+        ' Set window title and message content
         form.Text = title
         form.MessageTextBox.Text = message
 
-        ' Configure buttons and icon based on the parameters
+        ' Configure button visibility and labels
         Select Case buttons
             Case MessageBoxButtons.OK
                 form.OKButton.Visible = True
-                form.CancelButt.Visible = False
+                form.CancelButton.Visible = False
+
             Case MessageBoxButtons.OKCancel, MessageBoxButtons.YesNo
                 form.OKButton.Visible = True
-                form.CancelButt.Visible = True
+                form.CancelButton.Visible = True
+
+                ' Adapt button text based on button type
                 form.OKButton.Text = If(buttons = MessageBoxButtons.YesNo, "Yes", "OK")
-                form.CancelButt.Text = If(buttons = MessageBoxButtons.YesNo, "No", "Cancel")
+                form.CancelButton.Text = If(buttons = MessageBoxButtons.YesNo, "No", "Cancel")
         End Select
 
+        ' Assign the appropriate system icon
         Select Case icon
             Case MessageBoxIcon.Error
                 form.IconPictureBox.Image = SystemIcons.Error.ToBitmap()
@@ -34,7 +39,7 @@ Public Class MessageForm
                 form.IconPictureBox.Image = SystemIcons.Warning.ToBitmap()
         End Select
 
-        ' Show the form as a dialog
+        ' Display the message dialog and return user selection
         Return form.ShowDialog()
 
     End Function
@@ -67,9 +72,9 @@ Public Class MessageForm
         Me.Close()
     End Sub
 
-    Private Sub CancelButton_Click(sender As Object, e As EventArgs) Handles CancelButt.Click
+    Private Sub CancelButton_Click(sender As Object, e As EventArgs) Handles CancelButton.Click
         Me.DialogResult = DialogResult.Cancel
-        If CancelButt.Text = "No" Then
+        If CancelButton.Text = "No" Then
             Me.DialogResult = DialogResult.No
         End If
         Me.Close()
@@ -95,11 +100,11 @@ Public Class MessageForm
         OKButton.ForeColor = Color.White
 
         ' Set the theme to dark mode
-        SetWindowTheme(CancelButt.Handle, "DarkMode_Explorer", Nothing)
-        DwmSetWindowAttribute(CancelButt.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
-        DwmSetWindowAttribute(CancelButt.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(CancelButton.Handle, "DarkMode_Explorer", Nothing)
+        DwmSetWindowAttribute(CancelButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(CancelButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
-        CancelButt.ForeColor = Color.White
+        CancelButton.ForeColor = Color.White
 
 
         ' Set the theme to dark mode
@@ -132,24 +137,22 @@ Public Class MessageForm
 
         OKButton.ForeColor = Color.Black
 
-        SetWindowTheme(CancelButt.Handle, "Explorer", Nothing)
-        DwmSetWindowAttribute(CancelButt.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-        DwmSetWindowAttribute(CancelButt.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+        SetWindowTheme(CancelButton.Handle, "Explorer", Nothing)
+        DwmSetWindowAttribute(CancelButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+        DwmSetWindowAttribute(CancelButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
-        CancelButt.ForeColor = Color.Black
+        CancelButton.ForeColor = Color.Black
 
         ' Set the theme to light mode
         SetWindowTheme(MessageTextBox.Handle, "Explorer", Nothing)
         DwmSetWindowAttribute(MessageTextBox.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
         DwmSetWindowAttribute(MessageTextBox.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
-
         MessageTextBox.ForeColor = Color.Black
         MessageTextBox.BackColor = Form1.ControlColorLight
         MessageTextBox.BorderStyle = BorderStyle.None
 
     End Sub
-
 
 End Class
 
