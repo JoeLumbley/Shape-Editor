@@ -137,7 +137,13 @@ Public Class Form1
 
     Private BoundingBrush As New SolidBrush(BoundingColorLightMode)
 
+    Private LinkColorDark As Color = Color.FromArgb(255, 28, 138, 224)
+    Private LinkHoverColorDark As Color = Color.FromArgb(255, 255, 255, 255)
+    Private ActiveLinkColorDark As Color = Color.Purple
 
+    Private LinkColorLight As Color = Color.FromArgb(255, 28, 138, 224)
+    Private LinkHoverColorLight As Color = Color.FromArgb(255, 0, 0, 0)
+    Private ActiveLinkColorLight As Color = Color.Purple
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -452,7 +458,6 @@ Public Class Form1
             e.Handled = True
 
         End If
-
 
         If e.KeyCode = Keys.Delete AndAlso SelectedPointIndex <> -1 Then
 
@@ -1521,6 +1526,11 @@ Public Class Form1
 
             DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
 
+
+            CopyLabel.LinkColor = LinkColorDark
+            CopyLabel.ActiveLinkColor = ActiveLinkColorDark
+
+
         Else
 
             'set title color - light mode
@@ -1636,6 +1646,9 @@ Public Class Form1
             End If
 
             DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
+
+            CopyLabel.LinkColor = LinkColorDark
+            CopyLabel.ActiveLinkColor = ActiveLinkColorDark
 
         End If
 
