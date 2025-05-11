@@ -1,7 +1,7 @@
 # Shape Editor
 
 
-Shape Editor is a tool for the interactive creation of shapes. The app generates an array of points in code that represent the drawn shape, making it an essential resource for developers looking to integrate shape data into their projects.
+Shape Editor is a tool for the interactive creation of shapes. Shape Editor generates an array of points in code that represent the drawn shape, making it an essential resource for developers looking to integrate shape data into their projects.
 
 
 
