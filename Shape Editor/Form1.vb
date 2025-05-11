@@ -229,18 +229,18 @@ Public Class Form1
                     MovePoint(AdjustedMouseLocation)
                 End If
 
-                ' If the inside of the shape was selected, start moving it
                 If SelectedPointIndex <> -1 Then
                     ' Move a specific point
                     MovePoint(AdjustedMouseLocation)
-                    'ElseIf IsInsideShape(AdjustedMouseLocation) Then
+
+                    ' If the inside of the shape was selected, start moving it
                 ElseIf BoundingRect.Contains(AdjustedMouseLocation) Then
 
                     ' Store initial position for moving the entire shape
                     MoveStartLocation = AdjustedMouseLocation
                     MovingShape = True
-                End If
 
+                End If
 
             ElseIf CurrentTool = Tool.Subtract Then
 
@@ -255,11 +255,9 @@ Public Class Form1
 
             GeneratePointArrayText()
 
-            ' Invalidate the drawing area.
             Invalidate(DrawingArea)
 
             InvalidateToolButtons()
-
 
         End If
 
