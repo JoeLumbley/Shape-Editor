@@ -178,22 +178,7 @@ Public Class Form1
 
         DrawCenterMark(e)
 
-        If IsInsideBoundingRectangle AndAlso CurrentTool = Tool.Move Then
-
-            ' Define the shapes bounding rectangle.
-            Dim BoundingRect As Rectangle = GetBoundingRectangle()
-
-            Dim ScaledBoundingRectangle As Rectangle = BoundingRect
-            ScaledBoundingRectangle.X = CInt(BoundingRect.X * ScaleFactor)
-            ScaledBoundingRectangle.Y = CInt(BoundingRect.Y * ScaleFactor)
-            ScaledBoundingRectangle.Width = CInt(BoundingRect.Width * ScaleFactor)
-            ScaledBoundingRectangle.Height = CInt(BoundingRect.Height * ScaleFactor)
-
-            'Dim BoundingBrush As New SolidBrush(Color.FromArgb(16, Color.DodgerBlue))
-
-            e.Graphics.FillRectangle(BoundingBrush, ScaledBoundingRectangle)
-
-        End If
+        DrawBoundingRectangle(e)
 
         e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
@@ -207,6 +192,28 @@ Public Class Form1
         DrawPointHandles(e)
 
     End Sub
+
+    'Private Sub DrawBoundingRectangle(e As PaintEventArgs)
+
+    '    ' Draw the bounding rectangle if the mouse is inside it and the current tool is Move
+    '    If IsInsideBoundingRectangle AndAlso CurrentTool = Tool.Move Then
+
+    '        ' Define the shapes bounding rectangle.
+    '        Dim BoundingRect As Rectangle = GetBoundingRectangle()
+
+    '        ' Scale the bounding rectangle based on the scale factor
+    '        Dim ScaledBoundingRectangle As Rectangle = BoundingRect
+
+    '        ScaledBoundingRectangle.X = CInt(BoundingRect.X * ScaleFactor)
+    '        ScaledBoundingRectangle.Y = CInt(BoundingRect.Y * ScaleFactor)
+    '        ScaledBoundingRectangle.Width = CInt(BoundingRect.Width * ScaleFactor)
+    '        ScaledBoundingRectangle.Height = CInt(BoundingRect.Height * ScaleFactor)
+
+    '        e.Graphics.FillRectangle(BoundingBrush, ScaledBoundingRectangle)
+
+    '    End If
+
+    'End Sub
 
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
 
@@ -884,6 +891,30 @@ Public Class Form1
         End If
 
     End Sub
+
+    Private Sub DrawBoundingRectangle(e As PaintEventArgs)
+
+        ' Draw the bounding rectangle if the mouse is inside it and the current tool is Move
+        If IsInsideBoundingRectangle AndAlso CurrentTool = Tool.Move Then
+
+            ' Define the shapes bounding rectangle.
+            Dim BoundingRect As Rectangle = GetBoundingRectangle()
+
+            ' Scale the bounding rectangle based on the scale factor
+            Dim ScaledBoundingRectangle As Rectangle = BoundingRect
+
+            ScaledBoundingRectangle.X = CInt(BoundingRect.X * ScaleFactor)
+            ScaledBoundingRectangle.Y = CInt(BoundingRect.Y * ScaleFactor)
+            ScaledBoundingRectangle.Width = CInt(BoundingRect.Width * ScaleFactor)
+            ScaledBoundingRectangle.Height = CInt(BoundingRect.Height * ScaleFactor)
+
+            e.Graphics.FillRectangle(BoundingBrush, ScaledBoundingRectangle)
+
+        End If
+
+    End Sub
+
+
 
     Private Sub NewShape()
 
