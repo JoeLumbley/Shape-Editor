@@ -261,36 +261,6 @@ Public Class Form1
 
     End Sub
 
-
-    Function GetBoundingRectangle() As Rectangle
-        If Points.Count = 0 Then Return Rectangle.Empty
-
-        Dim minX As Integer = Points.Min(Function(p) p.X)
-        Dim minY As Integer = Points.Min(Function(p) p.Y)
-        Dim maxX As Integer = Points.Max(Function(p) p.X)
-        Dim maxY As Integer = Points.Max(Function(p) p.Y)
-
-        Return New Rectangle(minX, minY, maxX - minX, maxY - minY)
-    End Function
-
-
-    Function IsInsideShape(P As Point) As Boolean
-        ' Implement a point-in-polygon test
-        Dim inside As Boolean = False
-        Dim j As Integer = Points.Count - 1
-
-        For i = 0 To Points.Count - 1
-            If (Points(i).Y > P.Y) <> (Points(j).Y > P.Y) And
-           (P.X < (Points(j).X - Points(i).X) * (P.Y - Points(i).Y) /
-           (Points(j).Y - Points(i).Y) + Points(i).X) Then
-                inside = Not inside
-            End If
-            j = i
-        Next
-
-        Return inside
-    End Function
-
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
 
 
@@ -892,8 +862,6 @@ Public Class Form1
 
     End Sub
 
-
-
     Private Sub NewShape()
 
         Points.Clear()
@@ -1207,6 +1175,23 @@ Public Class Form1
         End If
 
         Return orderedPoints
+
+    End Function
+
+    Function GetBoundingRectangle() As Rectangle
+        ' This function calculates the bounding rectangle of the shape defined by the points in the Points list.
+
+        ' If there are no points, return an empty rectangle.
+        If Points.Count = 0 Then Return Rectangle.Empty
+
+        ' Calculate the minimum and maximum X and Y coordinates of the points in the Points list.
+        Dim minX As Integer = Points.Min(Function(p) p.X)
+        Dim minY As Integer = Points.Min(Function(p) p.Y)
+        Dim maxX As Integer = Points.Max(Function(p) p.X)
+        Dim maxY As Integer = Points.Max(Function(p) p.Y)
+
+        ' Return a Rectangle object that represents the smallest rectangle that can contain all the points.
+        Return New Rectangle(minX, minY, maxX - minX, maxY - minY)
 
     End Function
 
