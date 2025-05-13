@@ -72,8 +72,8 @@ CSV files, are a simple and widely used format for storing and exchanging data i
 x,y
 ```
 
-![103](https://github.com/user-attachments/assets/7ea8cd3d-a518-42d4-b939-e1e549cd0654)
 
+![108](https://github.com/user-attachments/assets/adb9cd85-1537-42ef-b634-c52a071aeaf8)
 
 
 
