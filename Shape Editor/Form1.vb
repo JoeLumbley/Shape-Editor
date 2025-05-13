@@ -222,20 +222,18 @@ Public Class Form1
                 ' Define the shapes bounding rectangle.
                 Dim BoundingRect As Rectangle = GetBoundingRectangle()
 
-                ' If a point was selected, start moving it
                 If SelectedPointIndex <> -1 Then
-                    MovePoint(AdjustedMouseLocation)
-                End If
 
-                If SelectedPointIndex <> -1 Then
                     ' Move a specific point
                     MovePoint(AdjustedMouseLocation)
 
                     ' If the inside of the shape was selected, start moving it
                 ElseIf BoundingRect.Contains(AdjustedMouseLocation) Then
 
+
                     ' Store initial position for moving the entire shape
                     MoveStartLocation = AdjustedMouseLocation
+
                     MovingShape = True
 
                 End If
@@ -244,7 +242,9 @@ Public Class Form1
 
                 ' If a point was selected, remove it
                 If SelectedPointIndex <> -1 Then
+
                     RemovePoint(SelectedPointIndex)
+
                 End If
 
             End If
@@ -263,9 +263,10 @@ Public Class Form1
 
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
 
-
         If ActiveControl IsNot Nothing Then
+
             ActiveControl = Nothing
+
         End If
 
         ' Calculate the adjusted mouse location based on the scale factor
