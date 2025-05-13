@@ -329,13 +329,17 @@ Public Class Form1
 
         If BoundingRect.Contains(AdjustedMouseLocation) Then
 
-            IsInsideBoundingRectangle = True
+            If Not IsInsideBoundingRectangle Then
 
-            Invalidate(DrawingArea)
+                IsInsideBoundingRectangle = True
 
-            InvalidateToolButtons()
+                Invalidate(DrawingArea)
 
-        Else
+                InvalidateToolButtons()
+
+            End If
+
+        ElseIf IsInsideBoundingRectangle Then
 
             IsInsideBoundingRectangle = False
 
@@ -344,7 +348,6 @@ Public Class Form1
             InvalidateToolButtons()
 
         End If
-
 
     End Sub
 
@@ -959,6 +962,7 @@ Public Class Form1
             End If
 
         End Using
+
     End Sub
 
     Private Sub OpenShapeFile()
@@ -1066,7 +1070,7 @@ Public Class Form1
     End Sub
 
     Private Sub AddPoint(location As Point)
-        ' Helper method for adding points and their mirrored counterparts
+        ' Method for adding points and their mirrored counterparts
 
         Points.Add(location)
 
@@ -1077,7 +1081,7 @@ Public Class Form1
     End Sub
 
     Private Sub MovePoint(location As Point)
-        ' Helper method for moving points and updating their mirrored counterparts
+        ' Method for moving points and updating their mirrored counterparts
 
         Points(SelectedPointIndex) = location
 
@@ -1086,7 +1090,7 @@ Public Class Form1
     End Sub
 
     Private Function GetMirroredPoint(p As Point) As Point
-        ' Helper method to calculate the mirrored point
+        ' Method to calculate the mirrored point
 
         Return New Point(p.X, -p.Y)
 
@@ -1130,13 +1134,19 @@ Public Class Form1
     Private Function GetPointIndexAtLocation(location As Point) As Integer
 
         For i As Integer = 0 To Points.Count - 1 Step 2
+
             Dim point As Point = Points(i)
+
             Dim scaledPoint As New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
+
             Dim rect As New Rectangle(scaledPoint.X - ControlHandleSize / 2, scaledPoint.Y - ControlHandleSize / 2, ControlHandleSize, ControlHandleSize)
 
             If rect.Contains(New Point(CInt(location.X * ScaleFactor), CInt(location.Y * ScaleFactor))) Then
+
                 Return i
+
             End If
+
         Next
 
         Return -1
@@ -1195,15 +1205,21 @@ Public Class Form1
         Dim orderedPoints As New List(Of Point)()
 
         For i As Integer = 0 To Points.Count - 1 Step 2
+
             orderedPoints.Add(Points(i))
+
         Next
 
         For i As Integer = Points.Count - 1 To 1 Step -2
+
             orderedPoints.Add(Points(i))
+
         Next
 
         If Points.Count > 0 Then
+
             orderedPoints.Add(Points(0)) ' Close the shape
+
         End If
 
         Return orderedPoints
