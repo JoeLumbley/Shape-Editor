@@ -808,7 +808,6 @@ Public Class Form1
     Private Sub DrawCoordinateAxes(e As PaintEventArgs)
         ' Draw two lines intersecting at the center of the drawing area to represent the coordinate axes.
 
-        ' Draw the coordinate axes lines.
         ' Draw the X-axis line.
         e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0)
 
@@ -830,10 +829,12 @@ Public Class Form1
 
     Private Sub DrawShape(e As PaintEventArgs)
         ' DrawShape
-        ' Draw the shape if there are points
 
+        ' Draw the shape if there are points
         If Points.Count > 1 Then
+
             Dim orderedPoints = GetOrderedPoints()
+
             Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
 
             ' Fill the shape if the checkbox is checked
@@ -846,6 +847,7 @@ Public Class Form1
             e.Graphics.DrawPolygon(ShapePen, scaledPoints)
 
         End If
+
     End Sub
 
     Private Sub DrawPointHandles(e As PaintEventArgs)
@@ -861,11 +863,15 @@ Public Class Form1
 
                 ' Check if the point is selected or hovered
                 If i = SelectedPointIndex OrElse i = HoveredPointIndex Then
+
                     ' Draw the selected or hovered point handle
                     e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - ControlHandleSize / 2), CInt(scaledPoint.Y - ControlHandleSize / 2), ControlHandleSize, ControlHandleSize)
+
                 Else
+
                     ' Draw the normal point handle
                     e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - ControlHandleSize / 2), CInt(scaledPoint.Y - ControlHandleSize / 2), ControlHandleSize, ControlHandleSize)
+
                 End If
 
             Next
@@ -899,20 +905,31 @@ Public Class Form1
     Private Sub NewShape()
 
         Points.Clear()
+
         TextBox1.Clear()
 
         Text = "Shape Editor - Code with Joe"
 
         CenterDrawingArea()
+
         ResetScrollBars()
+
         CurrentTool = Tool.Add
+
         RefreshToolIcons()
+
         ScaleFactor = 8
+
         TrackBar1.Value = CInt(ScaleFactor * 100)
+
         UpdateUIScaleFactor()
+
         CopyLabel.Enabled = False
+
         Invalidate(DrawingArea)
+
         InvalidateToolButtons()
+
     End Sub
 
     Private Sub SaveShapeToFile()
