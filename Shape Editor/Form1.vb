@@ -1,6 +1,6 @@
 ﻿' Shape Editor
 
-' A simple shape editor that allows you to draw shapes and generate the corresponding point array in VB.NET code.
+' Create shapes interactively and generate code automatically.
 
 ' MIT License
 ' Copyright(c) 2025 Joseph W. Lumbley
@@ -35,6 +35,18 @@ Public Class Form1
     End Enum
 
     Private CurrentTool As Tool = Tool.Add
+
+
+
+
+
+
+
+
+
+
+
+
 
     Public Enum DwmWindowAttribute
         DWMWA_USE_IMMERSIVE_DARK_MODE = 21
@@ -116,10 +128,7 @@ Public Class Form1
 
     Private HideControlHandles As Boolean = False
 
-    'Private PointToSegmentDistance As Double = 0.0 ' Distance from a point to a line segment
-
     Private Const ThresholdDistance As Double = 10.0 ' Distance threshold for point selection
-    'Private Const DefaultScaleFactor As Double = 8.0 ' Default scale factor for the drawing area
 
     Private DrawingArea As Rectangle
 
@@ -127,8 +136,6 @@ Public Class Form1
     Private MovingShape As Boolean = False
 
     Private IsInsideBoundingRectangle As Boolean = False
-
-
 
     Private BoundingColorLightMode As Color = Color.FromArgb(16, 30, 144, 255)
     Private BoundingColorDarkMode As Color = Color.FromArgb(75, Color.DodgerBlue)
