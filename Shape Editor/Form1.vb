@@ -640,10 +640,12 @@ Public Class Form1
 
     Private Sub UpdateTitleBarTheme()
         ' Title bar theme update workaround
-        ' This is a workaround for the issue where the title bar does not update correctly
-        ' when switching between light and dark mode in Windows 10.
-        ' This is a known issue in Windows 10, and this workaround forces the title bar to update.
-        ' The workaround is only needed for Windows 10, as Windows 11 handles the theme change correctly.
+
+        ' This is a workaround for the issue where the title bar does not update
+        ' correctly when switching between light and dark mode in Windows 10.
+        ' This is a known issue in Windows 10, and this workaround forces the
+        ' title bar to update. The workaround is only needed for Windows 10
+        ' Windows 11 handles the theme change correctly.
 
         ' Check if the OS is Windows 10
         If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
@@ -671,9 +673,13 @@ Public Class Form1
             FillShape = False
 
             If DarkMode Then
+
                 FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
+
             Else
+
                 FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
+
             End If
 
             FillShapeToolStripMenuItem.Text = "Fill Shape"
@@ -683,9 +689,13 @@ Public Class Form1
             FillShape = True
 
             If DarkMode Then
+
                 FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
+
             Else
+
                 FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
+
             End If
 
             FillShapeToolStripMenuItem.Text = "No Fill"
@@ -693,6 +703,7 @@ Public Class Form1
         End If
 
         Invalidate(DrawingArea)
+
         InvalidateToolButtons()
 
     End Sub
@@ -702,8 +713,8 @@ Public Class Form1
 
         ToggleHandlesVisibility()
 
-        ' Refresh the form to apply visual updates
         Invalidate(DrawingArea)
+
         InvalidateToolButtons()
 
     End Sub
@@ -711,8 +722,11 @@ Public Class Form1
     Private Sub CenterDrawingButton_Click(sender As Object, e As EventArgs) Handles CenterDrawingButton.Click
 
         CenterDrawingArea()
+
         ResetScrollBars()
+
         Invalidate(DrawingArea)
+
         InvalidateToolButtons()
 
     End Sub
@@ -757,7 +771,9 @@ Public Class Form1
 
         ' Cancel closing if user selects "No" or X's out of the form
         If result = DialogResult.No OrElse result = DialogResult.Cancel Then
+
             e.Cancel = True
+
         End If
 
     End Sub
@@ -771,14 +787,20 @@ Public Class Form1
 
         ' Draw vertical grid lines
         For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
+
             Dim x As Integer = i * stepSize
+
             e.Graphics.DrawLine(gridPen, x, -ClientSize.Height * 8, x, ClientSize.Height * 8)
+
         Next
 
         ' Draw horizontal grid lines
         For i As Integer = -((ClientSize.Height * 8) \ stepSize) To (ClientSize.Height * 8) \ stepSize
+
             Dim y As Integer = i * stepSize
+
             e.Graphics.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
+
         Next
 
     End Sub
