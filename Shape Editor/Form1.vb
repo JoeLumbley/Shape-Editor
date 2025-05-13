@@ -958,6 +958,8 @@ Public Class Form1
 
         CurrentTool = Tool.Add
 
+        RefreshToolIcons()
+
         InvalidateToolButtons()
 
         Text = "Shape Editor - Code with Joe"
