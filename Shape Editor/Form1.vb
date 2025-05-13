@@ -632,12 +632,23 @@ Public Class Form1
 
         ApplyUITheme()
 
-        ' Fixes title bar theme update issue in Windows 10
+        UpdateTitleBarTheme()
+
+        Refresh()
+
+    End Sub
+
+    Private Sub UpdateTitleBarTheme()
+        ' Title bar theme update workaround
+        ' This is a workaround for the issue where the title bar does not update correctly
+        ' when switching between light and dark mode in Windows 10.
+        ' This is a known issue in Windows 10, and this workaround forces the title bar to update.
+        ' The workaround is only needed for Windows 10, as Windows 11 handles the theme change correctly.
+
         ' Check if the OS is Windows 10
         If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
             ' The first public build of Windows 11 had the build number 10.0.22000
             ' So, we can assume that any build number less than 22000 is Windows 10.
-            ' Force a redraw of the form to apply the theme changes
 
             ' Create a new instance of the ApplyingThemeForm
             Dim ThemeForm As New ApplyingThemeForm()
@@ -645,10 +656,11 @@ Public Class Form1
             ' Force a redraw of form1 by showing applying theme form.
             ThemeForm.ShowDialog()
 
-            ' 10.0.19045.5737 - Windows 10 Home Version	22H2
+            ' Tested on 10.0.19045.5737 - Windows 10 Home Version 22H2
+
         End If
 
-        Refresh()
+        ' For Windows 11, the title bar should update automatically, so no action is needed.
 
     End Sub
 
@@ -772,7 +784,7 @@ Public Class Form1
     End Sub
 
     Private Sub DrawCoordinateAxes(e As PaintEventArgs)
-        ' Draw two lines intersecting at the center of the drawing area.
+        ' Draw two lines intersecting at the center of the drawing area to represent the coordinate axes.
 
         ' Draw the coordinate axes lines.
         ' Draw the X-axis line.
@@ -1064,7 +1076,6 @@ Public Class Form1
 
         newPoint.Offset(-1, -1)
 
-
         Points.Insert(index + 2, newPoint)
 
         Points.Insert(index + 3, GetMirroredPoint(newPoint))
@@ -1092,24 +1103,6 @@ Public Class Form1
         Return -1
 
     End Function
-
-    Private Function GetPointNearLocation(location As Point, proximity As Integer) As Integer
-        For i As Integer = 0 To Points.Count - 1 Step 2
-            Dim point As Point = Points(i)
-            Dim scaledPoint As New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
-
-            ' Expand the detection range based on the proximity parameter
-            Dim rect As New Rectangle(scaledPoint.X - proximity / 2, scaledPoint.Y - proximity / 2, proximity, proximity)
-
-            If rect.Contains(New Point(CInt(location.X * ScaleFactor), CInt(location.Y * ScaleFactor))) Then
-                Return i
-            End If
-        Next
-        Return -1
-    End Function
-
-
-
 
     Private Sub GeneratePointArrayText()
 
@@ -1466,7 +1459,6 @@ Public Class Form1
             CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_DarkMode
             CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelectedColor_DarkMode
             CustomMenuRenderer.ToolStripBackground = ToolStripBackground_DarkMode ' *****************
-            'CustomMenuRenderer.BorderColor = MenuItemBorderColor_DarkMode
             CustomMenuRenderer.MenuItemSelectedColor = MenuItemSelectedColor_DarkMode
             CustomMenuRenderer.TextColor = MenuItemTextColor_DarkMode
             CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColor_DarkMode
@@ -1527,10 +1519,8 @@ Public Class Form1
 
             DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
 
-
             CopyLabel.LinkColor = LinkColorDark
             CopyLabel.ActiveLinkColor = ActiveLinkColorDark
-
 
         Else
 
@@ -1578,24 +1568,18 @@ Public Class Form1
             CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_LightMode
             CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelected_LightMode
             CustomMenuRenderer.ToolStripBackground = ToolStripBackground_LightMode
-            'CustomMenuRenderer.BorderColor = MenuItemBorderColor_LightMode
             CustomMenuRenderer.MenuItemSelectedColor = MenuItemSelectedColor_LightMode
             CustomMenuRenderer.TextColor = MenuItemTextColor_LightMode
             CustomMenuRenderer.SelectedBorderColor = SelectedBorderColor_LightMode
 
             SaveToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            'MenuStrip1.AutoSize = False
-            'SaveToolStripMenuItem.AutoSize = False
             SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsLight)
             OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileLight)
             OpenToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            'OpenToolStripMenuItem.AutoSize = False
             NewToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.NewFileLight)
             NewToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            'NewToolStripMenuItem.AutoSize = False
             AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutLight)
             AboutToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            'AboutToolStripMenuItem.AutoSize = False
             ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitLight)
 
             If CurrentTool = Tool.Add Then
@@ -1665,7 +1649,6 @@ Public Class Form1
 
         BoundingBrush = If(DarkMode, BoundingBrushDarkMode, BoundingBrushLightMode)
 
-
         ShapePen = New Pen(If(DarkMode, Color.White, Color.Black), 2)
 
         HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkMode, Color.DodgerBlue, Color.DarkGray)))
@@ -1710,7 +1693,6 @@ Public Class Form1
 
         LanguageLabel.Top = ClientRectangle.Top + menuStripHeight + 3
         LanguageLabel.Left = halfClientWidth + 5
-        'LanguageLabel.Width = halfClientWidth
         LanguageLabel.Height = 20
 
         Panel1.Top = ClientRectangle.Top + menuStripHeight
@@ -1754,15 +1736,12 @@ Public Class Form1
         CenterDrawingButton.Width = vScrollBarWidth + 2
         CenterDrawingButton.Height = hScrollBarHeight + 2
 
-        'AddPointToolButton.ImageAlign = ContentAlignment.TopLeft
         AddPointToolButton.Width = CenterDrawingButton.Width
         AddPointToolButton.Height = CenterDrawingButton.Height
 
-        'MovePointToolButton.ImageAlign = ContentAlignment.TopLeft
         MovePointToolButton.Width = CenterDrawingButton.Width
         MovePointToolButton.Height = CenterDrawingButton.Height
 
-        'SubtractPointToolButton.ImageAlign = ContentAlignment.TopLeft
         SubtractPointToolButton.Width = CenterDrawingButton.Width
         SubtractPointToolButton.Height = CenterDrawingButton.Height
 
