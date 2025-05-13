@@ -1000,9 +1000,7 @@ Public Class Form1
             openFileDialog.AutoUpgradeEnabled = True
             openFileDialog.ShowReadOnly = False
             openFileDialog.ShowHelp = False
-
             openFileDialog.Filter = "CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
-
             openFileDialog.Title = "Open Shape"
             openFileDialog.InitialDirectory = Application.StartupPath
 
@@ -1094,6 +1092,7 @@ Public Class Form1
             End If
 
         End Using
+
     End Sub
 
     Private Sub AddPoint(location As Point)
@@ -1357,17 +1356,29 @@ Public Class Form1
     End Sub
 
     Private Sub InvalidateToolButtons()
+
         MovePointToolButton.Invalidate()
+
         AddPointToolButton.Invalidate()
+
         SubtractPointToolButton.Invalidate()
+
+        CenterDrawingButton.Invalidate()
+
     End Sub
 
     Private Sub UpdateDrawingCenterY()
+
+        ' Update the drawing center Y coordinate based on the vertical scroll bar value
         DrawingCenter.Y = (ClientSize.Height - TrackBar1.Height - HScrollBar1.Height + MenuStrip1.Height) \ 2 - VScrollBar1.Value
+
     End Sub
 
     Private Sub UpdateDrawingCenterX()
+
+        ' Update the drawing center X coordinate based on the horizontal scroll bar value
         DrawingCenter.X = (ClientSize.Width \ 4) - (VScrollBar1.Width \ 2) - HScrollBar1.Value
+
     End Sub
 
     Private Sub CenterDrawingArea()
