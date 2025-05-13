@@ -1780,13 +1780,10 @@ Public Class Form1
         SubtractPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height - SubtractPointToolButton.Height
         SubtractPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-
         DrawingArea.X = 0
         DrawingArea.Y = menuStripHeight
         DrawingArea.Width = ClientRectangle.Width \ 2 - VScrollBar1.Width
         DrawingArea.Height = ClientRectangle.Height - menuStripHeight - TrackBar1.Height - HScrollBar1.Height
-
-
 
     End Sub
 
@@ -1795,8 +1792,6 @@ Public Class Form1
         ResetScrollBars()
 
         CenterDrawingArea()
-
-        'If ScaleFactor >= 8 Then
 
         AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
 
@@ -1816,9 +1811,6 @@ Public Class Form1
 
         VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
 
-
-        'End If
-
         Label1.Text = $"Scale: {ScaleFactor:N2}"
 
     End Sub
@@ -1831,7 +1823,6 @@ Public Class CustomColorMenuStripRenderer
     Public MenuItemBackground As Color
     Public MenuItemBackgroundSelected As Color
     Public ToolStripBackground As Color
-    'Public BorderColor As Color
     Public SelectedBorderColor As Color
     Public MenuItemSelectedColor As Color
     Public MenuItemSelectedGradientBegin As Color
@@ -1842,12 +1833,10 @@ Public Class CustomColorMenuStripRenderer
 
     Public TextColor As Color
 
-    'constructor
     Public Sub New(menuItemBackground As Color, menuItemBackgroundSelected As Color, toolStripBackground As Color, menuItemSelectedColor As Color, textColor As Color, selectedBorderColor As Color)
         Me.MenuItemBackground = menuItemBackground
         Me.MenuItemBackgroundSelected = menuItemBackgroundSelected
         Me.ToolStripBackground = toolStripBackground
-        'Me.BorderColor = borderColor
         Me.MenuItemSelectedColor = menuItemSelectedColor
         Me.TextColor = textColor
         Me.SelectedBorderColor = selectedBorderColor
@@ -1860,7 +1849,6 @@ Public Class CustomColorMenuStripRenderer
 
     End Sub
 
-    ' Render the menu item text
     Protected Overrides Sub OnRenderItemText(e As ToolStripItemTextRenderEventArgs)
         e.Item.ForeColor = TextColor
         MyBase.OnRenderItemText(e)
@@ -1953,10 +1941,9 @@ Public Class CustomColorMenuStripRenderer
 
     ' Render the border
     Protected Overrides Sub OnRenderToolStripBorder(e As ToolStripRenderEventArgs)
-        'e.Graphics.DrawRectangle(New Pen(BorderColor), New Rectangle(Point.Empty, e.ToolStrip.Size - New Size(1, 1)))
+        ' No border rendering needed.
     End Sub
 
-    ' Render the separator
     Protected Overrides Sub OnRenderSeparator(e As ToolStripSeparatorRenderEventArgs)
         Dim rect As Rectangle = e.Item.ContentRectangle
         Dim pen As New Pen(SeparatorColor)
