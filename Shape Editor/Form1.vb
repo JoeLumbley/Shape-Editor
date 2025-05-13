@@ -938,13 +938,11 @@ Public Class Form1
 
         TextBox1.Clear()
 
-        Text = "Shape Editor - Code with Joe"
+        CopyLabel.Enabled = False
 
         CenterDrawingArea()
 
         ResetScrollBars()
-
-        CurrentTool = Tool.Add
 
         RefreshToolIcons()
 
@@ -952,13 +950,17 @@ Public Class Form1
 
         TrackBar1.Value = CInt(ScaleFactor * 100)
 
-        UpdateUIScaleFactor()
+        HideControlHandles = False
 
-        CopyLabel.Enabled = False
+        UpdateUIScaleFactor()
 
         Invalidate(DrawingArea)
 
+        CurrentTool = Tool.Add
+
         InvalidateToolButtons()
+
+        Text = "Shape Editor - Code with Joe"
 
     End Sub
 
@@ -1401,12 +1403,7 @@ Public Class Form1
 
         ApplyUITheme()
 
-        CopyLabel.Enabled = False
-
-        Text = "Shape Editor - Code with Joe"
-
-        ScaleFactor = TrackBar1.Value / 100.0
-        Label1.Text = $"Scale: {ScaleFactor:N2}"
+        NewShape()
 
         CreateShapesFiles()
 
