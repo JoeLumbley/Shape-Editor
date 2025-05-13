@@ -230,7 +230,6 @@ Public Class Form1
                     ' If the inside of the shape was selected, start moving it
                 ElseIf BoundingRect.Contains(AdjustedMouseLocation) Then
 
-
                     ' Store initial position for moving the entire shape
                     MoveStartLocation = AdjustedMouseLocation
 
@@ -423,15 +422,35 @@ Public Class Form1
 
             e.Handled = True
 
-        End If
-
-        If e.KeyCode = Keys.Delete AndAlso SelectedPointIndex <> -1 Then
+        ElseIf e.KeyCode = Keys.Delete AndAlso SelectedPointIndex <> -1 Then
 
             RemovePoint(SelectedPointIndex)
+
+            Invalidate(DrawingArea)
+
+            InvalidateToolButtons()
+
+            e.Handled = True
 
         ElseIf e.KeyCode = Keys.OemMinus AndAlso SelectedPointIndex <> -1 Then
 
             RemovePoint(SelectedPointIndex)
+
+            Invalidate(DrawingArea)
+
+            InvalidateToolButtons()
+
+            e.Handled = True
+
+        ElseIf e.KeyCode = Keys.Subtract AndAlso SelectedPointIndex <> -1 Then
+
+            RemovePoint(SelectedPointIndex)
+
+            Invalidate(DrawingArea)
+
+            InvalidateToolButtons()
+
+            e.Handled = True
 
         ElseIf e.KeyCode = Keys.N AndAlso SelectedPointIndex <> -1 Then
 
@@ -439,11 +458,23 @@ Public Class Form1
 
             Invalidate(DrawingArea)
 
+            e.Handled = True
+
         ElseIf e.KeyCode = Keys.Oemplus AndAlso SelectedPointIndex <> -1 Then
 
             InsertNewPoint(SelectedPointIndex)
 
             Invalidate(DrawingArea)
+
+            e.Handled = True
+
+        ElseIf e.KeyCode = Keys.Add AndAlso SelectedPointIndex <> -1 Then
+
+            InsertNewPoint(SelectedPointIndex)
+
+            Invalidate(DrawingArea)
+
+            e.Handled = True
 
         End If
 
@@ -469,8 +500,6 @@ Public Class Form1
                     ' Update the drawing center based on the scroll value
                     UpdateDrawingCenterY()
 
-                    ' Invalidate the drawing area and tool buttons
-                    'Invalidate()
                     Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
@@ -488,7 +517,6 @@ Public Class Form1
                     ' Update the drawing center based on the scroll value
                     UpdateDrawingCenterY()
 
-                    ' Invalidate the drawing area and tool buttons
                     Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
@@ -508,7 +536,6 @@ Public Class Form1
                     ' Update the drawing center based on the scroll value
                     UpdateDrawingCenterX()
 
-                    ' Invalidate the drawing area and tool buttons
                     Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
@@ -528,7 +555,6 @@ Public Class Form1
                     ' Update the drawing center based on the scroll value
                     UpdateDrawingCenterX()
 
-                    ' Invalidate the drawing area and tool buttons
                     Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
