@@ -624,7 +624,7 @@ Public Class Form1
 
         CurrentTool = Tool.Move
 
-        RefreshToolIcons()
+        UpdateToolIcons()
 
     End Sub
 
@@ -632,7 +632,7 @@ Public Class Form1
 
         CurrentTool = Tool.Add
 
-        RefreshToolIcons()
+        UpdateToolIcons()
 
     End Sub
 
@@ -640,7 +640,7 @@ Public Class Form1
 
         CurrentTool = Tool.Subtract
 
-        RefreshToolIcons()
+        UpdateToolIcons()
 
     End Sub
 
@@ -944,7 +944,7 @@ Public Class Form1
 
         ResetScrollBars()
 
-        RefreshToolIcons()
+        UpdateToolIcons()
 
         ScaleFactor = 8
 
@@ -958,7 +958,7 @@ Public Class Form1
 
         CurrentTool = Tool.Add
 
-        RefreshToolIcons()
+        UpdateToolIcons()
 
         InvalidateToolButtons()
 
@@ -1079,7 +1079,7 @@ Public Class Form1
 
                 CurrentTool = Tool.Move
 
-                RefreshToolIcons()
+                UpdateToolIcons()
 
                 ScaleFactor = 8
 
@@ -1427,7 +1427,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub RefreshToolIcons()
+    Private Sub UpdateToolIcons()
 
         If CurrentTool = Tool.Move Then
 
