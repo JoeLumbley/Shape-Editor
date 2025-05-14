@@ -183,8 +183,7 @@ Partial Class Form1
         ' 
         FillShapeToolStripMenuItem.AutoSize = False
         FillShapeToolStripMenuItem.Name = "FillShapeToolStripMenuItem"
-        FillShapeToolStripMenuItem.ShortcutKeyDisplayString = ""
-        FillShapeToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.F
+        FillShapeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F"
         FillShapeToolStripMenuItem.Size = New Size(284, 34)
         FillShapeToolStripMenuItem.Text = "Fill Shape"
         ' 

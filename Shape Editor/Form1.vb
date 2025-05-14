@@ -155,6 +155,9 @@ Public Class Form1
 
     Private ControlDDown As Boolean = False
 
+    Private ControlFDown As Boolean = False
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         InitializeApplication()
@@ -455,6 +458,22 @@ Public Class Form1
 
             e.Handled = True
 
+        ElseIf e.Control AndAlso e.KeyCode = Keys.F Then
+
+            If Not ControlFDown Then
+
+                ControlFDown = True
+
+                ToggleShapeFill()
+
+                Invalidate(DrawingArea)
+
+                InvalidateToolButtons()
+
+            End If
+
+            e.Handled = True
+
         ElseIf e.KeyCode = Keys.Delete AndAlso SelectedPointIndex <> -1 Then
 
             RemovePoint(SelectedPointIndex)
@@ -513,11 +532,53 @@ Public Class Form1
 
     End Sub
 
+    Private Sub ToggleShapeFill()
+
+        If FillShape Then
+
+            FillShape = False
+
+            If DarkMode Then
+
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
+
+            Else
+
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
+
+            End If
+
+            FillShapeToolStripMenuItem.Text = "Fill Shape"
+
+        Else
+
+            FillShape = True
+
+            If DarkMode Then
+
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
+
+            Else
+
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
+
+            End If
+
+            FillShapeToolStripMenuItem.Text = "No Fill"
+
+        End If
+
+    End Sub
+
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
 
         If e.Control AndAlso e.KeyCode = Keys.D Then
 
             ControlDDown = False
+
+        ElseIf e.Control AndAlso e.KeyCode = Keys.F Then
+
+            ControlFDown = False
 
         End If
 
@@ -745,39 +806,7 @@ Public Class Form1
 
     Private Sub FillShapeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FillShapeToolStripMenuItem.Click
 
-        If FillShape Then
-
-            FillShape = False
-
-            If DarkMode Then
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
-
-            Else
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
-
-            End If
-
-            FillShapeToolStripMenuItem.Text = "Fill Shape"
-
-        Else
-
-            FillShape = True
-
-            If DarkMode Then
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
-
-            Else
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
-
-            End If
-
-            FillShapeToolStripMenuItem.Text = "No Fill"
-
-        End If
+        ToggleShapeFill()
 
         Invalidate(DrawingArea)
 
@@ -786,7 +815,6 @@ Public Class Form1
     End Sub
 
     Private Sub HideHandlesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HideHandlesToolStripMenuItem.Click
-        ' The HideHandlesToolStripMenuItem toggles the visibility of control handles.
 
         ToggleHandlesVisibility()
 
@@ -1938,6 +1966,10 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_GiveFeedback(sender As Object, e As GiveFeedbackEventArgs) Handles Me.GiveFeedback
+
+    End Sub
+
+    Private Sub FillShapeToolStripMenuItem_MouseHover(sender As Object, e As EventArgs) Handles FillShapeToolStripMenuItem.MouseHover
 
     End Sub
 End Class
