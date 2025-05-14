@@ -157,6 +157,7 @@ Public Class Form1
 
     Private ControlFDown As Boolean = False
 
+    Private ControlHDown As Boolean = False
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -474,55 +475,72 @@ Public Class Form1
 
             e.Handled = True
 
+        ElseIf e.Control AndAlso e.KeyCode = Keys.H Then
+
+            If Not ControlHDown Then
+
+                ControlHDown = True
+
+                ToggleHandlesVisibility()
+
+                Invalidate(DrawingArea)
+
+                InvalidateToolButtons()
+
+            End If
+
+            e.Handled = True
+
         ElseIf e.KeyCode = Keys.Delete AndAlso SelectedPointIndex <> -1 Then
 
-            RemovePoint(SelectedPointIndex)
-
-            Invalidate(DrawingArea)
-
-            InvalidateToolButtons()
-
-            e.Handled = True
-
-        ElseIf e.KeyCode = Keys.OemMinus AndAlso SelectedPointIndex <> -1 Then
 
             RemovePoint(SelectedPointIndex)
 
-            Invalidate(DrawingArea)
+                Invalidate(DrawingArea)
 
-            InvalidateToolButtons()
+                InvalidateToolButtons()
 
-            e.Handled = True
+                e.Handled = True
 
-        ElseIf e.KeyCode = Keys.Subtract AndAlso SelectedPointIndex <> -1 Then
+            ElseIf e.KeyCode = Keys.OemMinus AndAlso SelectedPointIndex <> -1 Then
 
-            RemovePoint(SelectedPointIndex)
+                RemovePoint(SelectedPointIndex)
 
-            Invalidate(DrawingArea)
+                Invalidate(DrawingArea)
 
-            InvalidateToolButtons()
+                InvalidateToolButtons()
 
-            e.Handled = True
+                e.Handled = True
 
-        ElseIf e.KeyCode = Keys.N AndAlso SelectedPointIndex <> -1 Then
+            ElseIf e.KeyCode = Keys.Subtract AndAlso SelectedPointIndex <> -1 Then
 
-            InsertNewPoint(SelectedPointIndex)
+                RemovePoint(SelectedPointIndex)
 
-            Invalidate(DrawingArea)
+                Invalidate(DrawingArea)
 
-            e.Handled = True
+                InvalidateToolButtons()
 
-        ElseIf e.KeyCode = Keys.Oemplus AndAlso SelectedPointIndex <> -1 Then
+                e.Handled = True
 
-            InsertNewPoint(SelectedPointIndex)
+            ElseIf e.KeyCode = Keys.N AndAlso SelectedPointIndex <> -1 Then
 
-            Invalidate(DrawingArea)
+                InsertNewPoint(SelectedPointIndex)
 
-            e.Handled = True
+                Invalidate(DrawingArea)
 
-        ElseIf e.KeyCode = Keys.Add AndAlso SelectedPointIndex <> -1 Then
+                e.Handled = True
 
-            InsertNewPoint(SelectedPointIndex)
+            ElseIf e.KeyCode = Keys.Oemplus AndAlso SelectedPointIndex <> -1 Then
+
+                InsertNewPoint(SelectedPointIndex)
+
+                Invalidate(DrawingArea)
+
+                e.Handled = True
+
+            ElseIf e.KeyCode = Keys.Add AndAlso SelectedPointIndex <> -1 Then
+
+                InsertNewPoint(SelectedPointIndex)
 
             Invalidate(DrawingArea)
 
@@ -579,6 +597,10 @@ Public Class Form1
         ElseIf e.Control AndAlso e.KeyCode = Keys.F Then
 
             ControlFDown = False
+
+        ElseIf e.Control AndAlso e.KeyCode = Keys.H Then
+
+            ControlHDown = False
 
         End If
 

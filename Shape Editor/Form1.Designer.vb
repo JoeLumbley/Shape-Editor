@@ -174,8 +174,7 @@ Partial Class Form1
         ' 
         HideHandlesToolStripMenuItem.AutoSize = False
         HideHandlesToolStripMenuItem.Name = "HideHandlesToolStripMenuItem"
-        HideHandlesToolStripMenuItem.ShortcutKeyDisplayString = ""
-        HideHandlesToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.H
+        HideHandlesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+H"
         HideHandlesToolStripMenuItem.Size = New Size(284, 34)
         HideHandlesToolStripMenuItem.Text = "Hide Handles"
         ' 
