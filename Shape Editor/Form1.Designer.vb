@@ -180,7 +180,6 @@ Partial Class Form1
         ' 
         ' FillShapeToolStripMenuItem
         ' 
-        FillShapeToolStripMenuItem.AutoSize = False
         FillShapeToolStripMenuItem.Name = "FillShapeToolStripMenuItem"
         FillShapeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F"
         FillShapeToolStripMenuItem.Size = New Size(284, 34)
@@ -188,7 +187,6 @@ Partial Class Form1
         ' 
         ' DarkModeToolStripMenuItem
         ' 
-        DarkModeToolStripMenuItem.AutoSize = False
         DarkModeToolStripMenuItem.Name = "DarkModeToolStripMenuItem"
         DarkModeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+D"
         DarkModeToolStripMenuItem.Size = New Size(284, 34)

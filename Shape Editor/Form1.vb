@@ -106,12 +106,12 @@ Public Class Form1
 
     ' Dark mode colors
     Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 23, 23, 23)
-    Private MenuItemBackgroundSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64)
+    Private MenuItemBackgroundSelectedColor_DarkMode As Color = Color.FromArgb(255, 50, 50, 50)
     Private ToolStripBackground_DarkMode As Color = Color.FromArgb(255, 23, 23, 23)
     Private MenuItemBorderColor_DarkMode As Color = Color.FromArgb(255, 23, 23, 23)
     Private MenuItemSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64)
     Private MenuItemTextColor_DarkMode As Color = Color.FromArgb(255, 255, 255, 255)
-    Private MenuItemSelectedBorderColor_DarkMode As Color = Color.FromArgb(255, Color.DodgerBlue)
+    Private MenuItemSelectedBorderColor_DarkMode As Color = Color.FromArgb(255, Color.Gray)
 
     ' Set menu to Light mode colors.
     Private CustomMenuRenderer As New CustomColorMenuStripRenderer(MenuItemBackgroundColor_LightMode,
@@ -2033,9 +2033,6 @@ Public Class CustomColorMenuStripRenderer
     End Sub
 
     Protected Overrides Sub OnRenderMenuItemBackground(e As ToolStripItemRenderEventArgs)
-
-
-
 
         ' Define the rectangle that represents the size of the menu item
         Dim rect As New Rectangle(Point.Empty, e.Item.Size)
