@@ -1982,17 +1982,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DarkModeToolStripMenuItem_MouseHover(sender As Object, e As EventArgs) Handles DarkModeToolStripMenuItem.MouseHover
-
-    End Sub
-
-    Private Sub Form1_GiveFeedback(sender As Object, e As GiveFeedbackEventArgs) Handles Me.GiveFeedback
-
-    End Sub
-
-    Private Sub FillShapeToolStripMenuItem_MouseHover(sender As Object, e As EventArgs) Handles FillShapeToolStripMenuItem.MouseHover
-
-    End Sub
 End Class
 
 Public Class CustomColorMenuStripRenderer
