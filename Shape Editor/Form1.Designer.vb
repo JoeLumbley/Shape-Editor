@@ -133,34 +133,34 @@ Partial Class Form1
         ' 
         NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         NewToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.N
-        NewToolStripMenuItem.Size = New Size(270, 34)
+        NewToolStripMenuItem.Size = New Size(237, 34)
         NewToolStripMenuItem.Text = "New"
         ' 
         ' OpenToolStripMenuItem
         ' 
         OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         OpenToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.O
-        OpenToolStripMenuItem.Size = New Size(270, 34)
+        OpenToolStripMenuItem.Size = New Size(237, 34)
         OpenToolStripMenuItem.Text = "Open"
         ' 
         ' SaveToolStripMenuItem
         ' 
         SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         SaveToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.S
-        SaveToolStripMenuItem.Size = New Size(270, 34)
+        SaveToolStripMenuItem.Size = New Size(237, 34)
         SaveToolStripMenuItem.Text = "Save As"
         ' 
         ' AboutToolStripMenuItem
         ' 
         AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        AboutToolStripMenuItem.Size = New Size(270, 34)
+        AboutToolStripMenuItem.Size = New Size(237, 34)
         AboutToolStripMenuItem.Text = "About"
         ' 
         ' ExitToolStripMenuItem
         ' 
         ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         ExitToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Q
-        ExitToolStripMenuItem.Size = New Size(270, 34)
+        ExitToolStripMenuItem.Size = New Size(237, 34)
         ExitToolStripMenuItem.Text = "Exit"
         ' 
         ' OptionsToolStripMenuItem
@@ -172,20 +172,28 @@ Partial Class Form1
         ' 
         ' HideHandlesToolStripMenuItem
         ' 
+        HideHandlesToolStripMenuItem.AutoSize = False
         HideHandlesToolStripMenuItem.Name = "HideHandlesToolStripMenuItem"
-        HideHandlesToolStripMenuItem.Size = New Size(220, 34)
+        HideHandlesToolStripMenuItem.ShortcutKeyDisplayString = ""
+        HideHandlesToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.H
+        HideHandlesToolStripMenuItem.Size = New Size(284, 34)
         HideHandlesToolStripMenuItem.Text = "Hide Handles"
         ' 
         ' FillShapeToolStripMenuItem
         ' 
+        FillShapeToolStripMenuItem.AutoSize = False
         FillShapeToolStripMenuItem.Name = "FillShapeToolStripMenuItem"
-        FillShapeToolStripMenuItem.Size = New Size(220, 34)
+        FillShapeToolStripMenuItem.ShortcutKeyDisplayString = ""
+        FillShapeToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.F
+        FillShapeToolStripMenuItem.Size = New Size(284, 34)
         FillShapeToolStripMenuItem.Text = "Fill Shape"
         ' 
         ' DarkModeToolStripMenuItem
         ' 
+        DarkModeToolStripMenuItem.AutoSize = False
         DarkModeToolStripMenuItem.Name = "DarkModeToolStripMenuItem"
-        DarkModeToolStripMenuItem.Size = New Size(220, 34)
+        DarkModeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+D"
+        DarkModeToolStripMenuItem.Size = New Size(284, 34)
         DarkModeToolStripMenuItem.Text = "Dark Mode"
         ' 
         ' GroupBox1

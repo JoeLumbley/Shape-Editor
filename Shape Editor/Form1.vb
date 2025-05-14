@@ -23,6 +23,7 @@
 ' OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 ' SOFTWARE.
 
+Imports System.ComponentModel
 Imports System.IO
 Imports System.Runtime.InteropServices
 
@@ -151,6 +152,8 @@ Public Class Form1
     Private LinkColorLight As Color = Color.FromArgb(255, 28, 138, 224)
     Private LinkHoverColorLight As Color = Color.FromArgb(255, 0, 0, 0)
     Private ActiveLinkColorLight As Color = Color.Purple
+
+    Private ControlDDown As Boolean = False
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -422,6 +425,36 @@ Public Class Form1
 
             e.Handled = True
 
+        ElseIf e.Control AndAlso e.KeyCode = Keys.D Then
+
+            If Not ControlDDown Then
+
+                ControlDDown = True
+
+                If DarkMode Then
+
+                    DarkMode = False
+
+                    DarkModeToolStripMenuItem.Text = "Dark Mode"
+
+                Else
+
+                    DarkMode = True
+
+                    DarkModeToolStripMenuItem.Text = "Light Mode"
+
+                End If
+
+                ApplyUITheme()
+
+                UpdateTitleBarTheme()
+
+                Refresh()
+
+            End If
+
+            e.Handled = True
+
         ElseIf e.KeyCode = Keys.Delete AndAlso SelectedPointIndex <> -1 Then
 
             RemovePoint(SelectedPointIndex)
@@ -475,6 +508,16 @@ Public Class Form1
             Invalidate(DrawingArea)
 
             e.Handled = True
+
+        End If
+
+    End Sub
+
+    Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
+
+        If e.Control AndAlso e.KeyCode = Keys.D Then
+
+            ControlDDown = False
 
         End If
 
@@ -564,6 +607,10 @@ Public Class Form1
             End Select
 
         End If
+
+
+
+
 
         ' Call the base class implementation for other keys
         Return MyBase.ProcessCmdKey(msg, keyData)
@@ -1886,6 +1933,13 @@ Public Class Form1
 
     End Sub
 
+    Private Sub DarkModeToolStripMenuItem_MouseHover(sender As Object, e As EventArgs) Handles DarkModeToolStripMenuItem.MouseHover
+
+    End Sub
+
+    Private Sub Form1_GiveFeedback(sender As Object, e As GiveFeedbackEventArgs) Handles Me.GiveFeedback
+
+    End Sub
 End Class
 
 Public Class CustomColorMenuStripRenderer
@@ -1926,6 +1980,9 @@ Public Class CustomColorMenuStripRenderer
     End Sub
 
     Protected Overrides Sub OnRenderMenuItemBackground(e As ToolStripItemRenderEventArgs)
+
+
+
 
         ' Define the rectangle that represents the size of the menu item
         Dim rect As New Rectangle(Point.Empty, e.Item.Size)
