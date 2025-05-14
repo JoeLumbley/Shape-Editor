@@ -493,54 +493,53 @@ Public Class Form1
 
         ElseIf e.KeyCode = Keys.Delete AndAlso SelectedPointIndex <> -1 Then
 
+            RemovePoint(SelectedPointIndex)
+
+            Invalidate(DrawingArea)
+
+            InvalidateToolButtons()
+
+            e.Handled = True
+
+        ElseIf e.KeyCode = Keys.OemMinus AndAlso SelectedPointIndex <> -1 Then
 
             RemovePoint(SelectedPointIndex)
 
-                Invalidate(DrawingArea)
+            Invalidate(DrawingArea)
 
-                InvalidateToolButtons()
+            InvalidateToolButtons()
 
-                e.Handled = True
+            e.Handled = True
 
-            ElseIf e.KeyCode = Keys.OemMinus AndAlso SelectedPointIndex <> -1 Then
+        ElseIf e.KeyCode = Keys.Subtract AndAlso SelectedPointIndex <> -1 Then
 
-                RemovePoint(SelectedPointIndex)
+            RemovePoint(SelectedPointIndex)
 
-                Invalidate(DrawingArea)
+            Invalidate(DrawingArea)
 
-                InvalidateToolButtons()
+            InvalidateToolButtons()
 
-                e.Handled = True
+            e.Handled = True
 
-            ElseIf e.KeyCode = Keys.Subtract AndAlso SelectedPointIndex <> -1 Then
+        ElseIf e.KeyCode = Keys.N AndAlso SelectedPointIndex <> -1 Then
 
-                RemovePoint(SelectedPointIndex)
+            InsertNewPoint(SelectedPointIndex)
 
-                Invalidate(DrawingArea)
+            Invalidate(DrawingArea)
 
-                InvalidateToolButtons()
+            e.Handled = True
 
-                e.Handled = True
+        ElseIf e.KeyCode = Keys.Oemplus AndAlso SelectedPointIndex <> -1 Then
 
-            ElseIf e.KeyCode = Keys.N AndAlso SelectedPointIndex <> -1 Then
+            InsertNewPoint(SelectedPointIndex)
 
-                InsertNewPoint(SelectedPointIndex)
+            Invalidate(DrawingArea)
 
-                Invalidate(DrawingArea)
+            e.Handled = True
 
-                e.Handled = True
+        ElseIf e.KeyCode = Keys.Add AndAlso SelectedPointIndex <> -1 Then
 
-            ElseIf e.KeyCode = Keys.Oemplus AndAlso SelectedPointIndex <> -1 Then
-
-                InsertNewPoint(SelectedPointIndex)
-
-                Invalidate(DrawingArea)
-
-                e.Handled = True
-
-            ElseIf e.KeyCode = Keys.Add AndAlso SelectedPointIndex <> -1 Then
-
-                InsertNewPoint(SelectedPointIndex)
+            InsertNewPoint(SelectedPointIndex)
 
             Invalidate(DrawingArea)
 
