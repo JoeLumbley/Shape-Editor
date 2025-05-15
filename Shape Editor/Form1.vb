@@ -37,18 +37,6 @@ Public Class Form1
 
     Private CurrentTool As Tool = Tool.Add
 
-
-
-
-
-
-
-
-
-
-
-
-
     Public Enum DwmWindowAttribute
         DWMWA_USE_IMMERSIVE_DARK_MODE = 21
         DWMWA_MICA_EFFECT = 1029
@@ -159,6 +147,13 @@ Public Class Form1
 
     Private ControlHDown As Boolean = False
 
+    Private BackgroundColorDark As Color = Color.Black
+
+    Private BackgroundColorLight As Color = Color.White
+
+    Private BackgroundColor As Color = BackgroundColorLight
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         InitializeApplication()
@@ -177,7 +172,7 @@ Public Class Form1
         e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.None
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
 
-        e.Graphics.Clear(If(DarkMode, Color.Black, Color.White))
+        e.Graphics.Clear(BackgroundColor)
 
         DrawGrid(e)
 
@@ -912,24 +907,34 @@ Public Class Form1
         Dim gridPen As Pen = If(DarkMode, GridPenDark, GridPenLight)
 
         ' Draw vertical grid lines
-        For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
+        'For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
+        For i As Integer = -(((DrawingArea.Width \ 2) * ScaleFactor) \ stepSize) To ((DrawingArea.Width \ 2) * ScaleFactor) \ stepSize
 
             Dim x As Integer = i * stepSize
 
-            e.Graphics.DrawLine(gridPen, x, -ClientSize.Height * 8, x, ClientSize.Height * 8)
+            '                  (x, GridTop,x, GridBottom)
+            'e.Graphics.DrawLine(gridPen, x, -ClientSize.Height * 8, x, ClientSize.Height * 8)
+            'e.Graphics.DrawLine(gridPen, x, CInt((-ClientSize.Height * ScaleFactor) + 10), x, CInt(ClientSize.Height * ScaleFactor))
+            e.Graphics.DrawLine(gridPen, x, -CInt((DrawingArea.Height \ 2) * ScaleFactor), x, CInt((DrawingArea.Height \ 2) * ScaleFactor))
+
 
         Next
 
+
         ' Draw horizontal grid lines
-        For i As Integer = -((ClientSize.Height * 8) \ stepSize) To (ClientSize.Height * 8) \ stepSize
+        'For i As Integer = -((ClientSize.Height * 8) \ stepSize) To (ClientSize.Height * 8) \ stepSize
+        For i As Integer = -(((DrawingArea.Height \ 2) * ScaleFactor) \ stepSize) To ((DrawingArea.Height \ 2) * ScaleFactor) \ stepSize
 
             Dim y As Integer = i * stepSize
 
-            e.Graphics.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
+            'e.Graphics.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
+            e.Graphics.DrawLine(gridPen, -CInt((DrawingArea.Width \ 2) * ScaleFactor), y, CInt((DrawingArea.Width \ 2) * ScaleFactor), y)
+
 
         Next
 
     End Sub
+
 
     Private Sub DrawCoordinateAxes(e As PaintEventArgs)
         ' Draw two lines intersecting at the center of the drawing area to represent the coordinate axes.
@@ -1710,6 +1715,8 @@ Public Class Form1
             CopyLabel.LinkColor = LinkColorDark
             CopyLabel.ActiveLinkColor = ActiveLinkColorDark
 
+            BackgroundColor = BackgroundColorDark
+
         Else
 
             'set title color - light mode
@@ -1822,6 +1829,8 @@ Public Class Form1
 
             CopyLabel.LinkColor = LinkColorDark
             CopyLabel.ActiveLinkColor = ActiveLinkColorDark
+
+            BackgroundColor = BackgroundColorLight
 
         End If
 
@@ -1970,13 +1979,27 @@ Public Class Form1
 
         Dim ScaleFactorDiv16 = ScaleFactor / 16
 
-        HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
+        'HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
+        HScrollBar1.Minimum = -CInt(((DrawingArea.Width \ 2) * ScaleFactor) - (DrawingArea.Width \ 2))
 
-        HScrollBar1.Maximum = ClientSize.Width * ScaleFactorDiv16
 
-        VScrollBar1.Minimum = -ClientSize.Height * ScaleFactorDiv16
 
-        VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
+        'HScrollBar1.Maximum = ClientSize.Width * ScaleFactorDiv16
+        HScrollBar1.Maximum = CInt(((DrawingArea.Width \ 2) * ScaleFactor) - (DrawingArea.Width \ 2))
+
+
+
+        'VScrollBar1.Minimum = -ClientSize.Height * ScaleFactorDiv16
+
+        'VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
+
+        'VScrollBar1.Minimum = CInt(((-DrawingArea.Height \ 2) - DrawingArea.Height) * ScaleFactor)
+        VScrollBar1.Minimum = -CInt(((DrawingArea.Height \ 2) * ScaleFactor) - (DrawingArea.Height \ 2))
+
+
+        'VScrollBar1.Maximum = CInt((DrawingArea.Height \ 2) * ScaleFactor)
+        VScrollBar1.Maximum = CInt(((DrawingArea.Height \ 2) * ScaleFactor) - (DrawingArea.Height \ 2))
+
 
         Label1.Text = $"Scale: {ScaleFactor:N2}"
 
