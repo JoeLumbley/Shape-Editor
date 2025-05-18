@@ -126,7 +126,7 @@ Public Class Form1
     Private IsInsideBoundingRectangle As Boolean = False
 
     Private BoundingColorLightMode As Color = Color.FromArgb(16, 30, 144, 255)
-    Private BoundingColorDarkMode As Color = Color.FromArgb(75, Color.DodgerBlue)
+    Private BoundingColorDarkMode As Color = Color.FromArgb(32, Color.DodgerBlue)
     Private BoundingBrushLightMode As New SolidBrush(BoundingColorLightMode)
     Private BoundingBrushDarkMode As New SolidBrush(BoundingColorDarkMode)
 
@@ -173,13 +173,15 @@ Public Class Form1
 
         e.Graphics.Clear(BackgroundColor)
 
+        DrawBoundingRectangle(e)
+
+
         DrawGrid(e)
 
         DrawCoordinateAxes(e)
 
         DrawCenterMark(e)
 
-        DrawBoundingRectangle(e)
 
         e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
@@ -249,13 +251,13 @@ Public Class Form1
 
             End If
 
-            LeftMouseButtonDown = True
-
             GeneratePointArrayText()
 
             Invalidate(DrawingArea)
 
             InvalidateToolButtons()
+
+            LeftMouseButtonDown = True
 
         End If
 
