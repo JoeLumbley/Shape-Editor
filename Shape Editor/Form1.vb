@@ -175,13 +175,11 @@ Public Class Form1
 
         DrawBoundingRectangle(e)
 
-
         DrawGrid(e)
 
         DrawCoordinateAxes(e)
 
         DrawCenterMark(e)
-
 
         e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
