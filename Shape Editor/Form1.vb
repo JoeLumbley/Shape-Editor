@@ -168,8 +168,8 @@ Public Class Form1
         e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
 
         e.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
-        e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighSpeed
-        e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.Bilinear
+        'e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighSpeed
+        'e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.Bilinear
         e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.None
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
 
@@ -191,6 +191,7 @@ Public Class Form1
         DrawShape(e)
 
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
+        e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.None
 
         DrawPointHandles(e)
 
@@ -998,22 +999,31 @@ Public Class Form1
         ' Draw the point handles if the handles are not hidden
         If Not HideControlHandles Then
 
-            For i As Integer = 0 To Points.Count - 1 Step 2
+            For pointIndex As Integer = 0 To Points.Count - 1 Step 2
 
-                Dim point = Points(i)
+                Dim point = Points(pointIndex)
 
-                Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
+                Dim scaledPoint = New Point(CInt(point.X * ScaleFactor),
+                                            CInt(point.Y * ScaleFactor))
 
                 ' Check if the point is selected or hovered
-                If i = SelectedPointIndex OrElse i = HoveredPointIndex Then
+                If pointIndex = SelectedPointIndex OrElse pointIndex = HoveredPointIndex Then
 
                     ' Draw the selected or hovered point handle
-                    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - ControlHandleSize / 2), CInt(scaledPoint.Y - ControlHandleSize / 2), ControlHandleSize, ControlHandleSize)
+                    e.Graphics.FillRectangle(HoverBrush,
+                                             scaledPoint.X - ControlHandleSize \ 2,
+                                             scaledPoint.Y - ControlHandleSize \ 2,
+                                             ControlHandleSize,
+                                             ControlHandleSize)
 
                 Else
 
                     ' Draw the normal point handle
-                    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - ControlHandleSize / 2), CInt(scaledPoint.Y - ControlHandleSize / 2), ControlHandleSize, ControlHandleSize)
+                    e.Graphics.FillRectangle(HandleBrush,
+                                             scaledPoint.X - ControlHandleSize \ 2,
+                                             scaledPoint.Y - ControlHandleSize \ 2,
+                                             ControlHandleSize,
+                                             ControlHandleSize)
 
                 End If
 
