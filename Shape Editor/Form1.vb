@@ -994,62 +994,6 @@ Public Class Form1
 
     End Sub
 
-    'Private Sub DrawPointHandles(e As PaintEventArgs)
-
-    '    ' Draw the point handles if the handles are not hidden
-    '    If Not HideControlHandles Then
-
-    '        For pointIndex As Integer = 0 To Points.Count - 1 Step 2
-
-    '            Dim point = Points(pointIndex)
-
-    '            Dim scaledPoint = New Point(CInt(point.X * ScaleFactor),
-    '                                        CInt(point.Y * ScaleFactor))
-
-    '            ' Check if the point is selected or hovered
-    '            If pointIndex = SelectedPointIndex OrElse pointIndex = HoveredPointIndex Then
-
-    '                ' Draw the selected or hovered point handle
-    '                e.Graphics.FillRectangle(HoverBrush,
-    '                                         scaledPoint.X - ControlHandleSize \ 2,
-    '                                         scaledPoint.Y - ControlHandleSize \ 2,
-    '                                         ControlHandleSize,
-    '                                         ControlHandleSize)
-
-    '            Else
-
-    '                ' Draw the normal point handle
-    '                e.Graphics.FillRectangle(HandleBrush,
-    '                                         scaledPoint.X - ControlHandleSize \ 2,
-    '                                         scaledPoint.Y - ControlHandleSize \ 2,
-    '                                         ControlHandleSize,
-    '                                         ControlHandleSize)
-
-    '            End If
-
-    '        Next
-
-    '    End If
-
-    'End Sub
-
-
-    Private Function GetScaledPoint(originalPoint As Point) As Point
-
-        Return New Point(CInt(originalPoint.X * ScaleFactor),
-                         CInt(originalPoint.Y * ScaleFactor))
-
-    End Function
-
-    Private Function GetHandleRectangle(scaledPoint As Point) As Rectangle
-
-        Return New Rectangle(scaledPoint.X - ControlHandleSize \ 2,
-                             scaledPoint.Y - ControlHandleSize \ 2,
-                             ControlHandleSize,
-                             ControlHandleSize)
-
-    End Function
-
     Private Sub DrawPointHandles(e As PaintEventArgs)
 
         ' Draw the point handles if the handles are not hidden
@@ -1433,6 +1377,22 @@ Public Class Form1
 
         ' Return a Rectangle object that represents the smallest rectangle that can contain all the points.
         Return New Rectangle(minX, minY, maxX - minX, maxY - minY)
+
+    End Function
+
+    Private Function GetScaledPoint(originalPoint As Point) As Point
+
+        Return New Point(CInt(originalPoint.X * ScaleFactor),
+                         CInt(originalPoint.Y * ScaleFactor))
+
+    End Function
+
+    Private Function GetHandleRectangle(scaledPoint As Point) As Rectangle
+
+        Return New Rectangle(scaledPoint.X - ControlHandleSize \ 2,
+                             scaledPoint.Y - ControlHandleSize \ 2,
+                             ControlHandleSize,
+                             ControlHandleSize)
 
     End Function
 
