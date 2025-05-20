@@ -72,10 +72,10 @@ Public Class Form1
     Private GridPenDark As New Pen(GridColorDark, 1)
     Private GridPenLight As New Pen(GridColorLight, 1)
 
-    Private CoordinateSystemPenDarkMode As New Pen(Color.FromArgb(255, 64, 64, 64), 1)
-    Private CoordinateSystemPenLightMode As New Pen(Color.FromArgb(255, 200, 200, 200), 1)
+    Private CoordinateSystemPenDark As New Pen(Color.FromArgb(255, 64, 64, 64), 1)
+    Private CoordinateSystemPenLight As New Pen(Color.FromArgb(255, 200, 200, 200), 1)
 
-    Private CoordinateSystemPen As Pen = CoordinateSystemPenLightMode
+    Private CoordinateSystemPen As Pen = CoordinateSystemPenLight
 
     ' Set the fill color for the shape in light and dark modes
     Private ShapeFillColorLightMode As Color = Color.FromArgb(98, 30, 144, 255)
@@ -1729,7 +1729,7 @@ Public Class Form1
 
             BackgroundColor = BackgroundColorDark
 
-            CoordinateSystemPen = CoordinateSystemPenDarkMode
+            CoordinateSystemPen = CoordinateSystemPenDark
 
         Else
 
@@ -1846,7 +1846,7 @@ Public Class Form1
 
             BackgroundColor = BackgroundColorLight
 
-            CoordinateSystemPen = CoordinateSystemPenLightMode
+            CoordinateSystemPen = CoordinateSystemPenLight
 
         End If
 
