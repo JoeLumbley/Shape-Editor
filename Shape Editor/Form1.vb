@@ -1036,15 +1036,17 @@ Public Class Form1
 
     Private Function GetScaledPoint(originalPoint As Point) As Point
 
-        Return New Point(CInt(originalPoint.X * ScaleFactor), CInt(originalPoint.Y * ScaleFactor))
+        Return New Point(CInt(originalPoint.X * ScaleFactor),
+                         CInt(originalPoint.Y * ScaleFactor))
 
     End Function
 
     Private Function GetHandleRectangle(scaledPoint As Point) As Rectangle
 
         Return New Rectangle(scaledPoint.X - ControlHandleSize \ 2,
-                         scaledPoint.Y - ControlHandleSize \ 2,
-                         ControlHandleSize, ControlHandleSize)
+                             scaledPoint.Y - ControlHandleSize \ 2,
+                             ControlHandleSize,
+                             ControlHandleSize)
 
     End Function
 
