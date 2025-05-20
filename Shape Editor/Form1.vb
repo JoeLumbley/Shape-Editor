@@ -75,6 +75,8 @@ Public Class Form1
     Private CoordinateSystemPenDarkMode As New Pen(Color.FromArgb(255, 64, 64, 64), 1)
     Private CoordinateSystemPenLightMode As New Pen(Color.FromArgb(255, 200, 200, 200), 1)
 
+    Private CoordinateSystemPen As Pen = CoordinateSystemPenLightMode
+
     ' Set the fill color for the shape in light and dark modes
     Private ShapeFillColorLightMode As Color = Color.FromArgb(98, 30, 144, 255)
     Private ShapeFillColorDarkMode As Color = Color.FromArgb(24, Color.DodgerBlue)
@@ -940,7 +942,8 @@ Public Class Form1
 
         ' Draw the X-axis line.
         'e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0)
-        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -CInt((DrawingArea.Width \ 2) * ScaleFactor), 0, CInt((DrawingArea.Width \ 2) * ScaleFactor), 0)
+        'e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -CInt((DrawingArea.Width \ 2) * ScaleFactor), 0, CInt((DrawingArea.Width \ 2) * ScaleFactor), 0)
+        e.Graphics.DrawLine(CoordinateSystemPen, -CInt((DrawingArea.Width \ 2) * ScaleFactor), 0, CInt((DrawingArea.Width \ 2) * ScaleFactor), 0)
 
 
 
@@ -949,10 +952,9 @@ Public Class Form1
 
         ' Draw the Y-axis line.
         'e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8)
+        'e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -CInt((DrawingArea.Height \ 2) * ScaleFactor), 0, CInt((DrawingArea.Height \ 2) * ScaleFactor))
 
-
-        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -CInt((DrawingArea.Height \ 2) * ScaleFactor), 0, CInt((DrawingArea.Height \ 2) * ScaleFactor))
-
+        e.Graphics.DrawLine(CoordinateSystemPen, 0, -CInt((DrawingArea.Height \ 2) * ScaleFactor), 0, CInt((DrawingArea.Height \ 2) * ScaleFactor))
 
 
     End Sub
@@ -1727,6 +1729,8 @@ Public Class Form1
 
             BackgroundColor = BackgroundColorDark
 
+            CoordinateSystemPen = CoordinateSystemPenDarkMode
+
         Else
 
             'set title color - light mode
@@ -1841,6 +1845,8 @@ Public Class Form1
             CopyLabel.ActiveLinkColor = ActiveLinkColorDark
 
             BackgroundColor = BackgroundColorLight
+
+            CoordinateSystemPen = CoordinateSystemPenLightMode
 
         End If
 
