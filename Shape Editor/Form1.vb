@@ -63,7 +63,7 @@ Public Class Form1
     Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
 
-    Private GridColorDark As Color = Color.FromArgb(255, 35, 35, 35)
+    Private GridColorDark As Color = Color.FromArgb(255, 42, 42, 42)
     Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
 
     Public ControlColorDark As Color = Color.FromArgb(255, 23, 23, 23)
@@ -126,7 +126,7 @@ Public Class Form1
     Private IsInsideBoundingRectangle As Boolean = False
 
     Private BoundingColorLightMode As Color = Color.FromArgb(16, 30, 144, 255)
-    Private BoundingColorDarkMode As Color = Color.FromArgb(32, Color.DodgerBlue)
+    Private BoundingColorDarkMode As Color = Color.FromArgb(64, Color.Gray)
     Private BoundingBrushLightMode As New SolidBrush(BoundingColorLightMode)
     Private BoundingBrushDarkMode As New SolidBrush(BoundingColorDarkMode)
 
@@ -939,10 +939,21 @@ Public Class Form1
         ' Draw two lines intersecting at the center of the drawing area to represent the coordinate axes.
 
         ' Draw the X-axis line.
-        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0)
+        'e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0)
+        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -CInt((DrawingArea.Width \ 2) * ScaleFactor), 0, CInt((DrawingArea.Width \ 2) * ScaleFactor), 0)
+
+
+
+
+
 
         ' Draw the Y-axis line.
-        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8)
+        'e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8)
+
+
+        e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -CInt((DrawingArea.Height \ 2) * ScaleFactor), 0, CInt((DrawingArea.Height \ 2) * ScaleFactor))
+
+
 
     End Sub
 
