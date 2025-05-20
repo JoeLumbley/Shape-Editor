@@ -27,7 +27,6 @@ Partial Class AboutForm
         OKButton = New Button()
         Label2 = New Label()
         Label3 = New Label()
-        Label4 = New Label()
         Label5 = New Label()
         SuspendLayout()
         ' 
@@ -36,7 +35,7 @@ Partial Class AboutForm
         GitHubLink.AutoSize = True
         GitHubLink.Font = New Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         GitHubLink.LinkBehavior = LinkBehavior.HoverUnderline
-        GitHubLink.Location = New Point(211, 295)
+        GitHubLink.Location = New Point(211, 285)
         GitHubLink.Name = "GitHubLink"
         GitHubLink.Size = New Size(376, 28)
         GitHubLink.TabIndex = 0
@@ -46,7 +45,7 @@ Partial Class AboutForm
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(348, 189)
+        Label1.Location = New Point(348, 166)
         Label1.Name = "Label1"
         Label1.Size = New Size(103, 25)
         Label1.TabIndex = 1
@@ -64,7 +63,7 @@ Partial Class AboutForm
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(243, 218)
+        Label2.Location = New Point(243, 195)
         Label2.Name = "Label2"
         Label2.Size = New Size(312, 25)
         Label2.TabIndex = 3
@@ -73,20 +72,11 @@ Partial Class AboutForm
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(204, 93)
+        Label3.Location = New Point(155, 86)
         Label3.Name = "Label3"
-        Label3.Size = New Size(390, 25)
+        Label3.Size = New Size(487, 25)
         Label3.TabIndex = 4
-        Label3.Text = "A simple editor that allows you to draw a shape"
-        ' 
-        ' Label4
-        ' 
-        Label4.AutoSize = True
-        Label4.Location = New Point(152, 122)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(494, 25)
-        Label4.TabIndex = 5
-        Label4.Text = "and generates the corresponding point array in VB.NET code."
+        Label3.Text = "Create shapes interactively and generate code automatically."
         ' 
         ' Label5
         ' 
@@ -104,7 +94,6 @@ Partial Class AboutForm
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
         Controls.Add(Label5)
-        Controls.Add(Label4)
         Controls.Add(Label3)
         Controls.Add(Label2)
         Controls.Add(OKButton)
@@ -121,6 +110,5 @@ Partial Class AboutForm
     Friend WithEvents OKButton As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
 End Class
