@@ -1912,7 +1912,6 @@ Public Class Form1
         CenterDrawingArea()
 
         CopyLabel.Top = ClientRectangle.Top + menuStripHeight + 3
-        'CopyLabel.Left = ClientRectangle.Right - CopyLabel.Width - VScrollBar1.Width
         CopyLabel.Left = ClientRectangle.Right - CopyLabel.Width - 25
 
         LanguageLabel.Top = ClientRectangle.Top + menuStripHeight + 3
