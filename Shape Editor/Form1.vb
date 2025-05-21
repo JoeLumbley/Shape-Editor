@@ -1912,7 +1912,8 @@ Public Class Form1
         CenterDrawingArea()
 
         CopyLabel.Top = ClientRectangle.Top + menuStripHeight + 3
-        CopyLabel.Left = ClientRectangle.Right - CopyLabel.Width - VScrollBar1.Width
+        'CopyLabel.Left = ClientRectangle.Right - CopyLabel.Width - VScrollBar1.Width
+        CopyLabel.Left = ClientRectangle.Right - CopyLabel.Width - 25
 
         LanguageLabel.Top = ClientRectangle.Top + menuStripHeight + 3
         LanguageLabel.Left = halfClientWidth + 5
@@ -1920,13 +1921,13 @@ Public Class Form1
 
         Panel1.Top = ClientRectangle.Top + menuStripHeight
         Panel1.Left = halfClientWidth
-        Panel1.Width = halfClientWidth
+        Panel1.Width = halfClientWidth + 1
         Panel1.Height = menuStripHeight
 
         ' Update TextBox1
         TextBox1.Top = ClientRectangle.Top + menuStripHeight * 2
         TextBox1.Left = halfClientWidth
-        TextBox1.Width = halfClientWidth
+        TextBox1.Width = halfClientWidth + 1
         TextBox1.Height = clientHeight - menuStripHeight * 2
 
         ' Update TrackBar1
