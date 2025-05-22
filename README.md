@@ -5,7 +5,7 @@ Shape Editor is a tool for the interactive creation of shapes. Shape Editor gene
 
 
 
-![107](https://github.com/user-attachments/assets/a78c96b7-87c8-4f6b-b030-2c12780f6f9d)
+![110](https://github.com/user-attachments/assets/e6524094-7ca8-4744-84f4-b2304c774874)
 
 
 
