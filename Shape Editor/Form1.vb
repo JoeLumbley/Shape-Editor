@@ -685,10 +685,6 @@ Public Class Form1
 
         End If
 
-
-
-
-
         ' Call the base class implementation for other keys
         Return MyBase.ProcessCmdKey(msg, keyData)
 
