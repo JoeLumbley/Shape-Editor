@@ -63,7 +63,7 @@ Public Class Form1
     Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
 
-    Private GridColorDark As Color = Color.FromArgb(255, 42, 42, 42)
+    Private GridColorDark As Color = Color.FromArgb(255, 50, 50, 50)
     Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
 
     Public ControlColorDark As Color = Color.FromArgb(255, 23, 23, 23)
@@ -72,7 +72,7 @@ Public Class Form1
     Private GridPenDark As New Pen(GridColorDark, 1)
     Private GridPenLight As New Pen(GridColorLight, 1)
 
-    Private CoordinateSystemPenDark As New Pen(Color.FromArgb(255, 64, 64, 64), 1)
+    Private CoordinateSystemPenDark As New Pen(Color.FromArgb(255, 80, 80, 80), 1)
     Private CoordinateSystemPenLight As New Pen(Color.FromArgb(255, 200, 200, 200), 1)
 
     Private CoordinateSystemPen As Pen = CoordinateSystemPenLight
@@ -128,7 +128,7 @@ Public Class Form1
     Private IsInsideBoundingRectangle As Boolean = False
 
     Private BoundingColorLightMode As Color = Color.FromArgb(16, 30, 144, 255)
-    Private BoundingColorDarkMode As Color = Color.FromArgb(64, Color.Gray)
+    Private BoundingColorDarkMode As Color = Color.FromArgb(16, Color.DodgerBlue)
     Private BoundingBrushLightMode As New SolidBrush(BoundingColorLightMode)
     Private BoundingBrushDarkMode As New SolidBrush(BoundingColorDarkMode)
 
@@ -154,7 +154,6 @@ Public Class Form1
 
     Private BackgroundColor As Color = BackgroundColorLight
 
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         InitializeApplication()
@@ -168,10 +167,11 @@ Public Class Form1
         e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
 
         e.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
-        'e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighSpeed
-        'e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.Bilinear
-        e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.None
+        e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.GammaCorrected
+        e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
+        e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.None
 
         e.Graphics.Clear(BackgroundColor)
 
@@ -183,9 +183,7 @@ Public Class Form1
 
         DrawCenterMark(e)
 
-        e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
-        e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
         e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
 
         DrawShape(e)
