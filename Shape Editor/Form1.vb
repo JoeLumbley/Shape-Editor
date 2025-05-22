@@ -1872,9 +1872,9 @@ Public Class Form1
 
         ShapePen = New Pen(If(DarkMode, Color.White, Color.Black), 2)
 
-        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkMode, Color.DodgerBlue, Color.DarkGray)))
+        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkMode, Color.FromArgb(255, 90, 90, 90), Color.DarkGray)))
 
-        HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkMode, Color.Orchid, Color.DodgerBlue)))
+        HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkMode, Color.DodgerBlue, Color.DodgerBlue)))
 
         Label1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
