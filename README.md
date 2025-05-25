@@ -179,25 +179,41 @@ To begin using the Shape Editor, launch the application and start creating shape
 
 # Code Walkthrough
 
+This document provides a detailed walkthrough of a Visual Basic .NET (VB.NET) code for a shape editor application. This application allows users to draw shapes, add or remove points, and manipulate these shapes in a graphical interface. We'll go through the code line by line to understand its functionality and structure.
 
+## Table of Contents
+1. [Imports and Class Declaration](#imports-and-class-declaration)
+2. [Enumerations](#enumerations)
+3. [DLL Imports](#dll-imports)
+4. [Class Variables](#class-variables)
+5. [Form Load Event](#form-load-event)
+6. [Paint Event](#paint-event)
+7. [Mouse Events](#mouse-events)
+8. [Key Events](#key-events)
+9. [Drawing Methods](#drawing-methods)
+10. [Shape Manipulation Methods](#shape-manipulation-methods)
+11. [File Operations](#file-operations)
+12. [Utility Methods](#utility-methods)
+13. [UI Theme Management](#ui-theme-management)
+14. [Layout Management](#layout-management)
 
-## Imports
+---
+
+## Imports and Class Declaration
 
 ```vb
 Imports System.IO
 Imports System.Runtime.InteropServices
-```
-- `Imports System.IO`: This imports the `System.IO` namespace, which contains classes for handling file input and output operations.
-- `Imports System.Runtime.InteropServices`: This imports the `System.Runtime.InteropServices` namespace, used for interoperability with unmanaged code, enabling the use of Windows API functions.
 
-## Class Definition
-
-```vb
 Public Class Form1
 ```
-This line defines a public class named `Form1`, which represents the main form of the application. All the functionality of the shape editor will be encapsulated within this class.
+- **Imports System.IO**: This namespace is included for handling input and output operations, such as reading from and writing to files.
+- **Imports System.Runtime.InteropServices**: This namespace is used for interoperation with unmanaged code, allowing the application to call functions from Windows DLLs.
+- **Public Class Form1**: This line declares the main form of the application, where all the controls and logic will be defined.
 
-## Enum Definitions
+---
+
+## Enumerations
 
 ```vb
 Enum Tool
@@ -206,17 +222,10 @@ Enum Tool
     Move
 End Enum
 ```
-This `Enum` defines three tools that the user can select:
-- `Add`: For adding points to the shape.
-- `Subtract`: For removing points from the shape.
-- `Move`: For moving existing points.
-
-```vb
-Private CurrentTool As Tool = Tool.Add
-```
-This line initializes a variable `CurrentTool` to `Tool.Add`, meaning the default tool when the application starts is the "Add" tool.
-
-### DWM Window Attributes
+- **Enum Tool**: This enumeration defines the types of tools available in the application: 
+  - **Add**: To add points to the shape.
+  - **Subtract**: To remove points from the shape.
+  - **Move**: To move points or the entire shape.
 
 ```vb
 Public Enum DwmWindowAttribute
@@ -224,502 +233,417 @@ Public Enum DwmWindowAttribute
     DWMWA_MICA_EFFECT = 1029
 End Enum
 ```
-This `Enum` defines attributes for window management, specifically for the Desktop Window Manager (DWM). These attributes control the appearance and behavior of the window.
+- **Enum DwmWindowAttribute**: This enumeration is used to define attributes for the window, specifically for enabling dark mode and the Mica effect in Windows.
 
-### DllImport Declarations
+---
+
+## DLL Imports
 
 ```vb
 <DllImport("dwmapi.dll", CharSet:=CharSet.Unicode, SetLastError:=True)>
 Public Shared Function DwmSetWindowAttribute(hWnd As IntPtr, dwAttribute As DwmWindowAttribute, ByRef pvAttribute As Integer, cbAttribute As Integer) As Integer
 End Function
-```
-This `DllImport` attribute allows the function `DwmSetWindowAttribute` to be called from the unmanaged `dwmapi.dll`. It sets various attributes for a window.
 
-```vb
 <DllImport("uxtheme.dll", CharSet:=CharSet.Unicode, SetLastError:=True)>
 Public Shared Function SetWindowTheme(hWnd As IntPtr, pszSubAppName As String, pszSubIdList As String) As Integer
 End Function
 ```
-Similarly, this imports the `SetWindowTheme` function from `uxtheme.dll`, which changes the theme of a window.
+- **DllImport**: These attributes indicate that the methods are imported from unmanaged DLLs.
+  - **DwmSetWindowAttribute**: Used to set attributes for the window, such as enabling dark mode.
+  - **SetWindowTheme**: Used to change the theme of the window.
 
-### Variables and Constants
+---
+
+## Class Variables
 
 ```vb
-Private points As New List(Of Point)()
+Private CurrentTool As Tool = Tool.Add
 ```
-This initializes a new list to store the points that define the shapes drawn by the user.
+- **CurrentTool**: A variable to keep track of which tool is currently selected (default is `Add`).
 
 ```vb
-Private isDrawing As Boolean = False
-```
-This boolean variable tracks whether the user is currently drawing a shape.
-
-```vb
-Private selectedPointIndex As Integer = -1
-Private hoveredPointIndex As Integer = -1
-```
-These integers track the index of the currently selected point and the point currently hovered over by the mouse.
-
-```vb
-Private Const handleSize As Integer = 15
-```
-This constant defines the size of the handles used to manipulate the points.
-
-```vb
+Private Points As New List(Of Point)()
+Private LeftMouseButtonDown As Boolean = False
+Private SelectedPointIndex As Integer = -1
+Private HoveredPointIndex As Integer = -1
+Private Const ControlHandleSize As Integer = 15
 Private ScaleFactor As Double = 1.0
 ```
-This variable determines the scaling factor for drawing shapes, allowing for zooming in and out.
+- **Points**: A list to store the points that define the shape.
+- **LeftMouseButtonDown**: A boolean to check if the left mouse button is currently pressed.
+- **SelectedPointIndex**: An integer to track the index of the currently selected point.
+- **HoveredPointIndex**: An integer to track which point is currently hovered over.
+- **ControlHandleSize**: A constant that defines the size of the control handles for the points.
+- **ScaleFactor**: A double to manage the scaling of the drawing area.
 
-### Color and Brush Definitions
+The rest of the variables are used for colors, brushes, and other visual aspects of the UI.
 
-```vb
-Private ShapePen As New Pen(Color.Black, 2)
-```
-This creates a pen with a black color and a width of 2 pixels, used for drawing shapes.
+---
 
-```vb
-Private HandleBrush As New SolidBrush(Color.FromArgb(255, Color.DarkGray))
-Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
-```
-These brushes are used to fill the handles for the points and indicate when a point is hovered over.
-
-### Color Definitions for Light and Dark Modes
-
-```vb
-Private MenuItemBackgroundColor_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
-Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 23, 23, 23)
-```
-These variables define the background colors for menu items in light and dark modes.
-
-### Form Load Event
+## Form Load Event
 
 ```vb
 Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    InitializeApplication()
+End Sub
 ```
-This method is called when the form loads. It initializes various components and settings for the application.
+- **Form1_Load**: This event is triggered when the form is loaded. It calls the `InitializeApplication` method to set up the application.
 
-```vb
-KeyPreview = True
-```
-This allows the form to receive key events before they are passed to the control that has focus.
+---
 
-```vb
-DoubleBuffered = True
-```
-This enables double buffering to reduce flickering during drawing operations.
-
-```vb
-Application.VisualStyleState = VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled
-Application.EnableVisualStyles()
-```
-These lines enable visual styles for the application, allowing it to have a modern look.
-
-```vb
-ApplyUITheme()
-```
-This method applies the current UI theme (light or dark) to the application.
-
-```vb
-Text = "Shape Editor - Code with Joe"
-```
-This sets the title of the application window.
-
-```vb
-ScaleFactor = TrackBar1.Value / 100.0
-Label1.Text = $"Scale: {ScaleFactor:N2}"
-```
-This initializes the scale factor based on the value of a trackbar and updates a label to display the current scale.
-
-### OnPaint Method
+## Paint Event
 
 ```vb
 Protected Overrides Sub OnPaint(e As PaintEventArgs)
+    MyBase.OnPaint(e)
+    e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
+    e.Graphics.Clear(BackgroundColor)
+    DrawBoundingRectangle(e)
+    DrawGrid(e)
+    DrawCoordinateAxes(e)
+    DrawCenterMark(e)
+    DrawShape(e)
+    DrawPointHandles(e)
+End Sub
 ```
-This method is overridden to customize the painting of the form. It handles all the drawing operations on the form's graphics.
+- **OnPaint**: This method is overridden to customize the painting of the form. It:
+  - Translates the graphics context to the center of the drawing area.
+  - Clears the background with the specified color.
+  - Calls various drawing methods to render the bounding rectangle, grid, coordinate axes, center mark, shape, and point handles.
 
-```vb
-e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
-```
-This translates the origin of the drawing area to the center, making it easier to draw shapes relative to the center of the form.
+---
 
-```vb
-e.Graphics.Clear(If(DarkMode, Color.Black, Color.White))
-```
-This clears the background with either black or white, depending on the current theme.
+## Mouse Events
 
-### Drawing the Grid and Coordinate System
-
-```vb
-DrawGrid(e.Graphics)
-```
-This method is called to draw a grid on the drawing area.
-
-```vb
-e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0) ' X-axis
-```
-This draws the X-axis of the coordinate system.
-
-```vb
-e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8) ' Y-axis
-```
-This draws the Y-axis of the coordinate system.
-
-### Drawing the Shape
-
-```vb
-If points.Count > 1 Then
-    Dim orderedPoints = GetOrderedPoints()
-    Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
-```
-This checks if there are enough points to draw a shape and scales them based on the current scale factor.
-
-```vb
-If FillShape Then
-    e.Graphics.FillPolygon(ShapeFillBrush, scaledPoints)
-End If
-```
-If the fill shape option is enabled, this fills the shape with the specified brush.
-
-```vb
-e.Graphics.DrawPolygon(ShapePen, scaledPoints)
-```
-This draws the outline of the shape using the previously defined pen.
-
-### Drawing Point Handles
-
-```vb
-If Not HideControlHandles Then
-    For i As Integer = 0 To points.Count - 1 Step 2
-        Dim point = points(i)
-        Dim scaledPoint = New Point(CInt(point.X * ScaleFactor), CInt(point.Y * ScaleFactor))
-```
-This loop iterates through the points to draw handles for each point, allowing the user to manipulate them.
-
-```vb
-If i = selectedPointIndex OrElse i = hoveredPointIndex Then
-    e.Graphics.FillRectangle(HoverBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-Else
-    e.Graphics.FillRectangle(HandleBrush, CInt(scaledPoint.X - handleSize / 2), CInt(scaledPoint.Y - handleSize / 2), handleSize, handleSize)
-End If
-```
-This checks if the point is selected or hovered over to change its appearance accordingly.
-
-### Mouse Events
-
-#### Mouse Down Event
+### Mouse Down
 
 ```vb
 Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
-```
-This method is triggered when the mouse button is pressed. It handles point selection and addition.
+    If e.Button = MouseButtons.Left Then
+        AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
+        SelectedPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
 
-```vb
-If e.Button = MouseButtons.Left Then
-```
-This checks if the left mouse button was pressed.
+        If CurrentTool = Tool.Add Then
+            If SelectedPointIndex = -1 Then
+                AddPoint(AdjustedMouseLocation)
+            Else
+                InsertNewPoint(SelectedPointIndex)
+            End If
+        ElseIf CurrentTool = Tool.Move Then
+            Dim BoundingRect As Rectangle = GetBoundingRectangle()
+            If SelectedPointIndex <> -1 Then
+                MovePoint(AdjustedMouseLocation)
+            ElseIf BoundingRect.Contains(AdjustedMouseLocation) Then
+                MoveStartLocation = AdjustedMouseLocation
+                MovingShape = True
+            End If
+        ElseIf CurrentTool = Tool.Subtract Then
+            If SelectedPointIndex <> -1 Then
+                RemovePoint(SelectedPointIndex)
+            End If
+        End If
 
-```vb
-AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
-```
-This calculates the adjusted mouse location based on the scale factor, allowing accurate point placement.
-
-### Point Manipulation
-
-```vb
-If CurrentTool = Tool.Add Then
-    If selectedPointIndex = -1 Then
-        AddPoint(AdjustedMouseLocation)
+        GeneratePointArrayText()
+        Invalidate(DrawingArea)
+        InvalidateToolButtons()
+        LeftMouseButtonDown = True
     End If
+End Sub
 ```
-If the current tool is "Add" and no point is selected, a new point is added at the adjusted mouse location.
+- **Form1_MouseDown**: This event is triggered when the mouse button is pressed. It checks if the left button is pressed and then:
+  - Adjusts the mouse location based on the drawing center and scale factor.
+  - Determines if a point is selected at the mouse location.
+  - Depending on the current tool, it either adds a point, moves a point, or removes a point.
+  - Calls `GeneratePointArrayText()` to update the text representation of the points.
+  - Calls `Invalidate()` to refresh the drawing area.
 
-```vb
-ElseIf CurrentTool = Tool.Move Then
-    If selectedPointIndex <> -1 Then
-        MovePoint(AdjustedMouseLocation)
-    End If
-```
-If the current tool is "Move" and a point is selected, that point is moved to the adjusted mouse location.
-
-```vb
-ElseIf CurrentTool = Tool.Subtract Then
-    If selectedPointIndex <> -1 Then
-        RemovePoint(selectedPointIndex)
-    End If
-End If
-```
-If the current tool is "Subtract" and a point is selected, that point is removed.
-
-### Mouse Move Event
+### Mouse Move
 
 ```vb
 Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles MyBase.MouseMove
+    AdjustedMouseLocation = New Point(CInt((e.Location.X - DrawingCenter.X) / ScaleFactor), CInt((e.Location.Y - DrawingCenter.Y) / ScaleFactor))
+
+    If LeftMouseButtonDown AndAlso SelectedPointIndex <> -1 Then
+        MovePoint(AdjustedMouseLocation)
+        Invalidate(DrawingArea)
+        InvalidateToolButtons()
+        GeneratePointArrayText()
+    End If
+
+    Dim newHoveredPointIndex = GetPointIndexAtLocation(AdjustedMouseLocation)
+    If newHoveredPointIndex <> HoveredPointIndex Then
+        HoveredPointIndex = newHoveredPointIndex
+        Invalidate(DrawingArea)
+        InvalidateToolButtons()
+    End If
+
+    If MovingShape And LeftMouseButtonDown Then
+        Dim offsetX As Integer = (AdjustedMouseLocation.X - MoveStartLocation.X)
+        Dim offsetY As Integer = (AdjustedMouseLocation.Y - MoveStartLocation.Y)
+        For i = 0 To Points.Count - 1
+            Points(i) = New Point(Points(i).X + offsetX, Points(i).Y + offsetY)
+        Next
+        MoveStartLocation = AdjustedMouseLocation
+        Invalidate(DrawingArea)
+        InvalidateToolButtons()
+        GeneratePointArrayText()
+    End If
+End Sub
 ```
-This method updates the position of selected points as the mouse moves.
+- **Form1_MouseMove**: This event is triggered when the mouse is moved. It:
+  - Adjusts the mouse location.
+  - If the left mouse button is down and a point is selected, it moves the point.
+  - Updates the hovered point index and refreshes the drawing area.
+  - If the shape is being moved, it calculates the offset and shifts all points accordingly.
+
+### Mouse Up
 
 ```vb
-If isDrawing AndAlso selectedPointIndex <> -1 Then
-    MovePoint(AdjustedMouseLocation)
-    GeneratePointArrayText()
-    Invalidate()
-End If
+Private Sub Form1_MouseUp(sender As Object, e As MouseEventArgs) Handles MyBase.MouseUp
+    If e.Button = MouseButtons.Left Then
+        LeftMouseButtonDown = False
+        SelectedPointIndex = -1
+        GeneratePointArrayText()
+        MovingShape = False
+    End If
+End Sub
 ```
-If the user is drawing and a point is selected, the point is moved, and the point array text is generated.
+- **Form1_MouseUp**: This event is triggered when the mouse button is released. It resets the relevant flags and updates the point array text.
 
-### Key Events
+---
+
+## Key Events
+
+### Key Down
 
 ```vb
 Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    If e.Control AndAlso e.KeyCode = Keys.C Then
+        If Not String.IsNullOrEmpty(TextBox1.Text) Then
+            Clipboard.SetText(TextBox1.Text)
+        End If
+        e.Handled = True
+    ElseIf e.Control AndAlso e.KeyCode = Keys.D Then
+        If Not ControlDDown Then
+            ControlDDown = True
+            DarkMode = Not DarkMode
+            DarkModeToolStripMenuItem.Text = If(DarkMode, "Light Mode", "Dark Mode")
+            ApplyUITheme()
+            Refresh()
+        End If
+        e.Handled = True
+    End If
+    ' Additional key handling...
+End Sub
 ```
-This method handles keyboard inputs for specific actions like closing shapes or deleting points.
+- **Form1_KeyDown**: This event is triggered when a key is pressed. It checks for specific key combinations (like Ctrl+C for copying text) and toggles dark mode with Ctrl+D.
+
+### Key Up
 
 ```vb
-If e.KeyCode = Keys.Delete AndAlso selectedPointIndex <> -1 Then
-    RemovePoint(selectedPointIndex)
+Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
+    If e.Control AndAlso e.KeyCode = Keys.D Then
+        ControlDDown = False
+    End If
+End Sub
 ```
-If the Delete key is pressed and a point is selected, that point is removed.
+- **Form1_KeyUp**: This event resets the control flags when the keys are released.
 
-### Resizing the Form
+---
+
+## Drawing Methods
+
+### DrawGrid
 
 ```vb
-Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+Private Sub DrawGrid(e As PaintEventArgs)
+    Dim stepSize As Integer = CInt(20 * ScaleFactor)
+    Dim gridPen As Pen = If(DarkMode, GridPenDark, GridPenLight)
+
+    For i As Integer = -(((DrawingArea.Width \ 2) * ScaleFactor) \ stepSize) To ((DrawingArea.Width \ 2) * ScaleFactor) \ stepSize
+        Dim x As Integer = i * stepSize
+        e.Graphics.DrawLine(gridPen, x, -CInt((DrawingArea.Height \ 2) * ScaleFactor), x, CInt((DrawingArea.Height \ 2) * ScaleFactor))
+    Next
+
+    For i As Integer = -(((DrawingArea.Height \ 2) * ScaleFactor) \ stepSize) To ((DrawingArea.Height \ 2) * ScaleFactor) \ stepSize
+        Dim y As Integer = i * stepSize
+        e.Graphics.DrawLine(gridPen, -CInt((DrawingArea.Width \ 2) * ScaleFactor), y, CInt((DrawingArea.Width \ 2) * ScaleFactor), y)
+    Next
+End Sub
 ```
-This method adjusts the layout of UI components when the form is resized.
+- **DrawGrid**: This method draws a grid on the drawing area. It calculates the step size based on the scale factor and draws vertical and horizontal lines at regular intervals.
+
+### DrawCoordinateAxes
 
 ```vb
-LayoutForm()
-Invalidate()
+Private Sub DrawCoordinateAxes(e As PaintEventArgs)
+    e.Graphics.DrawLine(CoordinateSystemPen, -CInt((DrawingArea.Width \ 2) * ScaleFactor), 0, CInt((DrawingArea.Width \ 2) * ScaleFactor), 0)
+    e.Graphics.DrawLine(CoordinateSystemPen, 0, -CInt((DrawingArea.Height \ 2) * ScaleFactor), 0, CInt((DrawingArea.Height \ 2) * ScaleFactor))
+End Sub
 ```
-This calls the `LayoutForm` method to reposition controls and invalidates the form to trigger a repaint.
+- **DrawCoordinateAxes**: This method draws the X and Y axes at the center of the drawing area.
 
-### Saving and Opening Shapes
-
-The `SaveToolStripMenuItem_Click` and `OpenToolStripMenuItem_Click` methods handle saving shapes to CSV files and opening them, respectively. They ensure the points are written in a readable format and can be easily reconstructed.
-
-
-
-
-
-
-
-
-
-
-
-
-# Save and Open Functionality in Shape Editor
-
-In this section, we will break down the code that handles saving and opening shape files in the Shape Editor application. This functionality allows users to save their drawn shapes as CSV files and load them back into the application.
-
-## Save Functionality
-
-### Method Definition
+### DrawShape
 
 ```vb
-Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
-```
-This method is triggered when the user clicks the "Save" option from the menu. It handles the process of saving the current shape points to a file.
+Private Sub DrawShape(e As PaintEventArgs)
+    If Points.Count > 1 Then
+        Dim orderedPoints = GetOrderedPoints()
+        Dim scaledPoints = orderedPoints.Select(Function(p) New Point(CInt(p.X * ScaleFactor), CInt(p.Y * ScaleFactor))).ToArray()
 
-### Using SaveFileDialog
+        If FillShape Then
+            e.Graphics.FillPolygon(ShapeFillBrush, scaledPoints)
+        End If
+
+        e.Graphics.DrawPolygon(ShapePen, scaledPoints)
+    End If
+End Sub
+```
+- **DrawShape**: This method draws the shape defined by the points. It checks if there are enough points to form a shape, scales the points, fills the shape if required, and then draws the polygon outline.
+
+### DrawBoundingRectangle
 
 ```vb
-Using saveFileDialog As New SaveFileDialog()
-```
-This creates a new instance of `SaveFileDialog`, which provides a dialog for the user to specify the file name and location to save the shape.
+Private Sub DrawBoundingRectangle(e As PaintEventArgs)
+    If IsInsideBoundingRectangle AndAlso CurrentTool = Tool.Move Then
+        Dim BoundingRect As Rectangle = GetBoundingRectangle()
+        Dim ScaledBoundingRectangle As Rectangle = BoundingRect
+        ScaledBoundingRectangle.X = CInt(BoundingRect.X * ScaleFactor)
+        ScaledBoundingRectangle.Y = CInt(BoundingRect.Y * ScaleFactor)
+        ScaledBoundingRectangle.Width = CInt(BoundingRect.Width * ScaleFactor)
+        ScaledBoundingRectangle.Height = CInt(BoundingRect.Height * ScaleFactor)
 
-### Setting Dialog Properties
+        e.Graphics.FillRectangle(BoundingBrush, ScaledBoundingRectangle)
+    End If
+End Sub
+```
+- **DrawBoundingRectangle**: This method draws a bounding rectangle around the shape if the mouse is inside it and the current tool is set to move.
+
+---
+
+## Shape Manipulation Methods
+
+### AddPoint
 
 ```vb
-saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"
-saveFileDialog.Title = "Save Shape"
-saveFileDialog.InitialDirectory = Application.StartupPath
+Private Sub AddPoint(location As Point)
+    Points.Add(location)
+    Points.Add(GetMirroredPoint(location))
+    SelectedPointIndex = Points.Count - 2
+End Sub
 ```
-- `Filter`: This specifies the types of files that can be saved. The user can choose to save as CSV files or any file type.
-- `Title`: This sets the title of the dialog window.
-- `InitialDirectory`: This sets the starting directory of the dialog to the application's startup path.
+- **AddPoint**: This method adds a new point to the shape and its mirrored counterpart. It also updates the selected point index.
 
-### Showing the Dialog
+### MovePoint
 
 ```vb
-If saveFileDialog.ShowDialog(Me) = DialogResult.OK Then
+Private Sub MovePoint(location As Point)
+    Points(SelectedPointIndex) = location
+    Points(SelectedPointIndex + 1) = GetMirroredPoint(location)
+End Sub
 ```
-This line displays the dialog to the user. If the user selects a file and clicks "OK", the following code block executes.
+- **MovePoint**: This method updates the position of the selected point and its mirrored counterpart.
 
-### Writing to the File
+### RemovePoint
 
 ```vb
-Using writer As New StreamWriter(saveFileDialog.FileName)
+Private Sub RemovePoint(index As Integer)
+    If index >= 0 AndAlso index < Points.Count - 1 Then
+        Points.RemoveAt(index + 1) ' Remove mirrored point
+        Points.RemoveAt(index)     ' Remove actual point
+    End If
+    SelectedPointIndex = -1
+    GeneratePointArrayText()
+    Invalidate(DrawingArea)
+End Sub
 ```
-This creates a `StreamWriter` to write text to the specified file.
+- **RemovePoint**: This method removes a point and its mirrored counterpart from the shape.
+
+### InsertNewPoint
 
 ```vb
-' Write the CSV headers (optional).
-writer.WriteLine("X,Y")
+Private Sub InsertNewPoint(index As Integer)
+    Dim newPoint As New Point(Points(index).X, Points(index).Y)
+    newPoint.Offset(-1, -1)
+    Points.Insert(index + 2, newPoint)
+    Points.Insert(index + 3, GetMirroredPoint(newPoint))
+    SelectedPointIndex += 2
+    GeneratePointArrayText()
+    Invalidate(DrawingArea)
+End Sub
 ```
-This writes the headers "X,Y" to the CSV file, indicating the format of the data that follows.
+- **InsertNewPoint**: This method inserts a new point at the specified index and adds its mirrored counterpart.
 
-### Looping Through Points
+---
+
+## File Operations
+
+### SaveShapeToFile
 
 ```vb
-For Each point As Point In points
-    writer.WriteLine($"{point.X},{point.Y}")
-Next
-```
-This loop iterates through each point in the `points` list and writes its X and Y coordinates to the file in CSV format.
+Private Sub SaveShapeToFile()
+    Using saveFileDialog As New SaveFileDialog()
+        saveFileDialog.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*"
+        saveFileDialog.Title = "Save Shape"
+        saveFileDialog.InitialDirectory = Application.StartupPath
 
-### Updating the Title Bar
+        If saveFileDialog.ShowDialog(Me) = DialogResult.OK Then
+            Using writer As New StreamWriter(saveFileDialog.FileName)
+                writer.WriteLine("X,Y")
+                For Each point As Point In Points
+                    writer.WriteLine($"{point.X},{point.Y}")
+                Next
+            End Using
+            Text = $"{Path.GetFileName(saveFileDialog.FileName)} - Shape Editor - Code with Joe"
+        End If
+    End Using
+End Sub
+```
+- **SaveShapeToFile**: This method opens a file dialog to save the current shape as a CSV file. It writes the points to the file in a structured format.
+
+### OpenShapeFile
 
 ```vb
-Text = $"{Path.GetFileName(saveFileDialog.FileName)} - Shape Editor - Code with Joe"
-```
-This updates the title of the form to include the name of the saved file, providing feedback to the user about the current file being edited.
+Private Sub OpenShapeFile()
+    Using openFileDialog As New OpenFileDialog()
+        openFileDialog.Filter = "CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+        openFileDialog.Title = "Open Shape"
+        openFileDialog.InitialDirectory = Application.StartupPath
 
-### Closing the Dialog
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            Points.Clear()
+            Try
+                Using reader As New StreamReader(openFileDialog.FileName)
+                    While Not reader.EndOfStream
+                        Dim line As String = reader.ReadLine()
+                        Dim parts As String() = line.Split(","c)
+                        If parts.Length = 2 Then
+                            Dim x As Integer
+                            Dim y As Integer
+                            If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
+                                Points.Add(New Point(x, y))
+                            End If
+                        End If
+                    End While
+                    Text = $"{Path.GetFileName(openFileDialog.FileName)} - Shape Editor - Code with Joe"
+                End Using
+            Catch ex As Exception
+                ' Handle exceptions...
+            End Try
+        End If
+    End Using
+End Sub
+```
+- **OpenShapeFile**: This method opens a file dialog to select a CSV file and reads the points from the file, adding them to the shape.
+
+---
+
+## Utility Methods
+
+### GeneratePointArrayText
 
 ```vb
-End If
-```
-This ends the conditional block for the `SaveFileDialog`.
-
-## Open Functionality
-
-### Method Definition
-
-```vb
-Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
-```
-This method is triggered when the user clicks the "Open" option from the menu. It handles the process of loading shape points from a file.
-
-### Using OpenFileDialog
-
-```vb
-Using openFileDialog As New OpenFileDialog()
-```
-This creates a new instance of `OpenFileDialog`, which allows the user to select a file to open.
-
-### Setting Dialog Properties
-
-```vb
-openFileDialog.AutoUpgradeEnabled = True
-openFileDialog.ShowReadOnly = False
-openFileDialog.ShowHelp = False
-```
-These properties configure the dialog's behavior:
-- `AutoUpgradeEnabled`: Automatically upgrades the dialog's appearance if needed.
-- `ShowReadOnly`: Allows the user to open files in read-only mode.
-- `ShowHelp`: Disables the help button in the dialog.
-
-```vb
-openFileDialog.Filter = "CSV Files (*.csv)|*.csv|Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
-openFileDialog.Title = "Open Shape"
-openFileDialog.InitialDirectory = Application.StartupPath
-```
-Similar to the save dialog, this sets the file types, title, and initial directory.
-
-### Showing the Dialog
-
-```vb
-If openFileDialog.ShowDialog() = DialogResult.OK Then
-```
-This displays the dialog. If the user selects a file and clicks "OK", the following code block executes.
-
-### Clearing Existing Points
-
-```vb
-points.Clear()
-```
-This clears the existing points from the `points` list to prepare for loading new points from the file.
-
-### Reading from the File
-
-```vb
-Dim fileIsValid As Boolean = False
-
-Try
-    Using reader As New StreamReader(openFileDialog.FileName)
-```
-This initializes a boolean to track validity and attempts to read the selected file using a `StreamReader`.
-
-### Parsing the Points
-
-```vb
-While Not reader.EndOfStream
-    Dim line As String = reader.ReadLine()
-    Dim parts As String() = line.Split(","c)
-```
-This loop reads the file line by line until the end. Each line is split by commas into an array of strings.
-
-```vb
-If parts.Length = 2 Then
-    Dim x As Integer
-    Dim y As Integer
-
-    If Integer.TryParse(parts(0), x) AndAlso Integer.TryParse(parts(1), y) Then
-        points.Add(New Point(x, y))
-```
-If the line contains two parts (X and Y), it attempts to parse them into integers and adds them as a new `Point` to the `points` list.
-
-### Validating the Points
-
-```vb
-fileIsValid = Integer.TryParse(parts(0), x)
-fileIsValid = Integer.TryParse(parts(1), y)
-```
-This validates the parsed integers, ensuring they are valid coordinates.
-
-### Exception Handling
-
-```vb
-Catch ex As Exception
-```
-This block catches any exceptions that might occur during file reading.
-
-```vb
-Select Case True
-    Case TypeOf ex Is IOException
-        MessageForm.Show("This file is in use by another app. Close the file and try again.", "File In Use - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    ' Other cases for different exceptions...
-End Select
-```
-This switch statement handles specific exceptions, providing user-friendly error messages based on the type of error encountered.
-
-### Updating the Title Bar
-
-```vb
-Text = $"{Path.GetFileName(openFileDialog.FileName)} - Shape Editor - Code with Joe"
-```
-This updates the title to reflect the name of the opened file.
-
-### Final Adjustments
-
-```vb
-CurrentTool = Tool.Move
-RefreshToolIcons()
-ScaleFactor = 8
-TrackBar1.Value = CInt(ScaleFactor * 100)
-UpdateUIScaleFactor()
-GeneratePointArrayText()
-Invalidate()
-```
-These lines reset the current tool to "Move", refresh the tool icons, set the scale factor, and generate the point array text for display. Finally, it calls `Invalidate()` to refresh the form.
-
-This section of code effectively handles saving and opening shapes in the Shape Editor application. It provides a user-friendly interface for managing shape data while ensuring robust error handling and feedback. Understanding this functionality is essential for any VB.NET developer looking to create interactive applications. Happy coding!
-
-[Index](#index)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Private Sub GeneratePointArrayText()
 
 
 ---
