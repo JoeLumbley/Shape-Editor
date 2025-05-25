@@ -196,6 +196,7 @@ Public Class Form1
 - **Public Class Form1**: This line declares the main form of the application, where all the controls and logic will be defined.
 
 ---
+[Index](#index)
 
 ## Enumerations
 
@@ -220,6 +221,7 @@ End Enum
 - **Enum DwmWindowAttribute**: This enumeration is used to define attributes for the window, specifically for enabling dark mode and the Mica effect in Windows.
 
 ---
+[Index](#index)
 
 ## DLL Imports
 
@@ -237,6 +239,7 @@ End Function
   - **SetWindowTheme**: Used to change the theme of the window.
 
 ---
+[Index](#index)
 
 ## Class Variables
 
