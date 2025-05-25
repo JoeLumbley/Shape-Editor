@@ -1114,18 +1114,31 @@ This project is licensed under the MIT License.
 
 
  [Imports and Class Declaration](#imports-and-class-declaration)
+ 
  [Enumerations](#enumerations)
+ 
  [DLL Imports](#dll-imports)
+ 
  [Class Variables](#class-variables)
+ 
  [Form Load Event](#form-load-event)
+ 
  [Paint Event](#paint-event)
+ 
  [Mouse Events](#mouse-events)
+ 
  [Key Events](#key-events)
+ 
  [Drawing Methods](#drawing-methods)
+ 
  [Shape Manipulation Methods](#shape-manipulation-methods)
+ 
  [File Operations](#file-operations)
+ 
  [Utility Methods](#utility-methods)
+ 
  [UI Theme Management](#ui-theme-management)
+ 
  [Layout Management](#layout-management)
    
 
