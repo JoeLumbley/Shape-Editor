@@ -179,21 +179,7 @@ To begin using the Shape Editor, launch the application and start creating shape
 
 # Code Walkthrough
 
-## Table of Contents
-1. [Imports and Class Declaration](#imports-and-class-declaration)
-2. [Enumerations](#enumerations)
-3. [DLL Imports](#dll-imports)
-4. [Class Variables](#class-variables)
-5. [Form Load Event](#form-load-event)
-6. [Paint Event](#paint-event)
-7. [Mouse Events](#mouse-events)
-8. [Key Events](#key-events)
-9. [Drawing Methods](#drawing-methods)
-10. [Shape Manipulation Methods](#shape-manipulation-methods)
-11. [File Operations](#file-operations)
-12. [Utility Methods](#utility-methods)
-13. [UI Theme Management](#ui-theme-management)
-14. [Layout Management](#layout-management)
+
 
 ---
 
@@ -1124,19 +1110,24 @@ This project is licensed under the MIT License.
    - Creating Shapes
 
  **[Code Walkthrough](#code-walkthrough)**
-   - Imports
-   - Class Definition
-   - Enum Definitions
-   - DWM Window Attributes
-   - Variables and Constants
-   - Color and Brush Definitions
-   - Form Load Event
-   - OnPaint Method
-   - Drawing Operations
-   - Mouse Events
-   - Key Events
-   - Resizing the Form
-   - Saving and Opening Shapes
+
+
+
+ [Imports and Class Declaration](#imports-and-class-declaration)
+ [Enumerations](#enumerations)
+ [DLL Imports](#dll-imports)
+ [Class Variables](#class-variables)
+ [Form Load Event](#form-load-event)
+ [Paint Event](#paint-event)
+ [Mouse Events](#mouse-events)
+ [Key Events](#key-events)
+ [Drawing Methods](#drawing-methods)
+ [Shape Manipulation Methods](#shape-manipulation-methods)
+ [File Operations](#file-operations)
+ [Utility Methods](#utility-methods)
+ [UI Theme Management](#ui-theme-management)
+ [Layout Management](#layout-management)
+   
 
  **[Save and Open Functionality](#save-and-open-functionality)**
  - Save Functionality
