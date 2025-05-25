@@ -903,29 +903,20 @@ Public Class Form1
         Dim gridPen As Pen = If(DarkMode, GridPenDark, GridPenLight)
 
         ' Draw vertical grid lines
-        'For i As Integer = -((ClientSize.Width * 8) \ stepSize) To (ClientSize.Width * 8) \ stepSize
         For i As Integer = -(((DrawingArea.Width \ 2) * ScaleFactor) \ stepSize) To ((DrawingArea.Width \ 2) * ScaleFactor) \ stepSize
 
             Dim x As Integer = i * stepSize
 
-            '                  (x, GridTop,x, GridBottom)
-            'e.Graphics.DrawLine(gridPen, x, -ClientSize.Height * 8, x, ClientSize.Height * 8)
-            'e.Graphics.DrawLine(gridPen, x, CInt((-ClientSize.Height * ScaleFactor) + 10), x, CInt(ClientSize.Height * ScaleFactor))
             e.Graphics.DrawLine(gridPen, x, -CInt((DrawingArea.Height \ 2) * ScaleFactor), x, CInt((DrawingArea.Height \ 2) * ScaleFactor))
-
 
         Next
 
-
         ' Draw horizontal grid lines
-        'For i As Integer = -((ClientSize.Height * 8) \ stepSize) To (ClientSize.Height * 8) \ stepSize
         For i As Integer = -(((DrawingArea.Height \ 2) * ScaleFactor) \ stepSize) To ((DrawingArea.Height \ 2) * ScaleFactor) \ stepSize
 
             Dim y As Integer = i * stepSize
 
-            'e.Graphics.DrawLine(gridPen, -ClientSize.Width * 8, y, ClientSize.Width * 8, y)
             e.Graphics.DrawLine(gridPen, -CInt((DrawingArea.Width \ 2) * ScaleFactor), y, CInt((DrawingArea.Width \ 2) * ScaleFactor), y)
-
 
         Next
 
@@ -936,21 +927,10 @@ Public Class Form1
         ' Draw two lines intersecting at the center of the drawing area to represent the coordinate axes.
 
         ' Draw the X-axis line.
-        'e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -ClientSize.Width * 8, 0, ClientSize.Width * 8, 0)
-        'e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), -CInt((DrawingArea.Width \ 2) * ScaleFactor), 0, CInt((DrawingArea.Width \ 2) * ScaleFactor), 0)
         e.Graphics.DrawLine(CoordinateSystemPen, -CInt((DrawingArea.Width \ 2) * ScaleFactor), 0, CInt((DrawingArea.Width \ 2) * ScaleFactor), 0)
 
-
-
-
-
-
         ' Draw the Y-axis line.
-        'e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -ClientSize.Height * 8, 0, ClientSize.Height * 8)
-        'e.Graphics.DrawLine(If(DarkMode, CoordinateSystemPenDarkMode, CoordinateSystemPenLightMode), 0, -CInt((DrawingArea.Height \ 2) * ScaleFactor), 0, CInt((DrawingArea.Height \ 2) * ScaleFactor))
-
         e.Graphics.DrawLine(CoordinateSystemPen, 0, -CInt((DrawingArea.Height \ 2) * ScaleFactor), 0, CInt((DrawingArea.Height \ 2) * ScaleFactor))
-
 
     End Sub
 
