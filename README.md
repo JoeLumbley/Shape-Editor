@@ -793,8 +793,6 @@ By understanding this code, you can appreciate how different parts work together
 
 ## Further Learning Resources
 - [VB.NET Documentation](https://docs.microsoft.com/en-us/dotnet/visual-basic/)
-- [Learn to Code: Visual Basic](https://www.codecademy.com/learn/learn-visual-basic)
-- [Windows Forms Programming in VB.NET](https://www.amazon.com/Windows-Forms-Programming-NET-Developers/dp/0321113570)
 
 ---
 
