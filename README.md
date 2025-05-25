@@ -195,8 +195,10 @@ Public Class Form1
 - **Imports System.Runtime.InteropServices**: This namespace is used for interoperation with unmanaged code, allowing the application to call functions from Windows DLLs.
 - **Public Class Form1**: This line declares the main form of the application, where all the controls and logic will be defined.
 
----
+
 [Index](#index)
+
+---
 
 ## Enumerations
 
@@ -220,8 +222,9 @@ End Enum
 ```
 - **Enum DwmWindowAttribute**: This enumeration is used to define attributes for the window, specifically for enabling dark mode and the Mica effect in Windows.
 
----
 [Index](#index)
+
+---
 
 ## DLL Imports
 
@@ -238,8 +241,9 @@ End Function
   - **DwmSetWindowAttribute**: Used to set attributes for the window, such as enabling dark mode.
   - **SetWindowTheme**: Used to change the theme of the window.
 
----
 [Index](#index)
+
+---
 
 ## Class Variables
 
@@ -265,6 +269,8 @@ Private ScaleFactor As Double = 1.0
 
 The rest of the variables are used for colors, brushes, and other visual aspects of the UI.
 
+[Index](#index)
+
 ---
 
 ## Form Load Event
@@ -275,6 +281,8 @@ Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 End Sub
 ```
 - **Form1_Load**: This event is triggered when the form is loaded. It calls the `InitializeApplication` method to set up the application.
+
+[Index](#index)
 
 ---
 
@@ -297,6 +305,8 @@ End Sub
   - Translates the graphics context to the center of the drawing area.
   - Clears the background with the specified color.
   - Calls various drawing methods to render the bounding rectangle, grid, coordinate axes, center mark, shape, and point handles.
+
+[Index](#index)
 
 ---
 
@@ -397,6 +407,8 @@ End Sub
 ```
 - **Form1_MouseUp**: This event is triggered when the mouse button is released. It resets the relevant flags and updates the point array text.
 
+[Index](#index)
+
 ---
 
 ## Key Events
@@ -435,6 +447,8 @@ Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
 End Sub
 ```
 - **Form1_KeyUp**: This event resets the control flags when the keys are released.
+
+[Index](#index)
 
 ---
 
@@ -506,6 +520,8 @@ End Sub
 ```
 - **DrawBoundingRectangle**: This method draws a bounding rectangle around the shape if the mouse is inside it and the current tool is set to move.
 
+[Index](#index)
+
 ---
 
 ## Shape Manipulation Methods
@@ -560,6 +576,8 @@ Private Sub InsertNewPoint(index As Integer)
 End Sub
 ```
 - **InsertNewPoint**: This method inserts a new point at the specified index and adds its mirrored counterpart.
+
+[Index](#index)
 
 ---
 
@@ -622,6 +640,8 @@ Private Sub OpenShapeFile()
 End Sub
 ```
 - **OpenShapeFile**: This method opens a file dialog to select a CSV file and reads the points from the file, adding them to the shape.
+
+[Index](#index)
 
 ---
 
@@ -709,6 +729,8 @@ End Function
 ```
 - **GetHandleRectangle**: This function returns a rectangle that defines the area of a control handle around a point, making it easier to detect mouse interactions.
 
+[Index](#index)
+
 ---
 
 ## UI Theme Management
@@ -743,6 +765,8 @@ End Sub
 ```
 - **ApplyUITheme**: This method applies the current UI theme (dark or light) to the application. It sets various attributes for controls and updates colors based on the selected theme.
 
+[Index](#index)
+
 ---
 
 ## Layout Management
@@ -769,6 +793,8 @@ Private Sub CenterDrawingArea()
 End Sub
 ```
 - **CenterDrawingArea**: This method centers the drawing area within the form, calculating its position based on the sizes of other controls.
+
+[Index](#index)
 
 ---
 
