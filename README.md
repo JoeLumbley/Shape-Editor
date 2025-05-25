@@ -179,8 +179,6 @@ To begin using the Shape Editor, launch the application and start creating shape
 
 # Code Walkthrough
 
-This document provides a detailed walkthrough of a Visual Basic .NET (VB.NET) code for a shape editor application. This application allows users to draw shapes, add or remove points, and manipulate these shapes in a graphical interface. We'll go through the code line by line to understand its functionality and structure.
-
 ## Table of Contents
 1. [Imports and Class Declaration](#imports-and-class-declaration)
 2. [Enumerations](#enumerations)
