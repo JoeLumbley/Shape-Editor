@@ -1171,9 +1171,7 @@ This project is licensed under the MIT License.
  [Layout Management](#layout-management)
    
 
- **[Save and Open Functionality](#save-and-open-functionality)**
- - Save Functionality
- - Open Functionality
+
 
  **[Creating Transparent Icons in GIMP](#creating-transparent-icons-in-gimp)**
  - Step-by-Step Guide
