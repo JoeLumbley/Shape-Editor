@@ -533,9 +533,7 @@ End Sub
    - **Purpose**: Allows users to insert a new point at the position of the currently selected point.
    - **Implementation**: Calls `InsertNewPoint()` to add a new point and refreshes the drawing area.
 
-### Conclusion
-
-This expanded section provides a comprehensive overview of the key handling functionality within the Shape Editor application. Each key combination enhances user interaction by providing intuitive shortcuts for common tasks, thereby improving the overall usability of the application.
+Each key combination enhances user interaction by providing intuitive shortcuts for common tasks, thereby improving the overall usability of the application.
 
 ### Key Up
 
