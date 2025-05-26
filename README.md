@@ -413,11 +413,7 @@ End Sub
 
 ## Key Events
 
-### Key Down
-
-Here's an expanded version of the **Key Down** section for the Shape Editor application, detailing the functionality and purpose of each key combination handled in the `Form1_KeyDown` method.
-
-## Key Down Event Handling
+### Key Down Event Handling
 
 The `Form1_KeyDown` method manages various keyboard inputs to enhance user interaction within the Shape Editor. Below is a breakdown of the functionality provided by each key combination:
 
