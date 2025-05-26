@@ -415,27 +415,131 @@ End Sub
 
 ### Key Down
 
+Here's an expanded version of the **Key Down** section for the Shape Editor application, detailing the functionality and purpose of each key combination handled in the `Form1_KeyDown` method.
+
+## Key Down Event Handling
+
+The `Form1_KeyDown` method manages various keyboard inputs to enhance user interaction within the Shape Editor. Below is a breakdown of the functionality provided by each key combination:
+
+### Code Implementation
+
 ```vb
 Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+
+    ' Check if Control + C is pressed
     If e.Control AndAlso e.KeyCode = Keys.C Then
+        ' Check if TextBox1.Text is not empty
         If Not String.IsNullOrEmpty(TextBox1.Text) Then
+            ' Copy the text from TextBox1 to the clipboard
             Clipboard.SetText(TextBox1.Text)
         End If
         e.Handled = True
+
+    ' Check if Control + D is pressed for Dark Mode toggle
     ElseIf e.Control AndAlso e.KeyCode = Keys.D Then
         If Not ControlDDown Then
             ControlDDown = True
+            ' Toggle Dark Mode
             DarkMode = Not DarkMode
             DarkModeToolStripMenuItem.Text = If(DarkMode, "Light Mode", "Dark Mode")
             ApplyUITheme()
+            UpdateTitleBarTheme()
             Refresh()
         End If
         e.Handled = True
+
+    ' Check if Control + F is pressed for toggling shape fill
+    ElseIf e.Control AndAlso e.KeyCode = Keys.F Then
+        If Not ControlFDown Then
+            ControlFDown = True
+            ToggleShapeFill()
+            Invalidate(DrawingArea)
+            InvalidateToolButtons()
+        End If
+        e.Handled = True
+
+    ' Check if Control + H is pressed for toggling handles visibility
+    ElseIf e.Control AndAlso e.KeyCode = Keys.H Then
+        If Not ControlHDown Then
+            ControlHDown = True
+            ToggleHandlesVisibility()
+            Invalidate(DrawingArea)
+            InvalidateToolButtons()
+        End If
+        e.Handled = True
+
+    ' Check if Delete key is pressed to remove selected point
+    ElseIf e.KeyCode = Keys.Delete AndAlso SelectedPointIndex <> -1 Then
+        RemovePoint(SelectedPointIndex)
+        Invalidate(DrawingArea)
+        InvalidateToolButtons()
+        e.Handled = True
+
+    ' Check if OemMinus key is pressed to remove selected point
+    ElseIf e.KeyCode = Keys.OemMinus AndAlso SelectedPointIndex <> -1 Then
+        RemovePoint(SelectedPointIndex)
+        Invalidate(DrawingArea)
+        InvalidateToolButtons()
+        e.Handled = True
+
+    ' Check if Subtract key is pressed to remove selected point
+    ElseIf e.KeyCode = Keys.Subtract AndAlso SelectedPointIndex <> -1 Then
+        RemovePoint(SelectedPointIndex)
+        Invalidate(DrawingArea)
+        InvalidateToolButtons()
+        e.Handled = True
+
+    ' Check if N key is pressed to insert a new point at the selected index
+    ElseIf e.KeyCode = Keys.N AndAlso SelectedPointIndex <> -1 Then
+        InsertNewPoint(SelectedPointIndex)
+        Invalidate(DrawingArea)
+        e.Handled = True
+
+    ' Check if Oemplus key is pressed to insert a new point
+    ElseIf e.KeyCode = Keys.Oemplus AndAlso SelectedPointIndex <> -1 Then
+        InsertNewPoint(SelectedPointIndex)
+        Invalidate(DrawingArea)
+        e.Handled = True
+
+    ' Check if Add key is pressed to insert a new point
+    ElseIf e.KeyCode = Keys.Add AndAlso SelectedPointIndex <> -1 Then
+        InsertNewPoint(SelectedPointIndex)
+        Invalidate(DrawingArea)
+        e.Handled = True
+
     End If
-    ' Additional key handling...
 End Sub
 ```
-- **Form1_KeyDown**: This event is triggered when a key is pressed. It checks for specific key combinations (like Ctrl+C for copying text) and toggles dark mode with Ctrl+D.
+
+### Key Functionality Breakdown
+
+1. **Copy to Clipboard (Ctrl + C)**
+   - **Purpose**: Allows users to copy the current text from `TextBox1` to the clipboard for easy pasting elsewhere.
+   - **Implementation**: Checks if the Control key is pressed along with the 'C' key. If `TextBox1` is not empty, it copies its content to the clipboard.
+
+2. **Toggle Dark Mode (Ctrl + D)**
+   - **Purpose**: Enables users to switch between dark and light themes for better visibility based on their preference.
+   - **Implementation**: Toggles the `DarkMode` variable and updates the menu item text accordingly. Calls `ApplyUITheme()` to refresh the UI with the new theme.
+
+3. **Toggle Shape Fill (Ctrl + F)**
+   - **Purpose**: Allows users to toggle the fill of shapes being drawn.
+   - **Implementation**: Calls `ToggleShapeFill()` to change the fill state and refreshes the drawing area.
+
+4. **Toggle Handles Visibility (Ctrl + H)**
+   - **Purpose**: Lets users show or hide the control handles of shapes for a cleaner workspace.
+   - **Implementation**: Calls `ToggleHandlesVisibility()` to update the visibility state and refreshes the drawing area.
+
+5. **Remove Selected Point (Delete, OemMinus, Subtract)**
+   - **Purpose**: Enables users to delete the currently selected point from the shape.
+   - **Implementation**: Checks if a point is selected and removes it using `RemovePoint()`, followed by refreshing the drawing area.
+
+6. **Insert New Point (N, Oemplus, Add)**
+   - **Purpose**: Allows users to insert a new point at the position of the currently selected point.
+   - **Implementation**: Calls `InsertNewPoint()` to add a new point and refreshes the drawing area.
+
+### Conclusion
+
+This expanded section provides a comprehensive overview of the key handling functionality within the Shape Editor application. Each key combination enhances user interaction by providing intuitive shortcuts for common tasks, thereby improving the overall usability of the application.
 
 ### Key Up
 
