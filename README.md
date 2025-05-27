@@ -535,16 +535,34 @@ End Sub
 
 Each key combination enhances user interaction by providing intuitive shortcuts for common tasks, thereby improving the overall usability of the application.
 
+
+
 ### Key Up
+[](#key-up)
+
+The `Form1_KeyUp` event is triggered when a key is released. This event is used to reset certain control flags that were set during key down events. Below is the implementation of the `Form1_KeyUp` method:
 
 ```vb
 Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
     If e.Control AndAlso e.KeyCode = Keys.D Then
         ControlDDown = False
+    ElseIf e.Control AndAlso e.KeyCode = Keys.F Then
+        ControlFDown = False
+    ElseIf e.Control AndAlso e.KeyCode = Keys.H Then
+        ControlHDown = False
     End If
 End Sub
 ```
-- **Form1_KeyUp**: This event resets the control flags when the keys are released.
+
+### Explanation of the Code
+- **Purpose**: This method checks if specific control key combinations are released and updates the corresponding flags accordingly.
+- **Control Flags**:
+  - `ControlDDown`: This flag is set to `False` when the user releases the Control + D key combination, which is typically used for toggling dark mode.
+  - `ControlFDown`: This flag is set to `False` when the user releases the Control + F key combination, which is used for toggling the shape fill.
+  - `ControlHDown`: This flag is set to `False` when the user releases the Control + H key combination, which is used for toggling the visibility of shape handles.
+
+### Usage
+This event is essential for managing the state of keyboard shortcuts in the application, ensuring that the application responds correctly to user input and maintains an intuitive user experience.
 
 [Index](#index)
 
