@@ -1970,36 +1970,16 @@ Public Class Form1
         CenterDrawingArea()
 
         AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
-
         AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
         MovePointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height - MovePointToolButton.Height
-
         MovePointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
 
-        Dim ScaleFactorDiv16 = ScaleFactor / 16
-
-        'HScrollBar1.Minimum = -ClientSize.Width * ScaleFactorDiv16
         HScrollBar1.Minimum = -CInt(((DrawingArea.Width \ 2) * ScaleFactor) - (DrawingArea.Width \ 2))
-
-
-
-        'HScrollBar1.Maximum = ClientSize.Width * ScaleFactorDiv16
         HScrollBar1.Maximum = CInt(((DrawingArea.Width \ 2) * ScaleFactor) - (DrawingArea.Width \ 2))
 
-
-
-        'VScrollBar1.Minimum = -ClientSize.Height * ScaleFactorDiv16
-
-        'VScrollBar1.Maximum = ClientSize.Height * ScaleFactorDiv16
-
-        'VScrollBar1.Minimum = CInt(((-DrawingArea.Height \ 2) - DrawingArea.Height) * ScaleFactor)
         VScrollBar1.Minimum = -CInt(((DrawingArea.Height \ 2) * ScaleFactor) - (DrawingArea.Height \ 2))
-
-
-        'VScrollBar1.Maximum = CInt((DrawingArea.Height \ 2) * ScaleFactor)
         VScrollBar1.Maximum = CInt(((DrawingArea.Height \ 2) * ScaleFactor) - (DrawingArea.Height \ 2))
-
 
         Label1.Text = $"Scale: {ScaleFactor:N2}"
 
