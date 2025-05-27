@@ -1897,24 +1897,20 @@ Public Class Form1
         Panel1.Width = halfClientWidth + 1
         Panel1.Height = menuStripHeight
 
-        ' Update TextBox1
         TextBox1.Top = ClientRectangle.Top + menuStripHeight * 2
         TextBox1.Left = halfClientWidth
         TextBox1.Width = halfClientWidth + 1
         TextBox1.Height = clientHeight - menuStripHeight * 2
 
-        ' Update TrackBar1
         TrackBar1.Top = ClientRectangle.Bottom - trackBarHeight
         TrackBar1.Left = ClientRectangle.Left
         TrackBar1.Width = halfClientWidth
 
-        ' Update Label1
         Label1.Top = TrackBar1.Bottom - Label1.Height - 5
         Label1.Left = ClientRectangle.Left + 5
         Label1.Width = 200
         Label1.Height = 20
 
-        ' Update HScrollBar1
         HScrollBar1.Top = ClientRectangle.Bottom - trackBarHeight - hScrollBarHeight
         HScrollBar1.Left = ClientRectangle.Left
         HScrollBar1.Width = halfClientWidth - vScrollBarWidth
@@ -1922,7 +1918,6 @@ Public Class Form1
         HScrollBar1.Maximum = clientWidth * 2
         HScrollBar1.Value = 0
 
-        ' Update VScrollBar1
         VScrollBar1.Top = ClientRectangle.Top + menuStripHeight
         VScrollBar1.Left = TextBox1.Left - vScrollBarWidth
         VScrollBar1.Height = clientHeight - trackBarHeight - hScrollBarHeight - menuStripHeight
