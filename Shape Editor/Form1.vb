@@ -1658,33 +1658,8 @@ Public Class Form1
             AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutDark)
             ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitDark)
 
-            If CurrentTool = Tool.Add Then
+            ApplyDarkThemeToButtons()
 
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
-
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
-
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
-
-            ElseIf CurrentTool = Tool.Move Then
-
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
-
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
-
-            ElseIf CurrentTool = Tool.Subtract Then
-
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
-
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
-
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedDark)
-
-            End If
-
-            CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonDarkMode)
 
             If FillShape Then
 
@@ -1775,33 +1750,8 @@ Public Class Form1
             AboutToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
             ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitLight)
 
-            If CurrentTool = Tool.Add Then
+            ApplyLightThemeToButtons()
 
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
-
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
-
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
-
-            ElseIf CurrentTool = Tool.Move Then
-
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
-
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
-
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
-
-            ElseIf CurrentTool = Tool.Subtract Then
-
-                AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
-
-                MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
-
-                SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedLight)
-
-            End If
-
-            CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonLightMode)
 
             If FillShape Then
 
@@ -1868,6 +1818,72 @@ Public Class Form1
 
         LanguageLabel.ForeColor = If(DarkMode, Color.White, Color.Black)
         CopyLabel.LinkColor = If(DarkMode, Color.White, Color.Black)
+
+    End Sub
+
+    Private Sub ApplyLightThemeToButtons()
+        ' This method applies the light theme to the tool buttons based on the current tool selection.
+
+        If CurrentTool = Tool.Add Then
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedLightMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
+
+        ElseIf CurrentTool = Tool.Move Then
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonSelectedLightMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolLight)
+
+        ElseIf CurrentTool = Tool.Subtract Then
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonLightMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonLightMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedLight)
+
+        End If
+
+        CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonLightMode)
+
+    End Sub
+
+    Private Sub ApplyDarkThemeToButtons()
+        ' This method applies the dark theme to the tool buttons based on the current tool selection.
+
+        If CurrentTool = Tool.Add Then
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
+
+        ElseIf CurrentTool = Tool.Move Then
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkModeSelected)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolDark)
+
+        ElseIf CurrentTool = Tool.Subtract Then
+
+            AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
+
+            MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
+
+            SubtractPointToolButton.Image = ResourceToImage(My.Resources.Resource1.SubtractPointToolSelectedDark)
+
+        End If
+
+        CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonDarkMode)
 
     End Sub
 
