@@ -1654,10 +1654,7 @@ Public Class Form1
 
             ApplyDarkThemeToMenuItems()
 
-
             ApplyDarkThemeToButtons()
-
-
 
             CopyLabel.LinkColor = LinkColorDark
             CopyLabel.ActiveLinkColor = ActiveLinkColorDark
@@ -1719,7 +1716,6 @@ Public Class Form1
             ApplyLightThemeToMenuItems()
 
             ApplyLightThemeToButtons()
-
 
             CopyLabel.LinkColor = LinkColorDark
             CopyLabel.ActiveLinkColor = ActiveLinkColorDark
