@@ -22,29 +22,28 @@ Partial Class ApplyingThemeForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Label1 = New Label()
+        ProgressBar1 = New ProgressBar()
         SuspendLayout()
         ' 
-        ' Label1
+        ' ProgressBar1
         ' 
-        Label1.AutoSize = True
-        Label1.Location = New Point(81, 9)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(164, 25)
-        Label1.TabIndex = 0
-        Label1.Text = "Applying UI Theme"
+        ProgressBar1.Location = New Point(12, 13)
+        ProgressBar1.Name = "ProgressBar1"
+        ProgressBar1.Size = New Size(360, 34)
+        ProgressBar1.TabIndex = 0
+        ProgressBar1.Value = 100
         ' 
         ' ApplyingThemeForm
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(326, 47)
-        Controls.Add(Label1)
+        ClientSize = New Size(384, 59)
+        Controls.Add(ProgressBar1)
+        FormBorderStyle = FormBorderStyle.FixedDialog
         Name = "ApplyingThemeForm"
-        Text = "ApplyingThemeForm"
+        Text = "Applying Theme"
         ResumeLayout(False)
-        PerformLayout()
     End Sub
 
-    Friend WithEvents Label1 As Label
+    Friend WithEvents ProgressBar1 As ProgressBar
 End Class

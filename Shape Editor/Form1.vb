@@ -1644,6 +1644,11 @@ Public Class Form1
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
+
+            SetWindowTheme(TrackBar1.Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+
             ' Set the menu colors for dark mode
             CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_DarkMode
             CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelectedColor_DarkMode
@@ -1730,7 +1735,7 @@ Public Class Form1
 
         BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        TrackBar1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
+        'TrackBar1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
         TextBox1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 

@@ -7,9 +7,9 @@ Public Class ApplyingThemeForm
 
         CenterToParent()
 
-        Me.FormBorderStyle = FormBorderStyle.FixedDialog
+        'Me.FormBorderStyle = FormBorderStyle.FixedDialog
 
-        Text = "Shape Editor"
+        'Text = "Applying Theme"
 
         If Form1.DarkMode Then
 
