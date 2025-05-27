@@ -1652,36 +1652,12 @@ Public Class Form1
             CustomMenuRenderer.TextColor = MenuItemTextColor_DarkMode
             CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColor_DarkMode
 
-            SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsDark)
-            OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileDark)
-            NewToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.NewFileDark)
-            AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutDark)
-            ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitDark)
+            ApplyDarkThemeToMenuItems()
+
 
             ApplyDarkThemeToButtons()
 
 
-            If FillShape Then
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
-
-            Else
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
-
-            End If
-
-            If HideControlHandles Then
-
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffDark)
-
-            Else
-
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnDark)
-
-            End If
-
-            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
 
             CopyLabel.LinkColor = LinkColorDark
             CopyLabel.ActiveLinkColor = ActiveLinkColorDark
@@ -1740,40 +1716,10 @@ Public Class Form1
             CustomMenuRenderer.TextColor = MenuItemTextColor_LightMode
             CustomMenuRenderer.SelectedBorderColor = SelectedBorderColor_LightMode
 
-            SaveToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsLight)
-            OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileLight)
-            OpenToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            NewToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.NewFileLight)
-            NewToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutLight)
-            AboutToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
-            ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitLight)
+            ApplyLightThemeToMenuItems()
 
             ApplyLightThemeToButtons()
 
-
-            If FillShape Then
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
-
-            Else
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
-
-            End If
-
-            If HideControlHandles Then
-
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
-
-            Else
-
-                HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
-
-            End If
-
-            DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
 
             CopyLabel.LinkColor = LinkColorDark
             CopyLabel.ActiveLinkColor = ActiveLinkColorDark
@@ -1818,6 +1764,90 @@ Public Class Form1
 
         LanguageLabel.ForeColor = If(DarkMode, Color.White, Color.Black)
         CopyLabel.LinkColor = If(DarkMode, Color.White, Color.Black)
+
+    End Sub
+
+    Private Sub ApplyLightThemeToMenuItems()
+        ' This method applies the light theme to the menu items.
+
+        SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsLight)
+        SaveToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+
+        OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileLight)
+        OpenToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+
+        NewToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.NewFileLight)
+        NewToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+
+        AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutLight)
+        AboutToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+
+        ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitLight)
+        ExitToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+
+        If FillShape Then
+
+            FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
+
+        Else
+
+            FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
+
+        End If
+
+        If HideControlHandles Then
+
+            HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffLight)
+
+        Else
+
+            HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnLight)
+
+        End If
+
+        DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOn)
+
+    End Sub
+
+    Private Sub ApplyDarkThemeToMenuItems()
+        ' This method applies the dark theme to the menu items.
+
+        SaveToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.SaveFileAsDark)
+        SaveToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+
+        OpenToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.OpenFileDark)
+        OpenToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+
+        NewToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.NewFileDark)
+        NewToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+
+        AboutToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.AboutDark)
+        AboutToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+
+        ExitToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.ExitDark)
+        ExitToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None
+
+        If FillShape Then
+
+            FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
+
+        Else
+
+            FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
+
+        End If
+
+        If HideControlHandles Then
+
+            HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOffDark)
+
+        Else
+
+            HideHandlesToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.HideHandlesOnDark)
+
+        End If
+
+        DarkModeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.DarkModeOff)
 
     End Sub
 
