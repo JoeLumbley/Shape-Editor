@@ -124,6 +124,7 @@ Public Class Form1
 
     Private MoveStartLocation As Point
     Private MovingShape As Boolean = False
+    Private MovingDrawingArea As Boolean = False
 
     Private IsInsideBoundingRectangle As Boolean = False
 
@@ -213,9 +214,25 @@ Public Class Form1
 
                     AddPoint(AdjustedMouseLocation)
 
+                    TextBox1.Text = GeneratePointArrayText()
+
+                    CopyLabel.Enabled = True
+
+                    Invalidate(DrawingArea)
+
+                    InvalidateToolButtons()
+
                 Else
 
                     InsertNewPoint(SelectedPointIndex)
+
+                    TextBox1.Text = GeneratePointArrayText()
+
+                    CopyLabel.Enabled = True
+
+                    Invalidate(DrawingArea)
+
+                    InvalidateToolButtons()
 
                 End If
 
@@ -229,6 +246,14 @@ Public Class Form1
                     ' Move a specific point
                     MovePoint(AdjustedMouseLocation)
 
+                    TextBox1.Text = GeneratePointArrayText()
+
+                    CopyLabel.Enabled = True
+
+                    Invalidate(DrawingArea)
+
+                    InvalidateToolButtons()
+
                     ' If the inside of the shape was selected, start moving it
                 ElseIf BoundingRect.Contains(AdjustedMouseLocation) Then
 
@@ -236,6 +261,16 @@ Public Class Form1
                     MoveStartLocation = AdjustedMouseLocation
 
                     MovingShape = True
+
+                    ' If no point was selected and the mouse is outside the bounding rectangle 
+                ElseIf SelectedPointIndex = -1 AndAlso Not BoundingRect.Contains(AdjustedMouseLocation) Then
+
+                    ' the drawing area was clicked outside the shape so we move the drawing area
+
+                    ' store initial position for moving the drawing area
+                    MoveStartLocation = AdjustedMouseLocation
+
+                    MovingDrawingArea = True
 
                 End If
 
@@ -246,15 +281,23 @@ Public Class Form1
 
                     RemovePoint(SelectedPointIndex)
 
+                    TextBox1.Text = GeneratePointArrayText()
+
+                    CopyLabel.Enabled = True
+
+                    Invalidate(DrawingArea)
+
+                    InvalidateToolButtons()
+
                 End If
 
             End If
 
-            GeneratePointArrayText()
+            'TextBox1.Text = GeneratePointArrayText()
 
-            Invalidate(DrawingArea)
+            'Invalidate(DrawingArea)
 
-            InvalidateToolButtons()
+            'InvalidateToolButtons()
 
             LeftMouseButtonDown = True
 
@@ -281,11 +324,13 @@ Public Class Form1
             ' Adjust the selected point's location based on the mouse movement
             MovePoint(AdjustedMouseLocation)
 
+            TextBox1.Text = GeneratePointArrayText()
+
+            CopyLabel.Enabled = True
+
             Invalidate(DrawingArea)
 
             InvalidateToolButtons()
-
-            GeneratePointArrayText()
 
         End If
 
@@ -318,11 +363,13 @@ Public Class Form1
 
             MoveStartLocation = AdjustedMouseLocation ' Update tracking position
 
+            TextBox1.Text = GeneratePointArrayText()
+
+            CopyLabel.Enabled = True
+
             Invalidate(DrawingArea)
 
             InvalidateToolButtons()
-
-            GeneratePointArrayText()
 
         End If
 
@@ -361,7 +408,7 @@ Public Class Form1
 
             SelectedPointIndex = -1
 
-            GeneratePointArrayText()
+            'TextBox1.Text = GeneratePointArrayText()
 
             MovingShape = False
 
@@ -1168,7 +1215,9 @@ Public Class Form1
 
                 UpdateUIScaleFactor()
 
-                GeneratePointArrayText()
+                TextBox1.Text = GeneratePointArrayText()
+
+                CopyLabel.Enabled = True
 
                 Invalidate(DrawingArea)
 
@@ -1218,9 +1267,9 @@ Public Class Form1
 
         SelectedPointIndex = -1
 
-        GeneratePointArrayText()
+        'TextBox1.Text = GeneratePointArrayText()
 
-        Invalidate(DrawingArea)
+        'Invalidate(DrawingArea)
 
     End Sub
 
@@ -1236,9 +1285,9 @@ Public Class Form1
 
         SelectedPointIndex += 2
 
-        GeneratePointArrayText()
+        'TextBox1.Text = GeneratePointArrayText()
 
-        Invalidate(DrawingArea)
+        'Invalidate(DrawingArea)
 
     End Sub
 
@@ -1264,7 +1313,7 @@ Public Class Form1
 
     End Function
 
-    Private Sub GeneratePointArrayText()
+    Private Function GeneratePointArrayText()
 
         ' Create a new StringBuilder to construct the output text.
         Dim sb As New System.Text.StringBuilder()
@@ -1299,17 +1348,20 @@ Public Class Form1
         ' Close the array definition.
         sb.AppendLine("}")
 
-        ' Set the constructed string as the content of TextBox1.
-        TextBox1.Text = sb.ToString()
+        'Return the constructed string.
+        Return sb.ToString()
 
-        ' Check if TextBox1.Text is not null or empty
-        If Not String.IsNullOrEmpty(TextBox1.Text) Then
+        '' Set the constructed string as the content of TextBox1.
+        'TextBox1.Text = sb.ToString()
 
-            CopyLabel.Enabled = True
+        '' Check if TextBox1.Text is not null or empty
+        'If Not String.IsNullOrEmpty(TextBox1.Text) Then
 
-        End If
+        '    CopyLabel.Enabled = True
 
-    End Sub
+        'End If
+
+    End Function
 
     Private Function GetOrderedPoints() As List(Of Point)
 
