@@ -1562,7 +1562,6 @@ Public Class Form1
         If CurrentTool = Tool.Move Then
 
             If DarkMode Then
-                ' Dark mode
 
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
 
@@ -1588,7 +1587,7 @@ Public Class Form1
         If CurrentTool = Tool.Add Then
 
             If DarkMode Then
-                ' Dark mode
+
                 ' Selected
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonSelectedDarkMode)
 
@@ -1612,7 +1611,7 @@ Public Class Form1
         If CurrentTool = Tool.Subtract Then
 
             If DarkMode Then
-                ' Dark mode
+
                 AddPointToolButton.Image = ResourceToImage(My.Resources.Resource1.AddPointToolButtonDarkMode)
 
                 MovePointToolButton.Image = ResourceToImage(My.Resources.Resource1.MovePointToolButtonDarkMode)
@@ -1641,9 +1640,9 @@ Public Class Form1
             DwmSetWindowAttribute(Handle, 20, 1, Marshal.SizeOf(GetType(Boolean)))
 
             ' Set the theme to dark mode
-            SetWindowTheme(Me.Handle, "DarkMode_Explorer", Nothing)
-            DwmSetWindowAttribute(Me.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
-            DwmSetWindowAttribute(Me.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+            SetWindowTheme(Handle, "DarkMode_Explorer", Nothing)
+            DwmSetWindowAttribute(Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            DwmSetWindowAttribute(Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
             SetWindowTheme(HScrollBar1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(HScrollBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
