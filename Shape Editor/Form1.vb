@@ -1675,7 +1675,8 @@ Public Class Form1
             SetWindowTheme(TextBox1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
-
+            TextBox1.BackColor = ControlColorDark
+            TextBox1.ForeColor = Color.FromArgb(255, 230, 230, 230)
 
             SetWindowTheme(TrackBar1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
@@ -1701,6 +1702,7 @@ Public Class Form1
             CoordinateSystemPen = CoordinateSystemPenDark
 
         Else
+            ' Light Mode
 
             'set title color - light mode
             DwmSetWindowAttribute(Handle, 20, 0, Marshal.SizeOf(GetType(Boolean)))
@@ -1741,6 +1743,9 @@ Public Class Form1
             SetWindowTheme(TextBox1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+            TextBox1.BackColor = ControlColorLight
+            TextBox1.ForeColor = Color.FromArgb(255, 32, 32, 32)
+
 
             ' Set the menu colors for light mode
             CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_LightMode
@@ -1754,8 +1759,8 @@ Public Class Form1
 
             ApplyLightThemeToButtons()
 
-            CopyLabel.LinkColor = LinkColorDark
-            CopyLabel.ActiveLinkColor = ActiveLinkColorDark
+            CopyLabel.LinkColor = LinkColorLight
+            CopyLabel.ActiveLinkColor = ActiveLinkColorLight
 
             BackgroundColor = BackgroundColorLight
 
@@ -1769,7 +1774,7 @@ Public Class Form1
 
         'TrackBar1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        TextBox1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
+        'TextBox1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
         ShapeFillBrush = If(DarkMode, ShapeFillBrushDarkMode, ShapeFillBrushLightMode)
 
@@ -1783,7 +1788,7 @@ Public Class Form1
 
         Label1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        TextBox1.ForeColor = If(DarkMode, Color.FromArgb(255, 230, 230, 230), Color.FromArgb(255, 32, 32, 32))
+        'TextBox1.ForeColor = If(DarkMode, Color.FromArgb(255, 230, 230, 230), Color.FromArgb(255, 32, 32, 32))
 
         Label1.ForeColor = If(DarkMode, Color.White, Color.Black)
 
