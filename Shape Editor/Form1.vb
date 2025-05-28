@@ -264,8 +264,7 @@ Public Class Form1
 
                     ' If no point was selected and the mouse is outside the bounding rectangle 
                 ElseIf SelectedPointIndex = -1 AndAlso Not BoundingRect.Contains(AdjustedMouseLocation) Then
-
-                    ' the drawing area was clicked outside the shape so we move the drawing area
+                    ' then we are moving the drawing area
 
                     ' store initial position for moving the drawing area
                     MoveStartLocation = AdjustedMouseLocation
@@ -1267,10 +1266,6 @@ Public Class Form1
 
         SelectedPointIndex = -1
 
-        'TextBox1.Text = GeneratePointArrayText()
-
-        'Invalidate(DrawingArea)
-
     End Sub
 
     Private Sub InsertNewPoint(index As Integer)
@@ -1284,10 +1279,6 @@ Public Class Form1
         Points.Insert(index + 3, GetMirroredPoint(newPoint))
 
         SelectedPointIndex += 2
-
-        'TextBox1.Text = GeneratePointArrayText()
-
-        'Invalidate(DrawingArea)
 
     End Sub
 
@@ -1350,16 +1341,6 @@ Public Class Form1
 
         'Return the constructed string.
         Return sb.ToString()
-
-        '' Set the constructed string as the content of TextBox1.
-        'TextBox1.Text = sb.ToString()
-
-        '' Check if TextBox1.Text is not null or empty
-        'If Not String.IsNullOrEmpty(TextBox1.Text) Then
-
-        '    CopyLabel.Enabled = True
-
-        'End If
 
     End Function
 
