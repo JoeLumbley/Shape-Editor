@@ -857,7 +857,7 @@ Public Class Form1
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
 
-        Dim result As DialogResult = MessageForm.Show("Are you sure you want to exit?", "Exit - Shape Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        Dim result As DialogResult = MessageForm.Show("Close without saving shape?", "Exit - Shape Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
         ' Cancel closing if user selects "No" or X's out of the form
         If result = DialogResult.No OrElse result = DialogResult.Cancel Then
