@@ -65,7 +65,7 @@ Public Class Form1
     Private HoverBrush As New SolidBrush(Color.FromArgb(255, Color.Gray))
 
     Private GridColorDark As Color = Color.FromArgb(255, 50, 50, 50)
-    Private GridColorLight As Color = Color.FromArgb(255, 240, 240, 240)
+    Private GridColorLight As Color = Color.FromArgb(255, 230, 230, 230)
 
     Public ControlColorDark As Color = Color.FromArgb(255, 23, 23, 23)
     Public ControlColorLight As Color = Color.FromArgb(255, 240, 240, 240)
@@ -1662,10 +1662,6 @@ Public Class Form1
             DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
-            'SetWindowTheme(GroupBox1.Handle, "DarkMode_Explorer", Nothing)
-            'DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
-            'DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
-
             SetWindowTheme(TextBox1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
@@ -1730,16 +1726,11 @@ Public Class Form1
             DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
-            'SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
-            'DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-            'DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
-
             SetWindowTheme(TextBox1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
             TextBox1.BackColor = ControlColorLight
             TextBox1.ForeColor = Color.FromArgb(255, 32, 32, 32)
-
 
             ' Set the menu colors for light mode
             CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_LightMode
@@ -1781,8 +1772,6 @@ Public Class Form1
         Label1.ForeColor = If(DarkMode, Color.White, Color.Black)
 
         CenterDrawingButton.ForeColor = If(DarkMode, Color.White, Color.Black)
-
-        'GroupBox1.BackColor = If(DarkMode, Color.FromArgb(255, 23, 23, 23), Color.White)
 
         Panel1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
         LanguageLabel.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
@@ -2010,11 +1999,6 @@ Public Class Form1
 
         SubtractPointToolButton.Width = CenterDrawingButton.Width
         SubtractPointToolButton.Height = CenterDrawingButton.Height
-
-        'GroupBox1.Top = HScrollBar1.Top
-        'GroupBox1.Left = VScrollBar1.Left - 2
-        'GroupBox1.Width = vScrollBarWidth + 10
-        'GroupBox1.Height = hScrollBarHeight + 10
 
         AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
         AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
