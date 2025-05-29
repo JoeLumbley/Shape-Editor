@@ -128,7 +128,7 @@ Public Class Form1
 
     Private IsInsideBoundingRectangle As Boolean = False
 
-    Private BoundingColorLightMode As Color = Color.FromArgb(16, 30, 144, 255)
+    Private BoundingColorLightMode As Color = Color.FromArgb(32, 30, 144, 255)
     Private BoundingColorDarkMode As Color = Color.FromArgb(16, Color.DodgerBlue)
     Private BoundingBrushLightMode As New SolidBrush(BoundingColorLightMode)
     Private BoundingBrushDarkMode As New SolidBrush(BoundingColorDarkMode)
@@ -323,13 +323,13 @@ Public Class Form1
             ' Adjust the selected point's location based on the mouse movement
             MovePoint(AdjustedMouseLocation)
 
-            TextBox1.Text = GeneratePointArrayText()
-
-            CopyLabel.Enabled = True
-
             Invalidate(DrawingArea)
 
             InvalidateToolButtons()
+
+            TextBox1.Text = GeneratePointArrayText()
+
+            If Not CopyLabel.Enabled Then CopyLabel.Enabled = True
 
         End If
 
@@ -362,13 +362,13 @@ Public Class Form1
 
             MoveStartLocation = AdjustedMouseLocation ' Update tracking position
 
-            TextBox1.Text = GeneratePointArrayText()
-
-            CopyLabel.Enabled = True
-
             Invalidate(DrawingArea)
 
             InvalidateToolButtons()
+
+            TextBox1.Text = GeneratePointArrayText()
+
+            If Not CopyLabel.Enabled Then CopyLabel.Enabled = True
 
         End If
 
