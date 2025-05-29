@@ -27,7 +27,6 @@ Partial Class Form1
         Label1 = New Label()
         HScrollBar1 = New HScrollBar()
         VScrollBar1 = New VScrollBar()
-        CenterDrawingButton = New Button()
         MenuStrip1 = New MenuStrip()
         FileToolStripMenuItem = New ToolStripMenuItem()
         NewToolStripMenuItem = New ToolStripMenuItem()
@@ -39,22 +38,21 @@ Partial Class Form1
         HideHandlesToolStripMenuItem = New ToolStripMenuItem()
         FillShapeToolStripMenuItem = New ToolStripMenuItem()
         DarkModeToolStripMenuItem = New ToolStripMenuItem()
-        GroupBox1 = New GroupBox()
         AddPointToolButton = New Button()
         MovePointToolButton = New Button()
         SubtractPointToolButton = New Button()
         Panel1 = New Panel()
         LanguageLabel = New Label()
         CopyLabel = New LinkLabel()
+        CenterDrawingButton = New Button()
         CType(TrackBar1, ComponentModel.ISupportInitialize).BeginInit()
         MenuStrip1.SuspendLayout()
-        GroupBox1.SuspendLayout()
         SuspendLayout()
         ' 
         ' TextBox1
         ' 
         TextBox1.BorderStyle = BorderStyle.FixedSingle
-        TextBox1.Location = New Point(478, 171)
+        TextBox1.Location = New Point(758, 74)
         TextBox1.Multiline = True
         TextBox1.Name = "TextBox1"
         TextBox1.PlaceholderText = "< Draw shape in the area to the left."
@@ -68,7 +66,7 @@ Partial Class Form1
         ' TrackBar1
         ' 
         TrackBar1.LargeChange = 100
-        TrackBar1.Location = New Point(13, 340)
+        TrackBar1.Location = New Point(104, 353)
         TrackBar1.Maximum = 6400
         TrackBar1.Minimum = 100
         TrackBar1.Name = "TrackBar1"
@@ -81,7 +79,7 @@ Partial Class Form1
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(67, 385)
+        Label1.Location = New Point(133, 387)
         Label1.Name = "Label1"
         Label1.Size = New Size(63, 25)
         Label1.TabIndex = 2
@@ -89,7 +87,7 @@ Partial Class Form1
         ' 
         ' HScrollBar1
         ' 
-        HScrollBar1.Location = New Point(373, 384)
+        HScrollBar1.Location = New Point(848, 340)
         HScrollBar1.Minimum = -100
         HScrollBar1.Name = "HScrollBar1"
         HScrollBar1.Size = New Size(120, 39)
@@ -101,16 +99,6 @@ Partial Class Form1
         VScrollBar1.Name = "VScrollBar1"
         VScrollBar1.Size = New Size(39, 180)
         VScrollBar1.TabIndex = 4
-        ' 
-        ' CenterDrawingButton
-        ' 
-        CenterDrawingButton.Font = New Font("Segoe UI", 10.2089548F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        CenterDrawingButton.Location = New Point(1, -1)
-        CenterDrawingButton.Name = "CenterDrawingButton"
-        CenterDrawingButton.Size = New Size(47, 43)
-        CenterDrawingButton.TabIndex = 5
-        CenterDrawingButton.TabStop = False
-        CenterDrawingButton.UseVisualStyleBackColor = True
         ' 
         ' MenuStrip1
         ' 
@@ -133,14 +121,14 @@ Partial Class Form1
         ' 
         NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         NewToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.N
-        NewToolStripMenuItem.Size = New Size(270, 34)
+        NewToolStripMenuItem.Size = New Size(242, 34)
         NewToolStripMenuItem.Text = "New"
         ' 
         ' OpenToolStripMenuItem
         ' 
         OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         OpenToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.O
-        OpenToolStripMenuItem.Size = New Size(270, 34)
+        OpenToolStripMenuItem.Size = New Size(242, 34)
         OpenToolStripMenuItem.Text = "Open"
         ' 
         ' SaveToolStripMenuItem
@@ -148,20 +136,20 @@ Partial Class Form1
         SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         SaveToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+ S"
         SaveToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.S
-        SaveToolStripMenuItem.Size = New Size(270, 34)
+        SaveToolStripMenuItem.Size = New Size(242, 34)
         SaveToolStripMenuItem.Text = "Save As"
         ' 
         ' AboutToolStripMenuItem
         ' 
         AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        AboutToolStripMenuItem.Size = New Size(270, 34)
+        AboutToolStripMenuItem.Size = New Size(242, 34)
         AboutToolStripMenuItem.Text = "About"
         ' 
         ' ExitToolStripMenuItem
         ' 
         ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         ExitToolStripMenuItem.ShortcutKeys = Keys.Control Or Keys.Q
-        ExitToolStripMenuItem.Size = New Size(270, 34)
+        ExitToolStripMenuItem.Size = New Size(242, 34)
         ExitToolStripMenuItem.Text = "Exit"
         ' 
         ' OptionsToolStripMenuItem
@@ -192,16 +180,6 @@ Partial Class Form1
         DarkModeToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+D"
         DarkModeToolStripMenuItem.Size = New Size(284, 34)
         DarkModeToolStripMenuItem.Text = "Dark Mode"
-        ' 
-        ' GroupBox1
-        ' 
-        GroupBox1.Controls.Add(CenterDrawingButton)
-        GroupBox1.FlatStyle = FlatStyle.Flat
-        GroupBox1.Location = New Point(524, 385)
-        GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(310, 152)
-        GroupBox1.TabIndex = 11
-        GroupBox1.TabStop = False
         ' 
         ' AddPointToolButton
         ' 
@@ -261,23 +239,33 @@ Partial Class Form1
         CopyLabel.TabStop = True
         CopyLabel.Text = "Copy"
         ' 
+        ' CenterDrawingButton
+        ' 
+        CenterDrawingButton.Font = New Font("Segoe UI", 10.2089548F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        CenterDrawingButton.Location = New Point(943, 323)
+        CenterDrawingButton.Name = "CenterDrawingButton"
+        CenterDrawingButton.Size = New Size(47, 43)
+        CenterDrawingButton.TabIndex = 5
+        CenterDrawingButton.TabStop = False
+        CenterDrawingButton.UseVisualStyleBackColor = True
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1258, 664)
+        Controls.Add(Label1)
+        Controls.Add(TrackBar1)
+        Controls.Add(TextBox1)
+        Controls.Add(HScrollBar1)
+        Controls.Add(VScrollBar1)
+        Controls.Add(CenterDrawingButton)
         Controls.Add(CopyLabel)
         Controls.Add(LanguageLabel)
         Controls.Add(Panel1)
         Controls.Add(MenuStrip1)
-        Controls.Add(TextBox1)
-        Controls.Add(HScrollBar1)
-        Controls.Add(Label1)
-        Controls.Add(TrackBar1)
         Controls.Add(SubtractPointToolButton)
-        Controls.Add(VScrollBar1)
         Controls.Add(MovePointToolButton)
-        Controls.Add(GroupBox1)
         Controls.Add(AddPointToolButton)
         KeyPreview = True
         MainMenuStrip = MenuStrip1
@@ -288,7 +276,6 @@ Partial Class Form1
         CType(TrackBar1, ComponentModel.ISupportInitialize).EndInit()
         MenuStrip1.ResumeLayout(False)
         MenuStrip1.PerformLayout()
-        GroupBox1.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -298,7 +285,6 @@ Partial Class Form1
     Friend WithEvents Label1 As Label
     Friend WithEvents HScrollBar1 As HScrollBar
     Friend WithEvents VScrollBar1 As VScrollBar
-    Friend WithEvents CenterDrawingButton As Button
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
@@ -306,7 +292,6 @@ Partial Class Form1
     Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents AddPointToolButton As Button
     Friend WithEvents MovePointToolButton As Button
     Friend WithEvents SubtractPointToolButton As Button
@@ -317,5 +302,6 @@ Partial Class Form1
     Friend WithEvents Panel1 As Panel
     Friend WithEvents LanguageLabel As Label
     Friend WithEvents CopyLabel As LinkLabel
+    Friend WithEvents CenterDrawingButton As Button
 
 End Class

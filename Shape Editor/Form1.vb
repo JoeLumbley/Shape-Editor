@@ -25,6 +25,7 @@
 
 Imports System.IO
 Imports System.Runtime.InteropServices
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Button
 
 Public Class Form1
 
@@ -1661,9 +1662,9 @@ Public Class Form1
             DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
-            SetWindowTheme(GroupBox1.Handle, "DarkMode_Explorer", Nothing)
-            DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
-            DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
+            'SetWindowTheme(GroupBox1.Handle, "DarkMode_Explorer", Nothing)
+            'DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
+            'DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
             SetWindowTheme(TextBox1.Handle, "DarkMode_Explorer", Nothing)
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 1, Marshal.SizeOf(GetType(Integer)))
@@ -1729,9 +1730,9 @@ Public Class Form1
             DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
             DwmSetWindowAttribute(SubtractPointToolButton.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
-            SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
-            DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
-            DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
+            'SetWindowTheme(GroupBox1.Handle, "Explorer", Nothing)
+            'DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
+            'DwmSetWindowAttribute(GroupBox1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 0, Marshal.SizeOf(GetType(Integer)))
 
             SetWindowTheme(TextBox1.Handle, "Explorer", Nothing)
             DwmSetWindowAttribute(TextBox1.Handle, DwmWindowAttribute.DWMWA_USE_IMMERSIVE_DARK_MODE, 0, Marshal.SizeOf(GetType(Integer)))
@@ -1781,7 +1782,7 @@ Public Class Form1
 
         CenterDrawingButton.ForeColor = If(DarkMode, Color.White, Color.Black)
 
-        GroupBox1.BackColor = If(DarkMode, Color.FromArgb(255, 23, 23, 23), Color.White)
+        'GroupBox1.BackColor = If(DarkMode, Color.FromArgb(255, 23, 23, 23), Color.White)
 
         Panel1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
         LanguageLabel.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
@@ -1996,6 +1997,8 @@ Public Class Form1
         VScrollBar1.Maximum = clientHeight * 4
         VScrollBar1.Value = 0
 
+        CenterDrawingButton.Top = HScrollBar1.Top - 1
+        CenterDrawingButton.Left = VScrollBar1.Left - 1
         CenterDrawingButton.Width = vScrollBarWidth + 2
         CenterDrawingButton.Height = hScrollBarHeight + 2
 
@@ -2008,10 +2011,10 @@ Public Class Form1
         SubtractPointToolButton.Width = CenterDrawingButton.Width
         SubtractPointToolButton.Height = CenterDrawingButton.Height
 
-        GroupBox1.Top = HScrollBar1.Top
-        GroupBox1.Left = VScrollBar1.Left - 2
-        GroupBox1.Width = vScrollBarWidth + 10
-        GroupBox1.Height = hScrollBarHeight + 10
+        'GroupBox1.Top = HScrollBar1.Top
+        'GroupBox1.Left = VScrollBar1.Left - 2
+        'GroupBox1.Width = vScrollBarWidth + 10
+        'GroupBox1.Height = hScrollBarHeight + 10
 
         AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
         AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
