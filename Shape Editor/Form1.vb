@@ -1765,10 +1765,6 @@ Public Class Form1
 
         BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        'TrackBar1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
-
-        'TextBox1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
-
         ShapeFillBrush = If(DarkMode, ShapeFillBrushDarkMode, ShapeFillBrushLightMode)
 
         BoundingBrush = If(DarkMode, BoundingBrushDarkMode, BoundingBrushLightMode)
@@ -1780,8 +1776,6 @@ Public Class Form1
         HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkMode, Color.DodgerBlue, Color.DodgerBlue)))
 
         Label1.BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
-
-        'TextBox1.ForeColor = If(DarkMode, Color.FromArgb(255, 230, 230, 230), Color.FromArgb(255, 32, 32, 32))
 
         Label1.ForeColor = If(DarkMode, Color.White, Color.Black)
 
