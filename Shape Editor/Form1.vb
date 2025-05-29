@@ -214,25 +214,25 @@ Public Class Form1
 
                     AddPoint(AdjustedMouseLocation)
 
-                    TextBox1.Text = GeneratePointArrayText()
-
-                    CopyLabel.Enabled = True
-
                     Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
+
+                    TextBox1.Text = GeneratePointArrayText()
+
+                    If Not CopyLabel.Enabled Then CopyLabel.Enabled = True
 
                 Else
 
                     InsertNewPoint(SelectedPointIndex)
 
-                    TextBox1.Text = GeneratePointArrayText()
-
-                    CopyLabel.Enabled = True
-
                     Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
+
+                    TextBox1.Text = GeneratePointArrayText()
+
+                    If Not CopyLabel.Enabled Then CopyLabel.Enabled = True
 
                 End If
 
@@ -246,13 +246,13 @@ Public Class Form1
                     ' Move a specific point
                     MovePoint(AdjustedMouseLocation)
 
-                    TextBox1.Text = GeneratePointArrayText()
-
-                    CopyLabel.Enabled = True
-
                     Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
+
+                    TextBox1.Text = GeneratePointArrayText()
+
+                    If Not CopyLabel.Enabled Then CopyLabel.Enabled = True
 
                     ' If the inside of the shape was selected, start moving it
                 ElseIf BoundingRect.Contains(AdjustedMouseLocation) Then
@@ -280,23 +280,17 @@ Public Class Form1
 
                     RemovePoint(SelectedPointIndex)
 
-                    TextBox1.Text = GeneratePointArrayText()
-
-                    CopyLabel.Enabled = True
-
                     Invalidate(DrawingArea)
 
                     InvalidateToolButtons()
 
+                    TextBox1.Text = GeneratePointArrayText()
+
+                    If Not CopyLabel.Enabled Then CopyLabel.Enabled = True
+
                 End If
 
             End If
-
-            'TextBox1.Text = GeneratePointArrayText()
-
-            'Invalidate(DrawingArea)
-
-            'InvalidateToolButtons()
 
             LeftMouseButtonDown = True
 
@@ -406,8 +400,6 @@ Public Class Form1
             LeftMouseButtonDown = False
 
             SelectedPointIndex = -1
-
-            'TextBox1.Text = GeneratePointArrayText()
 
             MovingShape = False
 
@@ -590,43 +582,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub ToggleShapeFill()
-
-        If FillShape Then
-
-            FillShape = False
-
-            If DarkMode Then
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
-
-            Else
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
-
-            End If
-
-            FillShapeToolStripMenuItem.Text = "Fill Shape"
-
-        Else
-
-            FillShape = True
-
-            If DarkMode Then
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
-
-            Else
-
-                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
-
-            End If
-
-            FillShapeToolStripMenuItem.Text = "No Fill"
-
-        End If
-
-    End Sub
 
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
 
@@ -834,34 +789,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateTitleBarTheme()
-        ' Title bar theme update workaround
-
-        ' This is a workaround for the issue where the title bar does not update
-        ' correctly when switching between light and dark mode in Windows 10.
-        ' This is a known issue in Windows 10, and this workaround forces the
-        ' title bar to update. The workaround is only needed for Windows 10
-        ' Windows 11 handles the theme change correctly.
-
-        ' Check if the OS is Windows 10
-        If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
-            ' The first public build of Windows 11 had the build number 10.0.22000
-            ' So, we can assume that any build number less than 22000 is Windows 10.
-
-            ' Create a new instance of the ApplyingThemeForm
-            Dim ThemeForm As New ApplyingThemeForm()
-
-            ' Force a redraw of form1 by showing applying theme form.
-            ThemeForm.ShowDialog()
-
-            ' Tested on 10.0.19045.5737 - Windows 10 Home Version 22H2
-
-        End If
-
-        ' For Windows 11, the title bar should update automatically, so no action is needed.
-
-    End Sub
-
     Private Sub FillShapeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FillShapeToolStripMenuItem.Click
 
         ToggleShapeFill()
@@ -938,6 +865,72 @@ Public Class Form1
             e.Cancel = True
 
         End If
+
+    End Sub
+
+    Private Sub ToggleShapeFill()
+
+        If FillShape Then
+
+            FillShape = False
+
+            If DarkMode Then
+
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnDark)
+
+            Else
+
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOnLight)
+
+            End If
+
+            FillShapeToolStripMenuItem.Text = "Fill Shape"
+
+        Else
+
+            FillShape = True
+
+            If DarkMode Then
+
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffDark)
+
+            Else
+
+                FillShapeToolStripMenuItem.Image = ResourceToImage(My.Resources.Resource1.FillShapeOffLight)
+
+            End If
+
+            FillShapeToolStripMenuItem.Text = "No Fill"
+
+        End If
+
+    End Sub
+
+    Private Sub UpdateTitleBarTheme()
+        ' Title bar theme update workaround
+
+        ' This is a workaround for the issue where the title bar does not update
+        ' correctly when switching between light and dark mode in Windows 10.
+        ' This is a known issue in Windows 10, and this workaround forces the
+        ' title bar to update. The workaround is only needed for Windows 10
+        ' Windows 11 handles the theme change correctly.
+
+        ' Check if the OS is Windows 10
+        If OsVersion.Major = 10 And OsVersion.Minor = 0 And OsVersion.Build < 22000 Then
+            ' The first public build of Windows 11 had the build number 10.0.22000
+            ' So, we can assume that any build number less than 22000 is Windows 10.
+
+            ' Create a new instance of the ApplyingThemeForm
+            Dim ThemeForm As New ApplyingThemeForm()
+
+            ' Force a redraw of form1 by showing applying theme form.
+            ThemeForm.ShowDialog()
+
+            ' Tested on 10.0.19045.5737 - Windows 10 Home Version 22H2
+
+        End If
+
+        ' For Windows 11, the title bar should update automatically, so no action is needed.
 
     End Sub
 
