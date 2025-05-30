@@ -337,7 +337,6 @@ Public Class Form1
             ' Set the new hovered point index
             HoveredPointIndex = newHoveredPointIndex
 
-            ' Invalidate the form to trigger a repaint
             Invalidate(DrawingArea)
 
             InvalidateToolButtons()
