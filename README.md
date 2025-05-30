@@ -4,8 +4,8 @@
 Shape Editor is a tool for the interactive creation of shapes. Shape Editor generates an array of points in code that represent the drawn shape, making it an essential resource for developers looking to integrate shape data into their projects.
 
 
+![112](https://github.com/user-attachments/assets/5b53c90f-6cb3-403e-9ada-f6cf0fadea13)
 
-![111](https://github.com/user-attachments/assets/dc2812d3-786e-4ddb-96e7-79eef9f17d73)
 
 
 
@@ -144,7 +144,7 @@ x,y
 
 
 
-![109](https://github.com/user-attachments/assets/92a94e62-d6d8-432f-a285-dbd36144c2f4)
+![114](https://github.com/user-attachments/assets/49d8e395-c887-42ee-903b-63c9ef4bbd37)
 
 
 
@@ -1177,19 +1177,11 @@ This code snippet converts a byte array from the resources into an `Image` objec
 ## Clones
 
 
+![113](https://github.com/user-attachments/assets/fb776e50-686e-470e-ba5c-cf0cb376a0f4)
 
 ![090](https://github.com/user-attachments/assets/88254d62-f74a-4d53-951d-b1337cad01b3)
 
-
 ![073](https://github.com/user-attachments/assets/0c224dc3-dd5a-40b8-b161-6829be5c9caf)
-
-
-
-
-
-
-
-
 
 ![044](https://github.com/user-attachments/assets/4f6a7ce3-7102-407a-9a16-f12672c225d8)
 
