@@ -588,13 +588,19 @@ Public Class Form1
 
             ControlDDown = False
 
+            e.Handled = True
+
         ElseIf e.Control AndAlso e.KeyCode = Keys.F Then
 
             ControlFDown = False
 
+            e.Handled = True
+
         ElseIf e.Control AndAlso e.KeyCode = Keys.H Then
 
             ControlHDown = False
+
+            e.Handled = True
 
         End If
 
