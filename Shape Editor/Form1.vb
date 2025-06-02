@@ -581,7 +581,6 @@ Public Class Form1
 
     End Sub
 
-
     Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
 
         If e.Control AndAlso e.KeyCode = Keys.D Then
