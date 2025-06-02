@@ -1175,20 +1175,54 @@ Public Class Form1
 
                     Select Case True
                         Case TypeOf ex Is IOException
-                            MessageForm.Show("This file is in use by another app. Close the file and try again.", "File In Use - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                            MessageForm.Show("This file is in use by another app. Close the file and try again.",
+                                             "File In Use - Shape Editor",
+                                             MessageBoxButtons.OK,
+                                             MessageBoxIcon.Error)
+
                         Case TypeOf ex Is FileNotFoundException
-                            MessageForm.Show("The file was not found. Please check the file path.", "File Not Found - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                            MessageForm.Show("The file was not found. Please check the file path.",
+                                             "File Not Found - Shape Editor",
+                                             MessageBoxButtons.OK,
+                                             MessageBoxIcon.Error)
+
                         Case TypeOf ex Is FormatException
-                            MessageForm.Show("The file format is invalid. Please check the file contents.", "Bad Format - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                            MessageForm.Show("The file format is invalid. Please check the file contents.",
+                                             "Bad Format - Shape Editor",
+                                             MessageBoxButtons.OK,
+                                             MessageBoxIcon.Error)
+
                         Case TypeOf ex Is ArgumentException
-                            MessageForm.Show("The file path is invalid. Please check the file path.", "Bad Path - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                            MessageForm.Show("The file path is invalid. Please check the file path.",
+                                             "Bad Path - Shape Editor",
+                                             MessageBoxButtons.OK,
+                                             MessageBoxIcon.Error)
+
                         Case TypeOf ex Is PathTooLongException
-                            MessageForm.Show("The file path is too long. Please shorten the file path.", "Path Too Long - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                            MessageForm.Show("The file path is too long. Please shorten the file path.",
+                                             "Path Too Long - Shape Editor",
+                                             MessageBoxButtons.OK,
+                                             MessageBoxIcon.Error)
+
                         Case TypeOf ex Is UnauthorizedAccessException
-                            MessageForm.Show("You do not have permission to access this file.", "Unauthorized - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                            MessageForm.Show("You do not have permission to access this file.",
+                                             "Unauthorized - Shape Editor",
+                                             MessageBoxButtons.OK,
+                                             MessageBoxIcon.Error)
+
                         Case Else
-                            ' Handle other exceptions
-                            MessageForm.Show("An unexpected error occurred: " & ex.Message, "Error - Shape Editor", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                            MessageForm.Show("An unexpected error occurred: " & ex.Message,
+                                             "Error - Shape Editor",
+                                             MessageBoxButtons.OK,
+                                             MessageBoxIcon.Error)
+
                     End Select
 
                     fileIsValid = False
