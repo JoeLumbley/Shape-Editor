@@ -162,7 +162,14 @@ Public Class Form1
     End Sub
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
+
         MyBase.OnPaint(e)
+
+        UpdateDrawingArea(e)
+
+    End Sub
+
+    Private Sub UpdateDrawingArea(e As PaintEventArgs)
 
         ' Translate the origin to the center of the drawing area
         e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
