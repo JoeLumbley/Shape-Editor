@@ -169,40 +169,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateDrawingArea(e As PaintEventArgs)
-
-        ' Translate the origin to the center of the drawing area
-        e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
-
-        e.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
-        e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.GammaCorrected
-        e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
-
-        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
-        e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.None
-
-        e.Graphics.Clear(BackgroundColor)
-
-        DrawBoundingRectangle(e)
-
-        DrawGrid(e)
-
-        DrawCoordinateAxes(e)
-
-        DrawCenterMark(e)
-
-        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
-        e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
-
-        DrawShape(e)
-
-        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
-        e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.None
-
-        DrawPointHandles(e)
-
-    End Sub
-
     Private Sub Form1_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
 
         ' Check if the left mouse button is pressed
@@ -945,6 +911,40 @@ Public Class Form1
 
     End Sub
 
+    Private Sub UpdateDrawingArea(e As PaintEventArgs)
+
+        ' Translate the origin to the center of the drawing area
+        e.Graphics.TranslateTransform(DrawingCenter.X, DrawingCenter.Y)
+
+        e.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
+        e.Graphics.CompositingQuality = Drawing2D.CompositingQuality.GammaCorrected
+        e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+
+        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
+        e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.None
+
+        e.Graphics.Clear(BackgroundColor)
+
+        DrawBoundingRectangle(e)
+
+        DrawGrid(e)
+
+        DrawCoordinateAxes(e)
+
+        DrawCenterMark(e)
+
+        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+        e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+
+        DrawShape(e)
+
+        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.None
+        e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.None
+
+        DrawPointHandles(e)
+
+    End Sub
+
     Private Sub DrawGrid(e As PaintEventArgs)
 
         ' Start at the origin (0, 0) and draw the grid lines in both directions at intervals of 20 units multiplied by the scale factor.
@@ -971,7 +971,6 @@ Public Class Form1
         Next
 
     End Sub
-
 
     Private Sub DrawCoordinateAxes(e As PaintEventArgs)
         ' Draw two lines intersecting at the center of the drawing area to represent the coordinate axes.
