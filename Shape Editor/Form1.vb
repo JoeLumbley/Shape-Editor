@@ -86,7 +86,7 @@ Public Class Form1
 
     ' Light mode colors
     Private MenuItemBackgroundColor_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
-    Private MenuItemBackgroundSelected_LightMode As Color = Color.FromArgb(16, Color.DodgerBlue)
+    Private MenuItemBackgroundSelected_LightMode As Color = Color.FromArgb(255, 229, 241, 251)
     Private ToolStripBackground_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
     Private MenuItemBorderColor_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
     Private MenuItemSelectedColor_LightMode As Color = Color.FromArgb(64, Color.Gray)
