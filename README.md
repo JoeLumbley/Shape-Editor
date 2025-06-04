@@ -7,7 +7,7 @@ The Shape Editor allows you to draw shapes on the left side of the screen while 
 ![112](https://github.com/user-attachments/assets/5b53c90f-6cb3-403e-9ada-f6cf0fadea13)
 
 
-I created this app because I was tired of manually typing out shape data for my projects. It felt tedious and inefficient, especially when I was developing my airplane simulator app. I often found myself typing in shape data, running the app, and then going back to adjust the code based on what I saw. It was like drawing in the dark and only turning on the light to see what I had created. This back-and-forth process was frustrating and needed to change.
+
 
 ## Features
 
@@ -157,7 +157,7 @@ x,y
 [Index](#index)
 
 
-
+I created this app because I was tired of manually typing out shape data for my projects. It felt tedious and inefficient, especially when I was developing my airplane simulator app. I often found myself typing in shape data, running the app, and then going back to adjust the code based on what I saw. It was like drawing in the dark and only turning on the light to see what I had created. This back-and-forth process was frustrating and needed to change.
 
 
 
