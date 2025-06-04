@@ -1,7 +1,7 @@
 # Shape Editor
 
 
-Shape Editor is a tool for the interactive creation of shapes. Shape Editor generates an array of points in code that represent the drawn shape, making it an essential resource for developers looking to integrate shape data into their projects.
+The Shape Editor allows you to draw shapes on the left side of the screen while the code is automatically generated on the right. This means you can focus on creativity. No more tedious typing or guesswork—just draw and watch the code come to life!
 
 
 ![112](https://github.com/user-attachments/assets/5b53c90f-6cb3-403e-9ada-f6cf0fadea13)
