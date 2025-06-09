@@ -123,6 +123,8 @@ Public Class Form1
     Private MoveStartLocation As Point
     Private MovingShape As Boolean = False
     Private MovingDrawingArea As Boolean = False
+    Private MoveScrollStart As Point
+
 
     Private IsInsideBoundingRectangle As Boolean = False
 
@@ -241,6 +243,7 @@ Public Class Form1
                     'MoveStartLocation = AdjustedMouseLocation
                     'MoveStartLocation = DrawingCenter
                     MoveStartLocation = e.Location
+                    'MoveScrollStart.Y = VScrollBar1.Value
 
 
                     MovingDrawingArea = True
@@ -341,14 +344,45 @@ Public Class Form1
 
         If MovingDrawingArea And LeftMouseButtonDown Then
 
-            Dim offsetX As Integer = e.Location.X - MoveStartLocation.X
-            Dim offsetY As Integer = e.Location.Y - MoveStartLocation.Y
+
+            Dim deltaY As Integer = e.Y - MoveStartLocation.Y
+            Dim deltaX As Integer = e.X - MoveStartLocation.X
+
+            VScrollBar1.Value = Math.Max(VScrollBar1.Minimum, Math.Min(VScrollBar1.Maximum, VScrollBar1.Value - deltaY))
+                HScrollBar1.Value = Math.Max(HScrollBar1.Minimum, Math.Min(HScrollBar1.Maximum, HScrollBar1.Value - deltaX))
+
+            MoveStartLocation = e.Location
+
+            'Dim offsetX As Integer = e.Location.X - MoveStartLocation.X
+            'Dim offsetY As Integer = e.Location.Y - MoveStartLocation.Y
+
+            'Dim offsetY As Integer = e.Location.Y - MoveScrollStart.Y
 
             ' Shift DrawingCenter instead of individual points
-            DrawingCenter.X += offsetX
-            DrawingCenter.Y += offsetY
+            'DrawingCenter.X += offsetX
+            'DrawingCenter.Y += offsetY
+            'VScrollBar1.Value = DrawingCenter.Y
 
-            MoveStartLocation = e.Location ' Update tracking position
+
+            'Dim newValue As Integer = DrawingCenter.Y + offsetY
+
+            '' Ensure the value stays within bounds
+            'If newValue > VScrollBar1.Maximum Then
+            '    newValue = VScrollBar1.Maximum
+            'ElseIf newValue < VScrollBar1.Minimum Then
+            '    newValue = VScrollBar1.Minimum
+            'End If
+
+            'VScrollBar1.Value = newValue
+
+
+            ' Update the drawing center based on the scroll value
+            UpdateDrawingCenterY()
+            UpdateDrawingCenterX()
+
+            'MoveStartLocation = e.Location ' Update tracking position
+
+
 
             Invalidate(DrawingArea) ' Refresh display
 
