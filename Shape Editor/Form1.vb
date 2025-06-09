@@ -931,7 +931,7 @@ Public Class Form1
 
         DrawCenterMark(e)
 
-        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+        e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
         e.Graphics.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
 
         DrawShape(e)
@@ -2026,10 +2026,12 @@ Public Class Form1
 
         'HScrollBar1.Minimum = -clientWidth * 2
         'HScrollBar1.Maximum = clientWidth * 2
-        HScrollBar1.Value = 0
 
-        HScrollBar1.Minimum = -CInt(((DrawingArea.Width \ 2) * ScaleFactor) - (DrawingArea.Width \ 2))
-        HScrollBar1.Maximum = CInt(((DrawingArea.Width \ 2) * ScaleFactor) - (DrawingArea.Width \ 2))
+        If DrawingArea.Width > 0 Then
+            HScrollBar1.Value = 0
+            HScrollBar1.Minimum = -CInt(((DrawingArea.Width \ 2) * ScaleFactor) - (DrawingArea.Width \ 2))
+            HScrollBar1.Maximum = CInt(((DrawingArea.Width \ 2) * ScaleFactor) - (DrawingArea.Width \ 2))
+        End If
 
 
         VScrollBar1.Top = ClientRectangle.Top + menuStripHeight
@@ -2038,10 +2040,12 @@ Public Class Form1
         VScrollBar1.Width = 25
         'VScrollBar1.Minimum = -clientHeight * 4
         'VScrollBar1.Maximum = clientHeight * 4
-        VScrollBar1.Value = 0
 
-        VScrollBar1.Minimum = -CInt(((DrawingArea.Height \ 2) * ScaleFactor) - (DrawingArea.Height \ 2))
-        VScrollBar1.Maximum = CInt(((DrawingArea.Height \ 2) * ScaleFactor) - (DrawingArea.Height \ 2))
+        If DrawingArea.Height > 0 Then
+            VScrollBar1.Value = 0
+            VScrollBar1.Minimum = -CInt(((DrawingArea.Height \ 2) * ScaleFactor) - (DrawingArea.Height \ 2))
+            VScrollBar1.Maximum = CInt(((DrawingArea.Height \ 2) * ScaleFactor) - (DrawingArea.Height \ 2))
+        End If
 
 
         CenterDrawingButton.Top = HScrollBar1.Top
