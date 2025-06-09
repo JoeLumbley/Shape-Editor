@@ -118,8 +118,6 @@ Public Class Form1
 
     Private HideControlHandles As Boolean = False
 
-    Private Const ThresholdDistance As Double = 10.0 ' Distance threshold for point selection
-
     Private DrawingArea As Rectangle
 
     Private MoveStartLocation As Point
