@@ -2032,26 +2032,15 @@ Public Class Form1
         CenterDrawingButton.Top = HScrollBar1.Top
         CenterDrawingButton.Left = VScrollBar1.Left
         CenterDrawingButton.Width = vScrollBarWidth
-        'CenterDrawingButton.Width = 39 + 2
-
         CenterDrawingButton.Height = hScrollBarHeight
 
-        'AddPointToolButton.Width = CenterDrawingButton.Width
         AddPointToolButton.Width = 39
-
-        'AddPointToolButton.Height = CenterDrawingButton.Height
         AddPointToolButton.Height = 39
 
-        'MovePointToolButton.Width = CenterDrawingButton.Width
         MovePointToolButton.Width = 39
-
-        'MovePointToolButton.Height = CenterDrawingButton.Height
         MovePointToolButton.Height = 39
 
-        'SubtractPointToolButton.Width = CenterDrawingButton.Width
         SubtractPointToolButton.Width = 39
-
-        'SubtractPointToolButton.Height = CenterDrawingButton.Height
         SubtractPointToolButton.Height = 39
 
 
