@@ -238,7 +238,10 @@ Public Class Form1
                     ' then we are moving the drawing area
 
                     ' store initial position for moving the drawing area
-                    MoveStartLocation = AdjustedMouseLocation
+                    'MoveStartLocation = AdjustedMouseLocation
+                    'MoveStartLocation = DrawingCenter
+                    MoveStartLocation = e.Location
+
 
                     MovingDrawingArea = True
 
@@ -336,6 +339,22 @@ Public Class Form1
 
         End If
 
+        If MovingDrawingArea And LeftMouseButtonDown Then
+
+            Dim offsetX As Integer = e.Location.X - MoveStartLocation.X
+            Dim offsetY As Integer = e.Location.Y - MoveStartLocation.Y
+
+            ' Shift DrawingCenter instead of individual points
+            DrawingCenter.X += offsetX
+            DrawingCenter.Y += offsetY
+
+            MoveStartLocation = e.Location ' Update tracking position
+
+            Invalidate(DrawingArea) ' Refresh display
+
+        End If
+
+
         ' Define the shapes bounding rectangle.
         Dim BoundingRect As Rectangle = GetBoundingRectangle()
 
@@ -372,6 +391,9 @@ Public Class Form1
             SelectedPointIndex = -1
 
             MovingShape = False
+
+            MovingDrawingArea = False
+
 
         End If
 
