@@ -2016,6 +2016,7 @@ Public Class Form1
         HScrollBar1.Top = ClientRectangle.Bottom - trackBarHeight - hScrollBarHeight
         HScrollBar1.Left = ClientRectangle.Left
         HScrollBar1.Width = halfClientWidth - vScrollBarWidth
+        HScrollBar1.Height = 25
         HScrollBar1.Minimum = -clientWidth * 2
         HScrollBar1.Maximum = clientWidth * 2
         HScrollBar1.Value = 0
@@ -2023,23 +2024,36 @@ Public Class Form1
         VScrollBar1.Top = ClientRectangle.Top + menuStripHeight
         VScrollBar1.Left = TextBox1.Left - vScrollBarWidth
         VScrollBar1.Height = clientHeight - trackBarHeight - hScrollBarHeight - menuStripHeight
+        VScrollBar1.Width = 25
         VScrollBar1.Minimum = -clientHeight * 4
         VScrollBar1.Maximum = clientHeight * 4
         VScrollBar1.Value = 0
 
-        CenterDrawingButton.Top = HScrollBar1.Top - 1
-        CenterDrawingButton.Left = VScrollBar1.Left - 1
-        CenterDrawingButton.Width = vScrollBarWidth + 2
-        CenterDrawingButton.Height = hScrollBarHeight + 2
+        CenterDrawingButton.Top = HScrollBar1.Top
+        CenterDrawingButton.Left = VScrollBar1.Left
+        CenterDrawingButton.Width = vScrollBarWidth
+        'CenterDrawingButton.Width = 39 + 2
 
-        AddPointToolButton.Width = CenterDrawingButton.Width
-        AddPointToolButton.Height = CenterDrawingButton.Height
+        CenterDrawingButton.Height = hScrollBarHeight
 
-        MovePointToolButton.Width = CenterDrawingButton.Width
-        MovePointToolButton.Height = CenterDrawingButton.Height
+        'AddPointToolButton.Width = CenterDrawingButton.Width
+        AddPointToolButton.Width = 39
 
-        SubtractPointToolButton.Width = CenterDrawingButton.Width
-        SubtractPointToolButton.Height = CenterDrawingButton.Height
+        'AddPointToolButton.Height = CenterDrawingButton.Height
+        AddPointToolButton.Height = 39
+
+        'MovePointToolButton.Width = CenterDrawingButton.Width
+        MovePointToolButton.Width = 39
+
+        'MovePointToolButton.Height = CenterDrawingButton.Height
+        MovePointToolButton.Height = 39
+
+        'SubtractPointToolButton.Width = CenterDrawingButton.Width
+        SubtractPointToolButton.Width = 39
+
+        'SubtractPointToolButton.Height = CenterDrawingButton.Height
+        SubtractPointToolButton.Height = 39
+
 
         AddPointToolButton.Top = HScrollBar1.Top - AddPointToolButton.Height
         AddPointToolButton.Left = VScrollBar1.Left - AddPointToolButton.Width
