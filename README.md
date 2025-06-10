@@ -1233,9 +1233,6 @@ This project is licensed under the MIT License.
 
 ## 🌟 Support the Shape Editor!
 
-![002](https://github.com/user-attachments/assets/12f7a8bd-7d8d-4c97-b4ea-ab12cb11c2e0)
-
-
 We invite you to consider giving the **Shape Editor** repository a star! By doing so, you contribute to its recognition and increase its chances of being included in the prestigious **GitHub Archive**.
 
 ### Why Star the Shape Editor?
@@ -1257,6 +1254,9 @@ Thank you for your support in making the **Shape Editor** a part of the GitHub A
 
 
 ## GitHub Arctic Code Vault
+
+![002](https://github.com/user-attachments/assets/12f7a8bd-7d8d-4c97-b4ea-ab12cb11c2e0)
+
 
 - [GitHub Arctic Code Vault](https://archiveprogram.github.com/arctic-vault/)
 - [YouTube - GitHub Arctic Code Vault](https://www.youtube.com/watch?v=fzI9FNjXQ0o)
