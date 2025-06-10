@@ -1229,7 +1229,7 @@ This project is licensed under the MIT License.
 
 
 
-- [GitHub Archive FAQ](https://archiveprogram.github.com/faq/)
+- [GitHub Arctic Code Vault](https://archiveprogram.github.com/arctic-vault/)
 
 
 
