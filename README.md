@@ -1217,27 +1217,49 @@ This project is licensed under the MIT License.
 
 
 
-## GitHub Arctic Code Vault
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+## 🌟 Support the Shape Editor!
 
 ![002](https://github.com/user-attachments/assets/12f7a8bd-7d8d-4c97-b4ea-ab12cb11c2e0)
 
 
+We invite you to consider giving the **Shape Editor** repository a star! By doing so, you contribute to its recognition and increase its chances of being included in the prestigious **GitHub Archive**.
 
+### Why Star the Shape Editor?
+
+The **Shape Editor** is not just another repository; it serves as a foundational and robust application primitive for illustrating event-driven interactive graphics in computer-aided design (CAD). Here’s why your support matters:
+
+- **Foundation for Innovation**: The Shape Editor provides a solid base for developers to create new applications, extending its functionality to meet diverse needs in graphics and design.
+- **Community Contribution**: By starring this project, you help elevate its visibility within the open-source community, encouraging more developers to explore and enhance it.
+- **Preservation in the GitHub Archive**: Your star can help ensure that this valuable resource is preserved in the GitHub Archive, recognizing the collaborative efforts of developers worldwide.
+
+### How You Can Help
+
+ **Star the Repository**: Click the ⭐️ button at the top right of this page.
+ **Spread the Word**: Share this project with your network, encouraging others to explore and star it.
+
+Thank you for your support in making the **Shape Editor** a part of the GitHub Archive!
+
+---
+
+
+## GitHub Arctic Code Vault
 
 - [GitHub Arctic Code Vault](https://archiveprogram.github.com/arctic-vault/)
 - [YouTube - GitHub Arctic Code Vault](https://www.youtube.com/watch?v=fzI9FNjXQ0o)
-
-
-
-
-
-
-
 
 
 
