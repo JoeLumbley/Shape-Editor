@@ -402,7 +402,6 @@ Public Class Form1
 
             MovingDrawingArea = False
 
-
         End If
 
     End Sub
