@@ -1176,21 +1176,6 @@ This code snippet converts a byte array from the resources into an `Image` objec
 
 
 
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1228,6 +1213,11 @@ Thank you for your support in making the **Shape Editor** a part of the GitHub A
 
 
 
+
+
+
+
+
 ## 🎞️ The Arctic Code Vault
 
 The **Arctic Code Vault** is a groundbreaking initiative by GitHub to preserve open-source software for future generations. On February 2, 2020, GitHub captured a snapshot of every active public repository and stored it in the Arctic World Archive (AWA), located in Svalbard, Norway. This unique archive is designed for long-term preservation, ensuring that the collective knowledge of developers around the world remains accessible for centuries to come.
@@ -1245,11 +1235,9 @@ The **Arctic Code Vault** is a groundbreaking initiative by GitHub to preserve o
 
 By starring the **Shape Editor** repository, you help enhance its visibility and increase its chances of being included in the Arctic Code Vault in future snapshots. Your support can make a significant difference in preserving this project as part of the global software heritage.
 
-Learn more about the Arctic Code Vault and its mission by visiting the [GitHub Archive Program](https://github.com/github/archive-program).
+Learn more about the Arctic Code Vault and its mission by visiting:
 
-
-
-
+- [GitHub Archive Program](https://archiveprogram.github.com/)
 - [GitHub Arctic Code Vault](https://archiveprogram.github.com/arctic-vault/)
 - [YouTube - GitHub Arctic Code Vault](https://www.youtube.com/watch?v=fzI9FNjXQ0o)
 
