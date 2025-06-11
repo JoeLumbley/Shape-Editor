@@ -73,7 +73,7 @@ Public Class Form1
     Private GridPenLight As New Pen(GridColorLight, 1)
 
     Private CoordinateSystemPenDark As New Pen(Color.FromArgb(255, 100, 100, 100), 1)
-    Private CoordinateSystemPenLight As New Pen(Color.FromArgb(255, 200, 200, 200), 1)
+    Private CoordinateSystemPenLight As New Pen(Color.FromArgb(255, 180, 180, 180), 1)
 
     Private CoordinateSystemPen As Pen = CoordinateSystemPenLight
 
@@ -1833,7 +1833,7 @@ Public Class Form1
 
         ShapePen = New Pen(If(DarkMode, Color.White, Color.Black), 2)
 
-        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkMode, Color.FromArgb(255, 128, 128, 128), Color.DarkGray)))
+        HandleBrush = New SolidBrush(Color.FromArgb(255, If(DarkMode, Color.FromArgb(255, 128, 128, 128), Color.FromArgb(255, 180, 180, 180))))
 
         HoverBrush = New SolidBrush(Color.FromArgb(255, If(DarkMode, Color.DodgerBlue, Color.DodgerBlue)))
 
