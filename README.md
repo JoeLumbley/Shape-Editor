@@ -850,6 +850,18 @@ End Function
 ```
 - **GetBoundingRectangle**: This function calculates the smallest rectangle that can contain all the points in the shape by finding the minimum and maximum X and Y coordinates.
 
+
+
+
+![125](https://github.com/user-attachments/assets/f2587956-53ee-43e1-8db8-03c9f194e25b)
+
+
+
+
+
+
+
+
 ### GetScaledPoint
 
 ```vb
