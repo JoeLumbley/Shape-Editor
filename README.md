@@ -5,7 +5,7 @@ The Shape Editor allows you to draw shapes on the left side of the screen while 
 
 
 
-![117](https://github.com/user-attachments/assets/3f4116ee-dd2a-43f6-a3e4-073347601ae5)
+![123](https://github.com/user-attachments/assets/7ca2a445-0ead-4765-9062-61cc48a18688)
 
 
 
@@ -37,9 +37,9 @@ The Shape Editor allows you to draw shapes on the left side of the screen while 
 - **Real-Time Updates**: Adjust points or modify the shape on one side, and the mirrored shape updates instantly, providing immediate visual feedback.
 
 
+![121](https://github.com/user-attachments/assets/67c419f4-b0e8-4811-a546-53d326d241a3)
 
 
-![101](https://github.com/user-attachments/assets/845bf830-11d0-42ae-b6c9-19cae3fc9051)
 
 
 ### Benefits
@@ -71,9 +71,9 @@ CSV files, are a simple and widely used format for storing and exchanging data i
 ```
 x,y
 ```
+![122](https://github.com/user-attachments/assets/05e514bc-6f46-416c-9f55-278788ae10ba)
 
 
-![108](https://github.com/user-attachments/assets/adb9cd85-1537-42ef-b634-c52a071aeaf8)
 
 
 
@@ -144,8 +144,8 @@ x,y
 
 
 
+![119](https://github.com/user-attachments/assets/0bf1b4eb-bef4-45ef-8d4b-36581e9bdd49)
 
-![118](https://github.com/user-attachments/assets/e429790f-6410-4fc9-8261-9f7d67c0bc5f)
 
 
 
@@ -1166,43 +1166,6 @@ This code snippet converts a byte array from the resources into an `Image` objec
 
 
 
-
-
-
-
-
-
-
-
-## Clones
-
-
-![113](https://github.com/user-attachments/assets/fb776e50-686e-470e-ba5c-cf0cb376a0f4)
-
-![090](https://github.com/user-attachments/assets/88254d62-f74a-4d53-951d-b1337cad01b3)
-
-![073](https://github.com/user-attachments/assets/0c224dc3-dd5a-40b8-b161-6829be5c9caf)
-
-![044](https://github.com/user-attachments/assets/4f6a7ce3-7102-407a-9a16-f12672c225d8)
-
-
-
-
-
-
-
-
-## License
-This project is licensed under the MIT License.
-
-
-
-
-![038](https://github.com/user-attachments/assets/9ccae402-4d60-4032-9696-6770b2872a27)
-
-
-
-
 ---
 
 
@@ -1226,12 +1189,79 @@ This project is licensed under the MIT License.
 
 
 
+## 🌟 Support the Shape Editor!
+
+We invite you to consider giving the **Shape Editor** repository a star! By doing so, you contribute to its recognition and increase its chances of being included in the prestigious **GitHub Archive**.
+
+### Why Star the Shape Editor?
+
+The **Shape Editor** is not just another repository; it serves as a foundational and robust application primitive for illustrating event-driven interactive graphics in computer-aided design (CAD). Here’s why your support matters:
+
+- **Foundation for Innovation**: The Shape Editor provides a solid base for developers to create new applications, extending its functionality to meet diverse needs in graphics and design.
+- **Community Contribution**: By starring this project, you help elevate its visibility within the open-source community, encouraging more developers to explore and enhance it.
+- **Preservation in the GitHub Archive**: Your star can help ensure that this valuable resource is preserved in the GitHub Archive, recognizing the collaborative efforts of developers worldwide.
+
+### How You Can Help
+
+ **Star the Repository**: Click the ⭐️ button at the top right of this page.
+ **Spread the Word**: Share this project with your network, encouraging others to explore and star it.
+
+Thank you for your support in making the **Shape Editor** a part of the GitHub Archive!
+
+---
 
 
 
 
 
 
+
+
+
+## 🎞️ The Arctic Code Vault
+
+The **Arctic Code Vault** is a groundbreaking initiative by GitHub to preserve open-source software for future generations. On February 2, 2020, GitHub captured a snapshot of every active public repository and stored it in the Arctic World Archive (AWA), located in Svalbard, Norway. This unique archive is designed for long-term preservation, ensuring that the collective knowledge of developers around the world remains accessible for centuries to come.
+
+
+![002](https://github.com/user-attachments/assets/12f7a8bd-7d8d-4c97-b4ea-ab12cb11c2e0)
+
+### Why the Arctic Code Vault Matters
+
+- **Cultural Heritage**: The Arctic Code Vault serves as a time capsule for the open-source community, safeguarding the contributions of millions of developers and the evolution of software.
+- **Global Collaboration**: By archiving repositories, GitHub highlights the collaborative spirit of open source, showcasing the collective efforts that drive innovation and creativity in software development.
+- **Future Accessibility**: The AWA is engineered to withstand the test of time, ensuring that the code and projects stored within can be accessed by future generations, even in the face of technological changes.
+
+### How You Can Contribute
+
+By starring the **Shape Editor** repository, you help enhance its visibility and increase its chances of being included in the Arctic Code Vault in future snapshots. Your support can make a significant difference in preserving this project as part of the global software heritage.
+
+Learn more about the Arctic Code Vault and its mission by visiting:
+
+- [GitHub Archive Program](https://archiveprogram.github.com/)
+- [GitHub Arctic Code Vault](https://archiveprogram.github.com/arctic-vault/)
+- [YouTube - GitHub Arctic Code Vault](https://www.youtube.com/watch?v=fzI9FNjXQ0o)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
 
 
 
@@ -1316,6 +1346,41 @@ This project is licensed under the MIT License.
 
 **[License](#license)**
 - License Information
+
+
+
+
+---
+
+## Clones
+
+
+![124](https://github.com/user-attachments/assets/afcd862b-6a8a-4a54-b226-61a6f80cf785)
+
+
+![113](https://github.com/user-attachments/assets/fb776e50-686e-470e-ba5c-cf0cb376a0f4)
+
+![090](https://github.com/user-attachments/assets/88254d62-f74a-4d53-951d-b1337cad01b3)
+
+![073](https://github.com/user-attachments/assets/0c224dc3-dd5a-40b8-b161-6829be5c9caf)
+
+![044](https://github.com/user-attachments/assets/4f6a7ce3-7102-407a-9a16-f12672c225d8)
+
+
+
+
+
+
+
+
+## License
+This project is licensed under the MIT License.
+
+![120](https://github.com/user-attachments/assets/63c864ac-ed23-4199-9a86-76a1235d2238)
+
+
+
+![038](https://github.com/user-attachments/assets/9ccae402-4d60-4032-9696-6770b2872a27)
 
 
 
