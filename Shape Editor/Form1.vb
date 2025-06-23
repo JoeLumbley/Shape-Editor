@@ -242,11 +242,7 @@ Public Class Form1
                     ' then we are moving the drawing area
 
                     ' store initial position for moving the drawing area
-                    'MoveStartLocation = AdjustedMouseLocation
-                    'MoveStartLocation = DrawingCenter
                     MoveStartLocation = e.Location
-                    'MoveScrollStart.Y = VScrollBar1.Value
-
 
                     MovingDrawingArea = True
 
@@ -363,7 +359,6 @@ Public Class Form1
             InvalidateToolButtons()
 
         End If
-
 
         ' Define the shapes bounding rectangle.
         Dim BoundingRect As Rectangle = GetBoundingRectangle()
@@ -635,6 +630,8 @@ Public Class Form1
 
                 Case Keys.Down
                     ' Handle Down Arrow Key
+
+                    ' Check if the scroll value exceeds the maximum limit
                     If VScrollBar1.Value + 10 > VScrollBar1.Maximum Then
                         VScrollBar1.Value = VScrollBar1.Maximum
                     Else
@@ -1389,9 +1386,11 @@ Public Class Form1
 
         ' Iterate through all the ordered points to format them as scaled Point objects.
         For i As Integer = 0 To orderedPoints.Count - 1
+
+            ' If this is not the last point.
             If i < orderedPoints.Count - 1 Then
 
-                ' Append each point with a trailing comma if it's not the last point in the list.
+                ' Append each point with a trailing comma.
                 sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor)),")
 
             Else
@@ -1400,6 +1399,7 @@ Public Class Form1
                 sb.AppendLine($"    New Point(CInt({orderedPoints(i).X} * ScaleFactor), CInt({orderedPoints(i).Y} * ScaleFactor))")
 
             End If
+
         Next
 
         ' Close the array definition.
