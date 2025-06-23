@@ -1,6 +1,8 @@
 ﻿' Shape Editor
 
 ' Create shapes interactively and generate code automatically.
+' This application allows users to create shapes by adding, moving, and removing points.
+' It generates code that can be copied to the clipboard for use in other applications.
 
 ' MIT License
 ' Copyright(c) 2025 Joseph W. Lumbley
@@ -78,37 +80,37 @@ Public Class Form1
     Private CoordinateSystemPen As Pen = CoordinateSystemPenLight
 
     ' Set the fill color for the shape in light and dark modes
-    Private ShapeFillColorLightMode As Color = Color.FromArgb(98, 30, 144, 255)
-    Private ShapeFillColorDarkMode As Color = Color.FromArgb(24, Color.DodgerBlue)
-    Private ShapeFillBrushLightMode As New SolidBrush(ShapeFillColorLightMode)
-    Private ShapeFillBrushDarkMode As New SolidBrush(ShapeFillColorDarkMode)
-    Private ShapeFillBrush As New SolidBrush(ShapeFillColorLightMode)
+    Private ShapeFillColorLight As Color = Color.FromArgb(98, 30, 144, 255)
+    Private ShapeFillColorDark As Color = Color.FromArgb(24, Color.DodgerBlue)
+    Private ShapeFillBrushLight As New SolidBrush(ShapeFillColorLight)
+    Private ShapeFillBrushDark As New SolidBrush(ShapeFillColorDark)
+    Private ShapeFillBrush As New SolidBrush(ShapeFillColorLight)
 
     ' Light mode colors
-    Private MenuItemBackgroundColor_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
-    Private MenuItemBackgroundSelected_LightMode As Color = Color.FromArgb(255, 229, 241, 251)
-    Private ToolStripBackground_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
-    Private MenuItemBorderColor_LightMode As Color = Color.FromArgb(255, 240, 240, 240)
-    Private MenuItemSelectedColor_LightMode As Color = Color.FromArgb(64, Color.Gray)
-    Private MenuItemTextColor_LightMode As Color = Color.FromArgb(255, Color.Black)
-    Private SelectedBorderColor_LightMode As Color = Color.FromArgb(255, Color.DodgerBlue)
+    Private MenuItemBackgroundColorLight As Color = Color.FromArgb(255, 240, 240, 240)
+    Private MenuItemBackgroundSelectedLight As Color = Color.FromArgb(255, 229, 241, 251)
+    Private ToolStripBackgroundLight As Color = Color.FromArgb(255, 240, 240, 240)
+    Private MenuItemBorderColorLight As Color = Color.FromArgb(255, 240, 240, 240)
+    Private MenuItemSelectedColorLight As Color = Color.FromArgb(64, Color.Gray)
+    Private MenuItemTextColorLight As Color = Color.FromArgb(255, Color.Black)
+    Private SelectedBorderColorLight As Color = Color.FromArgb(255, Color.DodgerBlue)
 
     ' Dark mode colors
-    Private MenuItemBackgroundColor_DarkMode As Color = Color.FromArgb(255, 23, 23, 23)
-    Private MenuItemBackgroundSelectedColor_DarkMode As Color = Color.FromArgb(255, 50, 50, 50)
-    Private ToolStripBackground_DarkMode As Color = Color.FromArgb(255, 23, 23, 23)
-    Private MenuItemBorderColor_DarkMode As Color = Color.FromArgb(255, 23, 23, 23)
-    Private MenuItemSelectedColor_DarkMode As Color = Color.FromArgb(255, 64, 64, 64)
-    Private MenuItemTextColor_DarkMode As Color = Color.FromArgb(255, 255, 255, 255)
-    Private MenuItemSelectedBorderColor_DarkMode As Color = Color.FromArgb(255, Color.Gray)
+    Private MenuItemBackgroundColorDark As Color = Color.FromArgb(255, 23, 23, 23)
+    Private MenuItemBackgroundSelectedDark As Color = Color.FromArgb(255, 50, 50, 50)
+    Private ToolStripBackgroundColorDark As Color = Color.FromArgb(255, 23, 23, 23)
+    Private MenuItemBorderColorDark As Color = Color.FromArgb(255, 23, 23, 23)
+    Private MenuItemSelectedColorDark As Color = Color.FromArgb(255, 64, 64, 64)
+    Private MenuItemTextColorDark As Color = Color.FromArgb(255, 255, 255, 255)
+    Private MenuItemSelectedBorderColorDark As Color = Color.FromArgb(255, Color.Gray)
 
     ' Set menu to Light mode colors.
-    Private CustomMenuRenderer As New CustomColorMenuStripRenderer(MenuItemBackgroundColor_LightMode,
-                                                                    MenuItemBackgroundSelected_LightMode,
-                                                                    ToolStripBackground_LightMode,
-                                                                    MenuItemSelectedColor_LightMode,
-                                                                    MenuItemTextColor_LightMode,
-                                                                    SelectedBorderColor_LightMode)
+    Private CustomMenuRenderer As New CustomColorMenuStripRenderer(MenuItemBackgroundColorLight,
+                                                                    MenuItemBackgroundSelectedLight,
+                                                                    ToolStripBackgroundLight,
+                                                                    MenuItemSelectedColorLight,
+                                                                    MenuItemTextColorLight,
+                                                                    SelectedBorderColorLight)
 
     Private OsVersion As Version = Environment.OSVersion.Version
 
@@ -128,12 +130,12 @@ Public Class Form1
 
     Private IsInsideBoundingRectangle As Boolean = False
 
-    Private BoundingColorLightMode As Color = Color.FromArgb(32, 30, 144, 255)
-    Private BoundingColorDarkMode As Color = Color.FromArgb(16, Color.DodgerBlue)
-    Private BoundingBrushLightMode As New SolidBrush(BoundingColorLightMode)
-    Private BoundingBrushDarkMode As New SolidBrush(BoundingColorDarkMode)
+    Private BoundingRectangleColorLight As Color = Color.FromArgb(32, 30, 144, 255)
+    Private BoundingRectangleColorDark As Color = Color.FromArgb(16, Color.DodgerBlue)
+    Private BoundingRectangleBrushLight As New SolidBrush(BoundingRectangleColorLight)
+    Private BoundingRectangleBrushDark As New SolidBrush(BoundingRectangleColorDark)
 
-    Private BoundingBrush As New SolidBrush(BoundingColorLightMode)
+    Private BoundingBrush As New SolidBrush(BoundingRectangleColorLight)
 
     Private LinkColorDark As Color = Color.FromArgb(255, 28, 138, 224)
     Private LinkHoverColorDark As Color = Color.FromArgb(255, 255, 255, 255)
@@ -1743,12 +1745,12 @@ Public Class Form1
             DwmSetWindowAttribute(TrackBar1.Handle, DwmWindowAttribute.DWMWA_MICA_EFFECT, 1, Marshal.SizeOf(GetType(Integer)))
 
             ' Set the menu colors for dark mode
-            CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_DarkMode
-            CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelectedColor_DarkMode
-            CustomMenuRenderer.ToolStripBackground = ToolStripBackground_DarkMode ' *****************
-            CustomMenuRenderer.MenuItemSelectedColor = MenuItemSelectedColor_DarkMode
-            CustomMenuRenderer.TextColor = MenuItemTextColor_DarkMode
-            CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColor_DarkMode
+            CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColorDark
+            CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelectedDark
+            CustomMenuRenderer.ToolStripBackground = ToolStripBackgroundColorDark ' *****************
+            CustomMenuRenderer.MenuItemSelectedColor = MenuItemSelectedColorDark
+            CustomMenuRenderer.TextColor = MenuItemTextColorDark
+            CustomMenuRenderer.SelectedBorderColor = MenuItemSelectedBorderColorDark
 
             ApplyDarkThemeToMenuItems()
 
@@ -1803,12 +1805,12 @@ Public Class Form1
             TextBox1.ForeColor = Color.FromArgb(255, 32, 32, 32)
 
             ' Set the menu colors for light mode
-            CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColor_LightMode
-            CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelected_LightMode
-            CustomMenuRenderer.ToolStripBackground = ToolStripBackground_LightMode
-            CustomMenuRenderer.MenuItemSelectedColor = MenuItemSelectedColor_LightMode
-            CustomMenuRenderer.TextColor = MenuItemTextColor_LightMode
-            CustomMenuRenderer.SelectedBorderColor = SelectedBorderColor_LightMode
+            CustomMenuRenderer.MenuItemBackground = MenuItemBackgroundColorLight
+            CustomMenuRenderer.MenuItemBackgroundSelected = MenuItemBackgroundSelectedLight
+            CustomMenuRenderer.ToolStripBackground = ToolStripBackgroundLight
+            CustomMenuRenderer.MenuItemSelectedColor = MenuItemSelectedColorLight
+            CustomMenuRenderer.TextColor = MenuItemTextColorLight
+            CustomMenuRenderer.SelectedBorderColor = SelectedBorderColorLight
 
             ApplyLightThemeToMenuItems()
 
@@ -1827,9 +1829,9 @@ Public Class Form1
 
         BackColor = If(DarkMode, ControlColorDark, SystemColors.Control)
 
-        ShapeFillBrush = If(DarkMode, ShapeFillBrushDarkMode, ShapeFillBrushLightMode)
+        ShapeFillBrush = If(DarkMode, ShapeFillBrushDark, ShapeFillBrushLight)
 
-        BoundingBrush = If(DarkMode, BoundingBrushDarkMode, BoundingBrushLightMode)
+        BoundingBrush = If(DarkMode, BoundingRectangleBrushDark, BoundingRectangleBrushLight)
 
         ShapePen = New Pen(If(DarkMode, Color.White, Color.Black), 2)
 
