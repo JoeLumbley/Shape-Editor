@@ -1980,6 +1980,7 @@ Public Class Form1
         End If
 
         CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonLightMode)
+        CenterDrawingButton.BackColor = ControlColorLight
 
     End Sub
 
@@ -2013,6 +2014,7 @@ Public Class Form1
         End If
 
         CenterDrawingButton.Image = ResourceToImage(My.Resources.Resource1.CenterDrawingToolButtonDarkMode)
+        CenterDrawingButton.BackColor = ControlColorDark
 
     End Sub
 
@@ -2124,21 +2126,21 @@ Public Class Form1
 
     End Sub
 
-    Private Sub CenterDrawingButton_MouseHover(sender As Object, e As EventArgs) Handles CenterDrawingButton.MouseHover
-
-        If DarkMode Then
-
-            CenterDrawingButton.BackColor = Color.FromArgb(255, 64, 64, 64)
-
-        End If
-
-    End Sub
-
     Private Sub CenterDrawingButton_MouseLeave(sender As Object, e As EventArgs) Handles CenterDrawingButton.MouseLeave
 
         If DarkMode Then
 
             CenterDrawingButton.BackColor = Color.FromArgb(255, 32, 32, 32)
+
+        End If
+
+    End Sub
+
+    Private Sub CenterDrawingButton_MouseEnter(sender As Object, e As EventArgs) Handles CenterDrawingButton.MouseEnter
+
+        If DarkMode Then
+
+            CenterDrawingButton.BackColor = Color.FromArgb(255, 64, 64, 64)
 
         End If
 
