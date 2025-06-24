@@ -1,7 +1,7 @@
 # Shape Editor
 
 
-The Shape Editor allows you to draw shapes on the left side of the screen while the code is automatically generated on the right. This means you can focus on creativity. No more tedious typing or guesswork—just draw and watch the code come to life!
+Shape Editor allows you to draw shapes on the left side of the screen while the code is automatically generated on the right. This means you can focus on creativity. No more tedious typing or guesswork—just draw and watch the code come to life!
 
 
 ![126](https://github.com/user-attachments/assets/5388b962-699a-4777-8f03-1b168688d48a)
