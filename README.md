@@ -37,8 +37,8 @@ Shape Editor allows you to draw shapes on the left side of the screen while the 
 - **Real-Time Updates**: Adjust points or modify the shape on one side, and the mirrored shape updates instantly, providing immediate visual feedback.
 
 
-![121](https://github.com/user-attachments/assets/67c419f4-b0e8-4811-a546-53d326d241a3)
 
+![127](https://github.com/user-attachments/assets/850385f6-3338-4d97-b2d7-0d8772f22b3c)
 
 
 
