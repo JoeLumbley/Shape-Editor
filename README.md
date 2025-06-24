@@ -965,30 +965,6 @@ By understanding this code, you can appreciate how different parts work together
 
 ---
 
-Feel free to reach out with any questions or for further clarification on specific parts of the code! Happy coding!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
 
 
 
