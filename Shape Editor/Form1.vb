@@ -157,6 +157,11 @@ Public Class Form1
 
     Private BackgroundColor As Color = BackgroundColorLight
 
+    ' copoilt: Make ToolTip1 for CenterDrawingButton
+    Private ToolTip1 As New ToolTip()
+
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         InitializeApplication()
@@ -1613,6 +1618,13 @@ Public Class Form1
         LayoutForm()
 
         MenuStrip1.Refresh()
+
+        ToolTip1.SetToolTip(CenterDrawingButton, "Center Drawing Area")
+
+        ToolTip1.ReshowDelay = 500
+        ToolTip1.AutoPopDelay = 5000
+        ToolTip1.InitialDelay = 500
+
 
     End Sub
 
