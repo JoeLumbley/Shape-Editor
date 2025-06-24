@@ -1619,10 +1619,10 @@ Public Class Form1
 
         MenuStrip1.Refresh()
 
-        ToolTip1.SetToolTip(CenterDrawingButton, "Center Drawing Area")
+        ToolTip1.SetToolTip(CenterDrawingButton, "Center Drawing")
 
         ToolTip1.ReshowDelay = 2000
-        ToolTip1.AutoPopDelay = 2000
+        ToolTip1.AutoPopDelay = 800
         ToolTip1.InitialDelay = 1000
 
 
@@ -2144,7 +2144,7 @@ Public Class Form1
 
         If DarkMode Then
 
-            CenterDrawingButton.BackColor = Color.FromArgb(255, 64, 64, 64)
+            CenterDrawingButton.BackColor = Color.FromArgb(255, 55, 55, 55)
 
         Else
             CenterDrawingButton.BackColor = Color.FromArgb(255, 218, 218, 218)
