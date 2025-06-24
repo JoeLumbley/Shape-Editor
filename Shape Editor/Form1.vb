@@ -1621,9 +1621,9 @@ Public Class Form1
 
         ToolTip1.SetToolTip(CenterDrawingButton, "Center Drawing Area")
 
-        ToolTip1.ReshowDelay = 500
-        ToolTip1.AutoPopDelay = 5000
-        ToolTip1.InitialDelay = 500
+        ToolTip1.ReshowDelay = 2000
+        ToolTip1.AutoPopDelay = 2000
+        ToolTip1.InitialDelay = 1000
 
 
     End Sub
