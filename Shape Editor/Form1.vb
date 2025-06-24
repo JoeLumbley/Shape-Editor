@@ -2065,7 +2065,7 @@ Public Class Form1
 
         HScrollBar1.Top = ClientRectangle.Bottom - trackBarHeight - hScrollBarHeight
         HScrollBar1.Left = ClientRectangle.Left
-        HScrollBar1.Width = halfClientWidth - vScrollBarWidth
+        HScrollBar1.Width = halfClientWidth - vScrollBarWidth + 1
         HScrollBar1.Height = 25
 
         If DrawingArea.Width > 0 Then
@@ -2076,7 +2076,7 @@ Public Class Form1
 
         VScrollBar1.Top = ClientRectangle.Top + menuStripHeight
         VScrollBar1.Left = TextBox1.Left - vScrollBarWidth
-        VScrollBar1.Height = clientHeight - trackBarHeight - hScrollBarHeight - menuStripHeight
+        VScrollBar1.Height = clientHeight - trackBarHeight - hScrollBarHeight - menuStripHeight + 1
         VScrollBar1.Width = 25
 
         If DrawingArea.Height > 0 Then
@@ -2085,10 +2085,10 @@ Public Class Form1
             VScrollBar1.Maximum = CInt(((DrawingArea.Height \ 2) * ScaleFactor) - (DrawingArea.Height \ 2))
         End If
 
-        CenterDrawingButton.Top = HScrollBar1.Top
-        CenterDrawingButton.Left = VScrollBar1.Left
-        CenterDrawingButton.Width = vScrollBarWidth
-        CenterDrawingButton.Height = hScrollBarHeight
+        CenterDrawingButton.Top = HScrollBar1.Top + 1
+        CenterDrawingButton.Left = VScrollBar1.Left + 1
+        CenterDrawingButton.Width = vScrollBarWidth - 1
+        CenterDrawingButton.Height = hScrollBarHeight - 1
 
         AddPointToolButton.Width = 39
         AddPointToolButton.Height = 39
