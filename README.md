@@ -952,13 +952,7 @@ End Sub
 
 ---
 
-## Conclusion
 
-This walkthrough has covered the key components of the shape editor application in VB.NET. Each section of the code is designed to handle specific functionalities, such as drawing shapes, managing user input, interacting with files, and applying UI themes.
-
-By understanding this code, you can appreciate how different parts work together to create a functional graphical application. Feel free to experiment with the code, modify it, and enhance its features as you continue to learn programming in VB.NET!
-
----
 
 ## Further Learning Resources
 - [VB.NET Documentation](https://docs.microsoft.com/en-us/dotnet/visual-basic/)
