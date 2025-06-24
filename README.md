@@ -1,11 +1,11 @@
 # Shape Editor
 
 
-The Shape Editor allows you to draw shapes on the left side of the screen while the code is automatically generated on the right. This means you can focus on creativity. No more tedious typing or guesswork—just draw and watch the code come to life!
+Shape Editor allows you to draw shapes on the left side of the screen while the code is automatically generated on the right. This means you can focus on creativity. No more tedious typing or guesswork—just draw and watch the code come to life!
 
 
+![126](https://github.com/user-attachments/assets/5388b962-699a-4777-8f03-1b168688d48a)
 
-![123](https://github.com/user-attachments/assets/7ca2a445-0ead-4765-9062-61cc48a18688)
 
 
 
@@ -37,8 +37,8 @@ The Shape Editor allows you to draw shapes on the left side of the screen while 
 - **Real-Time Updates**: Adjust points or modify the shape on one side, and the mirrored shape updates instantly, providing immediate visual feedback.
 
 
-![121](https://github.com/user-attachments/assets/67c419f4-b0e8-4811-a546-53d326d241a3)
 
+![127](https://github.com/user-attachments/assets/850385f6-3338-4d97-b2d7-0d8772f22b3c)
 
 
 
@@ -71,9 +71,9 @@ CSV files, are a simple and widely used format for storing and exchanging data i
 ```
 x,y
 ```
-![122](https://github.com/user-attachments/assets/05e514bc-6f46-416c-9f55-278788ae10ba)
 
 
+![128](https://github.com/user-attachments/assets/03721dd7-ca5a-44e0-a826-9692966c3ee5)
 
 
 
@@ -144,8 +144,8 @@ x,y
 
 
 
-![119](https://github.com/user-attachments/assets/0bf1b4eb-bef4-45ef-8d4b-36581e9bdd49)
 
+![129](https://github.com/user-attachments/assets/83693928-eada-4f10-aacb-af3a07956143)
 
 
 
@@ -952,40 +952,10 @@ End Sub
 
 ---
 
-## Conclusion
 
-This walkthrough has covered the key components of the shape editor application in VB.NET. Each section of the code is designed to handle specific functionalities, such as drawing shapes, managing user input, interacting with files, and applying UI themes.
-
-By understanding this code, you can appreciate how different parts work together to create a functional graphical application. Feel free to experiment with the code, modify it, and enhance its features as you continue to learn programming in VB.NET!
-
----
 
 ## Further Learning Resources
 - [VB.NET Documentation](https://docs.microsoft.com/en-us/dotnet/visual-basic/)
-
----
-
-Feel free to reach out with any questions or for further clarification on specific parts of the code! Happy coding!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 
