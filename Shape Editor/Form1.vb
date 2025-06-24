@@ -2132,6 +2132,10 @@ Public Class Form1
 
             CenterDrawingButton.BackColor = Color.FromArgb(255, 32, 32, 32)
 
+        Else
+
+            CenterDrawingButton.BackColor = Color.FromArgb(255, 240, 240, 240)
+
         End If
 
     End Sub
@@ -2141,6 +2145,10 @@ Public Class Form1
         If DarkMode Then
 
             CenterDrawingButton.BackColor = Color.FromArgb(255, 64, 64, 64)
+
+        Else
+            CenterDrawingButton.BackColor = Color.FromArgb(255, 218, 218, 218)
+
 
         End If
 
