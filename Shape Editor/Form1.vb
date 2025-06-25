@@ -1625,7 +1625,6 @@ Public Class Form1
         ToolTip1.AutoPopDelay = 800
         ToolTip1.InitialDelay = 1000
 
-
     End Sub
 
     Private Sub ResetScrollBars()
@@ -2147,8 +2146,8 @@ Public Class Form1
             CenterDrawingButton.BackColor = Color.FromArgb(255, 55, 55, 55)
 
         Else
-            CenterDrawingButton.BackColor = Color.FromArgb(255, 218, 218, 218)
 
+            CenterDrawingButton.BackColor = Color.FromArgb(255, 218, 218, 218)
 
         End If
 
