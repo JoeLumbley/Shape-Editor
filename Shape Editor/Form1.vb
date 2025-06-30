@@ -2208,7 +2208,6 @@ Public Class CustomColorMenuStripRenderer
                     ' Use selected background color when the dropdown is open
                     Using Brush As New SolidBrush(MenuItemBackgroundSelected)
                         e.Graphics.FillRectangle(Brush, rect)
-                        ' e.Graphics.DrawRectangle(New Pen(BorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
                     End Using
                 Else
                     ' Use selected background color and draw a border when dropdown is closed
@@ -2224,7 +2223,6 @@ Public Class CustomColorMenuStripRenderer
                     ' Use selected background color and draw a border when dropdown is open
                     Using Brush As New SolidBrush(MenuItemBackgroundSelected)
                         e.Graphics.FillRectangle(Brush, rect)
-                        'e.Graphics.DrawRectangle(New Pen(SelectedBorderColor), rect.Left + 1, rect.Top, rect.Right - 2, rect.Bottom - 1)
                     End Using
                 Else
                     ' Use default background color when not selected
@@ -2243,7 +2241,6 @@ Public Class CustomColorMenuStripRenderer
                     ' Use selected background color when dropdown is open
                     Using Brush As New SolidBrush(MenuItemBackgroundSelected)
                         e.Graphics.FillRectangle(Brush, rect)
-                        ' e.Graphics.DrawRectangle(New Pen(BorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
                     End Using
                 Else
                     ' Use default background color when not selected
@@ -2258,7 +2255,6 @@ Public Class CustomColorMenuStripRenderer
                     ' Use selected background color when dropdown is open
                     Using Brush As New SolidBrush(MenuItemBackgroundSelected)
                         e.Graphics.FillRectangle(Brush, rect)
-                        ' e.Graphics.DrawRectangle(New Pen(SelectedBorderColor), rect.Left + 2, rect.Top, rect.Right - 4, rect.Bottom - 1)
                     End Using
                 Else
                     ' Use default background color when not selected
